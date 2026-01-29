@@ -1,0 +1,78 @@
+---
+interface Props {
+    icon: string;
+    title: string;
+    description: string;
+    accentColor?: string;
+}
+
+const { icon, title, description, accentColor = '#6366f1' } = Astro.props;
+---
+
+<div class="feature-card">
+    <div class="feature-icon">
+        <Fragment set:html={icon} />
+    </div>
+    <h3 class="feature-title">{title}</h3>
+    <p class="feature-description">{description}</p>
+    <div class="feature-bar" style={`background: ${accentColor}`}></div>
+</div>
+
+<style>
+    .feature-card {
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 16px;
+        padding: 2rem;
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .feature-card:hover {
+        border-color: rgba(99, 102, 241, 0.3);
+        transform: translateY(-4px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .feature-icon {
+        width: 56px;
+        height: 56px;
+        background: rgba(99, 102, 241, 0.1);
+        border: 1px solid rgba(99, 102, 241, 0.2);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+        color: var(--accent-light);
+    }
+
+    .feature-icon :global(svg) {
+        width: 24px;
+        height: 24px;
+    }
+
+    .feature-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 0.75rem;
+        color: var(--white);
+    }
+
+    .feature-description {
+        font-size: 0.9rem;
+        line-height: 1.6;
+        color: var(--gray-400);
+    }
+
+    .feature-bar {
+        position: absolute;
+        bottom: 0;
+        left: 2rem;
+        right: 2rem;
+        height: 3px;
+        border-radius: 3px 3px 0 0;
+        opacity: 0.8;
+    }
+</style>

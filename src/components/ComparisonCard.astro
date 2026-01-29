@@ -1,0 +1,101 @@
+---
+interface Props {
+    problem: string;
+    solution: string;
+    brandName?: string;
+}
+
+const { problem, solution, brandName = 'ALPHAGRADE' } = Astro.props;
+---
+
+<div class="comparison-card">
+    <div class="comparison-problem">
+        <span class="comparison-icon problem">✕</span>
+        <p>"{problem}"</p>
+    </div>
+    <div class="comparison-solution">
+        <span class="comparison-icon solution">✓</span>
+        <div class="solution-content">
+            <span class="brand-label">{brandName}:</span>
+            <p>{solution}</p>
+        </div>
+    </div>
+</div>
+
+<style>
+    .comparison-card {
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 12px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .comparison-card:hover {
+        border-color: rgba(99, 102, 241, 0.3);
+        transform: translateY(-2px);
+    }
+
+    .comparison-problem {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1.25rem 1.5rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .comparison-problem p {
+        color: var(--gray-400);
+        font-style: italic;
+        font-size: 0.95rem;
+    }
+
+    .comparison-solution {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        padding: 1.25rem 1.5rem;
+        background: rgba(34, 197, 94, 0.03);
+    }
+
+    .comparison-icon {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.75rem;
+        font-weight: bold;
+        flex-shrink: 0;
+    }
+
+    .comparison-icon.problem {
+        background: rgba(239, 68, 68, 0.15);
+        color: var(--red);
+    }
+
+    .comparison-icon.solution {
+        background: rgba(34, 197, 94, 0.15);
+        color: var(--green);
+    }
+
+    .solution-content {
+        flex: 1;
+    }
+
+    .brand-label {
+        display: block;
+        color: var(--green);
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: 0.25rem;
+    }
+
+    .solution-content p {
+        color: var(--gray-200);
+        font-size: 0.95rem;
+    }
+</style>

@@ -1,0 +1,356 @@
+---
+interface Props {
+    badge?: string;
+    title: string;
+    titleAccent?: string;
+    subtitle?: string;
+    formAction?: string;
+    stats?: Array<{
+        value: string;
+        label: string;
+        position?: 'left' | 'right';
+    }>;
+}
+
+const { 
+    badge,
+    title, 
+    titleAccent,
+    subtitle,
+    formAction = '#',
+    stats = []
+} = Astro.props;
+
+const leftStats = stats.filter(s => s.position === 'left');
+const rightStats = stats.filter(s => s.position === 'right');
+---
+
+<section class="hero" id="hero">
+    <canvas id="network-canvas"></canvas>
+    
+    <div class="hero-content">
+        <!-- Left Stats -->
+        {leftStats.map(stat => (
+            <div class="hero-stat left">
+                <span class="stat-value">{stat.value}</span>
+                <span class="stat-label">{stat.label}</span>
+            </div>
+        ))}
+        
+        <!-- Center Content -->
+        <div class="hero-center">
+            {badge && (
+                <div class="hero-badge">
+                    <span>{badge}</span>
+                </div>
+            )}
+            
+            <h1>
+                {title}
+                {titleAccent && <span class="text-accent">{titleAccent}</span>}
+            </h1>
+            
+            {subtitle && <p class="hero-subtitle">{subtitle}</p>}
+        </div>
+        
+        <!-- Right Stats -->
+        {rightStats.map(stat => (
+            <div class="hero-stat right">
+                <span class="stat-value">{stat.value}</span>
+                <span class="stat-label">{stat.label}</span>
+            </div>
+        ))}
+    </div>
+    
+    <!-- Lead Form -->
+    <div class="hero-form-container">
+        <div class="hero-form-header">
+            <h3>Solicită Audit Gratuit</h3>
+            <p>Analizăm potențialul tău de lead generation în 24h</p>
+        </div>
+        <form class="hero-form" action={formAction} method="POST">
+            <div class="form-group">
+                <span class="form-icon">🌐</span>
+                <input type="url" name="website" placeholder="Website-ul tău" required />
+            </div>
+            <div class="form-group">
+                <span class="form-icon">📞</span>
+                <input type="tel" name="phone" placeholder="Telefon" required />
+            </div>
+            <div class="form-group">
+                <span class="form-icon">✉️</span>
+                <input type="email" name="email" placeholder="Email" required />
+            </div>
+            <button type="submit" class="btn btn-primary">
+                Trimite
+                <span>→</span>
+            </button>
+        </form>
+    </div>
+</section>
+
+<style>
+    .hero {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 8rem 2rem 4rem;
+        position: relative;
+        overflow: hidden;
+        background: radial-gradient(ellipse at center top, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+                    var(--black);
+    }
+
+    #network-canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        opacity: 0.6;
+    }
+
+    .hero-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4rem;
+        width: 100%;
+        max-width: 1400px;
+        position: relative;
+        z-index: 2;
+    }
+
+    .hero-center {
+        text-align: center;
+        flex: 1;
+        max-width: 800px;
+    }
+
+    .hero-badge {
+        display: inline-block;
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-badge span {
+        background: rgba(99, 102, 241, 0.1);
+        border: 1px solid rgba(99, 102, 241, 0.3);
+        padding: 0.5rem 1.25rem;
+        border-radius: 50px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--accent-light);
+    }
+
+    .hero h1 {
+        margin-bottom: 1.5rem;
+        line-height: 1.1;
+    }
+
+    .hero-subtitle {
+        font-size: 1.1rem;
+        color: var(--gray-400);
+        max-width: 600px;
+        margin: 0 auto;
+        line-height: 1.7;
+    }
+
+    .hero-stat {
+        background: rgba(10, 10, 10, 0.8);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        padding: 1rem 1.25rem;
+        text-align: center;
+        min-width: 100px;
+    }
+
+    .hero-stat .stat-value {
+        display: block;
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--accent-light);
+    }
+
+    .hero-stat .stat-label {
+        font-size: 0.7rem;
+        color: var(--gray-500);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .hero-stat.left {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .hero-stat.right {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    /* Form Styles */
+    .hero-form-container {
+        margin-top: 3rem;
+        width: 100%;
+        max-width: 900px;
+        position: relative;
+        z-index: 2;
+    }
+
+    .hero-form-header {
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-form-header h3 {
+        font-size: 1.1rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .hero-form-header p {
+        font-size: 0.85rem;
+        color: var(--gray-500);
+    }
+
+    .hero-form {
+        display: flex;
+        gap: 1rem;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 12px;
+        padding: 0.75rem;
+    }
+
+    .form-group {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 8px;
+        padding: 0 1rem;
+    }
+
+    .form-icon {
+        font-size: 1rem;
+        opacity: 0.5;
+    }
+
+    .form-group input {
+        flex: 1;
+        background: transparent;
+        border: none;
+        color: var(--white);
+        font-size: 0.9rem;
+        padding: 0.875rem 0;
+        outline: none;
+    }
+
+    .form-group input::placeholder {
+        color: var(--gray-500);
+    }
+
+    .hero-form .btn {
+        white-space: nowrap;
+    }
+
+    @media (max-width: 900px) {
+        .hero-content {
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .hero-stat.left,
+        .hero-stat.right {
+            position: static;
+            transform: none;
+        }
+
+        .hero-form {
+            flex-direction: column;
+        }
+
+        .form-group {
+            width: 100%;
+        }
+    }
+</style>
+
+<script>
+    // Canvas animation
+    const canvas = document.getElementById('network-canvas') as HTMLCanvasElement;
+    if (canvas) {
+        const ctx = canvas.getContext('2d');
+        let particles: Array<{x: number, y: number, vx: number, vy: number, radius: number}> = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initParticles();
+        }
+
+        function initParticles() {
+            particles = [];
+            const count = Math.min(60, Math.floor((canvas.width * canvas.height) / 20000));
+            for (let i = 0; i < count; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    vx: (Math.random() - 0.5) * 0.5,
+                    vy: (Math.random() - 0.5) * 0.5,
+                    radius: Math.random() * 2 + 1
+                });
+            }
+        }
+
+        function animate() {
+            if (!ctx) return;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            particles.forEach(p => {
+                p.x += p.vx;
+                p.y += p.vy;
+                if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(99, 102, 241, 0.5)';
+                ctx.fill();
+            });
+
+            // Connect particles
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 150) {
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = `rgba(99, 102, 241, ${0.15 * (1 - dist / 150)})`;
+                        ctx.lineWidth = 1;
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+        animate();
+    }
+</script>

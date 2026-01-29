@@ -1,0 +1,113 @@
+---
+interface Props {
+    icon: string;
+    title: string;
+    description: string;
+    badge?: {
+        text: string;
+        icon?: string;
+    };
+}
+
+const { icon, title, description, badge } = Astro.props;
+---
+
+<div class="benefit-card">
+    <h3 class="benefit-title">{title}</h3>
+    <p class="benefit-description">{description}</p>
+    
+    <div class="benefit-visual">
+        <div class="benefit-icon">
+            <Fragment set:html={icon} />
+        </div>
+        <span class="benefit-placeholder">Adaugă imagine</span>
+    </div>
+    
+    {badge && (
+        <div class="benefit-badge">
+            {badge.icon && <span class="badge-icon">{badge.icon}</span>}
+            <span>{badge.text}</span>
+        </div>
+    )}
+</div>
+
+<style>
+    .benefit-card {
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 20px;
+        padding: 2rem;
+        transition: all 0.4s ease;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .benefit-card:hover {
+        border-color: rgba(99, 102, 241, 0.3);
+        transform: translateY(-4px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .benefit-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 0.75rem;
+        color: var(--white);
+        line-height: 1.3;
+    }
+
+    .benefit-description {
+        font-size: 0.9rem;
+        line-height: 1.6;
+        color: var(--gray-400);
+        margin-bottom: 1.5rem;
+    }
+
+    .benefit-visual {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: rgba(99, 102, 241, 0.05);
+        border: 1px dashed rgba(99, 102, 241, 0.2);
+        border-radius: 12px;
+        padding: 2rem;
+        margin-bottom: 1rem;
+        min-height: 120px;
+    }
+
+    .benefit-icon {
+        color: var(--accent-light);
+        margin-bottom: 0.5rem;
+    }
+
+    .benefit-icon :global(svg) {
+        width: 48px;
+        height: 48px;
+        opacity: 0.6;
+    }
+
+    .benefit-placeholder {
+        font-size: 0.75rem;
+        color: var(--gray-500);
+    }
+
+    .benefit-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: rgba(99, 102, 241, 0.1);
+        border: 1px solid rgba(99, 102, 241, 0.2);
+        border-radius: 50px;
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: var(--white);
+        width: fit-content;
+    }
+
+    .badge-icon {
+        color: var(--green);
+    }
+</style>
