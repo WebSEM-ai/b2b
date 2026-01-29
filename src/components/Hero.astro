@@ -164,12 +164,67 @@ const {
         animate();
     }
 
-    // Form submission
-    const auditForm = document.getElementById('auditForm');
-    auditForm?.addEventListener('submit', (e) => {
+    // Form submission to Pipedrive
+    const auditForm = document.getElementById('auditForm') as HTMLFormElement;
+    const submitBtn = auditForm?.querySelector('button[type="submit"]') as HTMLButtonElement;
+    const originalBtnText = submitBtn?.innerHTML;
+
+    auditForm?.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const formData = new FormData(e.target as HTMLFormElement);
-        console.log('Form submitted:', Object.fromEntries(formData));
-        alert('Mulțumim! Te vom contacta în curând.');
+
+        // Disable button and show loading
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `
+                <svg class="spinner" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:18px;height:18px;animation:spin 1s linear infinite">
+                    <circle cx="12" cy="12" r="10" stroke-opacity="0.25"/>
+                    <path d="M12 2a10 10 0 0 1 10 10" stroke-opacity="1"/>
+                </svg>
+                Se trimite...
+            `;
+        }
+
+        const formData = new FormData(auditForm);
+        const data = {
+            email: formData.get('email'),
+            phone: formData.get('phone'),
+            website: formData.get('website')
+        };
+
+        try {
+            const response = await fetch('/api/pipedrive', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+
+            if (response.ok && result.success) {
+                // Success - show confirmation
+                auditForm.innerHTML = `
+                    <div style="text-align:center;padding:1rem;color:var(--green);">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:48px;height:48px;margin-bottom:0.5rem">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
+                        <p style="font-size:1.1rem;font-weight:600;margin-bottom:0.25rem">Mulțumim!</p>
+                        <p style="color:var(--gray-400);font-size:0.9rem">Te vom contacta în curând.</p>
+                    </div>
+                `;
+            } else {
+                throw new Error(result.error || 'Eroare la trimitere');
+            }
+        } catch (error) {
+            // Reset button on error
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnText;
+            }
+            alert('A apărut o eroare. Te rugăm să încerci din nou sau să ne contactezi direct.');
+            console.error('Form error:', error);
+        }
     });
 </script>

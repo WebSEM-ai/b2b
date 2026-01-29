@@ -1490,3 +1490,8 @@ body.modal-open {
     opacity: 1 !important;
     transform: translateY(0) !important;
 }
+
+/* Spinner animation */
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
