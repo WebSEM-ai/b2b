@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
+import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   // Site URL - important pentru sitemap și canonical URLs
@@ -8,7 +9,7 @@ export default defineConfig({
   // Integrări
   integrations: [
     mdx(),
-    // sitemap(), // TODO: re-enable after upgrading to Astro 5
+    sitemap(),
   ],
 
   // Build optimizations
