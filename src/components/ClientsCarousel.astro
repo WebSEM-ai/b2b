@@ -1,0 +1,47 @@
+---
+interface Props {
+    title?: string;
+    logos?: Array<{
+        src: string;
+        alt: string;
+    }>;
+}
+
+const {
+    title = 'Companii care folosesc AlphaGrade',
+    logos = [
+        { src: '/logos/logo-brd.png', alt: 'BRD' },
+        { src: '/logos/catena.png', alt: 'Catena' },
+        { src: '/logos/engie.png', alt: 'Engie' },
+        { src: '/logos/mol.png', alt: 'MOL' },
+        { src: '/logos/geberit.png', alt: 'Geberit' },
+        { src: '/logos/christian-tour.png', alt: 'Christian Tour' },
+        { src: '/logos/farmacia-dona.png', alt: 'Farmacia Dona' },
+        { src: '/logos/egger.png', alt: 'Egger' },
+        { src: '/logos/yves-rocher.png', alt: 'Yves Rocher' }
+    ]
+} = Astro.props;
+
+// Duplicate logos for seamless loop
+const allLogos = [...logos, ...logos];
+---
+
+<section class="clients-section">
+    <div class="clients-header">
+        <h3>{title}</h3>
+    </div>
+
+    <div class="logo-ticker-wrapper">
+        <div class="logo-ticker" id="logoTicker">
+            {allLogos.map(logo => (
+                <div class="logo-item">
+                    {logo.src ? (
+                        <img src={logo.src} alt={logo.alt} loading="lazy" />
+                    ) : (
+                        <span class="logo-placeholder">{logo.alt}</span>
+                    )}
+                </div>
+            ))}
+        </div>
+    </div>
+</section>

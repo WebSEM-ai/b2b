@@ -1,0 +1,94 @@
+---
+interface Stat {
+    value: string;
+    suffix?: string;
+    label: string;
+}
+
+interface Props {
+    title?: string;
+    subtitle?: string;
+    stats?: Stat[][];
+}
+
+const {
+    title = 'Rezultate Dovedite',
+    subtitle = 'Cifre care vorbesc de la sine',
+    stats = [
+        [
+            { value: '265', suffix: 'M+', label: 'Contacte B2B' },
+            { value: '98', suffix: '%', label: 'Acuratețe Date' },
+            { value: '100', suffix: '%', label: 'GDPR Compliant' },
+            { value: '72', suffix: 'h', label: 'Time to Launch' }
+        ],
+        [
+            { value: '0', suffix: '', label: 'Conturi Suspendate' },
+            { value: '98', suffix: '%', label: 'Date Verificate' },
+            { value: '24', suffix: 'h', label: 'Time to Launch' },
+            { value: '100', suffix: '%', label: 'Transparență' }
+        ]
+    ]
+} = Astro.props;
+---
+
+<section class="stats-section">
+    <div class="stats-section-header">
+        <h2>{title}</h2>
+        <p>{subtitle}</p>
+    </div>
+    <div class="stats-section-content">
+        {stats.map(row => (
+            <div class="fears-stats">
+                {row.map(stat => (
+                    <div class="fear-stat">
+                        <div class="fear-stat-value">
+                            <span class="fear-counter" data-target={stat.value}>0</span>{stat.suffix}
+                        </div>
+                        <div class="fear-stat-label">{stat.label}</div>
+                    </div>
+                ))}
+            </div>
+        ))}
+    </div>
+</section>
+
+<script>
+    // Counter animation
+    const counters = document.querySelectorAll('.fear-counter');
+
+    const animateCounter = (counter: Element) => {
+        const target = parseInt(counter.getAttribute('data-target') || '0');
+        const duration = 2000;
+        const start = performance.now();
+
+        const update = (currentTime: number) => {
+            const elapsed = currentTime - start;
+            const progress = Math.min(elapsed / duration, 1);
+
+            // Easing function
+            const easeOut = 1 - Math.pow(1 - progress, 3);
+            const current = Math.floor(easeOut * target);
+
+            counter.textContent = current.toString();
+
+            if (progress < 1) {
+                requestAnimationFrame(update);
+            } else {
+                counter.textContent = target.toString();
+            }
+        };
+
+        requestAnimationFrame(update);
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateCounter(entry.target);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    counters.forEach(counter => observer.observe(counter));
+</script>

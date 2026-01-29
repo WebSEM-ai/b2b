@@ -1,0 +1,36 @@
+---
+interface Props {
+    title?: string;
+    subtitle?: string;
+    buttonText?: string;
+    note?: string;
+}
+
+const {
+    title = 'Gata să-ți construiești pipeline-ul B2B?',
+    subtitle = 'Solicită un audit gratuit și vezi câți decision-makers poți targeta în nișa ta.',
+    buttonText = 'Solicită Audit Gratuit',
+    note = 'Fără obligații. Analiză completă în 24h.'
+} = Astro.props;
+---
+
+<section class="cta-section" id="contact">
+    <h2>{title}</h2>
+    <p>{subtitle}</p>
+    <a href="javascript:void(0)" class="cta-btn" id="cta-open-modal">
+        {buttonText}
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+    </a>
+    <p class="cta-subtext">{note}</p>
+</section>
+
+<script>
+    const ctaBtn = document.getElementById('cta-open-modal');
+    ctaBtn?.addEventListener('click', () => {
+        const modal = document.getElementById('booking-modal');
+        modal?.classList.add('active');
+        document.body.classList.add('modal-open');
+    });
+</script>

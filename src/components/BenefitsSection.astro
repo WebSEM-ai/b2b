@@ -1,0 +1,94 @@
+---
+interface Benefit {
+    title: string;
+    description: string;
+    icon: string;
+    stat: {
+        icon: string;
+        text: string;
+    };
+}
+
+interface Props {
+    title?: string;
+    subtitle?: string;
+    benefits?: Benefit[];
+}
+
+const {
+    title = 'De ce companiile aleg AlphaGrade.',
+    subtitle = 'Livrăm ce promit alții dar nu pot onora.',
+    benefits = [
+        {
+            title: '100% GDPR Compliant',
+            description: 'Consent tracking automat. Opt-out instant. Audit trail complet. Zero incidente în 3 ani de operare.',
+            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>`,
+            stat: { icon: '✓', text: '0 incidente' }
+        },
+        {
+            title: '95%+ Inbox Rate Garantat',
+            description: 'Domain warmup profesional. Email verification pre-send. Sender reputation monitoring 24/7.',
+            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.45 5.11L2 12v6a2 2 0 002 2h16a2 2 0 002-2v-6l-3.45-6.89A2 2 0 0016.76 4H7.24a2 2 0 00-1.79 1.11z"/></svg>`,
+            stat: { icon: '✓', text: '95%+ inbox' }
+        },
+        {
+            title: 'Cost Per Lead Fix: €45-€85',
+            description: 'Plătești doar contactele valide. Dashboard cu metrici live. Fără costuri ascunse. Zero lock-in.',
+            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>`,
+            stat: { icon: '✓', text: '3-5x ROI' }
+        },
+        {
+            title: 'Live în 24h, Leads în 72h',
+            description: 'ICP workshop 2h. Setup complet în 24h. Primele 50 contacte calificate în ziua 3.',
+            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`,
+            stat: { icon: '⏱', text: '72h to leads' }
+        }
+    ]
+} = Astro.props;
+---
+
+<section class="fears-section" id="benefits">
+    <div class="fears-header">
+        <h2>{title}</h2>
+        <p>{subtitle}</p>
+    </div>
+
+    <div class="benefits-grid">
+        {benefits.map(benefit => (
+            <div class="benefit-card">
+                <div class="benefit-card-content">
+                    <h3 class="benefit-card-title">{benefit.title}</h3>
+                    <p class="benefit-card-desc">{benefit.description}</p>
+                </div>
+                <div class="benefit-card-visual">
+                    <div class="benefit-card-visual-placeholder">
+                        <Fragment set:html={benefit.icon} />
+                    </div>
+                </div>
+                <div class="benefit-card-stat">
+                    <div class="benefit-card-stat-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                    </div>
+                    <span class="benefit-card-stat-text">{benefit.stat.text}</span>
+                </div>
+            </div>
+        ))}
+    </div>
+</section>
+
+<script>
+    // Animate cards on scroll
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.benefit-card').forEach(card => {
+        observer.observe(card);
+    });
+</script>

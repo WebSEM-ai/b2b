@@ -1,356 +1,175 @@
 ---
 interface Props {
     badge?: string;
-    title: string;
-    titleAccent?: string;
+    titleLine1?: string;
+    titleLine2?: string;
     subtitle?: string;
-    formAction?: string;
-    stats?: Array<{
+    floatingStats?: Array<{
         value: string;
         label: string;
-        position?: 'left' | 'right';
     }>;
 }
 
-const { 
-    badge,
-    title, 
-    titleAccent,
-    subtitle,
-    formAction = '#',
-    stats = []
+const {
+    badge = 'AlphaGrade — B2B Sales Intelligence',
+    titleLine1 = 'Pipeline B2B de <strong>€250K+</strong>',
+    titleLine2 = 'în 90 de zile.',
+    subtitle = 'Identificăm decision-makers cu buget. Inițiem conversații calificate. Livrăm meetings cu VP+ din companii €10M+ revenue. Apollo.io + execuție la cheie.',
+    floatingStats = [
+        { value: '+89%', label: 'Reply Rate' },
+        { value: '€2.3M', label: 'Pipeline' },
+        { value: '14 zile', label: 'Time to Close' }
+    ]
 } = Astro.props;
-
-const leftStats = stats.filter(s => s.position === 'left');
-const rightStats = stats.filter(s => s.position === 'right');
 ---
 
 <section class="hero" id="hero">
-    <canvas id="network-canvas"></canvas>
-    
-    <div class="hero-content">
-        <!-- Left Stats -->
-        {leftStats.map(stat => (
-            <div class="hero-stat left">
-                <span class="stat-value">{stat.value}</span>
-                <span class="stat-label">{stat.label}</span>
-            </div>
-        ))}
-        
-        <!-- Center Content -->
-        <div class="hero-center">
-            {badge && (
-                <div class="hero-badge">
-                    <span>{badge}</span>
-                </div>
-            )}
-            
-            <h1>
-                {title}
-                {titleAccent && <span class="text-accent">{titleAccent}</span>}
-            </h1>
-            
-            {subtitle && <p class="hero-subtitle">{subtitle}</p>}
+    <div class="hero-bg">
+        <div class="grid-lines"></div>
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <canvas id="network-canvas"></canvas>
+
+        <!-- Floating Stats Badges -->
+        <div class="floating-stat floating-stat-1">
+            <div class="floating-stat-value">{floatingStats[0]?.value}</div>
+            <div class="floating-stat-label">{floatingStats[0]?.label}</div>
         </div>
-        
-        <!-- Right Stats -->
-        {rightStats.map(stat => (
-            <div class="hero-stat right">
-                <span class="stat-value">{stat.value}</span>
-                <span class="stat-label">{stat.label}</span>
-            </div>
-        ))}
+        <div class="floating-stat floating-stat-2">
+            <div class="floating-stat-value">{floatingStats[1]?.value}</div>
+            <div class="floating-stat-label">{floatingStats[1]?.label}</div>
+        </div>
+        <div class="floating-stat floating-stat-3">
+            <div class="floating-stat-value">{floatingStats[2]?.value}</div>
+            <div class="floating-stat-label">{floatingStats[2]?.label}</div>
+        </div>
     </div>
-    
-    <!-- Lead Form -->
-    <div class="hero-form-container">
-        <div class="hero-form-header">
-            <h3>Solicită Audit Gratuit</h3>
-            <p>Analizăm potențialul tău de lead generation în 24h</p>
+
+    <div class="hero-content">
+        <div class="hero-label">{badge}</div>
+        <h1 class="hero-title">
+            <span class="line"><span set:html={titleLine1} /></span>
+            <span class="line"><span class="gradient">{titleLine2}</span></span>
+        </h1>
+        <p class="hero-sub">{subtitle}</p>
+    </div>
+
+    <!-- Hero Audit Form -->
+    <div class="hero-audit-form">
+        <div class="audit-form-container">
+            <div class="audit-form-label">
+                <h3>Solicită Audit Gratuit</h3>
+                <p>Analizăm potențialul tău de lead generation în 24h</p>
+            </div>
+            <form class="audit-form" id="auditForm">
+                <div class="audit-form-field">
+                    <input type="url" name="website" placeholder="Website-ul tău" required>
+                    <span class="audit-form-field-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="2" y1="12" x2="22" y2="12"/>
+                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                        </svg>
+                    </span>
+                </div>
+                <div class="audit-form-field">
+                    <input type="tel" name="phone" placeholder="Telefon" required>
+                    <span class="audit-form-field-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                        </svg>
+                    </span>
+                </div>
+                <div class="audit-form-field">
+                    <input type="email" name="email" placeholder="Email" required>
+                    <span class="audit-form-field-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                            <polyline points="22,6 12,13 2,6"/>
+                        </svg>
+                    </span>
+                </div>
+                <button type="submit" class="audit-form-submit">
+                    Trimite
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </button>
+            </form>
         </div>
-        <form class="hero-form" action={formAction} method="POST">
-            <div class="form-group">
-                <span class="form-icon">🌐</span>
-                <input type="url" name="website" placeholder="Website-ul tău" required />
-            </div>
-            <div class="form-group">
-                <span class="form-icon">📞</span>
-                <input type="tel" name="phone" placeholder="Telefon" required />
-            </div>
-            <div class="form-group">
-                <span class="form-icon">✉️</span>
-                <input type="email" name="email" placeholder="Email" required />
-            </div>
-            <button type="submit" class="btn btn-primary">
-                Trimite
-                <span>→</span>
-            </button>
-        </form>
     </div>
 </section>
 
-<style>
-    .hero {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 8rem 2rem 4rem;
-        position: relative;
-        overflow: hidden;
-        background: radial-gradient(ellipse at center top, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
-                    var(--black);
-    }
-
-    #network-canvas {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        opacity: 0.6;
-    }
-
-    .hero-content {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 4rem;
-        width: 100%;
-        max-width: 1400px;
-        position: relative;
-        z-index: 2;
-    }
-
-    .hero-center {
-        text-align: center;
-        flex: 1;
-        max-width: 800px;
-    }
-
-    .hero-badge {
-        display: inline-block;
-        margin-bottom: 1.5rem;
-    }
-
-    .hero-badge span {
-        background: rgba(99, 102, 241, 0.1);
-        border: 1px solid rgba(99, 102, 241, 0.3);
-        padding: 0.5rem 1.25rem;
-        border-radius: 50px;
-        font-size: 0.75rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        color: var(--accent-light);
-    }
-
-    .hero h1 {
-        margin-bottom: 1.5rem;
-        line-height: 1.1;
-    }
-
-    .hero-subtitle {
-        font-size: 1.1rem;
-        color: var(--gray-400);
-        max-width: 600px;
-        margin: 0 auto;
-        line-height: 1.7;
-    }
-
-    .hero-stat {
-        background: rgba(10, 10, 10, 0.8);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 12px;
-        padding: 1rem 1.25rem;
-        text-align: center;
-        min-width: 100px;
-    }
-
-    .hero-stat .stat-value {
-        display: block;
-        font-family: 'Space Grotesk', sans-serif;
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: var(--accent-light);
-    }
-
-    .hero-stat .stat-label {
-        font-size: 0.7rem;
-        color: var(--gray-500);
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-    }
-
-    .hero-stat.left {
-        position: absolute;
-        left: 0;
-        top: 50%;
-        transform: translateY(-50%);
-    }
-
-    .hero-stat.right {
-        position: absolute;
-        right: 0;
-        top: 50%;
-        transform: translateY(-50%);
-    }
-
-    /* Form Styles */
-    .hero-form-container {
-        margin-top: 3rem;
-        width: 100%;
-        max-width: 900px;
-        position: relative;
-        z-index: 2;
-    }
-
-    .hero-form-header {
-        text-align: center;
-        margin-bottom: 1.5rem;
-    }
-
-    .hero-form-header h3 {
-        font-size: 1.1rem;
-        margin-bottom: 0.25rem;
-    }
-
-    .hero-form-header p {
-        font-size: 0.85rem;
-        color: var(--gray-500);
-    }
-
-    .hero-form {
-        display: flex;
-        gap: 1rem;
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 12px;
-        padding: 0.75rem;
-    }
-
-    .form-group {
-        flex: 1;
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        background: rgba(0, 0, 0, 0.3);
-        border-radius: 8px;
-        padding: 0 1rem;
-    }
-
-    .form-icon {
-        font-size: 1rem;
-        opacity: 0.5;
-    }
-
-    .form-group input {
-        flex: 1;
-        background: transparent;
-        border: none;
-        color: var(--white);
-        font-size: 0.9rem;
-        padding: 0.875rem 0;
-        outline: none;
-    }
-
-    .form-group input::placeholder {
-        color: var(--gray-500);
-    }
-
-    .hero-form .btn {
-        white-space: nowrap;
-    }
-
-    @media (max-width: 900px) {
-        .hero-content {
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .hero-stat.left,
-        .hero-stat.right {
-            position: static;
-            transform: none;
-        }
-
-        .hero-form {
-            flex-direction: column;
-        }
-
-        .form-group {
-            width: 100%;
-        }
-    }
-</style>
-
 <script>
-    // Canvas animation
+    // Network Canvas Animation
     const canvas = document.getElementById('network-canvas') as HTMLCanvasElement;
     if (canvas) {
         const ctx = canvas.getContext('2d');
-        let particles: Array<{x: number, y: number, vx: number, vy: number, radius: number}> = [];
 
-        function resizeCanvas() {
+        function resize() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-            initParticles();
         }
+        resize();
+        window.addEventListener('resize', resize);
 
-        function initParticles() {
-            particles = [];
-            const count = Math.min(60, Math.floor((canvas.width * canvas.height) / 20000));
-            for (let i = 0; i < count; i++) {
-                particles.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    vx: (Math.random() - 0.5) * 0.5,
-                    vy: (Math.random() - 0.5) * 0.5,
-                    radius: Math.random() * 2 + 1
-                });
-            }
+        const particles: Array<{x: number; y: number; vx: number; vy: number}> = [];
+        const particleCount = 50;
+
+        for (let i = 0; i < particleCount; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                vx: (Math.random() - 0.5) * 0.5,
+                vy: (Math.random() - 0.5) * 0.5
+            });
         }
 
         function animate() {
             if (!ctx) return;
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            particles.forEach(p => {
+
+            particles.forEach((p, i) => {
                 p.x += p.vx;
                 p.y += p.vy;
+
                 if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
                 if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
 
+                // Draw particle
                 ctx.beginPath();
-                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
                 ctx.fillStyle = 'rgba(99, 102, 241, 0.5)';
                 ctx.fill();
-            });
 
-            // Connect particles
-            for (let i = 0; i < particles.length; i++) {
-                for (let j = i + 1; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
+                // Draw connections
+                particles.slice(i + 1).forEach(p2 => {
+                    const dx = p.x - p2.x;
+                    const dy = p.y - p2.y;
                     const dist = Math.sqrt(dx * dx + dy * dy);
+
                     if (dist < 150) {
                         ctx.beginPath();
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.strokeStyle = `rgba(99, 102, 241, ${0.15 * (1 - dist / 150)})`;
-                        ctx.lineWidth = 1;
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.strokeStyle = `rgba(99, 102, 241, ${0.2 * (1 - dist / 150)})`;
                         ctx.stroke();
                     }
-                }
-            }
+                });
+            });
 
             requestAnimationFrame(animate);
         }
-
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
         animate();
     }
+
+    // Form submission
+    const auditForm = document.getElementById('auditForm');
+    auditForm?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target as HTMLFormElement);
+        console.log('Form submitted:', Object.fromEntries(formData));
+        alert('Mulțumim! Te vom contacta în curând.');
+    });
 </script>

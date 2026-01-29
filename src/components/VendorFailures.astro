@@ -1,0 +1,52 @@
+---
+interface Comparison {
+    problem: string;
+    solution: string;
+}
+
+interface Props {
+    title?: string;
+    subtitle?: string;
+    comparisons?: Comparison[];
+}
+
+const {
+    title = 'De ce ultimii 3 leadgen vendors au eșuat.',
+    subtitle = 'Și cum te asigurăm că noi nu repetăm aceleași greșeli.',
+    comparisons = [
+        { problem: 'Date proaste - 40% bounce rate', solution: '98% accuracy, verificare real-time, sub 5% bounce garantat' },
+        { problem: 'Risc GDPR - amenzi €50K+', solution: 'Compliance nativ, audit trail, legal review inclus' },
+        { problem: 'Outreach generic - 0.5% reply rate', solution: 'AI research + personalizare 1:1, reply rate 8-12%' },
+        { problem: 'Spam factory - domeniu ars în 3 luni', solution: '95% inbox rate, warmup profesional, reputation monitoring' },
+        { problem: 'Setup complicat - 6 săptămâni onboarding', solution: 'Live în 24h, primele leads în 72h, sau setup gratuit' },
+        { problem: 'Lock-in contracts - 12 luni minimum', solution: 'Month-to-month, kill switch oricând, zero penalități' },
+        { problem: 'Fără transparență - black box reporting', solution: 'Dashboard live, fiecare metric vizibil, API access' },
+        { problem: 'ROI neclar - "trust the process"', solution: 'Cost/lead fix €45-85, pipeline calculator, ROI transparent' }
+    ]
+} = Astro.props;
+---
+
+<section class="vendor-failures">
+    <div class="vendor-header">
+        <h2>{title}</h2>
+        <p>{subtitle}</p>
+    </div>
+
+    <div class="vendor-grid">
+        {comparisons.map(item => (
+            <div class="vendor-item">
+                <div class="vendor-problem">
+                    <span class="vendor-problem-icon">❌</span>
+                    <span class="vendor-problem-text">"{item.problem}"</span>
+                </div>
+                <div class="vendor-solution">
+                    <span class="vendor-solution-icon">✓</span>
+                    <div>
+                        <div class="vendor-solution-label">ALPHAGRADE:</div>
+                        <div class="vendor-solution-text">{item.solution}</div>
+                    </div>
+                </div>
+            </div>
+        ))}
+    </div>
+</section>

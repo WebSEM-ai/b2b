@@ -1,285 +1,47 @@
 ---
 import LandingPage from '../layouts/LandingPage.astro';
 import Hero from '../components/Hero.astro';
-import FeatureCard from '../components/FeatureCard.astro';
-import ComparisonCard from '../components/ComparisonCard.astro';
-import BenefitCard from '../components/BenefitCard.astro';
+import ClientsCarousel from '../components/ClientsCarousel.astro';
+import BenefitsSection from '../components/BenefitsSection.astro';
+import StatsSection from '../components/StatsSection.astro';
+import VendorFailures from '../components/VendorFailures.astro';
+import FeaturesSection from '../components/FeaturesSection.astro';
+import CapabilitiesSection from '../components/CapabilitiesSection.astro';
+import CtaSection from '../components/CtaSection.astro';
+import BookingModal from '../components/BookingModal.astro';
 
 // Page metadata
-const pageTitle = "AlphaGrade | B2B Lead Intelligence by WebSEM";
+const pageTitle = "WebSEM | B2B Lead Intelligence";
 const pageDescription = "Pipeline B2B de €250K+ în 90 de zile. Identificăm decision-makers cu buget. Livrăm meetings cu VP+ din companii €10M+ revenue.";
-
-// Hero stats
-const heroStats = [
-    { value: '€2.3M', label: 'PIPELINE', position: 'left' as const },
-    { value: '+89%', label: 'REPLY RATE', position: 'right' as const }
-];
-
-// Features data
-const features = [
-    {
-        icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>`,
-        title: "Precision Targeting Predictiv",
-        description: "Microtargeting inteligent care rafinează continuu audiența ta până la nișa perfectă. Nu mai pierzi buget pe prospecți irelevanți."
-    },
-    {
-        icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
-        title: "AI Micro-Segmentation",
-        description: "Identifică publicul ideal folosind microprofiling avansat pe Apollo.io, Lemlist, Snov.io și Instantly.ai – simultan."
-    },
-    {
-        icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M21 12a9 9 0 0 1-9 9m9-9a9 9 0 0 0-9-9m9 9H3m9 9a9 9 0 0 1-9-9m9 9c1.66 0 3-4.03 3-9s-1.34-9-3-9m0 18c-1.66 0-3-4.03-3-9s1.34-9 3-9"/></svg>`,
-        title: "Optimizare Recursivă",
-        description: "Nu o singură campanie, ci un ciclu continuu: testează → analizează → recalibrează → relansează. Fiecare iterație e mai inteligentă."
-    },
-    {
-        icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>`,
-        title: "A/B/C Testing Multi-Layered",
-        description: "Rulează multiple variante în paralel și lasă algoritmul să descopere ce funcționează – în timp real."
-    },
-    {
-        icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>`,
-        title: "Engagement Mapping Multichannel",
-        description: "Știm exact unde și cum preferă să comunice fiecare lead: email, LinkedIn, SMS. Mesajul potrivit, pe canalul potrivit."
-    },
-    {
-        icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>`,
-        title: "Cross-Channel Synchronization",
-        description: "Prezență sincronizată pe toate punctele de contact – o experiență coerentă care maximizează conversia."
-    },
-    {
-        icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>`,
-        title: "Performance Analytics cu Databox",
-        description: "Analiză post-campanie în profunzime: trafic, engagement, conversii. Fiecare insight alimentează următoarea campanie."
-    },
-    {
-        icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
-        title: "Business Culture Alignment",
-        description: "Campaniile se adaptează nu doar la audiență, ci și la cultura de business a fiecărui client. Personalizare la nivel strategic."
-    }
-];
-
-// Comparison data
-const comparisons = [
-    { problem: "Date proaste - 40% bounce rate", solution: "98% accuracy, verificare real-time, sub 5% bounce garantat" },
-    { problem: "Risc GDPR - amenzi €50K+", solution: "Compliance nativ, audit trail, legal review inclus" },
-    { problem: "Outreach generic - 0.5% reply rate", solution: "AI research + personalizare 1:1, reply rate 8-12%" },
-    { problem: "Spam factory - domeniu ars în 3 luni", solution: "95% inbox rate, warmup profesional, reputation monitoring" },
-    { problem: "Setup complicat - 6 săptămâni onboarding", solution: "Live în 24h, primele leads în 72h, sau setup gratuit" },
-    { problem: "Lock-in contracts - 12 luni minimum", solution: "Month-to-month, kill switch oricând, zero penalități" },
-    { problem: "Fără transparență - black box reporting", solution: "Dashboard live, fiecare metric vizibil, API access" },
-    { problem: "ROI neclar - 'trust the process'", solution: "Cost/lead fix €45-85, pipeline calculator, ROI transparent" }
-];
-
-// Benefits data
-const benefits = [
-    {
-        icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>`,
-        title: "100% GDPR Compliant",
-        description: "Consent tracking automat. Opt-out instant. Audit trail complet. Zero incidente în 3 ani de operare.",
-        badge: { text: "0 incidente", icon: "✓" }
-    },
-    {
-        icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>`,
-        title: "95%+ Inbox Rate Garantat",
-        description: "Domain warmup profesional. Email verification pre-send. Sender reputation monitoring 24/7.",
-        badge: { text: "95%+ inbox", icon: "✓" }
-    },
-    {
-        icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>`,
-        title: "Cost Per Lead Fix: €45-€85",
-        description: "Plătești doar contactele valide. Dashboard cu metrici live. Fără costuri ascunse. Zero lock-in.",
-        badge: { text: "3-5x ROI", icon: "✓" }
-    },
-    {
-        icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>`,
-        title: "Live în 24h, Leads în 72h",
-        description: "ICP workshop 2h. Setup complet în 24h. Primele 50 contacte calificate în ziua 3.",
-        badge: { text: "72h to leads", icon: "⏱" }
-    }
-];
 ---
 
 <LandingPage title={pageTitle} description={pageDescription}>
-    
+
     <!-- Hero Section -->
-    <Hero
-        badge="ALPHAGRADE — B2B SALES INTELLIGENCE"
-        title="Pipeline B2B de €250K+"
-        titleAccent="în 90 de zile."
-        subtitle="Identificăm decision-makers cu buget. Inițiem conversații calificate. Livrăm meetings cu VP+ din companii €10M+ revenue. Apollo.io + execuție la cheie."
-        stats={heroStats}
-    />
+    <Hero />
 
-    <!-- Features Section -->
-    <section class="features-section" id="features">
-        <div class="section-header">
-            <h2>Avantajele <span class="text-accent">AlphaGrade</span></h2>
-            <p>Tehnologie AI care transformă prospectarea în știință exactă</p>
-        </div>
-        
-        <div class="features-grid">
-            {features.map(feature => (
-                <FeatureCard
-                    icon={feature.icon}
-                    title={feature.title}
-                    description={feature.description}
-                />
-            ))}
-        </div>
-    </section>
+    <!-- Clients Logo Carousel -->
+    <ClientsCarousel />
 
-    <!-- Comparison Section -->
-    <section class="comparison-section" id="why">
-        <div class="section-header">
-            <h2>De ce ultimii 3 leadgen vendors au eșuat.</h2>
-            <p>Și cum te asigurăm că noi nu repetăm aceleași greșeli.</p>
-        </div>
-        
-        <div class="comparison-grid">
-            {comparisons.map(item => (
-                <ComparisonCard
-                    problem={item.problem}
-                    solution={item.solution}
-                />
-            ))}
-        </div>
-    </section>
+    <!-- Benefits Section - Why companies choose AlphaGrade -->
+    <BenefitsSection />
 
-    <!-- Benefits Section -->
-    <section class="benefits-section" id="benefits">
-        <div class="section-header">
-            <h2>De ce companiile aleg <span class="text-accent">AlphaGrade</span>.</h2>
-            <p>Livrăm ce promit alții dar nu pot onora.</p>
-        </div>
-        
-        <div class="benefits-grid">
-            {benefits.map(benefit => (
-                <BenefitCard
-                    icon={benefit.icon}
-                    title={benefit.title}
-                    description={benefit.description}
-                    badge={benefit.badge}
-                />
-            ))}
-        </div>
-    </section>
+    <!-- Stats Section - Proven Results -->
+    <StatsSection />
+
+    <!-- Vendor Failures - Why others failed -->
+    <VendorFailures />
+
+    <!-- Features Section - AlphaGrade Advantages -->
+    <FeaturesSection />
+
+    <!-- Capabilities Section -->
+    <CapabilitiesSection />
 
     <!-- CTA Section -->
-    <section class="cta-section" id="contact">
-        <div class="cta-content">
-            <h2>Gata să-ți construiești pipeline-ul B2B?</h2>
-            <p>Solicită un audit gratuit și vezi câți decision-makers poți targeta în nișa ta.</p>
-            <a href="#hero" class="btn btn-primary">
-                Solicită Audit Gratuit
-                <span>→</span>
-            </a>
-        </div>
-    </section>
+    <CtaSection />
+
+    <!-- Booking Modal -->
+    <BookingModal />
 
 </LandingPage>
-
-<style>
-    /* Features Section */
-    .features-section {
-        padding: 6rem 2rem;
-        background: var(--black);
-    }
-
-    .features-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 1.5rem;
-        max-width: 1400px;
-        margin: 0 auto;
-    }
-
-    @media (max-width: 1200px) {
-        .features-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media (max-width: 600px) {
-        .features-grid { grid-template-columns: 1fr; }
-    }
-
-    /* Comparison Section */
-    .comparison-section {
-        padding: 6rem 2rem;
-        background: linear-gradient(180deg, var(--black) 0%, rgba(10, 10, 10, 0.95) 100%);
-    }
-
-    .comparison-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
-        max-width: 1200px;
-        margin: 0 auto;
-    }
-
-    @media (max-width: 900px) {
-        .comparison-grid { grid-template-columns: 1fr; }
-    }
-
-    /* Benefits Section */
-    .benefits-section {
-        padding: 6rem 2rem;
-        background: var(--black);
-    }
-
-    .benefits-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 1.5rem;
-        max-width: 1400px;
-        margin: 0 auto;
-    }
-
-    @media (max-width: 1200px) {
-        .benefits-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media (max-width: 600px) {
-        .benefits-grid { grid-template-columns: 1fr; }
-    }
-
-    /* CTA Section */
-    .cta-section {
-        padding: 6rem 2rem;
-        background: radial-gradient(ellipse at center, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
-    }
-
-    .cta-content {
-        text-align: center;
-        max-width: 600px;
-        margin: 0 auto;
-    }
-
-    .cta-content h2 {
-        margin-bottom: 1rem;
-    }
-
-    .cta-content p {
-        margin-bottom: 2rem;
-        font-size: 1.1rem;
-    }
-
-    .cta-content .btn {
-        font-size: 1rem;
-        padding: 1rem 2rem;
-    }
-
-    /* Section Header */
-    .section-header {
-        text-align: center;
-        margin-bottom: 4rem;
-        max-width: 800px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .section-header p {
-        margin-top: 1rem;
-        font-size: 1.1rem;
-        color: var(--gray-400);
-    }
-</style>
