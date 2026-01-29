@@ -1,0 +1,465 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import BookingModal from '../components/BookingModal.astro';
+import '../styles/global.css';
+
+interface Props {
+    title: string;
+    description: string;
+    pubDate: Date;
+    updatedDate?: Date;
+    heroImage?: string;
+    heroImageAlt?: string;
+    author?: string;
+    category?: string;
+    tags?: string[];
+    readingTime?: number;
+}
+
+const {
+    title,
+    description,
+    pubDate,
+    updatedDate,
+    heroImage,
+    heroImageAlt,
+    author = 'WebSEM Team',
+    category,
+    tags = [],
+    readingTime,
+} = Astro.props;
+
+const siteUrl = Astro.site?.toString() || 'https://b2b.websem.ro';
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
+const ogImage = heroImage || '/images/og-default.jpg';
+
+// Format dates
+const formatDate = (date: Date) => {
+    return new Intl.DateTimeFormat('ro-RO', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    }).format(date);
+};
+---
+
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title} | WebSEM Blog</title>
+    <meta name="description" content={description}>
+
+    <!-- Canonical -->
+    <link rel="canonical" href={canonicalUrl}>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title}>
+    <meta property="og:description" content={description}>
+    <meta property="og:image" content={`${siteUrl}${ogImage}`}>
+    <meta property="og:url" content={canonicalUrl}>
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content={pubDate.toISOString()}>
+    {updatedDate && <meta property="article:modified_time" content={updatedDate.toISOString()}>}
+    <meta property="article:author" content={author}>
+    {tags.map(tag => <meta property="article:tag" content={tag}>)}
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content={title}>
+    <meta name="twitter:description" content={description}>
+    <meta name="twitter:image" content={`${siteUrl}${ogImage}`}>
+
+    <!-- Fonts - optimized loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": title,
+        "description": description,
+        "image": `${siteUrl}${ogImage}`,
+        "author": {
+            "@type": "Organization",
+            "name": author
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "WebSEM",
+            "logo": {
+                "@type": "ImageObject",
+                "url": `${siteUrl}/images/logo.png`
+            }
+        },
+        "datePublished": pubDate.toISOString(),
+        "dateModified": (updatedDate || pubDate).toISOString(),
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": canonicalUrl
+        }
+    })} />
+</head>
+<body>
+    <Header />
+
+    <article class="blog-article">
+        <!-- Hero -->
+        <header class="article-header">
+            <div class="article-header-content">
+                {category && (
+                    <a href={`/blog/category/${category}`} class="article-category">
+                        {category.replace('-', ' ')}
+                    </a>
+                )}
+                <h1>{title}</h1>
+                <p class="article-description">{description}</p>
+
+                <div class="article-meta">
+                    <div class="meta-item">
+                        <span class="meta-label">Autor</span>
+                        <span class="meta-value">{author}</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Publicat</span>
+                        <span class="meta-value">{formatDate(pubDate)}</span>
+                    </div>
+                    {readingTime && (
+                        <div class="meta-item">
+                            <span class="meta-label">Timp de citire</span>
+                            <span class="meta-value">{readingTime} min</span>
+                        </div>
+                    )}
+                </div>
+            </div>
+        </header>
+
+        <!-- Hero Image -->
+        {heroImage && (
+            <div class="article-hero-image">
+                <img src={heroImage} alt={heroImageAlt || title} loading="eager">
+            </div>
+        )}
+
+        <!-- Content -->
+        <div class="article-content">
+            <slot />
+        </div>
+
+        <!-- Tags -->
+        {tags.length > 0 && (
+            <footer class="article-footer">
+                <div class="article-tags">
+                    <span class="tags-label">Tags:</span>
+                    {tags.map(tag => (
+                        <a href={`/blog/tag/${tag}`} class="tag">#{tag}</a>
+                    ))}
+                </div>
+            </footer>
+        )}
+    </article>
+
+    <!-- CTA Section -->
+    <section class="blog-cta">
+        <div class="blog-cta-content">
+            <h2>Vrei rezultate similare pentru business-ul tău?</h2>
+            <p>Solicită un audit gratuit și află cum putem genera €250K+ pipeline în 90 de zile.</p>
+            <a href="javascript:void(0)" class="cta-btn" id="blog-cta-btn">Solicită Audit Gratuit</a>
+        </div>
+    </section>
+
+    <Footer />
+    <BookingModal />
+
+    <script>
+        // Blog CTA button
+        const blogCtaBtn = document.getElementById('blog-cta-btn');
+        blogCtaBtn?.addEventListener('click', () => {
+            const modal = document.getElementById('booking-modal');
+            modal?.classList.add('active');
+            document.body.classList.add('modal-open');
+        });
+    </script>
+</body>
+</html>
+
+<style>
+    .blog-article {
+        padding-top: 80px;
+    }
+
+    .article-header {
+        padding: 4rem 2rem;
+        background: linear-gradient(180deg, rgba(99, 102, 241, 0.1) 0%, transparent 100%);
+    }
+
+    .article-header-content {
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .article-category {
+        display: inline-block;
+        padding: 0.35rem 1rem;
+        background: rgba(99, 102, 241, 0.15);
+        border: 1px solid rgba(99, 102, 241, 0.3);
+        border-radius: 50px;
+        font-size: 0.7rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--accent-light);
+        text-decoration: none;
+        margin-bottom: 1.5rem;
+        transition: all 0.3s ease;
+    }
+
+    .article-category:hover {
+        background: rgba(99, 102, 241, 0.25);
+    }
+
+    .article-header h1 {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: clamp(2rem, 5vw, 3rem);
+        font-weight: 700;
+        line-height: 1.2;
+        margin-bottom: 1rem;
+        letter-spacing: -0.02em;
+    }
+
+    .article-description {
+        font-size: 1.15rem;
+        color: var(--gray-400);
+        line-height: 1.6;
+        margin-bottom: 2rem;
+    }
+
+    .article-meta {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        flex-wrap: wrap;
+    }
+
+    .meta-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .meta-label {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--gray-500);
+    }
+
+    .meta-value {
+        font-size: 0.9rem;
+        color: var(--gray-300);
+    }
+
+    .article-hero-image {
+        max-width: 1000px;
+        margin: 0 auto 3rem;
+        padding: 0 2rem;
+    }
+
+    .article-hero-image img {
+        width: 100%;
+        height: auto;
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .article-content {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 0 2rem 4rem;
+        font-size: 1.05rem;
+        line-height: 1.8;
+        color: var(--gray-300);
+    }
+
+    .article-content :global(h2) {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 1.75rem;
+        font-weight: 700;
+        margin: 3rem 0 1rem;
+        color: var(--white);
+    }
+
+    .article-content :global(h3) {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 1.35rem;
+        font-weight: 600;
+        margin: 2.5rem 0 1rem;
+        color: var(--white);
+    }
+
+    .article-content :global(p) {
+        margin-bottom: 1.5rem;
+    }
+
+    .article-content :global(a) {
+        color: var(--accent-light);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        transition: color 0.3s ease;
+    }
+
+    .article-content :global(a:hover) {
+        color: var(--white);
+    }
+
+    .article-content :global(ul),
+    .article-content :global(ol) {
+        margin: 1.5rem 0;
+        padding-left: 1.5rem;
+    }
+
+    .article-content :global(li) {
+        margin-bottom: 0.75rem;
+    }
+
+    .article-content :global(blockquote) {
+        border-left: 3px solid var(--accent);
+        padding-left: 1.5rem;
+        margin: 2rem 0;
+        font-style: italic;
+        color: var(--gray-400);
+    }
+
+    .article-content :global(code) {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 0.2rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.9em;
+    }
+
+    .article-content :global(pre) {
+        background: rgba(0, 0, 0, 0.5);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        padding: 1.5rem;
+        overflow-x: auto;
+        margin: 2rem 0;
+    }
+
+    .article-content :global(pre code) {
+        background: none;
+        padding: 0;
+    }
+
+    .article-content :global(table) {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 2rem 0;
+    }
+
+    .article-content :global(th),
+    .article-content :global(td) {
+        padding: 0.75rem 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        text-align: left;
+    }
+
+    .article-content :global(th) {
+        background: rgba(99, 102, 241, 0.1);
+        font-weight: 600;
+        color: var(--white);
+    }
+
+    .article-content :global(hr) {
+        border: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        margin: 3rem 0;
+    }
+
+    .article-content :global(strong) {
+        color: var(--white);
+        font-weight: 600;
+    }
+
+    .article-footer {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 2rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .article-tags {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+    }
+
+    .tags-label {
+        font-size: 0.85rem;
+        color: var(--gray-500);
+    }
+
+    .tag {
+        padding: 0.35rem 0.75rem;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 50px;
+        font-size: 0.8rem;
+        color: var(--gray-400);
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .tag:hover {
+        background: rgba(99, 102, 241, 0.15);
+        border-color: rgba(99, 102, 241, 0.3);
+        color: var(--accent-light);
+    }
+
+    .blog-cta {
+        padding: 5rem 2rem;
+        background: linear-gradient(180deg, transparent 0%, rgba(99, 102, 241, 0.1) 100%);
+        text-align: center;
+    }
+
+    .blog-cta-content {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .blog-cta h2 {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+
+    .blog-cta p {
+        color: var(--gray-400);
+        margin-bottom: 2rem;
+    }
+
+    @media (max-width: 768px) {
+        .article-header {
+            padding: 3rem 1.5rem;
+        }
+
+        .article-meta {
+            gap: 1.5rem;
+        }
+
+        .article-content {
+            padding: 0 1.5rem 3rem;
+            font-size: 1rem;
+        }
+    }
+</style>

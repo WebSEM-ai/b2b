@@ -1,0 +1,14 @@
+# robots.txt for b2b.websem.ro
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://b2b.websem.ro/sitemap-index.xml
+
+# Disallow admin/draft pages
+Disallow: /draft/
+Disallow: /admin/
+
+# Crawl-delay (optional, pentru a nu supraîncărca serverul)
+# Crawl-delay: 1
