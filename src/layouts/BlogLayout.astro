@@ -525,52 +525,129 @@ const shareUrls = {
         margin-bottom: 0.5rem;
     }
 
+    /* Blockquotes - stilizate cu iconița de citat */
     .content-wrapper :global(blockquote) {
-        border-left: 3px solid var(--accent);
-        padding-left: 1.25rem;
+        position: relative;
+        border-left: 4px solid var(--accent);
+        padding: 1.5rem 1.5rem 1.5rem 2rem;
         margin: 2rem 0;
+        background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-input) 100%);
+        border-radius: 0 12px 12px 0;
         font-style: italic;
-        color: var(--text-tertiary);
+        color: var(--text-secondary);
     }
 
+    .content-wrapper :global(blockquote)::before {
+        content: '"';
+        position: absolute;
+        top: -10px;
+        left: 10px;
+        font-size: 4rem;
+        font-family: Georgia, serif;
+        color: var(--accent);
+        opacity: 0.3;
+        line-height: 1;
+    }
+
+    .content-wrapper :global(blockquote p:last-child) {
+        margin-bottom: 0;
+    }
+
+    /* Code inline */
     .content-wrapper :global(code) {
         background: var(--bg-input);
-        padding: 0.15rem 0.4rem;
-        border-radius: 4px;
-        font-size: 0.9em;
+        padding: 0.2rem 0.5rem;
+        border-radius: 6px;
+        font-size: 0.88em;
+        font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
+        color: var(--accent-light);
+        border: 1px solid var(--border-light);
     }
 
+    /* Code blocks - cu header și design îmbunătățit */
     .content-wrapper :global(pre) {
+        position: relative;
         background: var(--bg-tertiary);
         border: 1px solid var(--border-light);
-        border-radius: 8px;
-        padding: 1.25rem;
-        overflow-x: auto;
+        border-radius: 12px;
+        padding: 0;
+        overflow: hidden;
         margin: 2rem 0;
+    }
+
+    .content-wrapper :global(pre)::before {
+        content: '';
+        display: block;
+        height: 40px;
+        background: var(--bg-input);
+        border-bottom: 1px solid var(--border-light);
+        position: relative;
+    }
+
+    .content-wrapper :global(pre)::after {
+        content: '• • •';
+        position: absolute;
+        top: 12px;
+        left: 16px;
+        font-size: 0.8rem;
+        letter-spacing: 4px;
+        color: var(--text-muted);
     }
 
     .content-wrapper :global(pre code) {
+        display: block;
         background: none;
-        padding: 0;
+        padding: 1.25rem;
+        border: none;
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        line-height: 1.6;
+        overflow-x: auto;
     }
 
+    /* Tabele - design profesional cu rânduri alternante */
     .content-wrapper :global(table) {
         width: 100%;
-        border-collapse: collapse;
+        border-collapse: separate;
+        border-spacing: 0;
         margin: 2rem 0;
         font-size: 0.95rem;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid var(--border-light);
+        box-shadow: var(--shadow-sm);
     }
 
     .content-wrapper :global(th),
     .content-wrapper :global(td) {
-        padding: 0.75rem 1rem;
-        border: 1px solid var(--border-light);
+        padding: 1rem 1.25rem;
         text-align: left;
+        border-bottom: 1px solid var(--border-light);
     }
 
     .content-wrapper :global(th) {
-        background: var(--bg-input);
+        background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
         font-weight: 600;
+        color: #ffffff;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        letter-spacing: 0.05em;
+    }
+
+    .content-wrapper :global(tr:nth-child(even)) {
+        background: var(--bg-card);
+    }
+
+    .content-wrapper :global(tr:hover) {
+        background: var(--bg-input);
+    }
+
+    .content-wrapper :global(tr:last-child td) {
+        border-bottom: none;
+    }
+
+    .content-wrapper :global(td:first-child) {
+        font-weight: 500;
         color: var(--text-primary);
     }
 
