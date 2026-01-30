@@ -27,7 +27,16 @@ const {
             </span>
         </a>
 
-        <div class="nav-actions">
+        <button class="nav-mobile-toggle" id="mobile-toggle" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <div class="nav-links" id="nav-links">
+            {links.map(link => (
+                <a href={link.href} class="nav-link">{link.text}</a>
+            ))}
             <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
                 <!-- Moon icon - shown in light mode -->
                 <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -38,18 +47,6 @@ const {
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
                 </svg>
             </button>
-
-            <button class="nav-mobile-toggle" id="mobile-toggle" aria-label="Toggle menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
-
-        <div class="nav-links" id="nav-links">
-            {links.map(link => (
-                <a href={link.href} class="nav-link">{link.text}</a>
-            ))}
             <a href="javascript:void(0)" class="nav-cta" id="open-booking-modal">
                 <span class="nav-cta-glow"></span>
                 {ctaText}
@@ -62,21 +59,21 @@ const {
     // Theme toggle functionality
     const themeToggle = document.getElementById('theme-toggle');
 
-    // Get initial theme from localStorage or default to light
+    // Get initial theme from localStorage or default to dark
     function getTheme() {
         const stored = localStorage.getItem('theme');
         if (stored) return stored;
         // Check system preference as fallback
-        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            return 'dark';
+        if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+            return 'light';
         }
-        return 'light'; // Default to light
+        return 'dark'; // Default to dark
     }
 
     // Apply theme to document
     function applyTheme(theme: string) {
-        if (theme === 'dark') {
-            document.documentElement.setAttribute('data-theme', 'dark');
+        if (theme === 'light') {
+            document.documentElement.setAttribute('data-theme', 'light');
         } else {
             document.documentElement.removeAttribute('data-theme');
         }
@@ -128,12 +125,6 @@ const {
 </script>
 
 <style>
-    .nav-actions {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
     .logo-link {
         display: flex;
         align-items: center;
