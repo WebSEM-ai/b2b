@@ -411,8 +411,8 @@ const shareUrls = {
     /* Breadcrumbs */
     .breadcrumbs {
         padding: 1.5rem 2rem;
-        background: rgba(0, 0, 0, 0.2);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        background: var(--bg-secondary);
+        border-bottom: 1px solid var(--border-light);
     }
 
     .breadcrumbs-container {
@@ -435,16 +435,16 @@ const shareUrls = {
         display: flex;
         align-items: center;
         gap: 0.5rem;
-        color: var(--gray-500);
+        color: var(--text-muted);
     }
 
     .breadcrumbs li:not(:last-child)::after {
         content: '/';
-        color: var(--gray-600);
+        color: var(--text-muted);
     }
 
     .breadcrumbs a {
-        color: var(--gray-400);
+        color: var(--text-tertiary);
         text-decoration: none;
         transition: color 0.2s ease;
     }
@@ -454,13 +454,13 @@ const shareUrls = {
     }
 
     .breadcrumbs .current {
-        color: var(--gray-500);
+        color: var(--text-muted);
     }
 
     /* Article Header */
     .article-header {
         padding: 3rem 2rem 2rem;
-        background: linear-gradient(180deg, rgba(99, 102, 241, 0.08) 0%, transparent 100%);
+        background: var(--bg-secondary);
     }
 
     .article-header-content {
@@ -472,8 +472,8 @@ const shareUrls = {
     .article-category {
         display: inline-block;
         padding: 0.4rem 1rem;
-        background: rgba(99, 102, 241, 0.12);
-        border: 1px solid rgba(99, 102, 241, 0.25);
+        background: var(--bg-input);
+        border: 1px solid var(--border-accent);
         border-radius: 50px;
         font-size: 0.7rem;
         font-weight: 600;
@@ -486,7 +486,7 @@ const shareUrls = {
     }
 
     .article-category:hover {
-        background: rgba(99, 102, 241, 0.2);
+        background: var(--bg-input-focus);
     }
 
     .article-header h1 {
@@ -496,11 +496,12 @@ const shareUrls = {
         line-height: 1.2;
         margin-bottom: 1rem;
         letter-spacing: -0.02em;
+        color: var(--text-primary);
     }
 
     .article-description {
         font-size: 1.1rem;
-        color: var(--gray-400);
+        color: var(--text-tertiary);
         line-height: 1.6;
         margin-bottom: 2rem;
         max-width: 650px;
@@ -515,7 +516,7 @@ const shareUrls = {
         flex-wrap: wrap;
         gap: 1.5rem;
         padding-top: 1.5rem;
-        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        border-top: 1px solid var(--border-light);
     }
 
     .author-info {
@@ -537,7 +538,7 @@ const shareUrls = {
     .author-avatar span {
         font-size: 1rem;
         font-weight: 600;
-        color: var(--white);
+        color: #ffffff;
     }
 
     .author-details {
@@ -549,7 +550,7 @@ const shareUrls = {
     .author-name {
         font-size: 0.9rem;
         font-weight: 500;
-        color: var(--white);
+        color: var(--text-primary);
     }
 
     .meta-row {
@@ -557,11 +558,11 @@ const shareUrls = {
         align-items: center;
         gap: 0.5rem;
         font-size: 0.8rem;
-        color: var(--gray-500);
+        color: var(--text-muted);
     }
 
     .meta-dot {
-        color: var(--gray-600);
+        color: var(--text-muted);
     }
 
     /* Share Buttons */
@@ -573,19 +574,19 @@ const shareUrls = {
 
     .share-label {
         font-size: 0.8rem;
-        color: var(--gray-500);
+        color: var(--text-muted);
     }
 
     .share-btn {
         width: 36px;
         height: 36px;
         border-radius: 8px;
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: var(--bg-input);
+        border: 1px solid var(--border-medium);
         display: flex;
         align-items: center;
         justify-content: center;
-        color: var(--gray-400);
+        color: var(--text-tertiary);
         transition: all 0.2s ease;
         cursor: pointer;
     }
@@ -596,31 +597,31 @@ const shareUrls = {
     }
 
     .share-btn:hover {
-        background: rgba(255, 255, 255, 0.1);
-        color: var(--white);
+        background: var(--bg-input-focus);
+        color: var(--text-primary);
     }
 
     .share-btn.linkedin:hover {
-        background: rgba(0, 119, 181, 0.2);
-        border-color: rgba(0, 119, 181, 0.4);
+        background: rgba(0, 119, 181, 0.15);
+        border-color: rgba(0, 119, 181, 0.3);
         color: #0077B5;
     }
 
     .share-btn.twitter:hover {
-        background: rgba(29, 161, 242, 0.2);
-        border-color: rgba(29, 161, 242, 0.4);
+        background: rgba(29, 161, 242, 0.15);
+        border-color: rgba(29, 161, 242, 0.3);
         color: #1DA1F2;
     }
 
     .share-btn.facebook:hover {
-        background: rgba(24, 119, 242, 0.2);
-        border-color: rgba(24, 119, 242, 0.4);
+        background: rgba(24, 119, 242, 0.15);
+        border-color: rgba(24, 119, 242, 0.3);
         color: #1877F2;
     }
 
     .share-btn.copy-link.copied {
-        background: rgba(16, 185, 129, 0.2);
-        border-color: rgba(16, 185, 129, 0.4);
+        background: rgba(16, 185, 129, 0.15);
+        border-color: rgba(16, 185, 129, 0.3);
         color: #10B981;
     }
 
@@ -635,7 +636,7 @@ const shareUrls = {
         width: 100%;
         height: auto;
         border-radius: 16px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        border: 1px solid var(--border-light);
     }
 
     /* Article Layout */
@@ -664,10 +665,10 @@ const shareUrls = {
         font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 0.1em;
-        color: var(--gray-500);
+        color: var(--text-muted);
         margin-bottom: 1rem;
         padding-bottom: 0.75rem;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        border-bottom: 1px solid var(--border-light);
     }
 
     .toc-nav :global(.toc-list) {
@@ -686,7 +687,7 @@ const shareUrls = {
 
     .toc-nav :global(.toc-link) {
         font-size: 0.85rem;
-        color: var(--gray-500);
+        color: var(--text-muted);
         text-decoration: none;
         line-height: 1.4;
         display: block;
@@ -697,7 +698,7 @@ const shareUrls = {
     }
 
     .toc-nav :global(.toc-link:hover) {
-        color: var(--gray-300);
+        color: var(--text-secondary);
     }
 
     .toc-nav :global(.toc-link.active) {
@@ -711,7 +712,7 @@ const shareUrls = {
         padding-bottom: 3rem;
         font-size: 1.05rem;
         line-height: 1.8;
-        color: var(--gray-300);
+        color: var(--text-secondary);
     }
 
     .article-content :global(h2) {
@@ -719,7 +720,7 @@ const shareUrls = {
         font-size: 1.65rem;
         font-weight: 700;
         margin: 2.5rem 0 1rem;
-        color: var(--white);
+        color: var(--text-primary);
         scroll-margin-top: 100px;
     }
 
@@ -728,7 +729,7 @@ const shareUrls = {
         font-size: 1.25rem;
         font-weight: 600;
         margin: 2rem 0 0.75rem;
-        color: var(--white);
+        color: var(--text-primary);
         scroll-margin-top: 100px;
     }
 
@@ -744,7 +745,7 @@ const shareUrls = {
     }
 
     .article-content :global(a:hover) {
-        color: var(--white);
+        color: var(--accent);
     }
 
     .article-content :global(ul),
@@ -762,19 +763,19 @@ const shareUrls = {
         padding-left: 1.5rem;
         margin: 2rem 0;
         font-style: italic;
-        color: var(--gray-400);
+        color: var(--text-tertiary);
     }
 
     .article-content :global(code) {
-        background: rgba(255, 255, 255, 0.1);
+        background: var(--bg-input);
         padding: 0.2rem 0.5rem;
         border-radius: 4px;
         font-size: 0.9em;
     }
 
     .article-content :global(pre) {
-        background: rgba(0, 0, 0, 0.5);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: var(--bg-tertiary);
+        border: 1px solid var(--border-light);
         border-radius: 8px;
         padding: 1.5rem;
         overflow-x: auto;
@@ -796,24 +797,24 @@ const shareUrls = {
     .article-content :global(th),
     .article-content :global(td) {
         padding: 0.75rem 1rem;
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        border: 1px solid var(--border-light);
         text-align: left;
     }
 
     .article-content :global(th) {
-        background: rgba(99, 102, 241, 0.1);
+        background: var(--bg-input);
         font-weight: 600;
-        color: var(--white);
+        color: var(--text-primary);
     }
 
     .article-content :global(hr) {
         border: none;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        border-top: 1px solid var(--border-light);
         margin: 3rem 0;
     }
 
     .article-content :global(strong) {
-        color: var(--white);
+        color: var(--text-primary);
         font-weight: 600;
     }
 
@@ -822,7 +823,7 @@ const shareUrls = {
         max-width: 720px;
         margin: 0 auto;
         padding: 2rem;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        border-top: 1px solid var(--border-light);
     }
 
     .article-tags {
@@ -834,23 +835,23 @@ const shareUrls = {
 
     .tags-label {
         font-size: 0.85rem;
-        color: var(--gray-500);
+        color: var(--text-muted);
     }
 
     .tag {
         padding: 0.4rem 0.85rem;
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: var(--bg-input);
+        border: 1px solid var(--border-light);
         border-radius: 50px;
         font-size: 0.8rem;
-        color: var(--gray-400);
+        color: var(--text-tertiary);
         text-decoration: none;
         transition: all 0.3s ease;
     }
 
     .tag:hover {
-        background: rgba(99, 102, 241, 0.15);
-        border-color: rgba(99, 102, 241, 0.3);
+        background: var(--bg-input-focus);
+        border-color: var(--border-accent);
         color: var(--accent-light);
     }
 
@@ -859,7 +860,7 @@ const shareUrls = {
         display: none;
         margin-top: 2rem;
         padding-top: 1.5rem;
-        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        border-top: 1px solid var(--border-light);
     }
 
     .mobile-share .share-label {
@@ -883,7 +884,7 @@ const shareUrls = {
     /* Blog CTA */
     .blog-cta {
         padding: 5rem 2rem;
-        background: linear-gradient(180deg, transparent 0%, rgba(99, 102, 241, 0.08) 100%);
+        background: var(--bg-secondary);
         text-align: center;
     }
 
@@ -895,7 +896,7 @@ const shareUrls = {
     .cta-label {
         display: inline-block;
         padding: 0.35rem 0.85rem;
-        background: rgba(99, 102, 241, 0.12);
+        background: var(--bg-input);
         border-radius: 50px;
         font-size: 0.7rem;
         font-weight: 600;
@@ -910,10 +911,11 @@ const shareUrls = {
         font-size: 1.85rem;
         font-weight: 700;
         margin-bottom: 1rem;
+        color: var(--text-primary);
     }
 
     .blog-cta p {
-        color: var(--gray-400);
+        color: var(--text-tertiary);
         margin-bottom: 2rem;
         font-size: 1.05rem;
     }
@@ -924,7 +926,7 @@ const shareUrls = {
         gap: 0.6rem;
         padding: 1rem 2rem;
         background: var(--accent);
-        color: var(--white);
+        color: #ffffff;
         font-size: 1rem;
         font-weight: 600;
         text-decoration: none;
