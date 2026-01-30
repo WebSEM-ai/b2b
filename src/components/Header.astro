@@ -20,7 +20,12 @@ const {
 
 <nav id="navbar">
     <div class="nav-container">
-        <a href="/" class="logo">Web<span>SEM</span></a>
+        <a href="/" class="logo-link">
+            <span class="logo-symbol">α</span>
+            <span class="logo-text">
+                <span class="logo-alpha">ALPHA</span><span class="logo-separator">/</span><span class="logo-grade">GRADE</span>
+            </span>
+        </a>
 
         <button class="nav-mobile-toggle" id="mobile-toggle" aria-label="Toggle menu">
             <span></span>
@@ -74,3 +79,58 @@ const {
         document.body.classList.add('modal-open');
     });
 </script>
+
+<style>
+    .logo-link {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        text-decoration: none;
+    }
+
+    .logo-symbol {
+        font-family: 'Times New Roman', serif;
+        font-size: 2rem;
+        font-weight: 400;
+        font-style: italic;
+        background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        line-height: 1;
+    }
+
+    .logo-text {
+        font-family: 'Orbitron', 'Space Grotesk', sans-serif;
+        font-size: 1.1rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        display: flex;
+        align-items: center;
+    }
+
+    .logo-alpha {
+        color: var(--white);
+    }
+
+    .logo-separator {
+        color: var(--gray-500);
+        margin: 0 0.1rem;
+        font-weight: 400;
+    }
+
+    .logo-grade {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    @media (max-width: 900px) {
+        .logo-symbol {
+            font-size: 1.6rem;
+        }
+
+        .logo-text {
+            font-size: 0.9rem;
+        }
+    }
+</style>

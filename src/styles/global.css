@@ -753,6 +753,21 @@ nav.scrolled {
     overflow: hidden;
 }
 
+/* Alpha symbol background decoration */
+.fears-section::after {
+    content: 'α';
+    position: absolute;
+    font-family: 'Times New Roman', serif;
+    font-size: 40rem;
+    font-style: italic;
+    color: rgba(99, 102, 241, 0.02);
+    top: 50%;
+    right: -10%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    z-index: 0;
+}
+
 .fears-section::before {
     content: '';
     position: absolute;
@@ -1282,6 +1297,7 @@ nav.scrolled {
     text-align: center;
     background: var(--black);
     position: relative;
+    overflow: hidden;
 }
 
 .cta-section::before {
@@ -1294,6 +1310,21 @@ nav.scrolled {
     height: 400px;
     background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
     pointer-events: none;
+}
+
+/* Alpha symbol background */
+.cta-section::after {
+    content: 'α';
+    position: absolute;
+    font-family: 'Times New Roman', serif;
+    font-size: 25rem;
+    font-style: italic;
+    color: rgba(99, 102, 241, 0.03);
+    top: 50%;
+    left: 5%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    z-index: 0;
 }
 
 .cta-section h2 {
