@@ -236,16 +236,16 @@ const formatCategory = (category: string) => {
         display: flex;
         align-items: center;
         gap: 0.5rem;
-        color: var(--gray-500);
+        color: var(--text-muted);
     }
 
     .breadcrumbs li:not(:last-child)::after {
         content: '/';
-        color: var(--gray-600);
+        color: var(--text-muted);
     }
 
     .breadcrumbs a {
-        color: var(--gray-400);
+        color: var(--text-tertiary);
         text-decoration: none;
         transition: color 0.2s ease;
     }
@@ -268,8 +268,8 @@ const formatCategory = (category: string) => {
     .hero-label {
         display: inline-block;
         padding: 0.4rem 1rem;
-        background: rgba(99, 102, 241, 0.1);
-        border: 1px solid rgba(99, 102, 241, 0.2);
+        background: var(--bg-input);
+        border: 1px solid var(--border-medium);
         border-radius: 50px;
         font-size: 0.75rem;
         font-weight: 600;
@@ -285,15 +285,12 @@ const formatCategory = (category: string) => {
         font-weight: 700;
         margin-bottom: 1rem;
         letter-spacing: -0.02em;
-        background: linear-gradient(135deg, var(--white) 0%, var(--gray-300) 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+        color: var(--text-primary);
     }
 
     .blog-hero p {
         font-size: 1.15rem;
-        color: var(--gray-400);
+        color: var(--text-tertiary);
         line-height: 1.6;
     }
 
@@ -315,14 +312,14 @@ const formatCategory = (category: string) => {
         font-family: 'Space Grotesk', sans-serif;
         font-size: 1.25rem;
         font-weight: 600;
-        color: var(--white);
+        color: var(--text-primary);
         white-space: nowrap;
     }
 
     .section-line {
         flex: 1;
         height: 1px;
-        background: linear-gradient(90deg, rgba(255, 255, 255, 0.15) 0%, transparent 100%);
+        background: var(--border-light);
     }
 
     /* Featured Section */
@@ -337,17 +334,17 @@ const formatCategory = (category: string) => {
     }
 
     .featured-card {
-        background: rgba(255, 255, 255, 0.02);
-        border: 1px solid rgba(255, 255, 255, 0.06);
+        background: var(--bg-card);
+        border: 1px solid var(--border-light);
         border-radius: 16px;
         overflow: hidden;
         transition: all 0.3s ease;
     }
 
     .featured-card:hover {
-        border-color: rgba(99, 102, 241, 0.3);
+        border-color: var(--border-accent);
         transform: translateY(-4px);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        box-shadow: var(--shadow-lg);
     }
 
     .featured-image {
@@ -355,7 +352,7 @@ const formatCategory = (category: string) => {
         position: relative;
         aspect-ratio: 16/9;
         overflow: hidden;
-        background: rgba(99, 102, 241, 0.05);
+        background: var(--bg-input);
     }
 
     .featured-image img {
@@ -388,7 +385,7 @@ const formatCategory = (category: string) => {
     .read-label {
         font-size: 0.85rem;
         font-weight: 500;
-        color: var(--white);
+        color: #ffffff;
     }
 
     .placeholder-image {
@@ -397,13 +394,13 @@ const formatCategory = (category: string) => {
         display: flex;
         align-items: center;
         justify-content: center;
-        background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(99, 102, 241, 0.05) 100%);
+        background: var(--bg-input);
     }
 
     .placeholder-image svg {
         width: 48px;
         height: 48px;
-        color: var(--gray-600);
+        color: var(--text-muted);
     }
 
     .featured-content {
@@ -423,7 +420,7 @@ const formatCategory = (category: string) => {
         text-transform: uppercase;
         letter-spacing: 0.05em;
         color: var(--accent-light);
-        background: rgba(99, 102, 241, 0.12);
+        background: var(--bg-input);
         padding: 0.3rem 0.7rem;
         border-radius: 4px;
         text-decoration: none;
@@ -431,11 +428,11 @@ const formatCategory = (category: string) => {
     }
 
     .post-category:hover {
-        background: rgba(99, 102, 241, 0.2);
+        background: var(--bg-input-focus);
     }
 
     .meta-separator {
-        color: var(--gray-600);
+        color: var(--text-muted);
         font-size: 0.6rem;
     }
 
@@ -444,7 +441,7 @@ const formatCategory = (category: string) => {
         align-items: center;
         gap: 0.35rem;
         font-size: 0.8rem;
-        color: var(--gray-500);
+        color: var(--text-muted);
     }
 
     .post-reading-time svg {
@@ -461,7 +458,7 @@ const formatCategory = (category: string) => {
     }
 
     .featured-content h3 a {
-        color: var(--white);
+        color: var(--text-primary);
         text-decoration: none;
         transition: color 0.3s ease;
     }
@@ -471,7 +468,7 @@ const formatCategory = (category: string) => {
     }
 
     .post-description {
-        color: var(--gray-400);
+        color: var(--text-tertiary);
         font-size: 0.95rem;
         line-height: 1.6;
         margin-bottom: 1.5rem;
@@ -506,7 +503,7 @@ const formatCategory = (category: string) => {
     .author-avatar span {
         font-size: 0.85rem;
         font-weight: 600;
-        color: var(--white);
+        color: #ffffff;
     }
 
     .author-details {
@@ -518,20 +515,20 @@ const formatCategory = (category: string) => {
     .author-name {
         font-size: 0.85rem;
         font-weight: 500;
-        color: var(--gray-300);
+        color: var(--text-secondary);
     }
 
     .post-date {
         font-size: 0.8rem;
-        color: var(--gray-500);
+        color: var(--text-muted);
     }
 
     .read-more {
         width: 40px;
         height: 40px;
         border-radius: 50%;
-        background: rgba(99, 102, 241, 0.1);
-        border: 1px solid rgba(99, 102, 241, 0.2);
+        background: var(--bg-input);
+        border: 1px solid var(--border-medium);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -551,7 +548,7 @@ const formatCategory = (category: string) => {
     }
 
     .read-more:hover svg {
-        color: var(--white);
+        color: #ffffff;
         transform: translateX(3px);
     }
 
@@ -567,24 +564,24 @@ const formatCategory = (category: string) => {
     }
 
     .post-card {
-        background: rgba(255, 255, 255, 0.02);
-        border: 1px solid rgba(255, 255, 255, 0.06);
+        background: var(--bg-card);
+        border: 1px solid var(--border-light);
         border-radius: 12px;
         overflow: hidden;
         transition: all 0.3s ease;
     }
 
     .post-card:hover {
-        border-color: rgba(99, 102, 241, 0.3);
+        border-color: var(--border-accent);
         transform: translateY(-4px);
-        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        box-shadow: var(--shadow-md);
     }
 
     .post-image {
         display: block;
         aspect-ratio: 16/10;
         overflow: hidden;
-        background: rgba(99, 102, 241, 0.05);
+        background: var(--bg-input);
     }
 
     .post-image img {
@@ -611,7 +608,7 @@ const formatCategory = (category: string) => {
     }
 
     .post-content h3 a {
-        color: var(--white);
+        color: var(--text-primary);
         text-decoration: none;
         transition: color 0.3s ease;
     }
@@ -628,7 +625,7 @@ const formatCategory = (category: string) => {
 
     .post-content .post-footer {
         padding-top: 1rem;
-        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        border-top: 1px solid var(--border-light);
     }
 
     .read-link {
@@ -649,7 +646,7 @@ const formatCategory = (category: string) => {
     }
 
     .read-link:hover {
-        color: var(--white);
+        color: var(--accent);
     }
 
     .read-link:hover svg {
@@ -660,20 +657,20 @@ const formatCategory = (category: string) => {
     .no-posts {
         text-align: center;
         padding: 5rem 2rem;
-        background: rgba(255, 255, 255, 0.02);
-        border: 1px solid rgba(255, 255, 255, 0.06);
+        background: var(--bg-card);
+        border: 1px solid var(--border-light);
         border-radius: 12px;
     }
 
     .no-posts svg {
         width: 48px;
         height: 48px;
-        color: var(--gray-600);
+        color: var(--text-muted);
         margin-bottom: 1rem;
     }
 
     .no-posts p {
-        color: var(--gray-500);
+        color: var(--text-muted);
         font-size: 1rem;
     }
 
@@ -686,8 +683,8 @@ const formatCategory = (category: string) => {
         max-width: 1200px;
         margin: 0 auto;
         padding: 3rem;
-        background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(99, 102, 241, 0.05) 100%);
-        border: 1px solid rgba(99, 102, 241, 0.2);
+        background: var(--bg-card);
+        border: 1px solid var(--border-accent);
         border-radius: 16px;
         display: flex;
         align-items: center;
@@ -700,10 +697,11 @@ const formatCategory = (category: string) => {
         font-size: 1.5rem;
         font-weight: 600;
         margin-bottom: 0.5rem;
+        color: var(--text-primary);
     }
 
     .newsletter-content p {
-        color: var(--gray-400);
+        color: var(--text-tertiary);
         font-size: 0.95rem;
     }
 
@@ -713,7 +711,7 @@ const formatCategory = (category: string) => {
         gap: 0.5rem;
         padding: 0.9rem 1.75rem;
         background: var(--accent);
-        color: var(--white);
+        color: #ffffff;
         font-size: 0.9rem;
         font-weight: 600;
         text-decoration: none;
