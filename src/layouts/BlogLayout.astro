@@ -87,13 +87,23 @@ const shareUrls = {
     <meta name="twitter:description" content={description}>
     <meta name="twitter:image" content={`${siteUrl}${ogImage}`}>
 
-    <!-- Fonts - optimized loading -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=Orbitron:wght@500;600;700&display=swap" rel="stylesheet">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/favicon.png">
+
+    <!-- Theme initialization -->
+    <script is:inline>
+        (function() {
+            const stored = localStorage.getItem('theme');
+            if (stored === 'light' || (!stored && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
 
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json" set:html={JSON.stringify({
@@ -126,75 +136,72 @@ const shareUrls = {
     <!-- Reading Progress Bar -->
     <div class="reading-progress" id="reading-progress"></div>
 
-    <Header />
+    <Header
+        links={[
+            { text: 'Acasă', href: '/' },
+            { text: 'Blog', href: '/blog' },
+            { text: 'Servicii', href: '/#benefits' },
+            { text: 'Contact', href: '/#contact' }
+        ]}
+    />
 
-    <article class="blog-article">
+    <main class="blog-main">
         <!-- Breadcrumbs -->
-        <nav class="breadcrumbs" aria-label="Breadcrumb">
-            <div class="breadcrumbs-container">
-                <ol>
-                    <li><a href="/">Acasă</a></li>
-                    <li><a href="/blog">Blog</a></li>
-                    {category && <li><a href={`/blog/category/${category}`}>{formatCategory(category)}</a></li>}
-                    <li aria-current="page" class="current">{title.length > 40 ? title.substring(0, 40) + '...' : title}</li>
-                </ol>
+        <nav class="breadcrumbs">
+            <div class="container">
+                <a href="/">Acasă</a>
+                <span class="sep">/</span>
+                <a href="/blog">Blog</a>
+                {category && (
+                    <>
+                        <span class="sep">/</span>
+                        <a href={`/blog/category/${category}`}>{formatCategory(category)}</a>
+                    </>
+                )}
+                <span class="sep">/</span>
+                <span class="current">{title.length > 50 ? title.substring(0, 50) + '...' : title}</span>
             </div>
         </nav>
 
-        <!-- Hero -->
+        <!-- Article Header -->
         <header class="article-header">
-            <div class="article-header-content">
+            <div class="container">
                 {category && (
-                    <a href={`/blog/category/${category}`} class="article-category">
+                    <a href={`/blog/category/${category}`} class="category-badge">
                         {formatCategory(category)}
                     </a>
                 )}
                 <h1>{title}</h1>
-                <p class="article-description">{description}</p>
+                <p class="description">{description}</p>
 
-                <div class="article-meta">
-                    <div class="author-info">
-                        <div class="author-avatar">
-                            <span>{author.charAt(0)}</span>
-                        </div>
-                        <div class="author-details">
-                            <span class="author-name">{author}</span>
-                            <div class="meta-row">
-                                <span class="publish-date">{formatDate(pubDate)}</span>
-                                {readingTime && (
-                                    <>
-                                        <span class="meta-dot">·</span>
-                                        <span class="reading-time">{readingTime} min citire</span>
-                                    </>
-                                )}
-                            </div>
+                <div class="meta">
+                    <div class="author">
+                        <div class="avatar">{author.charAt(0)}</div>
+                        <div class="info">
+                            <span class="name">{author}</span>
+                            <span class="date">
+                                {formatDate(pubDate)}
+                                {readingTime && ` · ${readingTime} min citire`}
+                            </span>
                         </div>
                     </div>
 
-                    <!-- Share Buttons -->
-                    <div class="share-buttons">
-                        <span class="share-label">Distribuie:</span>
-                        <a href={shareUrls.linkedin} target="_blank" rel="noopener noreferrer" class="share-btn linkedin" aria-label="Share on LinkedIn">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
+                    <div class="share">
+                        <a href={shareUrls.linkedin} target="_blank" rel="noopener noreferrer" class="share-btn" title="Share on LinkedIn">
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
                                 <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                             </svg>
                         </a>
-                        <a href={shareUrls.twitter} target="_blank" rel="noopener noreferrer" class="share-btn twitter" aria-label="Share on X/Twitter">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
+                        <a href={shareUrls.twitter} target="_blank" rel="noopener noreferrer" class="share-btn" title="Share on X">
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
                                 <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                             </svg>
                         </a>
-                        <a href={shareUrls.facebook} target="_blank" rel="noopener noreferrer" class="share-btn facebook" aria-label="Share on Facebook">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
+                        <a href={shareUrls.facebook} target="_blank" rel="noopener noreferrer" class="share-btn" title="Share on Facebook">
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
                                 <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                             </svg>
                         </a>
-                        <button class="share-btn copy-link" id="copy-link-btn" aria-label="Copy link">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/>
-                                <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/>
-                            </svg>
-                        </button>
                     </div>
                 </div>
             </div>
@@ -202,197 +209,78 @@ const shareUrls = {
 
         <!-- Hero Image -->
         {heroImage && (
-            <div class="article-hero-image">
-                <img src={heroImage} alt={heroImageAlt || title} loading="eager">
+            <div class="hero-image">
+                <div class="container">
+                    <img src={heroImage} alt={heroImageAlt || title} />
+                </div>
             </div>
         )}
 
-        <!-- Article Layout with Sidebar -->
-        <div class="article-layout">
-            <!-- Table of Contents Sidebar -->
-            <aside class="toc-sidebar" id="toc-sidebar">
-                <div class="toc-container">
-                    <h4 class="toc-title">Conținut</h4>
-                    <nav class="toc-nav" id="toc-nav">
-                        <!-- TOC will be generated by JavaScript -->
-                    </nav>
+        <!-- Article Content -->
+        <article class="article-content">
+            <div class="container">
+                <div class="content-wrapper">
+                    <slot />
                 </div>
-            </aside>
-
-            <!-- Content -->
-            <div class="article-content" id="article-content">
-                <slot />
             </div>
-        </div>
+        </article>
 
         <!-- Tags -->
         {tags.length > 0 && (
-            <footer class="article-footer">
-                <div class="article-tags">
-                    <span class="tags-label">Tags:</span>
+            <div class="article-tags">
+                <div class="container">
+                    <span class="label">Tags:</span>
                     {tags.map(tag => (
-                        <a href={`/blog/tag/${tag.toLowerCase().replace(/\s+/g, '-')}`} class="tag">#{tag}</a>
+                        <a href={`/blog/tag/${tag.toLowerCase().replace(/\s+/g, '-')}`} class="tag">
+                            #{tag}
+                        </a>
                     ))}
                 </div>
-
-                <!-- Mobile Share -->
-                <div class="mobile-share">
-                    <span class="share-label">Distribuie articolul:</span>
-                    <div class="share-buttons-mobile">
-                        <a href={shareUrls.linkedin} target="_blank" rel="noopener noreferrer" class="share-btn linkedin">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                            </svg>
-                            LinkedIn
-                        </a>
-                        <a href={shareUrls.twitter} target="_blank" rel="noopener noreferrer" class="share-btn twitter">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                            </svg>
-                            Twitter
-                        </a>
-                    </div>
-                </div>
-            </footer>
+            </div>
         )}
-    </article>
 
-    <!-- CTA Section -->
-    <section class="blog-cta">
-        <div class="blog-cta-content">
-            <span class="cta-label">Următorul pas</span>
-            <h2>Vrei rezultate similare pentru business-ul tău?</h2>
-            <p>Solicită un audit gratuit și află cum putem genera €250K+ pipeline în 90 de zile.</p>
-            <a href="javascript:void(0)" class="cta-btn" id="blog-cta-btn">
-                Solicită Audit Gratuit
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
-            </a>
-        </div>
-    </section>
+        <!-- CTA -->
+        <section class="article-cta">
+            <div class="container">
+                <h2>Vrei rezultate similare pentru business-ul tău?</h2>
+                <p>Solicită un audit gratuit și află cum putem genera €250K+ pipeline în 90 de zile.</p>
+                <a href="javascript:void(0)" class="cta-btn" id="blog-cta-btn">
+                    Solicită Audit Gratuit
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+        </section>
+    </main>
 
     <Footer />
     <BookingModal />
 
     <script>
-        // Reading Progress Bar
+        // Reading Progress
         const progressBar = document.getElementById('reading-progress');
-        const article = document.querySelector('.article-content');
+        const content = document.querySelector('.article-content');
 
-        function updateProgress() {
-            if (!article || !progressBar) return;
-
-            const articleRect = article.getBoundingClientRect();
-            const articleTop = articleRect.top + window.scrollY;
-            const articleHeight = article.offsetHeight;
-            const windowHeight = window.innerHeight;
-            const scrolled = window.scrollY;
-
-            const progress = Math.min(100, Math.max(0,
-                ((scrolled - articleTop + windowHeight * 0.3) / articleHeight) * 100
-            ));
-
+        window.addEventListener('scroll', () => {
+            if (!content || !progressBar) return;
+            const rect = content.getBoundingClientRect();
+            const start = rect.top + window.scrollY - window.innerHeight;
+            const end = rect.bottom + window.scrollY - window.innerHeight;
+            const progress = Math.min(100, Math.max(0, ((window.scrollY - start) / (end - start)) * 100));
             progressBar.style.width = `${progress}%`;
-        }
-
-        // Generate Table of Contents
-        const tocNav = document.getElementById('toc-nav');
-        const articleContent = document.getElementById('article-content');
-
-        if (tocNav && articleContent) {
-            const headings = articleContent.querySelectorAll('h2, h3');
-            const tocItems: { element: HTMLElement; level: number; id: string; text: string }[] = [];
-
-            headings.forEach((heading, index) => {
-                const id = heading.id || `heading-${index}`;
-                if (!heading.id) heading.id = id;
-
-                tocItems.push({
-                    element: heading as HTMLElement,
-                    level: heading.tagName === 'H2' ? 2 : 3,
-                    id,
-                    text: heading.textContent || ''
-                });
-            });
-
-            // Build TOC HTML
-            let tocHtml = '<ul class="toc-list">';
-            tocItems.forEach(item => {
-                const indent = item.level === 3 ? ' class="toc-sub"' : '';
-                tocHtml += `<li${indent}><a href="#${item.id}" class="toc-link">${item.text}</a></li>`;
-            });
-            tocHtml += '</ul>';
-            tocNav.innerHTML = tocHtml;
-
-            // Highlight active section
-            const tocLinks = tocNav.querySelectorAll('.toc-link');
-
-            function updateActiveToc() {
-                let current = '';
-
-                tocItems.forEach(item => {
-                    const section = item.element;
-                    const rect = section.getBoundingClientRect();
-                    if (rect.top <= 150) {
-                        current = item.id;
-                    }
-                });
-
-                tocLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${current}`) {
-                        link.classList.add('active');
-                    }
-                });
-            }
-
-            window.addEventListener('scroll', () => {
-                updateProgress();
-                updateActiveToc();
-            });
-
-            // Smooth scroll for TOC links
-            tocLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const targetId = link.getAttribute('href')?.slice(1);
-                    const target = targetId ? document.getElementById(targetId) : null;
-                    if (target) {
-                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
-                });
-            });
-        }
-
-        // Copy link button
-        const copyBtn = document.getElementById('copy-link-btn');
-        copyBtn?.addEventListener('click', async () => {
-            try {
-                await navigator.clipboard.writeText(window.location.href);
-                copyBtn.classList.add('copied');
-                setTimeout(() => copyBtn.classList.remove('copied'), 2000);
-            } catch (err) {
-                console.error('Failed to copy:', err);
-            }
         });
 
-        // Blog CTA button
-        const blogCtaBtn = document.getElementById('blog-cta-btn');
-        blogCtaBtn?.addEventListener('click', () => {
-            const modal = document.getElementById('booking-modal');
-            modal?.classList.add('active');
+        // CTA Button
+        document.getElementById('blog-cta-btn')?.addEventListener('click', () => {
+            document.getElementById('booking-modal')?.classList.add('active');
             document.body.classList.add('modal-open');
         });
-
-        // Initial calls
-        updateProgress();
     </script>
 </body>
 </html>
 
 <style>
-    /* Reading Progress Bar */
     .reading-progress {
         position: fixed;
         top: 0;
@@ -404,53 +292,46 @@ const shareUrls = {
         transition: width 0.1s ease;
     }
 
-    .blog-article {
+    .blog-main {
         padding-top: 80px;
+        min-height: 100vh;
+        background: var(--bg-primary);
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
     }
 
     /* Breadcrumbs */
     .breadcrumbs {
-        padding: 1.5rem 2rem;
+        padding: 1rem 0;
         background: var(--bg-secondary);
         border-bottom: 1px solid var(--border-light);
-    }
-
-    .breadcrumbs-container {
-        max-width: 1200px;
-        margin: 0 auto;
-    }
-
-    .breadcrumbs ol {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        list-style: none;
-        padding: 0;
-        margin: 0;
         font-size: 0.85rem;
-        flex-wrap: wrap;
     }
 
-    .breadcrumbs li {
+    .breadcrumbs .container {
         display: flex;
         align-items: center;
+        flex-wrap: wrap;
         gap: 0.5rem;
-        color: var(--text-muted);
-    }
-
-    .breadcrumbs li:not(:last-child)::after {
-        content: '/';
-        color: var(--text-muted);
+        max-width: 800px;
     }
 
     .breadcrumbs a {
         color: var(--text-tertiary);
         text-decoration: none;
-        transition: color 0.2s ease;
+        transition: color 0.2s;
     }
 
     .breadcrumbs a:hover {
         color: var(--accent-light);
+    }
+
+    .breadcrumbs .sep {
+        color: var(--text-muted);
     }
 
     .breadcrumbs .current {
@@ -459,122 +340,89 @@ const shareUrls = {
 
     /* Article Header */
     .article-header {
-        padding: 3rem 2rem 2rem;
+        padding: 3rem 0 2rem;
+        text-align: center;
         background: var(--bg-secondary);
     }
 
-    .article-header-content {
-        max-width: 800px;
-        margin: 0 auto;
-        text-align: center;
-    }
-
-    .article-category {
+    .category-badge {
         display: inline-block;
-        padding: 0.4rem 1rem;
+        padding: 0.35rem 0.9rem;
         background: var(--bg-input);
         border: 1px solid var(--border-accent);
         border-radius: 50px;
         font-size: 0.7rem;
         font-weight: 600;
         text-transform: uppercase;
-        letter-spacing: 0.1em;
+        letter-spacing: 0.08em;
         color: var(--accent-light);
         text-decoration: none;
-        margin-bottom: 1.5rem;
-        transition: all 0.3s ease;
-    }
-
-    .article-category:hover {
-        background: var(--bg-input-focus);
+        margin-bottom: 1.25rem;
     }
 
     .article-header h1 {
         font-family: 'Space Grotesk', sans-serif;
-        font-size: clamp(1.75rem, 4.5vw, 2.75rem);
+        font-size: clamp(1.75rem, 5vw, 2.5rem);
         font-weight: 700;
         line-height: 1.2;
         margin-bottom: 1rem;
-        letter-spacing: -0.02em;
         color: var(--text-primary);
     }
 
-    .article-description {
+    .article-header .description {
         font-size: 1.1rem;
         color: var(--text-tertiary);
         line-height: 1.6;
         margin-bottom: 2rem;
-        max-width: 650px;
-        margin-left: auto;
-        margin-right: auto;
     }
 
-    .article-meta {
+    .meta {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        flex-wrap: wrap;
-        gap: 1.5rem;
         padding-top: 1.5rem;
         border-top: 1px solid var(--border-light);
+        flex-wrap: wrap;
+        gap: 1rem;
     }
 
-    .author-info {
+    .author {
         display: flex;
         align-items: center;
         gap: 0.75rem;
     }
 
-    .author-avatar {
-        width: 44px;
-        height: 44px;
+    .avatar {
+        width: 42px;
+        height: 42px;
         border-radius: 50%;
-        background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+        background: linear-gradient(135deg, var(--accent), var(--accent-light));
         display: flex;
         align-items: center;
         justify-content: center;
-    }
-
-    .author-avatar span {
-        font-size: 1rem;
         font-weight: 600;
-        color: #ffffff;
+        color: #fff;
     }
 
-    .author-details {
-        display: flex;
-        flex-direction: column;
-        gap: 0.2rem;
+    .author .info {
+        text-align: left;
     }
 
-    .author-name {
-        font-size: 0.9rem;
+    .author .name {
+        display: block;
         font-weight: 500;
         color: var(--text-primary);
+        font-size: 0.9rem;
     }
 
-    .meta-row {
+    .author .date {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+    }
+
+    .share {
         display: flex;
-        align-items: center;
         gap: 0.5rem;
-        font-size: 0.8rem;
-        color: var(--text-muted);
-    }
-
-    .meta-dot {
-        color: var(--text-muted);
-    }
-
-    /* Share Buttons */
-    .share-buttons {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-    }
-
-    .share-label {
-        font-size: 0.8rem;
-        color: var(--text-muted);
     }
 
     .share-btn {
@@ -582,271 +430,173 @@ const shareUrls = {
         height: 36px;
         border-radius: 8px;
         background: var(--bg-input);
-        border: 1px solid var(--border-medium);
+        border: 1px solid var(--border-light);
         display: flex;
         align-items: center;
         justify-content: center;
         color: var(--text-tertiary);
-        transition: all 0.2s ease;
-        cursor: pointer;
-    }
-
-    .share-btn svg {
-        width: 16px;
-        height: 16px;
+        transition: all 0.2s;
     }
 
     .share-btn:hover {
         background: var(--bg-input-focus);
-        color: var(--text-primary);
-    }
-
-    .share-btn.linkedin:hover {
-        background: rgba(0, 119, 181, 0.15);
-        border-color: rgba(0, 119, 181, 0.3);
-        color: #0077B5;
-    }
-
-    .share-btn.twitter:hover {
-        background: rgba(29, 161, 242, 0.15);
-        border-color: rgba(29, 161, 242, 0.3);
-        color: #1DA1F2;
-    }
-
-    .share-btn.facebook:hover {
-        background: rgba(24, 119, 242, 0.15);
-        border-color: rgba(24, 119, 242, 0.3);
-        color: #1877F2;
-    }
-
-    .share-btn.copy-link.copied {
-        background: rgba(16, 185, 129, 0.15);
-        border-color: rgba(16, 185, 129, 0.3);
-        color: #10B981;
+        color: var(--accent-light);
+        border-color: var(--border-accent);
     }
 
     /* Hero Image */
-    .article-hero-image {
-        max-width: 1000px;
-        margin: 0 auto 2rem;
-        padding: 0 2rem;
+    .hero-image {
+        padding: 2rem 0;
+        background: var(--bg-primary);
     }
 
-    .article-hero-image img {
+    .hero-image img {
         width: 100%;
         height: auto;
-        border-radius: 16px;
+        border-radius: 12px;
         border: 1px solid var(--border-light);
-    }
-
-    /* Article Layout */
-    .article-layout {
-        display: grid;
-        grid-template-columns: 220px 1fr;
-        gap: 3rem;
-        max-width: 1100px;
-        margin: 0 auto;
-        padding: 0 2rem;
-    }
-
-    /* Table of Contents */
-    .toc-sidebar {
-        position: relative;
-    }
-
-    .toc-container {
-        position: sticky;
-        top: 100px;
-    }
-
-    .toc-title {
-        font-family: 'Space Grotesk', sans-serif;
-        font-size: 0.75rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        color: var(--text-muted);
-        margin-bottom: 1rem;
-        padding-bottom: 0.75rem;
-        border-bottom: 1px solid var(--border-light);
-    }
-
-    .toc-nav :global(.toc-list) {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-
-    .toc-nav :global(.toc-list li) {
-        margin-bottom: 0.5rem;
-    }
-
-    .toc-nav :global(.toc-sub) {
-        padding-left: 1rem;
-    }
-
-    .toc-nav :global(.toc-link) {
-        font-size: 0.85rem;
-        color: var(--text-muted);
-        text-decoration: none;
-        line-height: 1.4;
-        display: block;
-        padding: 0.25rem 0;
-        padding-left: 0.75rem;
-        border-left: 2px solid transparent;
-        transition: all 0.2s ease;
-    }
-
-    .toc-nav :global(.toc-link:hover) {
-        color: var(--text-secondary);
-    }
-
-    .toc-nav :global(.toc-link.active) {
-        color: var(--accent-light);
-        border-left-color: var(--accent);
     }
 
     /* Article Content */
     .article-content {
-        max-width: 720px;
-        padding-bottom: 3rem;
+        padding: 2rem 0 3rem;
+        background: var(--bg-primary);
+    }
+
+    .content-wrapper {
         font-size: 1.05rem;
         line-height: 1.8;
         color: var(--text-secondary);
     }
 
-    .article-content :global(h2) {
+    .content-wrapper :global(h2) {
         font-family: 'Space Grotesk', sans-serif;
-        font-size: 1.65rem;
+        font-size: 1.6rem;
         font-weight: 700;
         margin: 2.5rem 0 1rem;
         color: var(--text-primary);
-        scroll-margin-top: 100px;
     }
 
-    .article-content :global(h3) {
+    .content-wrapper :global(h3) {
         font-family: 'Space Grotesk', sans-serif;
         font-size: 1.25rem;
         font-weight: 600;
         margin: 2rem 0 0.75rem;
         color: var(--text-primary);
-        scroll-margin-top: 100px;
     }
 
-    .article-content :global(p) {
+    .content-wrapper :global(p) {
         margin-bottom: 1.5rem;
     }
 
-    .article-content :global(a) {
+    .content-wrapper :global(a) {
         color: var(--accent-light);
         text-decoration: underline;
-        text-underline-offset: 3px;
-        transition: color 0.3s ease;
+        text-underline-offset: 2px;
     }
 
-    .article-content :global(a:hover) {
+    .content-wrapper :global(a:hover) {
         color: var(--accent);
     }
 
-    .article-content :global(ul),
-    .article-content :global(ol) {
+    .content-wrapper :global(ul),
+    .content-wrapper :global(ol) {
         margin: 1.5rem 0;
         padding-left: 1.5rem;
     }
 
-    .article-content :global(li) {
-        margin-bottom: 0.75rem;
+    .content-wrapper :global(li) {
+        margin-bottom: 0.5rem;
     }
 
-    .article-content :global(blockquote) {
+    .content-wrapper :global(blockquote) {
         border-left: 3px solid var(--accent);
-        padding-left: 1.5rem;
+        padding-left: 1.25rem;
         margin: 2rem 0;
         font-style: italic;
         color: var(--text-tertiary);
     }
 
-    .article-content :global(code) {
+    .content-wrapper :global(code) {
         background: var(--bg-input);
-        padding: 0.2rem 0.5rem;
+        padding: 0.15rem 0.4rem;
         border-radius: 4px;
         font-size: 0.9em;
     }
 
-    .article-content :global(pre) {
+    .content-wrapper :global(pre) {
         background: var(--bg-tertiary);
         border: 1px solid var(--border-light);
         border-radius: 8px;
-        padding: 1.5rem;
+        padding: 1.25rem;
         overflow-x: auto;
         margin: 2rem 0;
     }
 
-    .article-content :global(pre code) {
+    .content-wrapper :global(pre code) {
         background: none;
         padding: 0;
     }
 
-    .article-content :global(table) {
+    .content-wrapper :global(table) {
         width: 100%;
         border-collapse: collapse;
         margin: 2rem 0;
         font-size: 0.95rem;
     }
 
-    .article-content :global(th),
-    .article-content :global(td) {
+    .content-wrapper :global(th),
+    .content-wrapper :global(td) {
         padding: 0.75rem 1rem;
         border: 1px solid var(--border-light);
         text-align: left;
     }
 
-    .article-content :global(th) {
+    .content-wrapper :global(th) {
         background: var(--bg-input);
         font-weight: 600;
         color: var(--text-primary);
     }
 
-    .article-content :global(hr) {
+    .content-wrapper :global(hr) {
         border: none;
         border-top: 1px solid var(--border-light);
         margin: 3rem 0;
     }
 
-    .article-content :global(strong) {
+    .content-wrapper :global(strong) {
         color: var(--text-primary);
         font-weight: 600;
     }
 
-    /* Article Footer */
-    .article-footer {
-        max-width: 720px;
-        margin: 0 auto;
-        padding: 2rem;
+    /* Tags */
+    .article-tags {
+        padding: 1.5rem 0;
         border-top: 1px solid var(--border-light);
+        background: var(--bg-primary);
     }
 
-    .article-tags {
+    .article-tags .container {
         display: flex;
         align-items: center;
         gap: 0.75rem;
         flex-wrap: wrap;
     }
 
-    .tags-label {
+    .article-tags .label {
         font-size: 0.85rem;
         color: var(--text-muted);
     }
 
     .tag {
-        padding: 0.4rem 0.85rem;
+        padding: 0.35rem 0.75rem;
         background: var(--bg-input);
         border: 1px solid var(--border-light);
         border-radius: 50px;
         font-size: 0.8rem;
         color: var(--text-tertiary);
         text-decoration: none;
-        transition: all 0.3s ease;
+        transition: all 0.2s;
     }
 
     .tag:hover {
@@ -855,91 +605,37 @@ const shareUrls = {
         color: var(--accent-light);
     }
 
-    /* Mobile Share */
-    .mobile-share {
-        display: none;
-        margin-top: 2rem;
-        padding-top: 1.5rem;
-        border-top: 1px solid var(--border-light);
-    }
-
-    .mobile-share .share-label {
-        display: block;
-        margin-bottom: 1rem;
-        font-size: 0.9rem;
-    }
-
-    .share-buttons-mobile {
-        display: flex;
-        gap: 1rem;
-    }
-
-    .share-buttons-mobile .share-btn {
-        width: auto;
-        padding: 0.6rem 1.25rem;
-        gap: 0.5rem;
-        font-size: 0.85rem;
-    }
-
-    /* Blog CTA */
-    .blog-cta {
-        padding: 5rem 2rem;
+    /* CTA */
+    .article-cta {
+        padding: 4rem 0;
         background: var(--bg-secondary);
         text-align: center;
     }
 
-    .blog-cta-content {
-        max-width: 600px;
-        margin: 0 auto;
-    }
-
-    .cta-label {
-        display: inline-block;
-        padding: 0.35rem 0.85rem;
-        background: var(--bg-input);
-        border-radius: 50px;
-        font-size: 0.7rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        color: var(--accent-light);
-        margin-bottom: 1.25rem;
-    }
-
-    .blog-cta h2 {
+    .article-cta h2 {
         font-family: 'Space Grotesk', sans-serif;
-        font-size: 1.85rem;
+        font-size: 1.75rem;
         font-weight: 700;
-        margin-bottom: 1rem;
+        margin-bottom: 0.75rem;
         color: var(--text-primary);
     }
 
-    .blog-cta p {
+    .article-cta p {
         color: var(--text-tertiary);
-        margin-bottom: 2rem;
-        font-size: 1.05rem;
+        margin-bottom: 1.5rem;
     }
 
     .cta-btn {
         display: inline-flex;
         align-items: center;
-        gap: 0.6rem;
-        padding: 1rem 2rem;
+        gap: 0.5rem;
+        padding: 0.9rem 1.75rem;
         background: var(--accent);
-        color: #ffffff;
-        font-size: 1rem;
+        color: #fff;
         font-weight: 600;
         text-decoration: none;
         border-radius: 8px;
-        border: none;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
-
-    .cta-btn svg {
-        width: 18px;
-        height: 18px;
-        transition: transform 0.3s ease;
+        transition: all 0.3s;
     }
 
     .cta-btn:hover {
@@ -947,54 +643,19 @@ const shareUrls = {
         transform: translateY(-2px);
     }
 
-    .cta-btn:hover svg {
-        transform: translateX(4px);
-    }
-
-    /* Responsive */
-    @media (max-width: 1024px) {
-        .article-layout {
-            grid-template-columns: 1fr;
-        }
-
-        .toc-sidebar {
-            display: none;
-        }
-
-        .article-content {
-            max-width: 100%;
-        }
-    }
-
-    @media (max-width: 768px) {
+    @media (max-width: 640px) {
         .article-header {
-            padding: 2rem 1.5rem;
+            padding: 2rem 0 1.5rem;
+            text-align: left;
         }
 
-        .article-meta {
+        .meta {
             flex-direction: column;
             align-items: flex-start;
         }
 
-        .share-buttons {
-            display: none;
-        }
-
-        .mobile-share {
-            display: block;
-        }
-
-        .article-content {
-            padding: 0 0 2rem;
-            font-size: 1rem;
-        }
-
-        .article-footer {
-            padding: 1.5rem;
-        }
-
-        .blog-cta h2 {
-            font-size: 1.5rem;
+        .article-cta h2 {
+            font-size: 1.4rem;
         }
     }
 </style>
