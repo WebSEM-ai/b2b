@@ -1495,3 +1495,226 @@ body.modal-open {
 @keyframes spin {
     to { transform: rotate(360deg); }
 }
+
+/* ============================================
+   MOBILE FIXES - Prevent text overlap
+   ============================================ */
+@media (max-width: 900px) {
+    /* Hero section mobile fixes */
+    .hero {
+        min-height: auto;
+        padding-top: 80px;
+        padding-bottom: 0;
+        flex-direction: column;
+    }
+
+    .hero-content {
+        padding: 2rem 1.5rem 1.5rem;
+        max-width: 100%;
+    }
+
+    .hero-label {
+        font-size: 0.6rem;
+        padding: 0.3rem 0.75rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-title {
+        font-size: clamp(2rem, 8vw, 3rem);
+        margin-bottom: 1rem;
+    }
+
+    .hero-sub {
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem;
+        padding: 0 0.5rem;
+        line-height: 1.5;
+    }
+
+    /* Form section mobile */
+    .hero-audit-form {
+        position: relative;
+        padding: 1.5rem 1rem;
+    }
+
+    .audit-form-label {
+        margin-bottom: 1rem;
+    }
+
+    .audit-form-label h3 {
+        font-size: 1rem;
+    }
+
+    .audit-form-label p {
+        font-size: 0.75rem;
+    }
+
+    .audit-form-field input {
+        padding: 0.9rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    /* Benefits section mobile carousel */
+    .benefits-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 1rem;
+        padding: 0 1rem 1rem;
+        margin: 0 -1rem;
+    }
+
+    .benefits-grid::-webkit-scrollbar {
+        display: none;
+    }
+
+    .benefit-card {
+        flex: 0 0 85%;
+        scroll-snap-align: center;
+        min-height: 320px;
+    }
+
+    /* Stats section mobile */
+    .stats-section {
+        padding: 3rem 1rem;
+    }
+
+    .fears-stats {
+        gap: 1.5rem;
+    }
+
+    .fear-stat-value {
+        font-size: 2rem;
+    }
+
+    /* Vendor failures mobile carousel */
+    .vendor-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 1rem;
+        padding: 0 1rem 1rem;
+        margin: 0 -1rem;
+    }
+
+    .vendor-grid::-webkit-scrollbar {
+        display: none;
+    }
+
+    .vendor-item {
+        flex: 0 0 85%;
+        scroll-snap-align: center;
+    }
+
+    /* Features section mobile carousel */
+    .stats-cards-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 1rem;
+        padding: 0 1rem 1rem;
+        margin: 0 -1rem;
+    }
+
+    .stats-cards-grid::-webkit-scrollbar {
+        display: none;
+    }
+
+    .stat-card {
+        flex: 0 0 75%;
+        scroll-snap-align: center;
+    }
+
+    /* Capabilities section mobile carousel */
+    .cap-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 0.75rem;
+        padding: 0 1rem 1rem;
+        margin: 0 -1rem;
+    }
+
+    .cap-grid::-webkit-scrollbar {
+        display: none;
+    }
+
+    .cap-item {
+        flex: 0 0 45%;
+        scroll-snap-align: center;
+    }
+
+    /* Section headers mobile */
+    .fears-header,
+    .vendor-header,
+    .alphagrade-stats-header,
+    .cap-header,
+    .stats-section-header {
+        padding: 0 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .fears-header h2,
+    .vendor-header h2,
+    .alphagrade-stats-header h2,
+    .cap-header h2 {
+        font-size: 1.5rem;
+    }
+
+    /* CTA section mobile */
+    .cta-section {
+        padding: 3rem 1.5rem;
+    }
+
+    .cta-section h2 {
+        font-size: 1.75rem;
+        line-height: 1.2;
+    }
+
+    .cta-btn {
+        padding: 1rem 2rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: clamp(1.75rem, 7vw, 2.5rem);
+    }
+
+    .hero-sub {
+        font-size: 0.85rem;
+    }
+
+    .benefit-card {
+        flex: 0 0 90%;
+    }
+
+    .vendor-item {
+        flex: 0 0 90%;
+    }
+
+    .stat-card {
+        flex: 0 0 85%;
+    }
+
+    .cap-item {
+        flex: 0 0 60%;
+    }
+}
+
+/* Carousel scroll indicator hint */
+@media (max-width: 900px) {
+    .benefits-grid::after,
+    .vendor-grid::after,
+    .stats-cards-grid::after,
+    .cap-grid::after {
+        content: '';
+        flex: 0 0 1rem;
+    }
+}
