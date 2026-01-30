@@ -244,21 +244,6 @@ const shareUrls = {
 
         <!-- Main Content Area with TOC -->
         <div class="article-layout">
-            <!-- Table of Contents - Sidebar -->
-            <aside class="toc-sidebar" id="toc-sidebar">
-                <div class="toc-container">
-                    <h4 class="toc-title">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
-                            <path d="M4 6h16M4 12h16M4 18h10"/>
-                        </svg>
-                        Cuprins
-                    </h4>
-                    <nav class="toc-nav" id="toc-nav">
-                        <!-- Populated by JavaScript -->
-                    </nav>
-                </div>
-            </aside>
-
             <!-- Article Content -->
             <article class="article-content" id="article-content">
                 <div class="content-wrapper">
@@ -316,6 +301,21 @@ const shareUrls = {
                     </div>
                 </div>
             </article>
+
+            <!-- Table of Contents - Sidebar -->
+            <aside class="toc-sidebar" id="toc-sidebar">
+                <div class="toc-container">
+                    <h4 class="toc-title">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                            <path d="M4 6h16M4 12h16M4 18h10"/>
+                        </svg>
+                        Cuprins
+                    </h4>
+                    <nav class="toc-nav" id="toc-nav">
+                        <!-- Populated by JavaScript -->
+                    </nav>
+                </div>
+            </aside>
         </div>
 
         <!-- Related Posts -->
@@ -690,7 +690,7 @@ const shareUrls = {
     /* Article Layout with TOC */
     .article-layout {
         display: grid;
-        grid-template-columns: 250px 1fr;
+        grid-template-columns: 1fr 280px;
         gap: 3rem;
         max-width: 1200px;
         margin: 0 auto;
