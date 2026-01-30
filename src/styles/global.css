@@ -111,7 +111,7 @@ body {
 /* ============================================
    NAVIGATION - Premium Corporate
    ============================================ */
-nav {
+#navbar {
     position: fixed;
     top: 0;
     left: 0;
@@ -127,7 +127,7 @@ nav {
     transition: all 0.3s ease;
 }
 
-nav.scrolled {
+#navbar.scrolled {
     padding: 0.75rem 3rem;
     background: var(--bg-nav-scrolled);
     box-shadow: var(--shadow-lg);
