@@ -9,62 +9,20 @@ export async function getStaticPaths() {
 
     return posts.map((post) => ({
         params: { slug: post.slug },
-        props: { post, allPosts: posts },
+        props: { post },
     }));
 }
 
 interface Props {
     post: CollectionEntry<'blog'>;
-    allPosts: CollectionEntry<'blog'>[];
 }
 
-const { post, allPosts } = Astro.props;
+const { post } = Astro.props;
 const { Content } = await post.render();
 
 // Calculate reading time (rough estimate)
 const wordCount = post.body.split(/\s+/).length;
 const readingTime = Math.ceil(wordCount / 200);
-
-// Get related posts (same category, excluding current post)
-const relatedPosts = allPosts
-    .filter(p =>
-        p.slug !== post.slug &&
-        p.data.category === post.data.category &&
-        !p.data.draft
-    )
-    .sort((a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf())
-    .slice(0, 3)
-    .map(p => ({
-        slug: p.slug,
-        title: p.data.title,
-        description: p.data.description,
-        category: p.data.category || 'general',
-        pubDate: p.data.pubDate,
-        heroImage: p.data.heroImage,
-    }));
-
-// If not enough related posts from same category, add from other categories
-if (relatedPosts.length < 3) {
-    const additionalPosts = allPosts
-        .filter(p =>
-            p.slug !== post.slug &&
-            p.data.category !== post.data.category &&
-            !p.data.draft &&
-            !relatedPosts.find(rp => rp.slug === p.slug)
-        )
-        .sort((a, b) => new Date(b.data.pubDate).valueOf() - new Date(a.data.pubDate).valueOf())
-        .slice(0, 3 - relatedPosts.length)
-        .map(p => ({
-            slug: p.slug,
-            title: p.data.title,
-            description: p.data.description,
-            category: p.data.category || 'general',
-            pubDate: p.data.pubDate,
-            heroImage: p.data.heroImage,
-        }));
-
-    relatedPosts.push(...additionalPosts);
-}
 ---
 
 <BlogLayout
@@ -78,7 +36,6 @@ if (relatedPosts.length < 3) {
     category={post.data.category}
     tags={post.data.tags}
     readingTime={post.data.readingTime || readingTime}
-    relatedPosts={relatedPosts}
 >
     <Content />
 </BlogLayout>
