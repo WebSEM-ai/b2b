@@ -1,0 +1,196 @@
+---
+import LandingPage from '../layouts/LandingPage.astro';
+import Hero from '../components/Hero.astro';
+import ClientsCarousel from '../components/ClientsCarousel.astro';
+import BenefitsSection from '../components/BenefitsSection.astro';
+import StatsSection from '../components/StatsSection.astro';
+import VendorFailures from '../components/VendorFailures.astro';
+import FeaturesSection from '../components/FeaturesSection.astro';
+import CapabilitiesSection from '../components/CapabilitiesSection.astro';
+import ProcessSection from '../components/ProcessSection.astro';
+import UseCasesSection from '../components/UseCasesSection.astro';
+import PricingSection from '../components/PricingSection.astro';
+import CtaSection from '../components/CtaSection.astro';
+import BookingModal from '../components/BookingModal.astro';
+
+const pageTitle = "Platforme Enterprise | Catalog Produse & Portal B2B | WebSEM";
+const pageDescription = "Dezvoltăm platforme web enterprise cu Next.js 15 și Payload CMS 3. Catalog produse, portal B2B, site corporate. Lighthouse 98+, admin simplu, live în 30 zile.";
+
+const navLinks = [
+    { text: 'De Ce Noi', href: '#benefits' },
+    { text: 'Stack', href: '#advantages' },
+    { text: 'Pricing', href: '#pricing' },
+    { text: 'Contact', href: '#contact' }
+];
+---
+
+<LandingPage title={pageTitle} description={pageDescription} navLinks={navLinks}>
+
+    <!-- Hero Section -->
+    <Hero
+        badge="WebSEM — Platforme Enterprise"
+        titleLine1='Platforma ta web <strong>enterprise</strong>'
+        titleLine2="live în 30 de zile."
+        subtitle="Construim cataloage de produse, portaluri B2B și site-uri corporate cu Next.js 15 + Payload CMS 3. Lighthouse 98+, admin simplu, zero WordPress."
+        floatingStats={[
+            { value: '98+', label: 'Lighthouse' },
+            { value: '0', label: 'WordPress' },
+            { value: '<1s', label: 'Load Time' }
+        ]}
+        formTitle="Solicită Consultanță Gratuită"
+        formSubtitle="Analizăm proiectul tău și propunem arhitectura optimă în 24h"
+        formPlaceholder="Website-ul tău actual"
+        formButtonText="Solicită Ofertă"
+    />
+
+    <!-- Clients Logo Carousel -->
+    <ClientsCarousel />
+
+    <!-- Benefits Section -->
+    <BenefitsSection
+        title="De ce companiile aleg WebSEM."
+        subtitle="Platforme enterprise fără compromisuri."
+        benefits={[
+            {
+                title: 'Zero WordPress',
+                description: 'Fără plugin-uri vulnerabile, fără actualizări care strică site-ul, fără hosting lent. Next.js + Payload CMS = rapid, sigur, scalabil.',
+                icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>`,
+                stat: { icon: '✓', text: 'No WordPress' }
+            },
+            {
+                title: 'Lighthouse 98+',
+                description: 'Performance, accessibility, SEO și best practices — toate peste 98. Site-ul tău va fi mai rapid decât 99% din competiție.',
+                icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`,
+                stat: { icon: '⚡', text: '98+ score' }
+            },
+            {
+                title: 'Admin Simplu',
+                description: 'Payload CMS 3 — interfață admin modernă, intuitivă. Echipa ta editează conținut fără training, fără frustrare.',
+                icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>`,
+                stat: { icon: '✓', text: 'No-code editing' }
+            },
+            {
+                title: 'Live în 30 Zile',
+                description: 'De la brief la lansare în maxim 30 de zile pentru proiecte Starter. Proces clar, deadline-uri respectate, zero surprize.',
+                icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`,
+                stat: { icon: '⏱', text: '30 zile max' }
+            }
+        ]}
+    />
+
+    <!-- Stats Section -->
+    <StatsSection
+        title="Rezultate Măsurabile"
+        subtitle="Cifre din proiectele noastre enterprise"
+        stats={[
+            { value: '98', suffix: '+', label: 'Lighthouse Score', description: 'Performance garantat' },
+            { value: '0', suffix: '', label: 'WordPress', description: 'Zero dependențe legacy' },
+            { value: '1', suffix: 's', label: 'Load Time', description: 'Sub 1 secundă first paint' },
+            { value: '99', suffix: '.9%', label: 'Uptime', description: 'Hosting enterprise Vercel' }
+        ]}
+    />
+
+    <!-- Vendor Failures - WordPress vs WebSEM -->
+    <VendorFailures
+        title="De ce WordPress nu e soluția enterprise."
+        subtitle="Și ce facem diferit cu Next.js + Payload CMS."
+        solutionLabel="WEBSEM:"
+        comparisons={[
+            { problem: 'Plugin-uri vulnerabile — 70% din hack-uri', solution: 'Zero plugin-uri, cod custom securizat, TypeScript strict' },
+            { problem: 'Hosting lent — 3-5s page load', solution: 'Edge deployment Vercel, sub 1s load time, CDN global' },
+            { problem: 'Updates care strică site-ul', solution: 'Versioning Git, preview deploys, zero downtime updates' },
+            { problem: 'Admin confuz — "unde e butonul?"', solution: 'Payload CMS — admin modern, intuitiv, custom pentru business-ul tău' },
+            { problem: 'SEO mediocru — Core Web Vitals roșii', solution: 'SSG + ISR nativ, meta tags automate, structured data' },
+            { problem: 'Scalabilitate limitată — crash la trafic', solution: 'Serverless + CDN, auto-scaling, 99.9% uptime garantat' },
+            { problem: 'Design generic — "mai e un site WordPress"', solution: 'Design custom Figma, animații Framer Motion, identitate unică' },
+            { problem: 'Lock-in la developer — "doar el știe"', solution: 'Cod documentat, open-source stack, echipa ta poate continua' }
+        ]}
+    />
+
+    <!-- Features Section - Tech Stack -->
+    <FeaturesSection
+        title='Stack-ul <span class="brand">WebSEM</span>'
+        subtitle="Tehnologii enterprise alese strategic, nu la modă"
+        features={[
+            {
+                icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>`,
+                title: 'Next.js 15',
+                description: 'Framework React de producție. Server Components, App Router, ISR — performanță maximă out of the box.'
+            },
+            {
+                icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>`,
+                title: 'Payload CMS 3',
+                description: 'Headless CMS TypeScript-native. Admin customizabil, access control granular, API auto-generat.'
+            },
+            {
+                icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>`,
+                title: 'PostgreSQL',
+                description: 'Bază de date relațională robustă. ACID compliant, extensibilă, perfect pentru date structurate enterprise.'
+            },
+            {
+                icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/><line x1="12" y1="22" x2="12" y2="15.5"/><polyline points="22 8.5 12 15.5 2 8.5"/></svg>`,
+                title: 'Vercel',
+                description: 'Platform as a Service — edge deployment, preview URLs, analytics built-in, zero-config CI/CD.'
+            },
+            {
+                icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>`,
+                title: 'Cloudflare R2',
+                description: 'Object storage fără egress fees. Perfect pentru imagini, PDF-uri, media — CDN global inclus.'
+            },
+            {
+                icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`,
+                title: 'TypeScript',
+                description: 'Type safety end-to-end — de la CMS la frontend. Mai puține bug-uri, refactoring sigur, DX superior.'
+            },
+            {
+                icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>`,
+                title: 'Framer Motion',
+                description: 'Animații fluid performante. Scroll-triggered reveals, page transitions, micro-interactions delightful.'
+            },
+            {
+                icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>`,
+                title: 'ISR (Incremental Static Regeneration)',
+                description: 'Conținut proaspăt fără rebuild complet. Paginile se regenerează automat la update din CMS.'
+            }
+        ]}
+    />
+
+    <!-- Capabilities Section - Tech Badges -->
+    <CapabilitiesSection
+        title="Capabilități Tehnice"
+        subtitle="Stack enterprise-grade pentru platforme scalabile"
+        capabilities={[
+            { icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>`, title: 'Next.js 15', description: 'React Framework' },
+            { icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>`, title: 'Payload CMS', description: 'Headless CMS' },
+            { icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>`, title: 'PostgreSQL', description: 'Database' },
+            { icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/></svg>`, title: 'Vercel', description: 'Deployment' },
+            { icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>`, title: 'Cloudflare R2', description: 'Object Storage' },
+            { icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`, title: 'TypeScript', description: 'Type Safety' },
+            { icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>`, title: 'Framer Motion', description: 'Animations' },
+            { icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`, title: 'Security', description: 'Enterprise Grade' },
+            { icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>`, title: 'REST & GraphQL', description: 'API Access' },
+            { icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>`, title: 'Analytics', description: 'Built-in' }
+        ]}
+    />
+
+    <!-- Process Section - 4 Steps -->
+    <ProcessSection />
+
+    <!-- Use Cases Section -->
+    <UseCasesSection />
+
+    <!-- Pricing Section -->
+    <PricingSection />
+
+    <!-- CTA Section -->
+    <CtaSection
+        title="Gata să-ți construiești platforma enterprise?"
+        subtitle="Solicită o consultanță gratuită și primești propunerea de arhitectură în 24h."
+        buttonText="Solicită Consultanță Gratuită"
+        note="Fără obligații. Propunere tehnică detaliată în 24h."
+    />
+
+    <!-- Booking Modal -->
+    <BookingModal />
+
+</LandingPage>

@@ -8,6 +8,7 @@ interface Props {
     title?: string;
     subtitle?: string;
     comparisons?: Comparison[];
+    solutionLabel?: string;
 }
 
 const {
@@ -22,7 +23,8 @@ const {
         { problem: 'Lock-in contracts - 12 luni minimum', solution: 'Month-to-month, kill switch oricând, zero penalități' },
         { problem: 'Fără transparență - black box reporting', solution: 'Dashboard live, fiecare metric vizibil, API access' },
         { problem: 'ROI neclar - "trust the process"', solution: 'Cost/lead fix €45-85, pipeline calculator, ROI transparent' }
-    ]
+    ],
+    solutionLabel = 'ALPHAGRADE:'
 } = Astro.props;
 ---
 
@@ -42,7 +44,7 @@ const {
                 <div class="vendor-solution">
                     <span class="vendor-solution-icon">✓</span>
                     <div>
-                        <div class="vendor-solution-label">ALPHAGRADE:</div>
+                        <div class="vendor-solution-label">{solutionLabel}</div>
                         <div class="vendor-solution-text">{item.solution}</div>
                     </div>
                 </div>

@@ -1,0 +1,181 @@
+---
+interface UseCase {
+    title: string;
+    description: string;
+    example: string;
+    ideal: string;
+}
+
+interface Props {
+    title?: string;
+    subtitle?: string;
+    useCases?: UseCase[];
+}
+
+const {
+    title = 'Cazuri de Utilizare',
+    subtitle = 'Platforme construite pentru business real.',
+    useCases = [
+        {
+            title: 'Catalog Produse',
+            description: 'Catalog digital cu filtre avansate, search instant și pagini de produs optimizate pentru conversie. Import automat din ERP/PIM.',
+            example: 'Distribuitor industrial cu 15,000+ SKU-uri, filtre tehnice multi-parametru, PDF datasheet generator.',
+            ideal: 'Distribuitori, producători, importatori cu cataloage mari.'
+        },
+        {
+            title: 'Portal B2B',
+            description: 'Portal cu autentificare, prețuri diferențiate pe client, istoric comenzi, dashboard analytics. Integrare ERP nativă.',
+            example: 'Portal dealeri cu prețuri negociate, minimum order quantity, credit limit și raportare lunară.',
+            ideal: 'Companii cu rețea de dealeri, distribuție multi-nivel.'
+        },
+        {
+            title: 'Site Corporate Enterprise',
+            description: 'Website corporate cu CMS headless, blog, career page, investor relations. Multi-language, performance 98+.',
+            example: 'Site holding cu 5 subsidiare, newsroom, evenimente, rapoarte anuale interactive.',
+            ideal: 'Holdinguri, companii listate, branduri premium.'
+        }
+    ]
+} = Astro.props;
+---
+
+<section class="usecases-section" id="usecases">
+    <div class="usecases-header">
+        <h2>{title}</h2>
+        <p>{subtitle}</p>
+    </div>
+
+    <div class="usecases-grid">
+        {useCases.map(uc => (
+            <div class="usecase-card">
+                <h3 class="usecase-title">{uc.title}</h3>
+                <p class="usecase-desc">{uc.description}</p>
+                <div class="usecase-example">
+                    <span class="usecase-example-label">Exemplu:</span>
+                    <p>{uc.example}</p>
+                </div>
+                <div class="usecase-ideal">
+                    <span class="usecase-ideal-label">Ideal pentru:</span>
+                    <p>{uc.ideal}</p>
+                </div>
+            </div>
+        ))}
+    </div>
+</section>
+
+<script>
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.usecase-card').forEach(card => {
+        observer.observe(card);
+    });
+</script>
+
+<style>
+    .usecases-section {
+        padding: var(--section-padding);
+        max-width: var(--container-max);
+        margin: 0 auto;
+    }
+
+    .usecases-header {
+        text-align: center;
+        margin-bottom: 3.5rem;
+    }
+
+    .usecases-header h2 {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+    }
+
+    .usecases-header p {
+        color: var(--text-muted);
+        font-size: 1rem;
+    }
+
+    .usecases-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+    }
+
+    .usecase-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border-light);
+        border-radius: 20px;
+        padding: 2rem;
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    .usecase-card.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .usecase-card:nth-child(2).visible { transition-delay: 0.1s; }
+    .usecase-card:nth-child(3).visible { transition-delay: 0.2s; }
+
+    .usecase-card:hover {
+        transform: translateY(-6px);
+        border-color: var(--border-accent);
+        box-shadow: var(--shadow-glow);
+    }
+
+    .usecase-title {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 1rem;
+        background: var(--gradient-primary);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .usecase-desc {
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+    }
+
+    .usecase-example,
+    .usecase-ideal {
+        margin-bottom: 1rem;
+    }
+
+    .usecase-example-label,
+    .usecase-ideal-label {
+        display: block;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--accent-light);
+        margin-bottom: 0.3rem;
+    }
+
+    .usecase-example p,
+    .usecase-ideal p {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        line-height: 1.5;
+    }
+
+    @media (max-width: 900px) {
+        .usecases-grid {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+    }
+</style>

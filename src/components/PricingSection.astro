@@ -1,0 +1,345 @@
+---
+interface Tier {
+    name: string;
+    price: string;
+    description: string;
+    features: string[];
+    timeline: string;
+    highlighted?: boolean;
+}
+
+interface Props {
+    title?: string;
+    subtitle?: string;
+    note?: string;
+    tiers?: Tier[];
+}
+
+const {
+    title = 'Pachete & Prețuri',
+    subtitle = 'Transparent. Fără costuri ascunse.',
+    note = 'Toate pachetele includ: hosting Vercel, SSL, CDN Cloudflare, CMS training, 30 zile suport post-lansare.',
+    tiers = [
+        {
+            name: 'Starter',
+            price: '€3,500',
+            description: 'Site corporate sau landing page complex cu CMS headless.',
+            features: [
+                'Până la 10 pagini',
+                'Payload CMS integrat',
+                'Design responsive custom',
+                'SEO on-page optimizat',
+                'Contact form + integrare email',
+                'Lighthouse 95+',
+                'Deploy pe Vercel'
+            ],
+            timeline: 'Livrare: 2-3 săptămâni',
+            highlighted: false
+        },
+        {
+            name: 'Enterprise',
+            price: '€7,500',
+            description: 'Platformă completă: catalog produse, portal B2B sau site multi-entitate.',
+            features: [
+                'Pagini nelimitate',
+                'Catalog produse cu filtre',
+                'Autentificare & roluri utilizatori',
+                'Dashboard analytics custom',
+                'Integrare ERP / API extern',
+                'Multi-language support',
+                'ISR (Incremental Static Regeneration)',
+                'PostgreSQL database'
+            ],
+            timeline: 'Livrare: 4-6 săptămâni',
+            highlighted: true
+        },
+        {
+            name: 'Custom',
+            price: 'La cerere',
+            description: 'Proiecte enterprise cu cerințe specifice și integrări complexe.',
+            features: [
+                'Arhitectură la comandă',
+                'Microservicii & API gateway',
+                'SSO / LDAP integration',
+                'Workflow automation',
+                'Migrare date din sisteme legacy',
+                'SLA & suport dedicat',
+                'Code review & documentation'
+            ],
+            timeline: 'Timeline: custom',
+            highlighted: false
+        }
+    ]
+} = Astro.props;
+---
+
+<section class="pricing-section" id="pricing">
+    <div class="pricing-header">
+        <h2>{title}</h2>
+        <p>{subtitle}</p>
+    </div>
+
+    <div class="pricing-grid">
+        {tiers.map(tier => (
+            <div class={`pricing-card ${tier.highlighted ? 'pricing-card--highlighted' : ''}`}>
+                {tier.highlighted && <div class="pricing-badge">Recomandat</div>}
+                <div class="pricing-card-header">
+                    <h3 class="pricing-name">{tier.name}</h3>
+                    <div class="pricing-price">{tier.price}</div>
+                    <p class="pricing-desc">{tier.description}</p>
+                </div>
+                <ul class="pricing-features">
+                    {tier.features.map(feature => (
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            {feature}
+                        </li>
+                    ))}
+                </ul>
+                <div class="pricing-footer">
+                    <span class="pricing-timeline">{tier.timeline}</span>
+                    <button class="pricing-cta" data-open-booking>
+                        Solicită Ofertă
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        ))}
+    </div>
+
+    {note && <p class="pricing-note">{note}</p>}
+</section>
+
+<script>
+    // Open booking modal from pricing buttons
+    document.querySelectorAll('[data-open-booking]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const modal = document.getElementById('booking-modal');
+            modal?.classList.add('active');
+            document.body.classList.add('modal-open');
+        });
+    });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.pricing-card').forEach(card => {
+        observer.observe(card);
+    });
+</script>
+
+<style>
+    .pricing-section {
+        padding: var(--section-padding);
+        max-width: var(--container-max);
+        margin: 0 auto;
+    }
+
+    .pricing-header {
+        text-align: center;
+        margin-bottom: 3.5rem;
+    }
+
+    .pricing-header h2 {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+    }
+
+    .pricing-header p {
+        color: var(--text-muted);
+        font-size: 1rem;
+    }
+
+    .pricing-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        align-items: start;
+    }
+
+    .pricing-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border-light);
+        border-radius: 20px;
+        padding: 2rem;
+        position: relative;
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    .pricing-card.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .pricing-card:nth-child(2).visible { transition-delay: 0.1s; }
+    .pricing-card:nth-child(3).visible { transition-delay: 0.2s; }
+
+    .pricing-card:hover {
+        transform: translateY(-6px);
+        box-shadow: var(--shadow-lg);
+    }
+
+    .pricing-card--highlighted {
+        border-color: var(--border-accent);
+        box-shadow: var(--shadow-glow);
+    }
+
+    .pricing-card--highlighted:hover {
+        box-shadow: var(--shadow-glow), var(--shadow-lg);
+    }
+
+    .pricing-badge {
+        position: absolute;
+        top: -12px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--gradient-primary);
+        color: #fff;
+        font-size: 0.75rem;
+        font-weight: 700;
+        padding: 0.3rem 1rem;
+        border-radius: 20px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .pricing-card-header {
+        text-align: center;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid var(--border-light);
+        margin-bottom: 1.5rem;
+    }
+
+    .pricing-name {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--text-secondary);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 0.5rem;
+    }
+
+    .pricing-price {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 2.5rem;
+        font-weight: 700;
+        background: var(--gradient-primary);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        line-height: 1.2;
+        margin-bottom: 0.5rem;
+    }
+
+    .pricing-desc {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        line-height: 1.5;
+    }
+
+    .pricing-features {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 1.5rem 0;
+    }
+
+    .pricing-features li {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        padding: 0.4rem 0;
+    }
+
+    .pricing-features li svg {
+        width: 16px;
+        height: 16px;
+        flex-shrink: 0;
+        color: var(--green);
+    }
+
+    .pricing-footer {
+        text-align: center;
+    }
+
+    .pricing-timeline {
+        display: block;
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        margin-bottom: 1rem;
+    }
+
+    .pricing-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 12px;
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 0.9rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        background: var(--bg-card);
+        color: var(--text-primary);
+        border: 1px solid var(--border-medium);
+    }
+
+    .pricing-cta svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .pricing-cta:hover {
+        border-color: var(--border-accent);
+        box-shadow: var(--shadow-glow);
+    }
+
+    .pricing-card--highlighted .pricing-cta {
+        background: var(--gradient-primary);
+        color: #fff;
+        border: none;
+    }
+
+    .pricing-card--highlighted .pricing-cta:hover {
+        opacity: 0.9;
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-glow);
+    }
+
+    .pricing-note {
+        text-align: center;
+        margin-top: 2.5rem;
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.6;
+    }
+
+    @media (max-width: 900px) {
+        .pricing-grid {
+            grid-template-columns: 1fr;
+            max-width: 420px;
+            margin: 0 auto;
+        }
+    }
+</style>

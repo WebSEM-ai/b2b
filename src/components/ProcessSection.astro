@@ -1,0 +1,210 @@
+---
+interface Step {
+    number: number;
+    title: string;
+    description: string;
+    duration: string;
+}
+
+interface Props {
+    title?: string;
+    subtitle?: string;
+    steps?: Step[];
+}
+
+const {
+    title = 'Procesul Nostru',
+    subtitle = 'De la brief la lansare, pas cu pas.',
+    steps = [
+        { number: 1, title: 'Discovery & Arhitectură', description: 'Analizăm cerințele, definim arhitectura și alegem stack-ul optim.', duration: '3-5 zile' },
+        { number: 2, title: 'Design & Prototip', description: 'UI/UX design în Figma, prototip interactiv, feedback loop rapid.', duration: '5-7 zile' },
+        { number: 3, title: 'Dezvoltare & CMS', description: 'Implementare Next.js + Payload CMS, integrări API, testare.', duration: '10-15 zile' },
+        { number: 4, title: 'Lansare & Suport', description: 'Deploy pe Vercel, configurare DNS, monitoring, training echipă.', duration: '2-3 zile' }
+    ]
+} = Astro.props;
+---
+
+<section class="process-section" id="process">
+    <div class="process-header">
+        <h2>{title}</h2>
+        <p>{subtitle}</p>
+    </div>
+
+    <div class="process-timeline">
+        <div class="process-line"></div>
+        {steps.map(step => (
+            <div class="process-step">
+                <div class="process-step-number">
+                    <span>{step.number}</span>
+                </div>
+                <div class="process-step-content">
+                    <h3>{step.title}</h3>
+                    <p>{step.description}</p>
+                    <span class="process-step-duration">{step.duration}</span>
+                </div>
+            </div>
+        ))}
+    </div>
+</section>
+
+<script>
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.process-step').forEach(step => {
+        observer.observe(step);
+    });
+</script>
+
+<style>
+    .process-section {
+        padding: var(--section-padding);
+        max-width: var(--container-max);
+        margin: 0 auto;
+    }
+
+    .process-header {
+        text-align: center;
+        margin-bottom: 4rem;
+    }
+
+    .process-header h2 {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+    }
+
+    .process-header p {
+        color: var(--text-muted);
+        font-size: 1rem;
+    }
+
+    .process-timeline {
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2rem;
+    }
+
+    .process-line {
+        position: absolute;
+        top: 28px;
+        left: 10%;
+        right: 10%;
+        height: 2px;
+        background: var(--gradient-primary);
+        opacity: 0.3;
+    }
+
+    .process-step {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        position: relative;
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .process-step.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .process-step:nth-child(2).visible { transition-delay: 0.1s; }
+    .process-step:nth-child(3).visible { transition-delay: 0.2s; }
+    .process-step:nth-child(4).visible { transition-delay: 0.3s; }
+    .process-step:nth-child(5).visible { transition-delay: 0.4s; }
+
+    .process-step-number {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: var(--bg-card);
+        border: 2px solid var(--border-accent);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+        position: relative;
+        z-index: 1;
+    }
+
+    .process-step-number span {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 1.2rem;
+        font-weight: 700;
+        background: var(--gradient-primary);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .process-step-content {
+        background: var(--bg-card);
+        border: 1px solid var(--border-light);
+        border-radius: 16px;
+        padding: 1.5rem;
+        width: 100%;
+        transition: all 0.3s ease;
+    }
+
+    .process-step-content:hover {
+        border-color: var(--border-accent);
+        box-shadow: var(--shadow-glow);
+    }
+
+    .process-step-content h3 {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+    }
+
+    .process-step-content p {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        line-height: 1.5;
+        margin-bottom: 0.75rem;
+    }
+
+    .process-step-duration {
+        display: inline-block;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--accent-light);
+        background: rgba(99, 102, 241, 0.1);
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+    }
+
+    @media (max-width: 900px) {
+        .process-timeline {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .process-line {
+            display: none;
+        }
+
+        .process-step {
+            flex-direction: row;
+            text-align: left;
+            gap: 1rem;
+        }
+
+        .process-step-number {
+            flex-shrink: 0;
+            margin-bottom: 0;
+        }
+    }
+</style>

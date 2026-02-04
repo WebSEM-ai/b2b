@@ -8,6 +8,10 @@ interface Props {
         value: string;
         label: string;
     }>;
+    formTitle?: string;
+    formSubtitle?: string;
+    formPlaceholder?: string;
+    formButtonText?: string;
 }
 
 const {
@@ -19,7 +23,11 @@ const {
         { value: '+89%', label: 'Reply Rate' },
         { value: '€2.3M', label: 'Pipeline' },
         { value: '14 zile', label: 'Time to Close' }
-    ]
+    ],
+    formTitle = 'Solicită Audit Gratuit',
+    formSubtitle = 'Analizăm potențialul tău de lead generation în 24h',
+    formPlaceholder = 'Website-ul tău',
+    formButtonText = 'Trimite'
 } = Astro.props;
 ---
 
@@ -59,13 +67,13 @@ const {
     <div class="hero-audit-form">
         <div class="audit-form-container">
             <div class="audit-form-label">
-                <h3>Solicită Audit Gratuit</h3>
-                <p>Analizăm potențialul tău de lead generation în 24h</p>
+                <h3>{formTitle}</h3>
+                <p>{formSubtitle}</p>
             </div>
             <div class="audit-form-wrapper">
                 <form class="audit-form" id="auditForm">
                     <div class="audit-form-field">
-                        <input type="url" name="website" placeholder="Website-ul tău" required>
+                        <input type="url" name="website" placeholder={formPlaceholder} required>
                         <span class="audit-form-field-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <circle cx="12" cy="12" r="10"/>
@@ -92,7 +100,7 @@ const {
                         </span>
                     </div>
                     <button type="submit" class="audit-form-submit">
-                        Trimite
+                        {formButtonText}
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                             <path d="M5 12h14M12 5l7 7-7 7"/>
                         </svg>
