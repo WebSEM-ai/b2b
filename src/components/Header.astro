@@ -9,10 +9,9 @@ interface Props {
 
 const {
     links = [
-        { text: 'De Ce Noi', href: '#benefits' },
-        { text: 'Avantaje', href: '#advantages' },
-        { text: 'Capabilități', href: '#capabilities' },
+        { text: 'Outreach', href: '/' },
         { text: 'Platforme', href: '/platforme' },
+        { text: 'Prețuri', href: '#pricing' },
         { text: 'Contact', href: '#contact' }
     ],
     ctaText = 'Solicită Demo'
@@ -22,10 +21,16 @@ const {
 <nav id="navbar">
     <div class="nav-container">
         <a href="/" class="logo-link">
-            <span class="logo-symbol">α</span>
-            <span class="logo-text">
-                <span class="logo-alpha">ALPHA</span><span class="logo-separator">/</span><span class="logo-grade">GRADE</span>
-            </span>
+            <img src="/websem-logo.png" alt="WebSEM" class="logo-websem" />
+            <div class="logo-content">
+                <div class="logo-main">
+                    <span class="logo-symbol">α</span>
+                    <span class="logo-text">
+                        <span class="logo-alpha">ALPHA</span><span class="logo-separator">/</span><span class="logo-grade">GRADE</span>
+                    </span>
+                </div>
+                <span class="logo-powered">un serviciu <strong>WebSEM</strong></span>
+            </div>
         </a>
 
         <button class="nav-mobile-toggle" id="mobile-toggle" aria-label="Toggle menu">
@@ -133,9 +138,48 @@ const {
         text-decoration: none;
     }
 
+    .logo-websem {
+        width: 28px;
+        height: 28px;
+        object-fit: contain;
+        filter: invert(1);
+        opacity: 0.9;
+    }
+
+    :global([data-theme="light"]) .logo-websem {
+        filter: none;
+        opacity: 0.85;
+    }
+
+    .logo-content {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .logo-main {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+    }
+
+    .logo-powered {
+        font-size: 0.55rem;
+        color: var(--text-muted);
+        letter-spacing: 0.04em;
+        opacity: 0.6;
+        font-family: 'Inter', sans-serif;
+        margin-top: -1px;
+    }
+
+    .logo-powered strong {
+        color: var(--text-secondary);
+        font-weight: 600;
+    }
+
     .logo-symbol {
         font-family: 'Times New Roman', serif;
-        font-size: 2rem;
+        font-size: 1.6rem;
         font-weight: 400;
         font-style: italic;
         background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
@@ -146,7 +190,7 @@ const {
 
     .logo-text {
         font-family: 'Orbitron', 'Space Grotesk', sans-serif;
-        font-size: 1.1rem;
+        font-size: 1rem;
         font-weight: 700;
         letter-spacing: 0.08em;
         display: flex;
@@ -170,12 +214,21 @@ const {
     }
 
     @media (max-width: 900px) {
+        .logo-websem {
+            width: 22px;
+            height: 22px;
+        }
+
         .logo-symbol {
-            font-size: 1.6rem;
+            font-size: 1.3rem;
         }
 
         .logo-text {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+        }
+
+        .logo-powered {
+            font-size: 0.5rem;
         }
     }
 </style>

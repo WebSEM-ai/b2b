@@ -128,12 +128,17 @@ const year = new Date().getFullYear();
         <div class="footer-main">
             <div class="footer-brand">
                 <a href="/" class="footer-logo">
-                    <span class="logo-symbol">α</span>
-                    <span class="logo-text">
-                        <span class="logo-alpha">ALPHA</span><span class="logo-sep">/</span><span class="logo-grade">GRADE</span>
-                    </span>
+                    <img src="/websem-logo.png" alt="WebSEM" class="footer-websem-logo" />
+                    <div class="footer-logo-content">
+                        <div class="footer-logo-main">
+                            <span class="logo-symbol">α</span>
+                            <span class="logo-text">
+                                <span class="logo-alpha">ALPHA</span><span class="logo-sep">/</span><span class="logo-grade">GRADE</span>
+                            </span>
+                        </div>
+                        <span class="footer-powered">un serviciu <strong>WebSEM</strong></span>
+                    </div>
                 </a>
-                <p class="footer-tagline">B2B Sales Intelligence by WebSEM</p>
             </div>
 
             <div class="footer-contact">
@@ -558,9 +563,47 @@ const year = new Date().getFullYear();
         text-decoration: none;
     }
 
+    .footer-websem-logo {
+        width: 24px;
+        height: 24px;
+        object-fit: contain;
+        filter: invert(1);
+        opacity: 0.8;
+    }
+
+    :global([data-theme="light"]) .footer-websem-logo {
+        filter: none;
+        opacity: 0.75;
+    }
+
+    .footer-logo-content {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .footer-logo-main {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+    }
+
+    .footer-powered {
+        font-size: 0.5rem;
+        color: var(--text-muted);
+        letter-spacing: 0.04em;
+        opacity: 0.6;
+        font-family: 'Inter', sans-serif;
+        margin-top: -1px;
+    }
+
+    .footer-powered strong {
+        color: var(--text-secondary);
+        font-weight: 600;
+    }
+
     .footer-logo .logo-symbol {
         font-family: 'Times New Roman', serif;
-        font-size: 1.5rem;
+        font-size: 1.3rem;
         font-style: italic;
         background: linear-gradient(135deg, #667eea, #764ba2);
         -webkit-background-clip: text;
@@ -569,7 +612,7 @@ const year = new Date().getFullYear();
 
     .footer-logo .logo-text {
         font-family: 'Orbitron', 'Space Grotesk', sans-serif;
-        font-size: 0.9rem;
+        font-size: 0.85rem;
         font-weight: 700;
         letter-spacing: 0.05em;
     }
@@ -586,12 +629,6 @@ const year = new Date().getFullYear();
         background: linear-gradient(135deg, #667eea, #764ba2);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-    }
-
-    .footer-tagline {
-        margin-top: 0.5rem;
-        font-size: 0.8rem;
-        color: var(--text-muted);
     }
 
     .footer-contact {

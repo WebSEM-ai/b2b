@@ -16,15 +16,9 @@ import BookingModal from '../components/BookingModal.astro';
 const pageTitle = "Platforme Enterprise | Catalog Produse & Portal B2B | WebSEM";
 const pageDescription = "Dezvoltăm platforme web enterprise cu Next.js 15 și Payload CMS 3. Catalog produse, portal B2B, site corporate. Lighthouse 98+, admin simplu, live în 30 zile.";
 
-const navLinks = [
-    { text: 'De Ce Noi', href: '#benefits' },
-    { text: 'Stack', href: '#advantages' },
-    { text: 'Pricing', href: '#pricing' },
-    { text: 'Contact', href: '#contact' }
-];
 ---
 
-<LandingPage title={pageTitle} description={pageDescription} navLinks={navLinks}>
+<LandingPage title={pageTitle} description={pageDescription}>
 
     <!-- Hero Section -->
     <Hero
@@ -180,7 +174,122 @@ const navLinks = [
     <UseCasesSection />
 
     <!-- Pricing Section -->
-    <PricingSection />
+    <PricingSection
+        title="Pachete & Prețuri"
+        subtitle="Infrastructură enterprise. Prețuri transparente."
+        note="Toate pachetele includ: SSL, security headers, CMS training, 30 zile suport post-lansare. Mentenanță opțională — preț negociabil."
+        tiers={[
+            {
+                name: 'Starter',
+                price: '€3,500',
+                priceNote: 'one-time',
+                description: 'Site corporate sau landing page cu stack enterprise complet.',
+                featureGroups: [
+                    {
+                        label: 'Infrastructură',
+                        items: [
+                            'Front-end pe Vercel Edge',
+                            'Imagini pe Amazon S3',
+                            'CDN Cloudflare global',
+                            'Baza de date Neon PostgreSQL',
+                            'CMS Payload pe Railway'
+                        ]
+                    },
+                    {
+                        label: 'Funcționalități',
+                        items: [
+                            'Până la 10 pagini responsive',
+                            'Design custom & animații',
+                            'SEO on-page & meta tags',
+                            'Contact form integrat',
+                            'Lighthouse 95+ garantat'
+                        ]
+                    },
+                    {
+                        label: 'Business',
+                        items: [
+                            'Strategie digitală de bază',
+                            'Analiza nișei principale'
+                        ]
+                    }
+                ],
+                timeline: 'Livrare: 2-3 săptămâni',
+                highlighted: false
+            },
+            {
+                name: 'Enterprise',
+                price: '€7,500',
+                priceNote: 'one-time',
+                description: 'Platformă completă: catalog, portal B2B, multi-entitate.',
+                featureGroups: [
+                    {
+                        label: 'Infrastructură',
+                        items: [
+                            'Tot din Starter, plus:',
+                            'PostgreSQL dedicat Neon',
+                            'Railway CMS cu auto-scaling',
+                            'CDN multi-region',
+                            'ISR — conținut mereu fresh'
+                        ]
+                    },
+                    {
+                        label: 'Funcționalități',
+                        items: [
+                            'Pagini nelimitate',
+                            'Catalog produse + filtre avansate',
+                            'Autentificare & roluri utilizatori',
+                            'Dashboard analytics custom',
+                            'Integrare ERP / API extern',
+                            'Multi-language support'
+                        ]
+                    },
+                    {
+                        label: 'Business',
+                        items: [
+                            'Studiu concurență — toate nișele',
+                            'Strategie business completă',
+                            'Plan de creștere personalizat'
+                        ]
+                    }
+                ],
+                timeline: 'Livrare: 4-6 săptămâni',
+                highlighted: true
+            },
+            {
+                name: 'Custom',
+                price: 'La cerere',
+                description: 'Proiecte enterprise cu cerințe specifice și integrări complexe.',
+                featureGroups: [
+                    {
+                        label: 'Arhitectură',
+                        items: [
+                            'Infrastructură la comandă',
+                            'Microservicii & API gateway',
+                            'SSO / LDAP integration'
+                        ]
+                    },
+                    {
+                        label: 'Integrări',
+                        items: [
+                            'Workflow automation',
+                            'Migrare din sisteme legacy',
+                            'Integrări custom multi-vendor'
+                        ]
+                    },
+                    {
+                        label: 'Suport',
+                        items: [
+                            'SLA & suport dedicat',
+                            'Code review & documentație',
+                            'Mentenanță continuă'
+                        ]
+                    }
+                ],
+                timeline: 'Timeline: custom',
+                highlighted: false
+            }
+        ]}
+    />
 
     <!-- CTA Section -->
     <CtaSection

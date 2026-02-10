@@ -7,6 +7,7 @@ import StatsSection from '../components/StatsSection.astro';
 import VendorFailures from '../components/VendorFailures.astro';
 import FeaturesSection from '../components/FeaturesSection.astro';
 import CapabilitiesSection from '../components/CapabilitiesSection.astro';
+import PricingSection from '../components/PricingSection.astro';
 import CtaSection from '../components/CtaSection.astro';
 import BookingModal from '../components/BookingModal.astro';
 
@@ -37,6 +38,125 @@ const pageDescription = "Pipeline B2B de €250K+ în 90 de zile. Identificăm d
 
     <!-- Capabilities Section -->
     <CapabilitiesSection />
+
+    <!-- Pricing Section - Outreach Tools -->
+    <PricingSection
+        title="Pachete & Prețuri"
+        subtitle="Tool-uri enterprise. One-time payment."
+        note="Toate tool-urile rămân ale tale. Mentenanță opțională — preț negociabil separat."
+        tiers={[
+            {
+                name: 'Starter',
+                price: '€3,500',
+                priceNote: 'one-time',
+                description: 'Setup complet outreach cu tool-uri enterprise.',
+                featureGroups: [
+                    {
+                        label: 'Infrastructură',
+                        items: [
+                            'Servere dedicate Amazon AWS',
+                            'Elastic IP Microsoft Azure',
+                            'Interfață Google Suites',
+                            'Baze de date B2B verificate',
+                            '100% GDPR & compliance'
+                        ]
+                    },
+                    {
+                        label: 'Automatizare',
+                        items: [
+                            '10+ triggere automate',
+                            'Trimitere fluidă pe triggere',
+                            'Inbox management optimizat',
+                            'Email warmup inclus',
+                            'A/B testing campanii'
+                        ]
+                    },
+                    {
+                        label: 'Targetare',
+                        items: [
+                            'ICP workshop dedicat',
+                            'Targetare pe nișă principală',
+                            'Verificare email 98%+'
+                        ]
+                    }
+                ],
+                timeline: 'Setup: 24-72h',
+                highlighted: false
+            },
+            {
+                name: 'Enterprise',
+                price: '€7,500',
+                priceNote: 'one-time',
+                description: 'Stack complet outreach multichannel cu targetare avansată.',
+                featureGroups: [
+                    {
+                        label: 'Infrastructură',
+                        items: [
+                            'Tot din Starter, plus:',
+                            'Multi-server Amazon AWS',
+                            'IP rotation & warm-up avansat',
+                            'Inbox pool dedicat',
+                            'Domenii multiple configurate'
+                        ]
+                    },
+                    {
+                        label: 'Automatizare',
+                        items: [
+                            '20+ triggere multi-canal',
+                            'Email + LinkedIn + SMS sincronizat',
+                            'Trimitere fluidă bazată pe triggere',
+                            'Sequences cu logică condițională',
+                            'Dashboard Databox analytics'
+                        ]
+                    },
+                    {
+                        label: 'Targetare',
+                        items: [
+                            'Baze de date masive multi-nișă',
+                            'AI micro-segmentation',
+                            'Targetare impecabilă — VP+ decision makers',
+                            'Studiu concurență complet'
+                        ]
+                    }
+                ],
+                timeline: 'Setup: 24-72h',
+                highlighted: true
+            },
+            {
+                name: 'Custom',
+                price: 'La cerere',
+                description: 'Outreach enterprise cu cerințe specifice și volume mari.',
+                featureGroups: [
+                    {
+                        label: 'Scale',
+                        items: [
+                            'Infrastructură nelimitată',
+                            'Volume custom de contacte',
+                            'Multi-brand / multi-entitate'
+                        ]
+                    },
+                    {
+                        label: 'Integrări',
+                        items: [
+                            'CRM integration (HubSpot, Pipedrive)',
+                            'API custom & webhooks',
+                            'Workflow automation avansat'
+                        ]
+                    },
+                    {
+                        label: 'Suport',
+                        items: [
+                            'Account manager dedicat',
+                            'Strategie & execuție inclusă',
+                            'Raportare white-label'
+                        ]
+                    }
+                ],
+                timeline: 'Timeline: custom',
+                highlighted: false
+            }
+        ]}
+    />
 
     <!-- CTA Section -->
     <CtaSection />

@@ -1,9 +1,16 @@
 ---
+interface FeatureGroup {
+    label: string;
+    items: string[];
+}
+
 interface Tier {
     name: string;
     price: string;
+    priceNote?: string;
     description: string;
-    features: string[];
+    features?: string[];
+    featureGroups?: FeatureGroup[];
     timeline: string;
     highlighted?: boolean;
 }
@@ -86,18 +93,39 @@ const {
                 <div class="pricing-card-header">
                     <h3 class="pricing-name">{tier.name}</h3>
                     <div class="pricing-price">{tier.price}</div>
+                    {tier.priceNote && <p class="pricing-price-note">{tier.priceNote}</p>}
                     <p class="pricing-desc">{tier.description}</p>
                 </div>
-                <ul class="pricing-features">
-                    {tier.features.map(feature => (
-                        <li>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                                <polyline points="20 6 9 17 4 12"/>
-                            </svg>
-                            {feature}
-                        </li>
-                    ))}
-                </ul>
+                {tier.featureGroups ? (
+                    <div class="pricing-feature-groups">
+                        {tier.featureGroups.map(group => (
+                            <div class="feature-group">
+                                <span class="feature-group-label">{group.label}</span>
+                                <ul class="pricing-features pricing-features--grouped">
+                                    {group.items.map(item => (
+                                        <li>
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                                <polyline points="20 6 9 17 4 12"/>
+                                            </svg>
+                                            {item}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    <ul class="pricing-features">
+                        {tier.features?.map(feature => (
+                            <li>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                                {feature}
+                            </li>
+                        ))}
+                    </ul>
+                )}
                 <div class="pricing-footer">
                     <span class="pricing-timeline">{tier.timeline}</span>
                     <button class="pricing-cta" data-open-booking>
@@ -272,6 +300,46 @@ const {
         height: 16px;
         flex-shrink: 0;
         color: var(--green);
+    }
+
+    .pricing-feature-groups {
+        margin: 0 0 1.5rem 0;
+    }
+
+    .feature-group {
+        margin-bottom: 0.75rem;
+    }
+
+    .feature-group:last-child {
+        margin-bottom: 0;
+    }
+
+    .feature-group-label {
+        display: block;
+        font-size: 0.65rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--accent-light);
+        margin-bottom: 0.25rem;
+        padding-left: 0.1rem;
+        opacity: 0.8;
+    }
+
+    .pricing-features--grouped {
+        margin: 0;
+    }
+
+    .pricing-features--grouped li {
+        padding: 0.25rem 0;
+        font-size: 0.8rem;
+    }
+
+    .pricing-price-note {
+        font-size: 0.7rem;
+        color: var(--text-muted);
+        margin-top: 0.25rem;
+        font-weight: 400;
     }
 
     .pricing-footer {
