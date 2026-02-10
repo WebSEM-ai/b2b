@@ -7,6 +7,7 @@ import StatsSection from '../components/StatsSection.astro';
 import VendorFailures from '../components/VendorFailures.astro';
 import FeaturesSection from '../components/FeaturesSection.astro';
 import CapabilitiesSection from '../components/CapabilitiesSection.astro';
+import TabSection from '../components/TabSection.astro';
 import ProcessSection from '../components/ProcessSection.astro';
 import UseCasesSection from '../components/UseCasesSection.astro';
 import PricingSection from '../components/PricingSection.astro';
@@ -72,106 +73,118 @@ const pageDescription = "Dezvoltăm platforme web enterprise cu Next.js 15 și P
         ]}
     />
 
-    <!-- Stats Section -->
-    <StatsSection
-        title="Rezultate Măsurabile"
-        subtitle="Cifre din proiectele noastre enterprise"
-        stats={[
-            { value: '98', suffix: '+', label: 'Lighthouse Score', description: 'Performance garantat' },
-            { value: '0', suffix: '', label: 'WordPress', description: 'Zero dependențe legacy' },
-            { value: '1', suffix: 's', label: 'Load Time', description: 'Sub 1 secundă first paint' },
-            { value: '99', suffix: '.9%', label: 'Uptime', description: 'Hosting enterprise Vercel' }
-        ]}
-    />
+    <!-- Tab Group 1: Rezultate + Comparație WordPress -->
+    <TabSection tabs={['Rezultate Măsurabile', 'WordPress vs WebSEM']} id="platform-proof">
+        <div data-tab-panel="0">
+            <StatsSection
+                title="Rezultate Măsurabile"
+                subtitle="Cifre din proiectele noastre enterprise"
+                stats={[
+                    { value: '98', suffix: '+', label: 'Lighthouse Score', description: 'Performance garantat' },
+                    { value: '0', suffix: '', label: 'WordPress', description: 'Zero dependențe legacy' },
+                    { value: '1', suffix: 's', label: 'Load Time', description: 'Sub 1 secundă first paint' },
+                    { value: '99', suffix: '.9%', label: 'Uptime', description: 'Hosting enterprise Vercel' }
+                ]}
+            />
+        </div>
+        <div data-tab-panel="1">
+            <VendorFailures
+                title="De ce WordPress nu e soluția enterprise."
+                subtitle="Și ce facem diferit cu Next.js + Payload CMS."
+                solutionLabel="WEBSEM:"
+                comparisons={[
+                    { problem: 'Plugin-uri vulnerabile — 70% din hack-uri', solution: 'Zero plugin-uri, cod custom securizat, TypeScript strict' },
+                    { problem: 'Hosting lent — 3-5s page load', solution: 'Edge deployment Vercel, sub 1s load time, CDN global' },
+                    { problem: 'Updates care strică site-ul', solution: 'Versioning Git, preview deploys, zero downtime updates' },
+                    { problem: 'Admin confuz — "unde e butonul?"', solution: 'Payload CMS — admin modern, intuitiv, custom pentru business-ul tău' },
+                    { problem: 'SEO mediocru — Core Web Vitals roșii', solution: 'SSG + ISR nativ, meta tags automate, structured data' },
+                    { problem: 'Scalabilitate limitată — crash la trafic', solution: 'Serverless + CDN, auto-scaling, 99.9% uptime garantat' },
+                    { problem: 'Design generic — "mai e un site WordPress"', solution: 'Design custom Figma, animații Framer Motion, identitate unică' },
+                    { problem: 'Lock-in la developer — "doar el știe"', solution: 'Cod documentat, open-source stack, echipa ta poate continua' }
+                ]}
+            />
+        </div>
+    </TabSection>
 
-    <!-- Vendor Failures - WordPress vs WebSEM -->
-    <VendorFailures
-        title="De ce WordPress nu e soluția enterprise."
-        subtitle="Și ce facem diferit cu Next.js + Payload CMS."
-        solutionLabel="WEBSEM:"
-        comparisons={[
-            { problem: 'Plugin-uri vulnerabile — 70% din hack-uri', solution: 'Zero plugin-uri, cod custom securizat, TypeScript strict' },
-            { problem: 'Hosting lent — 3-5s page load', solution: 'Edge deployment Vercel, sub 1s load time, CDN global' },
-            { problem: 'Updates care strică site-ul', solution: 'Versioning Git, preview deploys, zero downtime updates' },
-            { problem: 'Admin confuz — "unde e butonul?"', solution: 'Payload CMS — admin modern, intuitiv, custom pentru business-ul tău' },
-            { problem: 'SEO mediocru — Core Web Vitals roșii', solution: 'SSG + ISR nativ, meta tags automate, structured data' },
-            { problem: 'Scalabilitate limitată — crash la trafic', solution: 'Serverless + CDN, auto-scaling, 99.9% uptime garantat' },
-            { problem: 'Design generic — "mai e un site WordPress"', solution: 'Design custom Figma, animații Framer Motion, identitate unică' },
-            { problem: 'Lock-in la developer — "doar el știe"', solution: 'Cod documentat, open-source stack, echipa ta poate continua' }
-        ]}
-    />
+    <!-- Tab Group 2: Stack Tehnic + Capabilități -->
+    <TabSection tabs={['Stack-ul WebSEM', 'Capabilități Tehnice']} id="platform-tech">
+        <div data-tab-panel="0">
+            <FeaturesSection
+                title='Stack-ul <span class="brand">WebSEM</span>'
+                subtitle="Tehnologii enterprise alese strategic, nu la modă"
+                features={[
+                    {
+                        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>`,
+                        title: 'Next.js 15',
+                        description: 'Framework React de producție. Server Components, App Router, ISR — performanță maximă out of the box.'
+                    },
+                    {
+                        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>`,
+                        title: 'Payload CMS 3',
+                        description: 'Headless CMS TypeScript-native. Admin customizabil, access control granular, API auto-generat.'
+                    },
+                    {
+                        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>`,
+                        title: 'PostgreSQL',
+                        description: 'Bază de date relațională robustă. ACID compliant, extensibilă, perfect pentru date structurate enterprise.'
+                    },
+                    {
+                        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/><line x1="12" y1="22" x2="12" y2="15.5"/><polyline points="22 8.5 12 15.5 2 8.5"/></svg>`,
+                        title: 'Vercel',
+                        description: 'Platform as a Service — edge deployment, preview URLs, analytics built-in, zero-config CI/CD.'
+                    },
+                    {
+                        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>`,
+                        title: 'Cloudflare R2',
+                        description: 'Object storage fără egress fees. Perfect pentru imagini, PDF-uri, media — CDN global inclus.'
+                    },
+                    {
+                        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`,
+                        title: 'TypeScript',
+                        description: 'Type safety end-to-end — de la CMS la frontend. Mai puține bug-uri, refactoring sigur, DX superior.'
+                    },
+                    {
+                        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>`,
+                        title: 'Framer Motion',
+                        description: 'Animații fluid performante. Scroll-triggered reveals, page transitions, micro-interactions delightful.'
+                    },
+                    {
+                        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>`,
+                        title: 'ISR (Incremental Static Regeneration)',
+                        description: 'Conținut proaspăt fără rebuild complet. Paginile se regenerează automat la update din CMS.'
+                    }
+                ]}
+            />
+        </div>
+        <div data-tab-panel="1">
+            <CapabilitiesSection
+                title="Capabilități Tehnice"
+                subtitle="Stack enterprise-grade pentru platforme scalabile"
+                capabilities={[
+                    { icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>`, title: 'Next.js 15', description: 'React Framework' },
+                    { icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>`, title: 'Payload CMS', description: 'Headless CMS' },
+                    { icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>`, title: 'PostgreSQL', description: 'Database' },
+                    { icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/></svg>`, title: 'Vercel', description: 'Deployment' },
+                    { icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>`, title: 'Cloudflare R2', description: 'Object Storage' },
+                    { icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`, title: 'TypeScript', description: 'Type Safety' },
+                    { icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>`, title: 'Framer Motion', description: 'Animations' },
+                    { icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`, title: 'Security', description: 'Enterprise Grade' },
+                    { icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>`, title: 'REST & GraphQL', description: 'API Access' },
+                    { icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>`, title: 'Analytics', description: 'Built-in' }
+                ]}
+            />
+        </div>
+    </TabSection>
 
-    <!-- Features Section - Tech Stack -->
-    <FeaturesSection
-        title='Stack-ul <span class="brand">WebSEM</span>'
-        subtitle="Tehnologii enterprise alese strategic, nu la modă"
-        features={[
-            {
-                icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>`,
-                title: 'Next.js 15',
-                description: 'Framework React de producție. Server Components, App Router, ISR — performanță maximă out of the box.'
-            },
-            {
-                icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>`,
-                title: 'Payload CMS 3',
-                description: 'Headless CMS TypeScript-native. Admin customizabil, access control granular, API auto-generat.'
-            },
-            {
-                icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>`,
-                title: 'PostgreSQL',
-                description: 'Bază de date relațională robustă. ACID compliant, extensibilă, perfect pentru date structurate enterprise.'
-            },
-            {
-                icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/><line x1="12" y1="22" x2="12" y2="15.5"/><polyline points="22 8.5 12 15.5 2 8.5"/></svg>`,
-                title: 'Vercel',
-                description: 'Platform as a Service — edge deployment, preview URLs, analytics built-in, zero-config CI/CD.'
-            },
-            {
-                icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>`,
-                title: 'Cloudflare R2',
-                description: 'Object storage fără egress fees. Perfect pentru imagini, PDF-uri, media — CDN global inclus.'
-            },
-            {
-                icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`,
-                title: 'TypeScript',
-                description: 'Type safety end-to-end — de la CMS la frontend. Mai puține bug-uri, refactoring sigur, DX superior.'
-            },
-            {
-                icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>`,
-                title: 'Framer Motion',
-                description: 'Animații fluid performante. Scroll-triggered reveals, page transitions, micro-interactions delightful.'
-            },
-            {
-                icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>`,
-                title: 'ISR (Incremental Static Regeneration)',
-                description: 'Conținut proaspăt fără rebuild complet. Paginile se regenerează automat la update din CMS.'
-            }
-        ]}
-    />
-
-    <!-- Capabilities Section - Tech Badges -->
-    <CapabilitiesSection
-        title="Capabilități Tehnice"
-        subtitle="Stack enterprise-grade pentru platforme scalabile"
-        capabilities={[
-            { icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>`, title: 'Next.js 15', description: 'React Framework' },
-            { icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>`, title: 'Payload CMS', description: 'Headless CMS' },
-            { icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>`, title: 'PostgreSQL', description: 'Database' },
-            { icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/></svg>`, title: 'Vercel', description: 'Deployment' },
-            { icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>`, title: 'Cloudflare R2', description: 'Object Storage' },
-            { icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`, title: 'TypeScript', description: 'Type Safety' },
-            { icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>`, title: 'Framer Motion', description: 'Animations' },
-            { icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`, title: 'Security', description: 'Enterprise Grade' },
-            { icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>`, title: 'REST & GraphQL', description: 'API Access' },
-            { icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>`, title: 'Analytics', description: 'Built-in' }
-        ]}
-    />
-
-    <!-- Process Section - 4 Steps -->
-    <ProcessSection />
-
-    <!-- Use Cases Section -->
-    <UseCasesSection />
+    <!-- Tab Group 3: Proces + Cazuri de Utilizare -->
+    <TabSection tabs={['Procesul Nostru', 'Cazuri de Utilizare']} id="platform-process">
+        <div data-tab-panel="0">
+            <ProcessSection />
+        </div>
+        <div data-tab-panel="1">
+            <UseCasesSection />
+        </div>
+    </TabSection>
 
     <!-- Pricing Section -->
     <PricingSection

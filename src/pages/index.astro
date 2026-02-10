@@ -7,6 +7,7 @@ import StatsSection from '../components/StatsSection.astro';
 import VendorFailures from '../components/VendorFailures.astro';
 import FeaturesSection from '../components/FeaturesSection.astro';
 import CapabilitiesSection from '../components/CapabilitiesSection.astro';
+import TabSection from '../components/TabSection.astro';
 import PricingSection from '../components/PricingSection.astro';
 import CtaSection from '../components/CtaSection.astro';
 import BookingModal from '../components/BookingModal.astro';
@@ -27,17 +28,25 @@ const pageDescription = "Pipeline B2B de €250K+ în 90 de zile. Identificăm d
     <!-- Benefits Section - Why companies choose AlphaGrade -->
     <BenefitsSection />
 
-    <!-- Stats Section - Proven Results -->
-    <StatsSection />
+    <!-- Tab Group 1: Rezultate + Comparație -->
+    <TabSection tabs={['Rezultate Dovedite', 'De ce au eșuat alții']} id="outreach-proof">
+        <div data-tab-panel="0">
+            <StatsSection />
+        </div>
+        <div data-tab-panel="1">
+            <VendorFailures />
+        </div>
+    </TabSection>
 
-    <!-- Vendor Failures - Why others failed -->
-    <VendorFailures />
-
-    <!-- Features Section - AlphaGrade Advantages -->
-    <FeaturesSection />
-
-    <!-- Capabilities Section -->
-    <CapabilitiesSection />
+    <!-- Tab Group 2: Avantaje + Capabilități -->
+    <TabSection tabs={['Avantajele AlphaGrade', 'Capabilități Tehnice']} id="outreach-tech">
+        <div data-tab-panel="0">
+            <FeaturesSection />
+        </div>
+        <div data-tab-panel="1">
+            <CapabilitiesSection />
+        </div>
+    </TabSection>
 
     <!-- Pricing Section - Outreach Tools -->
     <PricingSection
