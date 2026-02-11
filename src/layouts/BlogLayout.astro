@@ -4,6 +4,12 @@ import Footer from '../components/Footer.astro';
 import BookingModal from '../components/BookingModal.astro';
 import '../styles/global.css';
 
+interface Heading {
+    depth: number;
+    slug: string;
+    text: string;
+}
+
 interface Props {
     title: string;
     description: string;
@@ -15,6 +21,7 @@ interface Props {
     category?: string;
     tags?: string[];
     readingTime?: number;
+    headings?: Heading[];
 }
 
 const {
@@ -28,7 +35,11 @@ const {
     category,
     tags = [],
     readingTime,
+    headings = [],
 } = Astro.props;
+
+// Filter headings for TOC (only h2 and h3)
+const tocHeadings = headings.filter(h => h.depth >= 2 && h.depth <= 3);
 
 const siteUrl = Astro.site?.toString() || 'https://b2b.websem.ro';
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
@@ -106,6 +117,14 @@ const shareUrls = {
     </script>
 
     <!-- JSON-LD Structured Data -->
+    <!-- Apollo.io Website Tracking -->
+    <script is:inline>
+        function initApollo(){var n=Math.random().toString(36).substring(7),o=document.createElement("script");
+        o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,
+        o.onload=function(){window.trackingFunctions.onLoad({appId:"6671df7c865584038b0cd259"})},
+        document.head.appendChild(o)}initApollo();
+    </script>
+
     <script type="application/ld+json" set:html={JSON.stringify({
         "@context": "https://schema.org",
         "@type": "BlogPosting",
@@ -218,7 +237,26 @@ const shareUrls = {
 
         <!-- Article Content -->
         <article class="article-content">
-            <div class="container">
+            <div class="article-grid">
+                <!-- TOC Sidebar -->
+                {tocHeadings.length > 0 && (
+                    <aside class="toc-sidebar">
+                        <nav class="toc-nav">
+                            <span class="toc-title">Cuprins</span>
+                            {tocHeadings.map(heading => (
+                                <a
+                                    href={`#${heading.slug}`}
+                                    class={`toc-link toc-level-${heading.depth}`}
+                                    data-heading={heading.slug}
+                                >
+                                    {heading.text}
+                                </a>
+                            ))}
+                        </nav>
+                    </aside>
+                )}
+
+                <!-- Content -->
                 <div class="content-wrapper">
                     <slot />
                 </div>
@@ -292,6 +330,49 @@ const shareUrls = {
             document.getElementById('booking-modal')?.classList.add('active');
             document.body.classList.add('modal-open');
         });
+
+        // TOC Scroll Spy with Intersection Observer
+        const tocLinks = document.querySelectorAll('.toc-link');
+        if (tocLinks.length > 0) {
+            const observerOptions = {
+                root: null,
+                rootMargin: '-100px 0px -70% 0px',
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    const id = entry.target.getAttribute('id');
+                    const tocLink = document.querySelector(`.toc-link[data-heading="${id}"]`);
+
+                    if (entry.isIntersecting) {
+                        // Remove active from all
+                        document.querySelectorAll('.toc-link').forEach(link => {
+                            link.classList.remove('active');
+                        });
+                        // Add active to current
+                        tocLink?.classList.add('active');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all headings in the content
+            document.querySelectorAll('.content-wrapper h2, .content-wrapper h3').forEach(heading => {
+                observer.observe(heading);
+            });
+
+            // Smooth scroll for TOC links
+            tocLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href')?.slice(1);
+                    const targetElement = document.getElementById(targetId || '');
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+        }
     </script>
 </body>
 </html>
@@ -318,6 +399,83 @@ const shareUrls = {
         max-width: 800px;
         margin: 0 auto;
         padding: 0 1.5rem;
+    }
+
+    /* Article Grid with TOC */
+    .article-grid {
+        display: grid;
+        grid-template-columns: 220px 1fr;
+        gap: 3rem;
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+        align-items: start;
+    }
+
+    /* TOC Sidebar */
+    .toc-sidebar {
+        position: sticky;
+        top: 100px;
+        max-height: calc(100vh - 120px);
+        overflow-y: auto;
+    }
+
+    .toc-nav {
+        padding: 1rem;
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-medium);
+        border-radius: 12px;
+    }
+
+    .toc-title {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--text-muted);
+        display: block;
+        margin-bottom: 1rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .toc-link {
+        display: block;
+        color: var(--text-tertiary);
+        text-decoration: none;
+        font-size: 0.85rem;
+        line-height: 1.5;
+        padding: 0.4rem 0;
+        border-left: 2px solid transparent;
+        padding-left: 0.75rem;
+        transition: all 0.2s ease;
+    }
+
+    .toc-link:hover {
+        color: var(--text-primary);
+    }
+
+    .toc-link.active {
+        color: var(--accent-light);
+        border-left-color: var(--accent);
+    }
+
+    .toc-level-3 {
+        padding-left: 1.5rem;
+        font-size: 0.8rem;
+    }
+
+    /* Responsive - hide TOC on mobile */
+    @media (max-width: 900px) {
+        .article-grid {
+            grid-template-columns: 1fr;
+            max-width: 800px;
+        }
+
+        .toc-sidebar {
+            display: none;
+        }
     }
 
     /* Breadcrumbs */
@@ -483,6 +641,7 @@ const shareUrls = {
         font-size: 1.05rem;
         line-height: 1.8;
         color: var(--text-secondary);
+        max-width: 800px;
     }
 
     .content-wrapper :global(h2) {
