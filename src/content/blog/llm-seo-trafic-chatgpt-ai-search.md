@@ -5,8 +5,9 @@ pubDate: 2025-01-29
 author: "WebSEM Team"
 category: "seo"
 tags: ["LLM SEO", "AI Search", "ChatGPT", "Trafic AI", "GEO", "Perplexity"]
-heroImage: "/images/blog/llm-seo-trafic-ai.jpg"
-heroImageAlt: "ChatGPT interface pe laptop - LLM SEO și AI Search"
+heroImage: "/images/blog/LLM_SEO_2_-_mobile_dark.png"
+heroImageLight: "/images/blog/LLM_SEO_2_-_mobile_light.avif"
+heroImageAlt: "Diagrama Venn: LLM SEO vs Traditional SEO"
 featured: true
 draft: false
 ---

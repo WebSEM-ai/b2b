@@ -16,6 +16,7 @@ interface Props {
     pubDate: Date;
     updatedDate?: Date;
     heroImage?: string;
+    heroImageLight?: string;
     heroImageAlt?: string;
     author?: string;
     category?: string;
@@ -30,6 +31,7 @@ const {
     pubDate,
     updatedDate,
     heroImage,
+    heroImageLight,
     heroImageAlt,
     author = 'WebSEM Team',
     category,
@@ -230,7 +232,10 @@ const shareUrls = {
         {heroImage && (
             <div class="hero-image">
                 <div class="container">
-                    <img src={heroImage} alt={heroImageAlt || title} />
+                    <img src={heroImage} alt={heroImageAlt || title} class={heroImageLight ? 'hero-img-dark' : ''} />
+                    {heroImageLight && (
+                        <img src={heroImageLight} alt={heroImageAlt || title} class="hero-img-light" />
+                    )}
                 </div>
             </div>
         )}
@@ -629,6 +634,16 @@ const shareUrls = {
         height: auto;
         border-radius: 12px;
         border: 1px solid var(--border-light);
+    }
+
+    .hero-image .hero-img-light {
+        display: none;
+    }
+    :global([data-theme="light"]) .hero-image .hero-img-dark {
+        display: none;
+    }
+    :global([data-theme="light"]) .hero-image .hero-img-light {
+        display: block;
     }
 
     /* Article Content */

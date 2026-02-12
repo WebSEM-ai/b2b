@@ -80,7 +80,12 @@ const formatCategory = (category: string) => {
                         <article class="featured-card">
                             <a href={`/blog/${post.slug}`} class="featured-image">
                                 {post.data.heroImage ? (
-                                    <img src={post.data.heroImage} alt={post.data.heroImageAlt || post.data.title} loading="lazy" />
+                                    <>
+                                        <img src={post.data.heroImage} alt={post.data.heroImageAlt || post.data.title} loading="lazy" class={post.data.heroImageLight ? 'img-dark' : ''} />
+                                        {post.data.heroImageLight && (
+                                            <img src={post.data.heroImageLight} alt={post.data.heroImageAlt || post.data.title} loading="lazy" class="img-light" />
+                                        )}
+                                    </>
                                 ) : (
                                     <div class="placeholder-image">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -150,7 +155,12 @@ const formatCategory = (category: string) => {
                         <article class="post-card">
                             <a href={`/blog/${post.slug}`} class="post-image">
                                 {post.data.heroImage ? (
-                                    <img src={post.data.heroImage} alt={post.data.heroImageAlt || post.data.title} loading="lazy" />
+                                    <>
+                                        <img src={post.data.heroImage} alt={post.data.heroImageAlt || post.data.title} loading="lazy" class={post.data.heroImageLight ? 'img-dark' : ''} />
+                                        {post.data.heroImageLight && (
+                                            <img src={post.data.heroImageLight} alt={post.data.heroImageAlt || post.data.title} loading="lazy" class="img-light" />
+                                        )}
+                                    </>
                                 ) : (
                                     <div class="placeholder-image">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -366,6 +376,20 @@ const formatCategory = (category: string) => {
         height: 100%;
         object-fit: cover;
         transition: transform 0.5s ease;
+    }
+
+    /* Dark/Light image switching */
+    .featured-image .img-light,
+    .post-image .img-light {
+        display: none;
+    }
+    :global([data-theme="light"]) .featured-image .img-dark,
+    :global([data-theme="light"]) .post-image .img-dark {
+        display: none;
+    }
+    :global([data-theme="light"]) .featured-image .img-light,
+    :global([data-theme="light"]) .post-image .img-light {
+        display: block;
     }
 
     .featured-card:hover .featured-image img {

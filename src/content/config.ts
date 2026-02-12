@@ -13,6 +13,7 @@ const blogCollection = defineCollection({
     updatedDate: z.coerce.date().optional(),
     author: z.string().default('WebSEM Team'),
     heroImage: z.string().optional(),
+    heroImageLight: z.string().optional(),
     heroImageAlt: z.string().optional(),
 
     // SEO
