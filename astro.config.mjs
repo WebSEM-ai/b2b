@@ -1,6 +1,7 @@
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
+import rehypeSlug from 'rehype-slug';
 
 export default defineConfig({
   // Site URL - important pentru sitemap și canonical URLs
@@ -26,6 +27,7 @@ export default defineConfig({
       theme: 'github-dark',
       wrap: true,
     },
+    rehypePlugins: [rehypeSlug],
   },
 
   // Vite configuration for better performance

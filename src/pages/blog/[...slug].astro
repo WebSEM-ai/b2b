@@ -18,7 +18,7 @@ interface Props {
 }
 
 const { post } = Astro.props;
-const { Content } = await post.render();
+const { Content, headings } = await post.render();
 
 // Calculate reading time (rough estimate)
 const wordCount = post.body.split(/\s+/).length;
@@ -36,6 +36,7 @@ const readingTime = Math.ceil(wordCount / 200);
     category={post.data.category}
     tags={post.data.tags}
     readingTime={post.data.readingTime || readingTime}
+    headings={headings}
 >
     <Content />
 </BlogLayout>

@@ -11,42 +11,63 @@ featured: true
 draft: false
 ---
 
-## TL;DR
-
-Traficul din ChatGPT și alte tool-uri AI a crescut cu peste 500% în ultimul an. LLM SEO (Large Language Model SEO) este procesul prin care îți optimizezi conținutul pentru a apărea în răspunsurile generate de AI. Spre deosebire de SEO-ul clasic, aici nu concurezi pentru poziții în SERP, ci pentru a fi sursa pe care AI-ul o citează. Companiile care adoptă acum această strategie vor avea un avantaj competitiv major în următorii ani.
+<div class="key-takeaway">
+<strong>TL;DR</strong>
+Traficul din ChatGPT și alte tool-uri AI a crescut cu peste 500% în ultimul an. LLM SEO este procesul prin care îți optimizezi conținutul pentru a apărea în răspunsurile generate de AI. Spre deosebire de SEO-ul clasic, aici nu concurezi pentru poziții în SERP, ci pentru a fi sursa pe care AI-ul o citează. Companiile care adoptă acum această strategie vor avea un avantaj competitiv major.
+</div>
 
 ---
 
 ## Ce este LLM SEO?
 
-LLM SEO, cunoscut și sub numele de GEO (Generative Engine Optimization) sau AEO (Answer Engine Optimization), reprezintă optimizarea conținutului pentru a fi descoperit, înțeles și citat de modelele de limbaj precum ChatGPT, Claude, Gemini și Perplexity.
+LLM SEO, cunoscut și sub numele de **GEO** (Generative Engine Optimization) sau **AEO** (Answer Engine Optimization), reprezintă optimizarea conținutului pentru a fi descoperit, înțeles și citat de modelele de limbaj precum ChatGPT, Claude, Gemini și Perplexity.
 
-Când cineva întreabă ChatGPT "Care sunt cele mai bune agenții de marketing digital din România?", modelul nu afișează o listă de link-uri. În schimb, generează un răspuns bazat pe informațiile din surse pe care le consideră relevante și de încredere.
+Când cineva întreabă ChatGPT *"Care sunt cele mai bune agenții de marketing digital din România?"*, modelul nu afișează o listă de link-uri. În schimb, generează un răspuns bazat pe informațiile din surse pe care le consideră **relevante și de încredere**.
 
 Dacă site-ul tău este una dintre aceste surse, primești:
 
-- Vizibilitate în fața unui public care folosește activ AI pentru decizii
-- Trafic cu intenție ridicată de cumpărare
-- Poziționare ca autoritate în domeniu
+- **Vizibilitate** în fața unui public care folosește activ AI pentru decizii
+- **Trafic cu intenție ridicată** de cumpărare
+- **Poziționare ca autoritate** în domeniu
+
+<img src="/images/blog/LLM_SEO_2_-_mobile_dark.png" alt="Diagrama Venn: LLM SEO vs Traditional SEO" class="img-theme-dark" />
+<img src="/images/blog/LLM_SEO_2_-_mobile_light.avif" alt="Diagrama Venn: LLM SEO vs Traditional SEO" class="img-theme-light" />
 
 ## De ce contează traficul din AI?
 
 ### Cifrele vorbesc de la sine
 
-Conform studiilor recente din 2025:
+<div class="stat-highlight">
+<div class="stat-card">
+<strong>+527%</strong>
+<span>Creștere trafic AI YoY</span>
+</div>
+<div class="stat-card">
+<strong>10%+</strong>
+<span>Înscrieri SaaS din ChatGPT</span>
+</div>
+<div class="stat-card">
+<strong>Top 5</strong>
+<span>Legal, Finanțe, Sănătate, B2B, Asigurări</span>
+</div>
+<div class="stat-card">
+<strong>2-3x</strong>
+<span>Rată de conversie vs. căutări tradiționale</span>
+</div>
+</div>
 
-- Traficul din surse AI a crescut cu **527% year-over-year**
-- ChatGPT a ajuns să genereze peste **10% din înscrierile** pentru unele companii SaaS
-- Industriile cu cel mai mult trafic AI: Legal, Finanțe, Sănătate, B2B, Asigurări
-- Utilizatorii care vin din AI au o **rată de conversie semnificativ mai mare** decât cei din căutări tradiționale
+Utilizatorii care vin din AI au o **rată de conversie semnificativ mai mare** decât cei din căutări tradiționale, deoarece ajung pe site deja informați și aproape de decizie.
 
 ### Trafic mai puțin, dar mai calificat
 
-Diferența fundamentală: când cineva caută pe Google "cel mai bun CRM pentru firme mici", dă click pe 5-6 articole, compară, și eventual decide.
+Diferența fundamentală: când cineva caută pe Google *"cel mai bun CRM pentru firme mici"*, dă click pe 5-6 articole, compară, și eventual decide.
 
-Când întreabă ChatGPT același lucru, primește un răspuns sintetizat. Dacă dă click pe sursa citată, e deja informat și aproape de decizie.
+Când întreabă ChatGPT același lucru, primește un răspuns sintetizat. Dacă dă click pe sursa citată, e deja informat și **aproape de decizie**.
 
-Acest lucru înseamnă că traficul din AI se comportă ca trafic middle-to-bottom funnel, chiar dacă volumul pare mic.
+<div class="key-takeaway">
+<strong>De reținut</strong>
+Traficul din AI se comportă ca trafic middle-to-bottom funnel, chiar dacă volumul pare mic. Un singur vizitator din ChatGPT poate valora cât 5-10 vizitatori din căutări organice tradiționale.
+</div>
 
 ## Cum funcționează căutarea în AI?
 
@@ -78,7 +99,7 @@ Modelele AI preferă conținut care este:
 
 ### 1. Configurează Bing Webmaster Tools
 
-Dacă nu ai făcut asta, e primul pas. ChatGPT folosește intens indexul Bing, așa că:
+Dacă nu ai făcut asta, e primul pas. ChatGPT folosește intens indexul Bing:
 
 - Creează cont în Bing Webmaster Tools
 - Trimite sitemap-ul
@@ -118,7 +139,7 @@ Schema markup ajută AI-ul să înțeleagă contextul conținutului. Tipuri esen
 
 ### 4. Construiește autoritate tematică (Topical Authority)
 
-LLM-urile preferă să citeze surse care demonstrează expertiză într-un domeniu. Asta înseamnă:
+LLM-urile preferă să citeze surse care demonstrează expertiză într-un domeniu:
 
 - Creează clustere de conținut pe teme specifice
 - Leagă articolele între ele prin internal links
@@ -150,9 +171,9 @@ AI-ul adoră să citeze statistici și cercetări. Dacă ai date proprii:
 
 Oamenii întreabă AI-ul ca pe un consultant, nu ca pe un motor de căutare.
 
-**În loc de:** "agenție SEO București"
+**În loc de:** *"agenție SEO București"*
 
-**Întreabă:** "Care sunt cele mai bune agenții SEO din București pentru un e-commerce cu buget mediu?"
+**Întreabă:** *"Care sunt cele mai bune agenții SEO din București pentru un e-commerce cu buget mediu?"*
 
 Scrie conținut care răspunde la acest tip de întrebări detaliate.
 
@@ -196,7 +217,7 @@ Mult trafic AI apare ca "direct" sau fără referrer. Monitorizează:
 
 - Creșteri bruște în trafic direct
 - Corelații între mențiuni AI și trafic
-- Survey-uri post-conversie ("Cum ai aflat de noi?")
+- Survey-uri post-conversie (*"Cum ai aflat de noi?"*)
 
 ## Diferențe între SEO tradițional și LLM SEO
 
@@ -212,20 +233,19 @@ Mult trafic AI apare ca "direct" sau fără referrer. Monitorizează:
 
 ## Greșeli frecvente în LLM SEO
 
-**1. Ignori Bing complet**
-ChatGPT folosește Bing. Dacă nu ești indexat acolo, pierzi oportunități.
+<div class="key-takeaway">
+<strong>Evită aceste greșeli</strong>
 
-**2. Scrii conținut prea lung fără structură**
-AI-ul extrage pasaje. 5000 de cuvinte fără headere clare = greu de citat.
+**1. Ignori Bing complet** — ChatGPT folosește Bing. Dacă nu ești indexat acolo, pierzi oportunități.
 
-**3. Nu actualizezi conținutul vechi**
-LLM-urile preferă informații recente. Un articol din 2021 pierde în fața unuia din 2025.
+**2. Scrii conținut prea lung fără structură** — AI-ul extrage pasaje. 5000 de cuvinte fără headere clare = greu de citat.
 
-**4. Lipsesc datele și exemplele concrete**
-"Este important să..." e vag. "Rata de conversie a crescut cu 34% în 3 luni" e citabil.
+**3. Nu actualizezi conținutul vechi** — LLM-urile preferă informații recente. Un articol din 2021 pierde în fața unuia din 2025.
 
-**5. Nu ai schema markup**
-Aproape toate sursele citate în ChatGPT au schema markup implementat.
+**4. Lipsesc datele și exemplele concrete** — *"Este important să..."* e vag. *"Rata de conversie a crescut cu 34% în 3 luni"* e citabil.
+
+**5. Nu ai schema markup** — Aproape toate sursele citate în ChatGPT au schema markup implementat.
+</div>
 
 ## Ce urmează: viitorul AI Search
 
@@ -273,9 +293,9 @@ Da. Traficul din AI crește exponențial. Companiile care construiesc autoritate
 
 LLM SEO nu e o modă trecătoare — e următoarea evoluție a căutării online. Traficul din ChatGPT, Perplexity și alte tool-uri AI crește cu sute de procente anual, iar utilizatorii care vin din aceste surse sunt mai aproape de conversie decât cei din căutări tradiționale.
 
-Strategia nu e complicată: conținut clar, structurat, actualizat, cu date concrete și autoritate demonstrată. Dacă faci deja SEO bine, LLM SEO e o extensie naturală.
+Strategia nu e complicată: **conținut clar, structurat, actualizat, cu date concrete și autoritate demonstrată**. Dacă faci deja SEO bine, LLM SEO e o extensie naturală.
 
-Întrebarea nu e "dacă" să începi, ci "cât de repede".
+> Întrebarea nu e "dacă" să începi, ci "cât de repede".
 
 ---
 
