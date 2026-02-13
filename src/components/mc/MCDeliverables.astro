@@ -1,0 +1,151 @@
+---
+const deliverables = [
+    'Raport executiv de 5-10 pagini cu concluzii și direcții clare — făcut pentru board, nu pentru arhivă',
+    'Hartă competitivă vizuală — poziția ta vs. top 5 competitori pe fiecare dimensiune',
+    'Listă de nișe strategice prioritizate după impact și dificultate de capturare',
+    'Audit de securitate cu vulnerabilități critice și planul de remediere',
+    'Analiză reputație cu scor per locație / per canal și recomandările de acțiune',
+    'Matricea de bugetare: unde să investești primii bani și de ce exact acolo',
+    'Sesiune de prezentare live (60-90 min) cu Q&A inclus'
+];
+---
+
+<section class="mc-deliverables">
+    <div class="mc-deliverables-header">
+        <h2>Nu primești un PDF de 200 de pagini pe care nu-l citește nimeni. Primești un plan de luptă.</h2>
+    </div>
+
+    <div class="mc-deliverables-list">
+        {deliverables.map((item, i) => (
+            <div class="mc-deliverable-item">
+                <div class="mc-deliverable-check">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                </div>
+                <div class="mc-deliverable-line"></div>
+                <p>{item}</p>
+            </div>
+        ))}
+    </div>
+</section>
+
+<script>
+    const delObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.mc-deliverable-item').forEach(item => {
+        delObserver.observe(item);
+    });
+</script>
+
+<style>
+    .mc-deliverables {
+        padding: var(--section-padding);
+        max-width: var(--container-max);
+        margin: 0 auto;
+    }
+
+    .mc-deliverables-header {
+        text-align: center;
+        margin-bottom: 3rem;
+        max-width: 750px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .mc-deliverables-header h2 {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+        font-weight: 700;
+        color: var(--text-primary);
+        line-height: 1.3;
+    }
+
+    .mc-deliverables-list {
+        max-width: 700px;
+        margin: 0 auto;
+        position: relative;
+    }
+
+    .mc-deliverable-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 1.25rem;
+        padding: 1.25rem 0;
+        position: relative;
+        opacity: 0;
+        transform: translateX(-20px);
+        transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .mc-deliverable-item.visible {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    .mc-deliverable-item:nth-child(2).visible { transition-delay: 0.05s; }
+    .mc-deliverable-item:nth-child(3).visible { transition-delay: 0.1s; }
+    .mc-deliverable-item:nth-child(4).visible { transition-delay: 0.15s; }
+    .mc-deliverable-item:nth-child(5).visible { transition-delay: 0.2s; }
+    .mc-deliverable-item:nth-child(6).visible { transition-delay: 0.25s; }
+    .mc-deliverable-item:nth-child(7).visible { transition-delay: 0.3s; }
+
+    .mc-deliverable-check {
+        flex-shrink: 0;
+        width: 36px;
+        height: 36px;
+        background: rgba(230, 57, 70, 0.1);
+        border: 2px solid var(--mc-red);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--mc-red);
+        z-index: 1;
+    }
+
+    .mc-deliverable-check svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .mc-deliverable-line {
+        position: absolute;
+        left: 17px;
+        top: 48px;
+        width: 2px;
+        height: calc(100% - 12px);
+        background: linear-gradient(to bottom, rgba(230, 57, 70, 0.3), rgba(230, 57, 70, 0.05));
+    }
+
+    .mc-deliverable-item:last-child .mc-deliverable-line {
+        display: none;
+    }
+
+    .mc-deliverable-item p {
+        font-size: 0.95rem;
+        color: var(--text-secondary);
+        line-height: 1.6;
+        padding-top: 0.35rem;
+    }
+
+    :global([data-theme="light"]) .mc-deliverable-check {
+        background: rgba(230, 57, 70, 0.06);
+    }
+
+    @media (max-width: 600px) {
+        .mc-deliverables-list {
+            padding: 0 0.5rem;
+        }
+
+        .mc-deliverable-item {
+            gap: 1rem;
+        }
+    }
+</style>

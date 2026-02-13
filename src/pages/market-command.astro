@@ -1,0 +1,210 @@
+---
+import LandingPage from '../layouts/LandingPage.astro';
+import MCHero from '../components/mc/MCHero.astro';
+import MCProblem from '../components/mc/MCProblem.astro';
+import MCDimensions from '../components/mc/MCDimensions.astro';
+import MCProfiles from '../components/mc/MCProfiles.astro';
+import MCDeliverables from '../components/mc/MCDeliverables.astro';
+import PricingSection from '../components/PricingSection.astro';
+import MCSocialProof from '../components/mc/MCSocialProof.astro';
+import ClientsCarousel from '../components/ClientsCarousel.astro';
+import MCFaq from '../components/mc/MCFaq.astro';
+import MCCtaFinal from '../components/mc/MCCtaFinal.astro';
+import BookingModal from '../components/BookingModal.astro';
+
+const pageTitle = "Market Command — Audit Enterprise | WebSEM";
+const pageDescription = "Auditul Enterprise care îți arată exact unde ești, exact unde lovești. 6 dimensiuni critice analizate simultan: securitate, reputație, competiție, nișe strategice, prezență locală, infrastructură campanii.";
+---
+
+<LandingPage title={pageTitle} description={pageDescription}>
+    <div class="mc-page">
+        <!-- S1: Hero -->
+        <MCHero />
+
+        <!-- S2: Problema -->
+        <MCProblem />
+
+        <!-- S3: Cele 6 Dimensiuni -->
+        <MCDimensions />
+
+        <!-- S4: Pentru Cine -->
+        <MCProfiles />
+
+        <!-- S5: Ce Primești -->
+        <MCDeliverables />
+
+        <!-- S6: Pachete de Preț -->
+        <PricingSection
+            title="Pachete & Prețuri"
+            subtitle="Inteligență de piață la nivel enterprise. Investiție, nu cost."
+            note="Toate pachetele includ date reale, analiză pe dimensiuni critice și sesiune live de prezentare cu Q&A. Prețurile sunt orientative și pot fi ajustate în funcție de complexitate."
+            tiers={[
+                {
+                    name: 'RECON',
+                    price: '€1.500',
+                    priceNote: 'de la',
+                    description: 'Recunoașterea terenului. Auditul de bază care îți arată unde ești și ce probleme critice ai.',
+                    featureGroups: [
+                        {
+                            label: 'Analiză',
+                            items: [
+                                'Audit securitate digitală (SSL, viteza, Core Web Vitals)',
+                                'Audit reputație online (Google Maps, recenzii, rating-uri)',
+                                'Snapshot competitiv (top 3 competitori, gap-uri principale)'
+                            ]
+                        },
+                        {
+                            label: 'Livrabile',
+                            items: [
+                                'Raport executiv (15-25 pagini)',
+                                'Sumar de 3 pagini pentru decizii rapide'
+                            ]
+                        }
+                    ],
+                    timeline: 'Livrare: 7-10 zile lucrătoare',
+                    highlighted: false
+                },
+                {
+                    name: 'OFFENSIVE',
+                    price: '€3.500',
+                    priceNote: 'de la',
+                    description: 'Planul de atac. Auditul complet pe toate cele 6 dimensiuni cu strategie de bugetare prioritizată.',
+                    featureGroups: [
+                        {
+                            label: 'Tot ce include RECON, plus',
+                            items: [
+                                'Analiză competitivă completă (top 5, 6 dimensiuni)',
+                                'Nișe strategice identificate (keyword, content, canale)',
+                                'Audit prezență locală complet (toate locațiile, GBP)'
+                            ]
+                        },
+                        {
+                            label: 'Strategie & Livrabile',
+                            items: [
+                                'Audit infrastructură campanii (tracking, pixels, email)',
+                                'Matrice de bugetare cu ROI estimat',
+                                'Sesiune live de prezentare (90 min cu Q&A)'
+                            ]
+                        }
+                    ],
+                    timeline: 'Livrare: 14-21 zile lucrătoare',
+                    highlighted: true
+                },
+                {
+                    name: 'FULL COMMAND',
+                    price: '€7.000',
+                    priceNote: '/an',
+                    description: 'Controlul total. Audit enterprise complet cu monitorizare continuă pe termen lung.',
+                    featureGroups: [
+                        {
+                            label: 'Tot ce include OFFENSIVE, plus',
+                            items: [
+                                'Analiză LLM Visibility (ChatGPT, Claude, Gemini)',
+                                'Roadmap strategic pe 12 luni cu KPI-uri',
+                                'Benchmark trimestrial (re-audit la 3 luni)'
+                            ]
+                        },
+                        {
+                            label: 'Enterprise',
+                            items: [
+                                'War room session (workshop 3h cu echipa ta)',
+                                'Priority support — acces direct la echipa de analiști'
+                            ]
+                        }
+                    ],
+                    timeline: 'Livrare: 21-30 zile + monitorizare continuă',
+                    highlighted: false
+                }
+            ]}
+        />
+
+        <!-- S7: Social Proof -->
+        <MCSocialProof />
+
+        <!-- Clients Carousel -->
+        <ClientsCarousel />
+
+        <!-- S8: FAQ -->
+        <MCFaq />
+
+        <!-- S9: CTA Final -->
+        <MCCtaFinal />
+    </div>
+
+    <!-- Booking Modal -->
+    <BookingModal
+        title="Activează Market Command"
+        subtitle="Completează formularul și te contactăm în 24h pentru o discuție strategică"
+    />
+</LandingPage>
+
+<style is:global>
+    /* Market Command scoped color palette */
+    .mc-page {
+        --mc-red: #E63946;
+        --mc-red-glow: rgba(230, 57, 70, 0.3);
+        --mc-gold: #D4A843;
+        --mc-navy: #0D1B2A;
+        --mc-steel: #6C757D;
+    }
+
+    [data-theme="light"] .mc-page {
+        --mc-red-glow: rgba(230, 57, 70, 0.15);
+    }
+
+    /* Override pricing gradient for MC red theme */
+    .mc-page .pricing-card--highlighted {
+        border-color: rgba(230, 57, 70, 0.3);
+        box-shadow: 0 0 30px rgba(230, 57, 70, 0.15);
+    }
+
+    .mc-page .pricing-card--highlighted:hover {
+        box-shadow: 0 0 30px rgba(230, 57, 70, 0.25), var(--shadow-lg);
+    }
+
+    .mc-page .pricing-badge {
+        background: linear-gradient(135deg, #E63946, #ff6b6b);
+    }
+
+    .mc-page .pricing-price {
+        background: linear-gradient(135deg, #E63946, #ff6b6b);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .mc-page .pricing-card--highlighted .pricing-cta {
+        background: linear-gradient(135deg, #E63946, #c62828);
+    }
+
+    .mc-page .pricing-card--highlighted .pricing-cta:hover {
+        box-shadow: 0 0 30px rgba(230, 57, 70, 0.4);
+    }
+
+    .mc-page .pricing-card:hover {
+        border-color: rgba(230, 57, 70, 0.2);
+    }
+
+    .mc-page .pricing-cta:hover {
+        border-color: rgba(230, 57, 70, 0.5);
+        box-shadow: 0 0 20px rgba(230, 57, 70, 0.2);
+    }
+
+    .mc-page .feature-group-label {
+        color: #E63946;
+    }
+
+    .mc-page .pricing-features li svg {
+        color: #E63946;
+    }
+
+    /* FULL COMMAND gold accent */
+    .mc-page .pricing-card:last-child .pricing-name {
+        color: #D4A843;
+    }
+
+    .mc-page .pricing-card:last-child .pricing-price {
+        background: linear-gradient(135deg, #D4A843, #e8c86a);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+</style>

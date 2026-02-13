@@ -1,0 +1,154 @@
+---
+const faqs = [
+    {
+        q: 'Cât durează un audit?',
+        a: 'Între 7 și 30 de zile lucrătoare, în funcție de pachet și de complexitatea business-ului tău (număr de locații, competitori, canale active).'
+    },
+    {
+        q: 'Este doar un audit SEO?',
+        a: 'Nu. Market Command analizează 6 dimensiuni simultan: securitate, reputație, competiție, nișe strategice, prezență locală și infrastructura campaniilor. SEO este doar o parte din puzzle.'
+    },
+    {
+        q: 'Ce se întâmplă după ce primesc raportul?',
+        a: 'Ai o sesiune live de prezentare cu Q&A. După, poți implementa recomandările cu echipa ta internă, cu noi sau cu orice altă agenție. Raportul este al tău și acțiunile sunt clare.'
+    },
+    {
+        q: 'Pot să implementez cu altă agenție?',
+        a: 'Da. Auditul este independent de implementare. Îți dăm harta, tu decizi cu cine mergi pe teren. Zero lock-in.'
+    },
+    {
+        q: 'Avem nevoie de acces la conturile noastre?',
+        a: 'Doar pentru pachetele OFFENSIVE și FULL COMMAND avem nevoie de acces read-only la Google Analytics, Search Console și contul de ads. Totul sub NDA, totul protejat.'
+    }
+];
+---
+
+<section class="mc-faq">
+    <div class="mc-faq-header">
+        <h2>Întrebări frecvente</h2>
+    </div>
+
+    <div class="mc-faq-list">
+        {faqs.map((faq, i) => (
+            <details class="mc-faq-item">
+                <summary>
+                    <span class="mc-faq-q">{faq.q}</span>
+                    <span class="mc-faq-toggle">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"/>
+                        </svg>
+                    </span>
+                </summary>
+                <div class="mc-faq-answer">
+                    <p>{faq.a}</p>
+                </div>
+            </details>
+        ))}
+    </div>
+</section>
+
+<style>
+    .mc-faq {
+        padding: var(--section-padding);
+        max-width: var(--container-max);
+        margin: 0 auto;
+    }
+
+    .mc-faq-header {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    .mc-faq-header h2 {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+        font-weight: 700;
+        color: var(--text-primary);
+    }
+
+    .mc-faq-list {
+        max-width: 750px;
+        margin: 0 auto;
+    }
+
+    .mc-faq-item {
+        border: 1px solid var(--border-light);
+        border-radius: 14px;
+        margin-bottom: 0.75rem;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        background: var(--bg-card);
+    }
+
+    .mc-faq-item:hover {
+        border-color: rgba(230, 57, 70, 0.2);
+    }
+
+    .mc-faq-item[open] {
+        border-color: rgba(230, 57, 70, 0.3);
+        box-shadow: 0 0 15px var(--mc-red-glow);
+    }
+
+    .mc-faq-item summary {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.25rem 1.5rem;
+        cursor: pointer;
+        list-style: none;
+        user-select: none;
+    }
+
+    .mc-faq-item summary::-webkit-details-marker {
+        display: none;
+    }
+
+    .mc-faq-q {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--text-primary);
+    }
+
+    .mc-faq-toggle {
+        flex-shrink: 0;
+        width: 24px;
+        height: 24px;
+        color: var(--text-muted);
+        transition: transform 0.3s ease;
+        margin-left: 1rem;
+    }
+
+    .mc-faq-toggle svg {
+        width: 100%;
+        height: 100%;
+    }
+
+    .mc-faq-item[open] .mc-faq-toggle {
+        transform: rotate(180deg);
+        color: var(--mc-red);
+    }
+
+    .mc-faq-answer {
+        padding: 0 1.5rem 1.25rem;
+    }
+
+    .mc-faq-answer p {
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        line-height: 1.7;
+    }
+
+    :global([data-theme="light"]) .mc-faq-item {
+        background: #fff;
+        border-color: rgba(0, 0, 0, 0.06);
+    }
+
+    :global([data-theme="light"]) .mc-faq-item[open] {
+        box-shadow: 0 4px 15px rgba(230, 57, 70, 0.08);
+    }
+
+    :global([data-theme="light"]) .mc-faq-item:hover {
+        border-color: rgba(230, 57, 70, 0.15);
+    }
+</style>

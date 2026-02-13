@@ -1,0 +1,159 @@
+---
+const profiles = [
+    {
+        title: 'CEO / Fondator',
+        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>`,
+        desc: 'Vrei să știi unde se duc banii de marketing înainte să semnezi următorul buget. Vrei o imagine clară, nu rapoarte vagi. Market Command îți dă exact asta: o hartă a teritoriului tău digital cu fiecare amenințare și oportunitate marcată.'
+    },
+    {
+        title: 'CMO / Marketing Manager',
+        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>`,
+        desc: 'Ai nevoie de date concrete ca să justifici bugetul, să aloci resurse inteligent și să prezinți board-ului un plan cu fundament. Market Command îți dă argumentele de care ai nevoie, susținute de date, nu de păreri.'
+    },
+    {
+        title: 'Director Executiv / Strategie',
+        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>`,
+        desc: 'Competiția se mișcă rapid. Tu ai nevoie să te miști mai rapid și mai precis. Market Command îți arată unde investești cu ROI maxim și unde taie competiția colțuri pe care tu le poți exploata.'
+    }
+];
+---
+
+<section class="mc-profiles">
+    <div class="mc-profiles-header">
+        <h2>Construit pentru cei care iau decizii. Nu pentru cei care le amână.</h2>
+    </div>
+
+    <div class="mc-profiles-grid">
+        {profiles.map(profile => (
+            <div class="mc-profile-card">
+                <div class="mc-profile-icon" set:html={profile.icon} />
+                <h3>{profile.title}</h3>
+                <p>{profile.desc}</p>
+            </div>
+        ))}
+    </div>
+</section>
+
+<script>
+    const profileObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.mc-profile-card').forEach(card => {
+        profileObserver.observe(card);
+    });
+</script>
+
+<style>
+    .mc-profiles {
+        padding: var(--section-padding);
+        max-width: var(--container-max);
+        margin: 0 auto;
+    }
+
+    .mc-profiles-header {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    .mc-profiles-header h2 {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+        font-weight: 700;
+        color: var(--text-primary);
+        line-height: 1.3;
+        max-width: 650px;
+        margin: 0 auto;
+    }
+
+    .mc-profiles-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+    }
+
+    .mc-profile-card {
+        padding: 2rem;
+        background: var(--bg-card);
+        border: 1px solid var(--border-light);
+        border-radius: 18px;
+        text-align: center;
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    .mc-profile-card.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .mc-profile-card:nth-child(2).visible { transition-delay: 0.1s; }
+    .mc-profile-card:nth-child(3).visible { transition-delay: 0.2s; }
+
+    .mc-profile-card:hover {
+        transform: translateY(-8px);
+        border-color: rgba(230, 57, 70, 0.3);
+        box-shadow: 0 12px 40px var(--mc-red-glow);
+    }
+
+    .mc-profile-icon {
+        width: 52px;
+        height: 52px;
+        margin: 0 auto 1.25rem;
+        color: var(--mc-red);
+        background: rgba(230, 57, 70, 0.08);
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px;
+    }
+
+    .mc-profile-icon :global(svg) {
+        width: 100%;
+        height: 100%;
+    }
+
+    .mc-profile-card h3 {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--mc-red);
+        letter-spacing: 0.05em;
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+    }
+
+    .mc-profile-card p {
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        line-height: 1.7;
+    }
+
+    :global([data-theme="light"]) .mc-profile-card {
+        background: #fff;
+        border-color: rgba(0, 0, 0, 0.06);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    :global([data-theme="light"]) .mc-profile-card:hover {
+        box-shadow: 0 8px 30px rgba(230, 57, 70, 0.12);
+    }
+
+    :global([data-theme="light"]) .mc-profile-icon {
+        background: rgba(230, 57, 70, 0.06);
+    }
+
+    @media (max-width: 900px) {
+        .mc-profiles-grid {
+            grid-template-columns: 1fr;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+    }
+</style>

@@ -1,0 +1,134 @@
+---
+const stats = [
+    {
+        value: 'Locații lipsă',
+        desc: 'Am analizat rețelele de magazine ale retailerilor naționali și am descoperit locații întregi lipsă de pe Google Maps.'
+    },
+    {
+        value: '23% trafic blocat',
+        desc: 'Am identificat vulnerabilități de securitate care blocau 23% din traficul organic al unui client e-commerce.'
+    },
+    {
+        value: 'Zero competiție',
+        desc: 'Am găsit nișe de piață cu volum de căutare semnificativ și zero competiție directă în segmentul de bijuterii fashion.'
+    },
+    {
+        value: '40% buget pierdut',
+        desc: 'Am descoperit că 40% din bugetul PPC al unui client se ducea pe landing pages cu rata de conversie sub 0.5%.'
+    }
+];
+---
+
+<section class="mc-social-proof">
+    <div class="mc-social-header">
+        <h2>Rezultate, nu promisiuni.</h2>
+    </div>
+
+    <div class="mc-stats-grid">
+        {stats.map(stat => (
+            <div class="mc-stat-card">
+                <div class="mc-stat-value">{stat.value}</div>
+                <p>{stat.desc}</p>
+            </div>
+        ))}
+    </div>
+</section>
+
+<script>
+    const statObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.mc-stat-card').forEach(card => {
+        statObserver.observe(card);
+    });
+</script>
+
+<style>
+    .mc-social-proof {
+        padding: var(--section-padding);
+        max-width: var(--container-max);
+        margin: 0 auto;
+    }
+
+    .mc-social-header {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    .mc-social-header h2 {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+        font-weight: 700;
+        color: var(--text-primary);
+    }
+
+    .mc-stats-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .mc-stat-card {
+        padding: 1.75rem;
+        background: var(--bg-card);
+        border: 1px solid var(--border-light);
+        border-radius: 16px;
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    .mc-stat-card.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .mc-stat-card:nth-child(2).visible { transition-delay: 0.1s; }
+    .mc-stat-card:nth-child(3).visible { transition-delay: 0.2s; }
+    .mc-stat-card:nth-child(4).visible { transition-delay: 0.3s; }
+
+    .mc-stat-card:hover {
+        border-color: rgba(230, 57, 70, 0.3);
+        box-shadow: 0 0 25px var(--mc-red-glow);
+        transform: translateY(-3px);
+    }
+
+    .mc-stat-value {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--mc-red);
+        letter-spacing: 0.02em;
+        margin-bottom: 0.75rem;
+        text-transform: uppercase;
+    }
+
+    .mc-stat-card p {
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        line-height: 1.6;
+    }
+
+    :global([data-theme="light"]) .mc-stat-card {
+        background: #fff;
+        border-color: rgba(0, 0, 0, 0.06);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    :global([data-theme="light"]) .mc-stat-card:hover {
+        box-shadow: 0 4px 20px rgba(230, 57, 70, 0.1);
+    }
+
+    @media (max-width: 600px) {
+        .mc-stats-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>

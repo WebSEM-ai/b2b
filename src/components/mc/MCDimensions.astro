@@ -1,0 +1,337 @@
+---
+const dimensions = [
+    {
+        num: '01',
+        title: 'Securitate Digitală',
+        desc: 'Vulnerabilități tehnice care îți sabotează SEO-ul, campaniile PPC și rata de conversie. De la SSL la Core Web Vitals, de la malware la configurații server.',
+        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`
+    },
+    {
+        num: '02',
+        title: 'Reputație Online',
+        desc: 'Google Maps, recenzii, mențiuni, sentiment analysis. Cum te vede piața, cum te văd clienții și unde pierzi încredere.',
+        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>`
+    },
+    {
+        num: '03',
+        title: 'Poziție vs. Competiție',
+        desc: 'Analiză directă: cine te bate, unde te bate, cu ce te bate. Share of voice, keyword gaps, backlink gaps, content gaps.',
+        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>`
+    },
+    {
+        num: '04',
+        title: 'Nișe Strategice',
+        desc: 'Oportunități pe care nimeni nu le exploatează încă. Keyword-uri, piețe, segmente de audiență și canale unde poți fi primul.',
+        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>`
+    },
+    {
+        num: '05',
+        title: 'Prezență Locală',
+        desc: 'Google Maps, Google Business Profile, listări locale, coerență NAP, rating-uri per locație. Fiecare magazin, fiecare punct de contact.',
+        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>`
+    },
+    {
+        num: '06',
+        title: 'Infrastructura Campaniilor',
+        desc: 'Email deliverability, tracking setup, pixeli, tag-uri, UTM-uri, landing pages. Tot ce afectează performanța campaniilor tale active.',
+        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>`
+    }
+];
+---
+
+<section class="mc-dimensions">
+    <div class="mc-dimensions-header">
+        <h2>Nu un audit SEO. O radiografie totală a business-ului tău digital.</h2>
+        <p>Market Command analizează simultan 6 dimensiuni critice ale prezenței tale digitale. Nu verificăm doar poziții în Google. Scanăm tot.</p>
+    </div>
+
+    <div class="mc-dimensions-layout">
+        <!-- Radar Chart SVG -->
+        <div class="mc-radar-container">
+            <svg class="mc-radar" viewBox="0 0 400 400" id="mc-radar-svg">
+                <!-- Background hexagons -->
+                <polygon class="mc-radar-ring" points="200,60 321,130 321,270 200,340 79,270 79,130"/>
+                <polygon class="mc-radar-ring mc-radar-ring--mid" points="200,107 274,153 274,247 200,293 126,247 126,153"/>
+                <polygon class="mc-radar-ring mc-radar-ring--inner" points="200,153 227,177 227,223 200,247 173,223 173,177"/>
+
+                <!-- Axis lines -->
+                <line class="mc-radar-axis" x1="200" y1="60" x2="200" y2="340"/>
+                <line class="mc-radar-axis" x1="79" y1="130" x2="321" y2="270"/>
+                <line class="mc-radar-axis" x1="321" y1="130" x2="79" y2="270"/>
+
+                <!-- Data polygon - animated -->
+                <polygon class="mc-radar-data" id="mc-radar-data"
+                    points="200,80 305,145 290,260 200,310 100,245 110,150"
+                />
+
+                <!-- Data points -->
+                <circle class="mc-radar-dot" cx="200" cy="80" r="5"/>
+                <circle class="mc-radar-dot" cx="305" cy="145" r="5"/>
+                <circle class="mc-radar-dot" cx="290" cy="260" r="5"/>
+                <circle class="mc-radar-dot" cx="200" cy="310" r="5"/>
+                <circle class="mc-radar-dot" cx="100" cy="245" r="5"/>
+                <circle class="mc-radar-dot" cx="110" cy="150" r="5"/>
+
+                <!-- Labels -->
+                <text class="mc-radar-label" x="200" y="45" text-anchor="middle">Securitate</text>
+                <text class="mc-radar-label" x="340" y="130" text-anchor="start">Reputație</text>
+                <text class="mc-radar-label" x="340" y="275" text-anchor="start">Competiție</text>
+                <text class="mc-radar-label" x="200" y="365" text-anchor="middle">Nișe</text>
+                <text class="mc-radar-label" x="60" y="275" text-anchor="end">Locală</text>
+                <text class="mc-radar-label" x="60" y="130" text-anchor="end">Campanii</text>
+            </svg>
+        </div>
+
+        <!-- Dimension Cards -->
+        <div class="mc-dim-grid">
+            {dimensions.map(dim => (
+                <div class="mc-dim-card">
+                    <div class="mc-dim-num">{dim.num}</div>
+                    <div class="mc-dim-icon" set:html={dim.icon} />
+                    <h3>{dim.title}</h3>
+                    <p>{dim.desc}</p>
+                </div>
+            ))}
+        </div>
+    </div>
+</section>
+
+<script>
+    // Radar chart animation on scroll
+    const radarSvg = document.getElementById('mc-radar-svg');
+    const radarData = document.getElementById('mc-radar-data');
+
+    if (radarSvg && radarData) {
+        const radarObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    radarData.classList.add('animated');
+                    radarObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+
+        radarObserver.observe(radarSvg);
+    }
+
+    // Card scroll reveal
+    const dimObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.mc-dim-card').forEach(card => {
+        dimObserver.observe(card);
+    });
+</script>
+
+<style>
+    .mc-dimensions {
+        padding: var(--section-padding);
+        max-width: var(--container-max);
+        margin: 0 auto;
+    }
+
+    .mc-dimensions-header {
+        text-align: center;
+        margin-bottom: 3.5rem;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .mc-dimensions-header h2 {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 0.75rem;
+        line-height: 1.3;
+    }
+
+    .mc-dimensions-header p {
+        color: var(--text-muted);
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    .mc-dimensions-layout {
+        display: flex;
+        align-items: center;
+        gap: 3rem;
+    }
+
+    /* Radar Chart */
+    .mc-radar-container {
+        flex: 0 0 340px;
+        max-width: 340px;
+    }
+
+    .mc-radar {
+        width: 100%;
+        height: auto;
+    }
+
+    .mc-radar-ring {
+        fill: none;
+        stroke: var(--border-light);
+        stroke-width: 1;
+    }
+
+    .mc-radar-ring--mid {
+        stroke-dasharray: 4 4;
+        opacity: 0.6;
+    }
+
+    .mc-radar-ring--inner {
+        stroke-dasharray: 2 4;
+        opacity: 0.4;
+    }
+
+    .mc-radar-axis {
+        stroke: var(--border-light);
+        stroke-width: 0.5;
+        opacity: 0.4;
+    }
+
+    .mc-radar-data {
+        fill: rgba(230, 57, 70, 0.1);
+        stroke: var(--mc-red);
+        stroke-width: 2;
+        stroke-linejoin: round;
+        /* Animation setup */
+        transform-origin: center;
+        transform: scale(0);
+        transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .mc-radar-data.animated {
+        transform: scale(1);
+    }
+
+    .mc-radar-dot {
+        fill: var(--mc-red);
+        opacity: 0;
+        transition: opacity 0.4s ease 0.6s;
+    }
+
+    .mc-radar-data.animated ~ .mc-radar-dot {
+        opacity: 1;
+    }
+
+    .mc-radar-label {
+        fill: var(--text-muted);
+        font-family: 'Inter', sans-serif;
+        font-size: 11px;
+        font-weight: 500;
+    }
+
+    :global([data-theme="light"]) .mc-radar-data {
+        fill: rgba(230, 57, 70, 0.08);
+    }
+
+    /* Dimension Cards */
+    .mc-dim-grid {
+        flex: 1;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.25rem;
+    }
+
+    .mc-dim-card {
+        padding: 1.5rem;
+        background: var(--bg-card);
+        border: 1px solid var(--border-light);
+        border-radius: 14px;
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    .mc-dim-card.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .mc-dim-card:nth-child(2).visible { transition-delay: 0.05s; }
+    .mc-dim-card:nth-child(3).visible { transition-delay: 0.1s; }
+    .mc-dim-card:nth-child(4).visible { transition-delay: 0.15s; }
+    .mc-dim-card:nth-child(5).visible { transition-delay: 0.2s; }
+    .mc-dim-card:nth-child(6).visible { transition-delay: 0.25s; }
+
+    .mc-dim-card:hover {
+        border-color: rgba(230, 57, 70, 0.3);
+        box-shadow: 0 0 25px var(--mc-red-glow);
+        transform: translateY(-3px);
+    }
+
+    .mc-dim-num {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 0.7rem;
+        font-weight: 700;
+        color: var(--mc-red);
+        letter-spacing: 0.1em;
+        margin-bottom: 0.5rem;
+        opacity: 0.7;
+    }
+
+    .mc-dim-icon {
+        width: 32px;
+        height: 32px;
+        color: var(--mc-red);
+        margin-bottom: 0.5rem;
+    }
+
+    .mc-dim-icon :global(svg) {
+        width: 100%;
+        height: 100%;
+    }
+
+    .mc-dim-card h3 {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 0.4rem;
+    }
+
+    .mc-dim-card p {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        line-height: 1.5;
+    }
+
+    :global([data-theme="light"]) .mc-dim-card {
+        background: #fff;
+        border-color: rgba(0, 0, 0, 0.06);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    }
+
+    :global([data-theme="light"]) .mc-dim-card:hover {
+        box-shadow: 0 4px 20px rgba(230, 57, 70, 0.1);
+    }
+
+    @media (max-width: 1100px) {
+        .mc-dimensions-layout {
+            flex-direction: column;
+        }
+
+        .mc-radar-container {
+            flex: none;
+            max-width: 300px;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .mc-dim-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .mc-radar-container {
+            max-width: 260px;
+        }
+    }
+</style>

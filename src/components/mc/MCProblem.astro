@@ -1,0 +1,209 @@
+---
+---
+
+<section class="mc-problem">
+    <div class="mc-problem-content">
+        <h2 class="mc-problem-headline">
+            Investești în marketing fără să știi unde sunt găurile.
+        </h2>
+        <p class="mc-problem-body">
+            Majoritatea companiilor cheltuiesc bugete mari pe campanii fără să aibă o imagine clară a terenului de joc. Rezultatul?
+        </p>
+
+        <div class="mc-pain-grid">
+            <div class="mc-pain-card">
+                <div class="mc-pain-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="15" y1="9" x2="9" y2="15"/>
+                        <line x1="9" y1="9" x2="15" y2="15"/>
+                    </svg>
+                </div>
+                <p>Bani aruncați pe canale care nu performează</p>
+            </div>
+            <div class="mc-pain-card">
+                <div class="mc-pain-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        <line x1="12" y1="9" x2="12" y2="13"/>
+                        <line x1="12" y1="17" x2="12.01" y2="17"/>
+                    </svg>
+                </div>
+                <p>Vulnerabilități de securitate care îți sabotează SEO-ul</p>
+            </div>
+            <div class="mc-pain-card">
+                <div class="mc-pain-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                        <circle cx="12" cy="12" r="3"/>
+                    </svg>
+                </div>
+                <p>Competitori care îți iau piața din locuri pe care tu nici nu le monitorizezi</p>
+            </div>
+            <div class="mc-pain-card">
+                <div class="mc-pain-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12 6 12 12 16 14"/>
+                    </svg>
+                </div>
+                <p>Oportunități ratate care ar fi fost ale tale dacă le-ai fi văzut la timp</p>
+            </div>
+        </div>
+
+        <p class="mc-problem-closer">
+            <strong>Market Command îți dă imaginea completă înainte să cheltuiești un leu.</strong>
+            Știi unde ești, știi unde sunt ceilalți și știi exact ce mutări faci.
+        </p>
+    </div>
+</section>
+
+<script>
+    const probObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.mc-pain-card, .mc-problem-headline, .mc-problem-closer').forEach(el => {
+        probObserver.observe(el);
+    });
+</script>
+
+<style>
+    .mc-problem {
+        padding: var(--section-padding);
+        max-width: var(--container-max);
+        margin: 0 auto;
+    }
+
+    .mc-problem-content {
+        max-width: 900px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .mc-problem-headline {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 1rem;
+        line-height: 1.3;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .mc-problem-headline.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .mc-problem-body {
+        font-size: 1.05rem;
+        color: var(--text-secondary);
+        line-height: 1.7;
+        margin-bottom: 2.5rem;
+    }
+
+    .mc-pain-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.25rem;
+        margin-bottom: 2.5rem;
+    }
+
+    .mc-pain-card {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        padding: 1.25rem 1.5rem;
+        background: var(--bg-card);
+        border: 1px solid var(--border-light);
+        border-radius: 14px;
+        text-align: left;
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    .mc-pain-card.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .mc-pain-card:nth-child(2).visible { transition-delay: 0.1s; }
+    .mc-pain-card:nth-child(3).visible { transition-delay: 0.2s; }
+    .mc-pain-card:nth-child(4).visible { transition-delay: 0.3s; }
+
+    .mc-pain-card:hover {
+        border-color: rgba(230, 57, 70, 0.3);
+        box-shadow: 0 0 20px var(--mc-red-glow);
+        transform: translateY(-2px);
+    }
+
+    .mc-pain-icon {
+        flex-shrink: 0;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(230, 57, 70, 0.1);
+        border-radius: 10px;
+        color: var(--mc-red);
+    }
+
+    .mc-pain-icon svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .mc-pain-card p {
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        line-height: 1.5;
+        margin: 0;
+    }
+
+    .mc-problem-closer {
+        font-size: 1.05rem;
+        color: var(--text-secondary);
+        line-height: 1.7;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .mc-problem-closer.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .mc-problem-closer strong {
+        color: var(--mc-red);
+    }
+
+    :global([data-theme="light"]) .mc-pain-card {
+        background: #fff;
+        border-color: rgba(0, 0, 0, 0.06);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    }
+
+    :global([data-theme="light"]) .mc-pain-card:hover {
+        box-shadow: 0 4px 20px rgba(230, 57, 70, 0.1);
+    }
+
+    :global([data-theme="light"]) .mc-pain-icon {
+        background: rgba(230, 57, 70, 0.08);
+    }
+
+    @media (max-width: 900px) {
+        .mc-pain-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
