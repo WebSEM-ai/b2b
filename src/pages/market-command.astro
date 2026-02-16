@@ -1,15 +1,15 @@
 ---
 import LandingPage from '../layouts/LandingPage.astro';
-import MCHero from '../components/mc/MCHero.astro';
-import MCProblem from '../components/mc/MCProblem.astro';
-import MCDimensions from '../components/mc/MCDimensions.astro';
-import MCProfiles from '../components/mc/MCProfiles.astro';
-import MCDeliverables from '../components/mc/MCDeliverables.astro';
-import PricingSection from '../components/PricingSection.astro';
-import MCSocialProof from '../components/mc/MCSocialProof.astro';
+import Hero from '../components/Hero.astro';
 import ClientsCarousel from '../components/ClientsCarousel.astro';
+import BenefitsSection from '../components/BenefitsSection.astro';
+import TabSection from '../components/TabSection.astro';
+import MCDimensions from '../components/mc/MCDimensions.astro';
+import MCDeliverables from '../components/mc/MCDeliverables.astro';
+import MCCaseStudies from '../components/mc/MCCaseStudies.astro';
 import MCFaq from '../components/mc/MCFaq.astro';
-import MCCtaFinal from '../components/mc/MCCtaFinal.astro';
+import PricingSection from '../components/PricingSection.astro';
+import CtaSection from '../components/CtaSection.astro';
 import BookingModal from '../components/BookingModal.astro';
 
 const pageTitle = "Market Command — Audit Enterprise | WebSEM";
@@ -19,19 +19,74 @@ const pageDescription = "Auditul Enterprise care îți arată exact unde ești, 
 <LandingPage title={pageTitle} description={pageDescription}>
     <div class="mc-page">
         <!-- S1: Hero -->
-        <MCHero />
+        <Hero
+            badge="Market Command — Audit Enterprise"
+            titleLine1='Descoperă exact unde <strong>pierzi piață</strong>'
+            titleLine2="și cum o câștigi înapoi."
+            subtitle="Auditul Enterprise pe 6 dimensiuni critice care îți arată exact poziția ta reală, vulnerabilitățile competiției și oportunitățile pe care nimeni nu le exploatează încă."
+            floatingStats={[
+                { value: '6', label: 'Dimensiuni' },
+                { value: '90min', label: 'Sesiune Live' },
+                { value: '5-10 Pag.', label: 'Raport' }
+            ]}
+            formTitle="Solicită Audit Gratuit"
+            formSubtitle="Analizăm prezența ta digitală pe 6 dimensiuni în 24h"
+        />
 
-        <!-- S2: Problema -->
-        <MCProblem />
+        <!-- S2: Clients Carousel -->
+        <ClientsCarousel />
 
-        <!-- S3: Cele 6 Dimensiuni -->
-        <MCDimensions />
+        <!-- S3: Benefits -->
+        <BenefitsSection
+            title="De ce ai nevoie de Market Command."
+            subtitle="Nu un audit SEO clasic. O radiografie completă a business-ului tău digital."
+            benefits={[
+                {
+                    title: 'Viziune 360°, Nu Doar SEO',
+                    description: '6 dimensiuni analizate simultan: securitate, reputație, competiție, nișe, prezență locală, infrastructură campanii.',
+                    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>`,
+                    stat: { icon: '✓', text: '6 dimensiuni' }
+                },
+                {
+                    title: 'Date Reale, Nu Presupuneri',
+                    description: 'Fiecare recomandare este susținută de date. Analiză competitivă pe cifre, nu pe impresii.',
+                    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>`,
+                    stat: { icon: '✓', text: 'Data-driven' }
+                },
+                {
+                    title: 'Plan de Acțiune Clar',
+                    description: 'Raport executiv cu priorități, bugetare și timeline. Făcut pentru board, nu pentru arhivă.',
+                    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>`,
+                    stat: { icon: '✓', text: '5-10 pag.' }
+                },
+                {
+                    title: 'Zero Lock-In',
+                    description: 'Auditul este independent de implementare. Poți executa cu echipa ta, cu noi sau cu oricine altcineva.',
+                    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg>`,
+                    stat: { icon: '✓', text: 'Independent' }
+                }
+            ]}
+        />
 
-        <!-- S4: Pentru Cine -->
-        <MCProfiles />
+        <!-- S4: TabSection — Dimensiuni + Livrabile -->
+        <TabSection tabs={["Cele 6 Dimensiuni", "Ce Primești"]} id="mc-scope">
+            <div data-tab-panel="0">
+                <MCDimensions />
+            </div>
+            <div data-tab-panel="1">
+                <MCDeliverables />
+            </div>
+        </TabSection>
 
-        <!-- S5: Ce Primești -->
-        <MCDeliverables />
+        <!-- S5: TabSection — Case Studies + FAQ -->
+        <TabSection tabs={["Studii de Caz", "Întrebări Frecvente"]} id="mc-proof">
+            <div data-tab-panel="0">
+                <MCCaseStudies />
+            </div>
+            <div data-tab-panel="1">
+                <MCFaq />
+            </div>
+        </TabSection>
 
         <!-- S6: Pachete de Preț -->
         <PricingSection
@@ -118,17 +173,13 @@ const pageDescription = "Auditul Enterprise care îți arată exact unde ești, 
             ]}
         />
 
-        <!-- S7: Social Proof -->
-        <MCSocialProof />
-
-        <!-- Clients Carousel -->
-        <ClientsCarousel />
-
-        <!-- S8: FAQ -->
-        <MCFaq />
-
-        <!-- S9: CTA Final -->
-        <MCCtaFinal />
+        <!-- S7: CTA Final -->
+        <CtaSection
+            title="Competiția ta investește deja. Tu ce aștepți?"
+            subtitle="Solicită un audit gratuit și vezi exact unde pierzi piață — și cum o câștigi înapoi."
+            buttonText="Solicită Audit Gratuit"
+            note="Fără obligații. Primii pași în 24h."
+        />
     </div>
 
     <!-- Booking Modal -->
@@ -139,62 +190,110 @@ const pageDescription = "Auditul Enterprise care îți arată exact unde ești, 
 </LandingPage>
 
 <style is:global>
-    /* Market Command scoped color palette */
+    /* Market Command scoped color palette — Deep Teal */
     .mc-page {
-        --mc-red: #E63946;
-        --mc-red-glow: rgba(230, 57, 70, 0.3);
+        --mc-primary: #0D9488;
+        --mc-primary-light: #14B8A6;
+        --mc-primary-glow: rgba(13, 148, 136, 0.3);
+        --mc-gradient: linear-gradient(135deg, #0D9488, #0891B2);
         --mc-gold: #D4A843;
-        --mc-navy: #0D1B2A;
-        --mc-steel: #6C757D;
     }
 
     [data-theme="light"] .mc-page {
-        --mc-red-glow: rgba(230, 57, 70, 0.15);
+        --mc-primary-glow: rgba(13, 148, 136, 0.15);
     }
 
-    /* Override pricing gradient for MC red theme */
+    /* Override Hero canvas particle colors for teal theme */
+    .mc-page .hero .floating-stat-value {
+        background: linear-gradient(135deg, #0D9488, #0891B2);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .mc-page .hero-label {
+        border-color: rgba(13, 148, 136, 0.3);
+        background: rgba(13, 148, 136, 0.08);
+    }
+
+    .mc-page .hero-title .gradient {
+        background: linear-gradient(135deg, #0D9488, #0891B2);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    /* Override tab active button for teal theme */
+    .mc-page .tab-btn--active {
+        background: linear-gradient(135deg, #0D9488, #0891B2);
+        box-shadow: 0 4px 20px rgba(13, 148, 136, 0.4);
+    }
+
+    .mc-page .tab-btn--active .tab-btn-indicator {
+        border-top-color: #0891B2;
+    }
+
+    .mc-page .tab-btn:hover:not(.tab-btn--active) {
+        border-color: rgba(13, 148, 136, 0.2);
+    }
+
+    /* Override BenefitsSection stat icon for teal */
+    .mc-page .benefit-card-stat-icon {
+        background: rgba(13, 148, 136, 0.15);
+        color: #0D9488;
+    }
+
+    .mc-page .benefit-card-visual-placeholder {
+        border-color: rgba(13, 148, 136, 0.2);
+        color: #0D9488;
+    }
+
+    .mc-page .benefit-card:hover {
+        border-color: rgba(13, 148, 136, 0.25);
+        box-shadow: 0 8px 30px rgba(13, 148, 136, 0.12);
+    }
+
+    /* Override pricing gradient for MC teal theme */
     .mc-page .pricing-card--highlighted {
-        border-color: rgba(230, 57, 70, 0.3);
-        box-shadow: 0 0 30px rgba(230, 57, 70, 0.15);
+        border-color: rgba(13, 148, 136, 0.3);
+        box-shadow: 0 0 30px rgba(13, 148, 136, 0.15);
     }
 
     .mc-page .pricing-card--highlighted:hover {
-        box-shadow: 0 0 30px rgba(230, 57, 70, 0.25), var(--shadow-lg);
+        box-shadow: 0 0 30px rgba(13, 148, 136, 0.25), var(--shadow-lg);
     }
 
     .mc-page .pricing-badge {
-        background: linear-gradient(135deg, #E63946, #ff6b6b);
+        background: linear-gradient(135deg, #0D9488, #0891B2);
     }
 
     .mc-page .pricing-price {
-        background: linear-gradient(135deg, #E63946, #ff6b6b);
+        background: linear-gradient(135deg, #0D9488, #0891B2);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     }
 
     .mc-page .pricing-card--highlighted .pricing-cta {
-        background: linear-gradient(135deg, #E63946, #c62828);
+        background: linear-gradient(135deg, #0D9488, #0a7a70);
     }
 
     .mc-page .pricing-card--highlighted .pricing-cta:hover {
-        box-shadow: 0 0 30px rgba(230, 57, 70, 0.4);
+        box-shadow: 0 0 30px rgba(13, 148, 136, 0.4);
     }
 
     .mc-page .pricing-card:hover {
-        border-color: rgba(230, 57, 70, 0.2);
+        border-color: rgba(13, 148, 136, 0.2);
     }
 
     .mc-page .pricing-cta:hover {
-        border-color: rgba(230, 57, 70, 0.5);
-        box-shadow: 0 0 20px rgba(230, 57, 70, 0.2);
+        border-color: rgba(13, 148, 136, 0.5);
+        box-shadow: 0 0 20px rgba(13, 148, 136, 0.2);
     }
 
     .mc-page .feature-group-label {
-        color: #E63946;
+        color: #0D9488;
     }
 
     .mc-page .pricing-features li svg {
-        color: #E63946;
+        color: #0D9488;
     }
 
     /* FULL COMMAND gold accent */
@@ -206,5 +305,28 @@ const pageDescription = "Auditul Enterprise care îți arată exact unde ești, 
         background: linear-gradient(135deg, #D4A843, #e8c86a);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+    }
+
+    /* Override CTA section for teal theme */
+    .mc-page .cta-btn {
+        background: linear-gradient(135deg, #0D9488, #0891B2);
+    }
+
+    .mc-page .cta-btn:hover {
+        box-shadow: 0 0 30px rgba(13, 148, 136, 0.4);
+    }
+
+    /* Override audit form submit for teal theme */
+    .mc-page .audit-form-submit {
+        background: linear-gradient(135deg, #0D9488, #0891B2);
+    }
+
+    .mc-page .audit-form-submit:hover {
+        box-shadow: 0 0 25px rgba(13, 148, 136, 0.4);
+    }
+
+    .mc-page .audit-form-field input:focus {
+        border-color: rgba(13, 148, 136, 0.5);
+        box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.1);
     }
 </style>

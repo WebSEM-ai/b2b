@@ -23,11 +23,7 @@ const faqs = [
 ];
 ---
 
-<section class="mc-faq">
-    <div class="mc-faq-header">
-        <h2>Întrebări frecvente</h2>
-    </div>
-
+<div class="mc-faq">
     <div class="mc-faq-list">
         {faqs.map((faq, i) => (
             <details class="mc-faq-item">
@@ -45,25 +41,13 @@ const faqs = [
             </details>
         ))}
     </div>
-</section>
+</div>
 
 <style>
     .mc-faq {
         padding: var(--section-padding);
         max-width: var(--container-max);
         margin: 0 auto;
-    }
-
-    .mc-faq-header {
-        text-align: center;
-        margin-bottom: 3rem;
-    }
-
-    .mc-faq-header h2 {
-        font-family: 'Space Grotesk', sans-serif;
-        font-size: clamp(1.6rem, 3.5vw, 2.2rem);
-        font-weight: 700;
-        color: var(--text-primary);
     }
 
     .mc-faq-list {
@@ -81,12 +65,12 @@ const faqs = [
     }
 
     .mc-faq-item:hover {
-        border-color: rgba(230, 57, 70, 0.2);
+        border-color: rgba(13, 148, 136, 0.2);
     }
 
     .mc-faq-item[open] {
-        border-color: rgba(230, 57, 70, 0.3);
-        box-shadow: 0 0 15px var(--mc-red-glow);
+        border-color: rgba(13, 148, 136, 0.3);
+        box-shadow: 0 0 15px var(--mc-primary-glow, rgba(13, 148, 136, 0.15));
     }
 
     .mc-faq-item summary {
@@ -126,7 +110,7 @@ const faqs = [
 
     .mc-faq-item[open] .mc-faq-toggle {
         transform: rotate(180deg);
-        color: var(--mc-red);
+        color: var(--mc-primary, #0D9488);
     }
 
     .mc-faq-answer {
@@ -145,10 +129,10 @@ const faqs = [
     }
 
     :global([data-theme="light"]) .mc-faq-item[open] {
-        box-shadow: 0 4px 15px rgba(230, 57, 70, 0.08);
+        box-shadow: 0 4px 15px rgba(13, 148, 136, 0.08);
     }
 
     :global([data-theme="light"]) .mc-faq-item:hover {
-        border-color: rgba(230, 57, 70, 0.15);
+        border-color: rgba(13, 148, 136, 0.15);
     }
 </style>

@@ -1,0 +1,278 @@
+---
+const caseStudies = [
+    {
+        company: 'ASUS Romania',
+        industry: 'Tehnologie & IT',
+        metric: '€3.6 MLD',
+        metricLabel: 'buget guvernamental neaccesat',
+        bullets: [
+            '12 nișe strategice identificate în segmentul B2B enterprise',
+            'Zero prezență pe canalele de achiziții publice vs. competitori activi'
+        ],
+        quote: 'Auditul a arătat că ASUS România ignora complet verticalul guvernamental — un segment de €3.6 miliarde unde competiția directă era aproape inexistentă.'
+    },
+    {
+        company: 'RE/MAX Romania',
+        industry: 'Real Estate',
+        metric: '€6.5 MLD',
+        metricLabel: 'piață diaspora ignorată complet',
+        bullets: [
+            'Nicio campanie targetată către românii din diaspora care cumpără proprietăți',
+            'Competitorii locali acaparaseră deja 3 din 5 canale principale'
+        ],
+        quote: 'Piața diasporei — estimată la €6.5 miliarde — nu era pe radarul strategic al RE/MAX România. Auditul a transformat o „presupunere" în cifre acționabile.'
+    },
+    {
+        company: 'BILKA',
+        industry: 'Construcții & Materiale',
+        metric: '25%',
+        metricLabel: 'cotă de piață, fără strategie digitală',
+        bullets: [
+            'Lider de piață offline, dar cu prezență digitală fragmentată și nemonitorizată',
+            'Gap-uri critice în SEO local pe 15+ piețe regionale'
+        ],
+        quote: 'BILKA avea 25% din piață fără să fi investit strategic în digital — ceea ce înseamnă că fiecare procent câștigat digital era pură creștere organică.'
+    },
+    {
+        company: 'Clarfon',
+        industry: 'Retail & Telecom',
+        metric: '118',
+        metricLabel: 'locații → strategie monopol multi-canal',
+        bullets: [
+            'Audit complet Google Business Profile pe toate cele 118 puncte de vânzare',
+            'Identificat pierderi de trafic de 40%+ din listări incomplete sau duplicate'
+        ],
+        quote: 'Cu 118 locații, fiecare procent de optimizare locală înseamnă mii de vizite lunare în plus. Auditul a transformat un haos de listări într-un plan de dominație locală.'
+    },
+    {
+        company: 'Korill / Sun Wave Pharma',
+        industry: 'Pharma & Health',
+        metric: 'Repoziționare',
+        metricLabel: 'conversația de piață redefinită',
+        bullets: [
+            'Schimbat narativul de la „dozaj și preț" la „absorbție și eficiență"',
+            'Identificat keyword gap-uri critice unde competiția nu era prezentă'
+        ],
+        quote: 'Auditul a arătat că întreaga piață vorbea despre dozaj, dar consumatorii căutau informații despre absorbție. Am repoziționat conversația.'
+    }
+];
+---
+
+<div class="mc-case-studies">
+    <div class="mc-case-grid">
+        {caseStudies.map(study => (
+            <div class="mc-case-card">
+                <div class="mc-case-header">
+                    <span class="mc-case-pill">{study.industry}</span>
+                    <h3 class="mc-case-company">{study.company}</h3>
+                </div>
+
+                <div class="mc-case-metric">
+                    <span class="mc-case-metric-value">{study.metric}</span>
+                    <span class="mc-case-metric-label">{study.metricLabel}</span>
+                </div>
+
+                <ul class="mc-case-bullets">
+                    {study.bullets.map(bullet => (
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            {bullet}
+                        </li>
+                    ))}
+                </ul>
+
+                <blockquote class="mc-case-quote">
+                    <p>{study.quote}</p>
+                </blockquote>
+            </div>
+        ))}
+    </div>
+</div>
+
+<script>
+    const caseObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.mc-case-card').forEach(card => {
+        caseObserver.observe(card);
+    });
+</script>
+
+<style>
+    .mc-case-studies {
+        padding: var(--section-padding);
+        max-width: var(--container-max);
+        margin: 0 auto;
+    }
+
+    .mc-case-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+
+    .mc-case-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border-light);
+        border-radius: 16px;
+        padding: 2rem;
+        transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    .mc-case-card.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .mc-case-card:nth-child(2).visible { transition-delay: 0.08s; }
+    .mc-case-card:nth-child(3).visible { transition-delay: 0.16s; }
+    .mc-case-card:nth-child(4).visible { transition-delay: 0.24s; }
+    .mc-case-card:nth-child(5).visible { transition-delay: 0.32s; }
+
+    .mc-case-card:hover {
+        border-color: rgba(13, 148, 136, 0.3);
+        box-shadow: 0 0 25px var(--mc-primary-glow, rgba(13, 148, 136, 0.15));
+        transform: translateY(-3px);
+    }
+
+    .mc-case-card:last-child {
+        grid-column: 1 / -1;
+        max-width: 600px;
+        justify-self: center;
+        width: 100%;
+    }
+
+    .mc-case-header {
+        margin-bottom: 1.25rem;
+    }
+
+    .mc-case-pill {
+        display: inline-block;
+        font-size: 0.65rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--mc-primary, #0D9488);
+        background: rgba(13, 148, 136, 0.1);
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        margin-bottom: 0.5rem;
+    }
+
+    .mc-case-company {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin: 0;
+    }
+
+    .mc-case-metric {
+        margin-bottom: 1.25rem;
+    }
+
+    .mc-case-metric-value {
+        display: block;
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 2rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, #0D9488, #0891B2);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        line-height: 1.2;
+    }
+
+    .mc-case-metric-label {
+        display: block;
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        margin-top: 0.15rem;
+    }
+
+    .mc-case-bullets {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 1.25rem 0;
+    }
+
+    .mc-case-bullets li {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.5rem;
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        padding: 0.3rem 0;
+        line-height: 1.5;
+    }
+
+    .mc-case-bullets li svg {
+        width: 16px;
+        height: 16px;
+        flex-shrink: 0;
+        color: var(--mc-primary, #0D9488);
+        margin-top: 2px;
+    }
+
+    .mc-case-quote {
+        border-left: 3px solid var(--mc-primary, #0D9488);
+        padding: 0.75rem 1rem;
+        margin: 0;
+        background: rgba(13, 148, 136, 0.04);
+        border-radius: 0 8px 8px 0;
+    }
+
+    .mc-case-quote p {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        line-height: 1.6;
+        font-style: italic;
+        margin: 0;
+    }
+
+    :global([data-theme="light"]) .mc-case-card {
+        background: #fff;
+        border-color: rgba(0, 0, 0, 0.06);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    }
+
+    :global([data-theme="light"]) .mc-case-card:hover {
+        box-shadow: 0 4px 20px rgba(13, 148, 136, 0.1);
+    }
+
+    :global([data-theme="light"]) .mc-case-pill {
+        background: rgba(13, 148, 136, 0.08);
+    }
+
+    :global([data-theme="light"]) .mc-case-quote {
+        background: rgba(13, 148, 136, 0.03);
+    }
+
+    @media (max-width: 768px) {
+        .mc-case-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .mc-case-card:last-child {
+            max-width: none;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .mc-case-card {
+            padding: 1.5rem;
+        }
+
+        .mc-case-metric-value {
+            font-size: 1.6rem;
+        }
+    }
+</style>

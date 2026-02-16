@@ -39,82 +39,20 @@ const dimensions = [
 ];
 ---
 
-<section class="mc-dimensions">
-    <div class="mc-dimensions-header">
-        <h2>Nu un audit SEO. O radiografie totală a business-ului tău digital.</h2>
-        <p>Market Command analizează simultan 6 dimensiuni critice ale prezenței tale digitale. Nu verificăm doar poziții în Google. Scanăm tot.</p>
+<div class="mc-dimensions">
+    <div class="mc-dim-grid">
+        {dimensions.map(dim => (
+            <div class="mc-dim-card">
+                <div class="mc-dim-num">{dim.num}</div>
+                <div class="mc-dim-icon" set:html={dim.icon} />
+                <h3>{dim.title}</h3>
+                <p>{dim.desc}</p>
+            </div>
+        ))}
     </div>
-
-    <div class="mc-dimensions-layout">
-        <!-- Radar Chart SVG -->
-        <div class="mc-radar-container">
-            <svg class="mc-radar" viewBox="0 0 400 400" id="mc-radar-svg">
-                <!-- Background hexagons -->
-                <polygon class="mc-radar-ring" points="200,60 321,130 321,270 200,340 79,270 79,130"/>
-                <polygon class="mc-radar-ring mc-radar-ring--mid" points="200,107 274,153 274,247 200,293 126,247 126,153"/>
-                <polygon class="mc-radar-ring mc-radar-ring--inner" points="200,153 227,177 227,223 200,247 173,223 173,177"/>
-
-                <!-- Axis lines -->
-                <line class="mc-radar-axis" x1="200" y1="60" x2="200" y2="340"/>
-                <line class="mc-radar-axis" x1="79" y1="130" x2="321" y2="270"/>
-                <line class="mc-radar-axis" x1="321" y1="130" x2="79" y2="270"/>
-
-                <!-- Data polygon - animated -->
-                <polygon class="mc-radar-data" id="mc-radar-data"
-                    points="200,80 305,145 290,260 200,310 100,245 110,150"
-                />
-
-                <!-- Data points -->
-                <circle class="mc-radar-dot" cx="200" cy="80" r="5"/>
-                <circle class="mc-radar-dot" cx="305" cy="145" r="5"/>
-                <circle class="mc-radar-dot" cx="290" cy="260" r="5"/>
-                <circle class="mc-radar-dot" cx="200" cy="310" r="5"/>
-                <circle class="mc-radar-dot" cx="100" cy="245" r="5"/>
-                <circle class="mc-radar-dot" cx="110" cy="150" r="5"/>
-
-                <!-- Labels -->
-                <text class="mc-radar-label" x="200" y="45" text-anchor="middle">Securitate</text>
-                <text class="mc-radar-label" x="340" y="130" text-anchor="start">Reputație</text>
-                <text class="mc-radar-label" x="340" y="275" text-anchor="start">Competiție</text>
-                <text class="mc-radar-label" x="200" y="365" text-anchor="middle">Nișe</text>
-                <text class="mc-radar-label" x="60" y="275" text-anchor="end">Locală</text>
-                <text class="mc-radar-label" x="60" y="130" text-anchor="end">Campanii</text>
-            </svg>
-        </div>
-
-        <!-- Dimension Cards -->
-        <div class="mc-dim-grid">
-            {dimensions.map(dim => (
-                <div class="mc-dim-card">
-                    <div class="mc-dim-num">{dim.num}</div>
-                    <div class="mc-dim-icon" set:html={dim.icon} />
-                    <h3>{dim.title}</h3>
-                    <p>{dim.desc}</p>
-                </div>
-            ))}
-        </div>
-    </div>
-</section>
+</div>
 
 <script>
-    // Radar chart animation on scroll
-    const radarSvg = document.getElementById('mc-radar-svg');
-    const radarData = document.getElementById('mc-radar-data');
-
-    if (radarSvg && radarData) {
-        const radarObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    radarData.classList.add('animated');
-                    radarObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.3 });
-
-        radarObserver.observe(radarSvg);
-    }
-
-    // Card scroll reveal
     const dimObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -135,109 +73,9 @@ const dimensions = [
         margin: 0 auto;
     }
 
-    .mc-dimensions-header {
-        text-align: center;
-        margin-bottom: 3.5rem;
-        max-width: 700px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .mc-dimensions-header h2 {
-        font-family: 'Space Grotesk', sans-serif;
-        font-size: clamp(1.6rem, 3.5vw, 2.2rem);
-        font-weight: 700;
-        color: var(--text-primary);
-        margin-bottom: 0.75rem;
-        line-height: 1.3;
-    }
-
-    .mc-dimensions-header p {
-        color: var(--text-muted);
-        font-size: 1rem;
-        line-height: 1.6;
-    }
-
-    .mc-dimensions-layout {
-        display: flex;
-        align-items: center;
-        gap: 3rem;
-    }
-
-    /* Radar Chart */
-    .mc-radar-container {
-        flex: 0 0 340px;
-        max-width: 340px;
-    }
-
-    .mc-radar {
-        width: 100%;
-        height: auto;
-    }
-
-    .mc-radar-ring {
-        fill: none;
-        stroke: var(--border-light);
-        stroke-width: 1;
-    }
-
-    .mc-radar-ring--mid {
-        stroke-dasharray: 4 4;
-        opacity: 0.6;
-    }
-
-    .mc-radar-ring--inner {
-        stroke-dasharray: 2 4;
-        opacity: 0.4;
-    }
-
-    .mc-radar-axis {
-        stroke: var(--border-light);
-        stroke-width: 0.5;
-        opacity: 0.4;
-    }
-
-    .mc-radar-data {
-        fill: rgba(230, 57, 70, 0.1);
-        stroke: var(--mc-red);
-        stroke-width: 2;
-        stroke-linejoin: round;
-        /* Animation setup */
-        transform-origin: center;
-        transform: scale(0);
-        transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .mc-radar-data.animated {
-        transform: scale(1);
-    }
-
-    .mc-radar-dot {
-        fill: var(--mc-red);
-        opacity: 0;
-        transition: opacity 0.4s ease 0.6s;
-    }
-
-    .mc-radar-data.animated ~ .mc-radar-dot {
-        opacity: 1;
-    }
-
-    .mc-radar-label {
-        fill: var(--text-muted);
-        font-family: 'Inter', sans-serif;
-        font-size: 11px;
-        font-weight: 500;
-    }
-
-    :global([data-theme="light"]) .mc-radar-data {
-        fill: rgba(230, 57, 70, 0.08);
-    }
-
-    /* Dimension Cards */
     .mc-dim-grid {
-        flex: 1;
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
         gap: 1.25rem;
     }
 
@@ -263,16 +101,16 @@ const dimensions = [
     .mc-dim-card:nth-child(6).visible { transition-delay: 0.25s; }
 
     .mc-dim-card:hover {
-        border-color: rgba(230, 57, 70, 0.3);
-        box-shadow: 0 0 25px var(--mc-red-glow);
+        border-color: rgba(13, 148, 136, 0.3);
+        box-shadow: 0 0 25px var(--mc-primary-glow, rgba(13, 148, 136, 0.15));
         transform: translateY(-3px);
     }
 
     .mc-dim-num {
-        font-family: 'Orbitron', sans-serif;
+        font-family: 'Space Grotesk', sans-serif;
         font-size: 0.7rem;
         font-weight: 700;
-        color: var(--mc-red);
+        color: var(--mc-primary, #0D9488);
         letter-spacing: 0.1em;
         margin-bottom: 0.5rem;
         opacity: 0.7;
@@ -281,7 +119,7 @@ const dimensions = [
     .mc-dim-icon {
         width: 32px;
         height: 32px;
-        color: var(--mc-red);
+        color: var(--mc-primary, #0D9488);
         margin-bottom: 0.5rem;
     }
 
@@ -311,27 +149,18 @@ const dimensions = [
     }
 
     :global([data-theme="light"]) .mc-dim-card:hover {
-        box-shadow: 0 4px 20px rgba(230, 57, 70, 0.1);
+        box-shadow: 0 4px 20px rgba(13, 148, 136, 0.1);
     }
 
-    @media (max-width: 1100px) {
-        .mc-dimensions-layout {
-            flex-direction: column;
-        }
-
-        .mc-radar-container {
-            flex: none;
-            max-width: 300px;
+    @media (max-width: 900px) {
+        .mc-dim-grid {
+            grid-template-columns: repeat(2, 1fr);
         }
     }
 
     @media (max-width: 600px) {
         .mc-dim-grid {
             grid-template-columns: 1fr;
-        }
-
-        .mc-radar-container {
-            max-width: 260px;
         }
     }
 </style>
