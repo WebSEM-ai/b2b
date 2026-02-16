@@ -19,7 +19,20 @@ const pageDescription = "Dezvoltăm platforme web enterprise cu Next.js 15 și P
 
 ---
 
-<LandingPage title={pageTitle} description={pageDescription}>
+<LandingPage
+    title={pageTitle}
+    description={pageDescription}
+    footerCtaBadge="Platforme Enterprise"
+    footerCtaTitle='Gata să-ți <span class="gradient-text">Transformi</span> Platforma Digitală?'
+    footerCtaSubtitle='Solicită o <strong>consultanță gratuită</strong> și vezi cum arată un site enterprise modern — rapid, sigur și ușor de administrat.'
+    footerCtaStats={[
+        { value: '98+', label: 'Lighthouse Score' },
+        { value: '30 zile', label: 'Time to Launch' },
+        { value: '0', label: 'WordPress' }
+    ]}
+    footerCtaButtonText="Solicită Consultanță Gratuită"
+    footerCtaDisclaimer="* Consultanța inițială este gratuită. Analizăm platforma ta actuală și îți propunem o arhitectură modernă cu Next.js 15 + Payload CMS 3."
+>
 
     <!-- Hero Section -->
     <Hero

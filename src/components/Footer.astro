@@ -8,6 +8,15 @@ interface Props {
         text: string;
         href: string;
     }>;
+    ctaBadge?: string;
+    ctaTitle?: string;
+    ctaSubtitle?: string;
+    ctaStats?: Array<{
+        value: string;
+        label: string;
+    }>;
+    ctaButtonText?: string;
+    ctaDisclaimer?: string;
 }
 
 const {
@@ -20,7 +29,17 @@ const {
         { text: 'Termeni și condiții', href: '/termeni' },
         { text: 'Politica de cookies', href: '/cookies' },
         { text: 'Politica de confidențialitate', href: '/confidentialitate' }
-    ]
+    ],
+    ctaBadge = 'Începe Acum',
+    ctaTitle = 'Gata să-ți <span class="gradient-text">Transformi</span> Pipeline-ul B2B?',
+    ctaSubtitle = 'Primii 10 clienți din această lună beneficiază de <strong>audit gratuit</strong> și <strong>50 lead-uri bonus</strong>.',
+    ctaStats = [
+        { value: '265M+', label: 'Contacte Verificate' },
+        { value: '98%', label: 'Acuratețe Email' },
+        { value: '72h', label: 'Setup Complet' }
+    ],
+    ctaButtonText = 'Solicită Audit Gratuit',
+    ctaDisclaimer = '* Datele de contact sunt furnizate prin <strong>Apollo.io</strong>, <strong>LinkedIn Sales Navigator</strong> și alte platforme B2B outreach. Nu deținem aceste baze de date - oferim servicii de prospectare și outreach.'
 } = Astro.props;
 
 const year = new Date().getFullYear();
@@ -35,29 +54,20 @@ const year = new Date().getFullYear();
 
     <div class="footer-cta-container">
         <div class="footer-cta-content">
-            <span class="footer-cta-badge">Începe Acum</span>
-            <h2 class="footer-cta-title">
-                Gata să-ți <span class="gradient-text">Transformi</span> Pipeline-ul B2B?
-            </h2>
-            <p class="footer-cta-subtitle">
-                Primii 10 clienți din această lună beneficiază de <strong>audit gratuit</strong> și <strong>50 lead-uri bonus</strong>.
-            </p>
+            <span class="footer-cta-badge">{ctaBadge}</span>
+            <h2 class="footer-cta-title" set:html={ctaTitle} />
+            <p class="footer-cta-subtitle" set:html={ctaSubtitle} />
 
             <div class="footer-cta-stats">
-                <div class="footer-stat-item">
-                    <span class="footer-stat-value">265M+</span>
-                    <span class="footer-stat-label">Contacte Verificate</span>
-                </div>
-                <div class="footer-stat-divider"></div>
-                <div class="footer-stat-item">
-                    <span class="footer-stat-value">98%</span>
-                    <span class="footer-stat-label">Acuratețe Email</span>
-                </div>
-                <div class="footer-stat-divider"></div>
-                <div class="footer-stat-item">
-                    <span class="footer-stat-value">72h</span>
-                    <span class="footer-stat-label">Setup Complet</span>
-                </div>
+                {ctaStats.map((stat, i) => (
+                    <>
+                        {i > 0 && <div class="footer-stat-divider"></div>}
+                        <div class="footer-stat-item">
+                            <span class="footer-stat-value">{stat.value}</span>
+                            <span class="footer-stat-label">{stat.label}</span>
+                        </div>
+                    </>
+                ))}
             </div>
         </div>
 
@@ -95,7 +105,7 @@ const year = new Date().getFullYear();
                     </div>
                 </div>
                 <button type="submit" class="footer-form-submit">
-                    <span class="btn-text">Solicită Audit Gratuit</span>
+                    <span class="btn-text">{ctaButtonText}</span>
                     <span class="btn-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                             <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -116,9 +126,7 @@ const year = new Date().getFullYear();
                     <p>Te contactăm în maximum 24h cu analiza completă.</p>
                 </div>
             </div>
-            <p class="footer-form-disclaimer">
-                * Datele de contact sunt furnizate prin <strong>Apollo.io</strong>, <strong>LinkedIn Sales Navigator</strong> și alte platforme B2B outreach. Nu deținem aceste baze de date - oferim servicii de prospectare și outreach.
-            </p>
+            <p class="footer-form-disclaimer" set:html={ctaDisclaimer} />
         </div>
     </div>
 </section>

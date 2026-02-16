@@ -16,7 +16,20 @@ const pageTitle = "Market Command — Audit Enterprise | WebSEM";
 const pageDescription = "Auditul Enterprise care îți arată exact unde ești, exact unde lovești. 6 dimensiuni critice analizate simultan: securitate, reputație, competiție, nișe strategice, prezență locală, infrastructură campanii.";
 ---
 
-<LandingPage title={pageTitle} description={pageDescription}>
+<LandingPage
+    title={pageTitle}
+    description={pageDescription}
+    footerCtaBadge="Market Command"
+    footerCtaTitle='Gata să Descoperi Unde <span class="gradient-text">Pierzi Piață</span>?'
+    footerCtaSubtitle='Solicită un <strong>audit gratuit</strong> pe 6 dimensiuni critice și vezi exact ce oportunități ratezi.'
+    footerCtaStats={[
+        { value: '6', label: 'Dimensiuni Analizate' },
+        { value: '90min', label: 'Sesiune Live Q&A' },
+        { value: '5-10 Pag.', label: 'Raport Executiv' }
+    ]}
+    footerCtaButtonText="Solicită Audit Gratuit"
+    footerCtaDisclaimer="* Auditul inițial este gratuit și fără obligații. Analizăm prezența ta digitală pe toate cele 6 dimensiuni și îți livrăm un sumar cu concluzii acționabile."
+>
     <div class="mc-page">
         <!-- S1: Hero -->
         <Hero

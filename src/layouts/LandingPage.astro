@@ -9,14 +9,26 @@ interface Props {
     ogImage?: string;
     navLinks?: Array<{ text: string; href: string }>;
     navCta?: { text: string; href: string };
+    footerCtaBadge?: string;
+    footerCtaTitle?: string;
+    footerCtaSubtitle?: string;
+    footerCtaStats?: Array<{ value: string; label: string }>;
+    footerCtaButtonText?: string;
+    footerCtaDisclaimer?: string;
 }
 
-const { 
-    title, 
-    description, 
+const {
+    title,
+    description,
     ogImage = '/images/og-default.jpg',
     navLinks,
-    navCta
+    navCta,
+    footerCtaBadge,
+    footerCtaTitle,
+    footerCtaSubtitle,
+    footerCtaStats,
+    footerCtaButtonText,
+    footerCtaDisclaimer
 } = Astro.props;
 
 const siteUrl = Astro.site?.toString() || 'https://b2b.websem.ro';
@@ -91,6 +103,13 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
         <slot />
     </main>
     
-    <Footer />
+    <Footer
+        ctaBadge={footerCtaBadge}
+        ctaTitle={footerCtaTitle}
+        ctaSubtitle={footerCtaSubtitle}
+        ctaStats={footerCtaStats}
+        ctaButtonText={footerCtaButtonText}
+        ctaDisclaimer={footerCtaDisclaimer}
+    />
 </body>
 </html>
