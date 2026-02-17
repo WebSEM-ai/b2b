@@ -1,0 +1,427 @@
+---
+import LandingPage from '../layouts/LandingPage.astro';
+import Hero from '../components/Hero.astro';
+import ClientsCarousel from '../components/ClientsCarousel.astro';
+import BenefitsSection from '../components/BenefitsSection.astro';
+import VendorFailures from '../components/VendorFailures.astro';
+import FeaturesSection from '../components/FeaturesSection.astro';
+import ProcessSection from '../components/ProcessSection.astro';
+import PricingSection from '../components/PricingSection.astro';
+import CtaSection from '../components/CtaSection.astro';
+import BookingModal from '../components/BookingModal.astro';
+
+const pageTitle = "Chatbot AI pentru Business | WebSEM";
+const pageDescription = "Implementam chatboti AI antrenati pe datele tale — suport clienti 24/7, vanzari automate si integrari multi-canal. Live in 48h. GDPR compliant.";
+---
+
+<LandingPage
+    title={pageTitle}
+    description={pageDescription}
+    footerCtaBadge="Chatbot AI"
+    footerCtaTitle='Gata să-ți <span class="gradient-text">Automatizezi</span> Comunicarea?'
+    footerCtaSubtitle='Solicită o <strong>demonstrație gratuită</strong> și vezi cum un chatbot AI antrenat pe datele tale poate transforma suportul și vânzările.'
+    footerCtaStats={[
+        { value: '24/7', label: 'Disponibilitate' },
+        { value: '<3s', label: 'Timp Răspuns' },
+        { value: '48h', label: 'Go Live' }
+    ]}
+    footerCtaButtonText="Solicită Demo Gratuită"
+    footerCtaDisclaimer="* Demo-ul inițial este gratuit și fără obligații. Configurăm un chatbot de test antrenat pe datele tale în 48h."
+>
+    <div class="chatbot-page">
+        <!-- S1: Hero -->
+        <Hero
+            badge="WebSEM — Chatbot AI pentru Business"
+            titleLine1='Asistent AI antrenat pe <strong>datele tale</strong>'
+            titleLine2="live în 48 de ore."
+            subtitle="Implementăm chatboți AI care răspund clienților 24/7, generează lead-uri și automatizează suportul — antrenați pe documentele, produsele și procesele tale."
+            floatingStats={[
+                { value: '+74%', label: 'Satisfacție Clienți' },
+                { value: '€0', label: 'Cost / Conversație' },
+                { value: '<3 sec', label: 'Timp Răspuns' }
+            ]}
+            formTitle="Solicită Demo Gratuită"
+            formSubtitle="Configurăm un chatbot de test pe datele tale în 48h"
+            formPlaceholder="Website-ul tău"
+            formButtonText="Vreau Demo"
+        />
+
+        <!-- S2: Clients Carousel -->
+        <ClientsCarousel />
+
+        <!-- S3: Benefits -->
+        <BenefitsSection
+            title="De ce ai nevoie de un chatbot AI."
+            subtitle="Nu un widget de chat clasic. Un asistent AI care înțelege business-ul tău."
+            benefits={[
+                {
+                    title: 'Suport 24/7 Non-Stop',
+                    description: 'Chatbotul răspunde instant, oricând — noaptea, în weekend, de sărbători. Clienții tăi nu mai așteaptă niciodată.',
+                    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`,
+                    stat: { icon: '⏰', text: '24/7 activ' }
+                },
+                {
+                    title: 'Antrenat pe Datele Tale',
+                    description: 'Importăm documente, FAQ-uri, cataloage de produse și procese interne. Chatbotul știe tot ce știe echipa ta.',
+                    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="14" y2="11"/></svg>`,
+                    stat: { icon: '🧠', text: 'Knowledge base' }
+                },
+                {
+                    title: 'Multi-Canal',
+                    description: 'Website, WhatsApp, Facebook Messenger, Instagram — un singur chatbot, toate canalele. Experiență consistentă peste tot.',
+                    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 9h8"/><path d="M8 13h6"/></svg>`,
+                    stat: { icon: '💬', text: 'Omnichannel' }
+                },
+                {
+                    title: 'Setup în 48h',
+                    description: 'De la brief la chatbot funcțional în maxim 48 de ore. Nu săptămâni de dezvoltare, nu echipe de ingineri.',
+                    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`,
+                    stat: { icon: '⚡', text: '48h go-live' }
+                },
+                {
+                    title: 'Modele AI Premium',
+                    description: 'Powered by GPT-4o, Claude și modele open-source. Alegem modelul optim pentru use case-ul tău — acuratețe maximă.',
+                    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a4 4 0 0 1 4 4c0 1.95-1.4 3.58-3.25 3.93L12 22"/><path d="M12 2a4 4 0 0 0-4 4c0 1.95 1.4 3.58 3.25 3.93"/><circle cx="12" cy="6" r="1"/></svg>`,
+                    stat: { icon: '🤖', text: 'GPT-4o & Claude' }
+                },
+                {
+                    title: 'GDPR Compliant',
+                    description: 'Date procesate în EU, encryption end-to-end, consimțământ utilizator, data retention configurabil. 100% conform GDPR.',
+                    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>`,
+                    stat: { icon: '🔒', text: '100% GDPR' }
+                }
+            ]}
+        />
+
+        <!-- S4: Vendor Failures — De ce chatbotul tău actual nu funcționează -->
+        <VendorFailures
+            title="De ce chatbotul tău actual nu funcționează."
+            subtitle="Și ce facem diferit cu AI antrenat pe datele tale."
+            solutionLabel="WEBSEM:"
+            comparisons={[
+                { problem: 'Răspunsuri generice — „nu am înțeles întrebarea"', solution: 'AI antrenat pe FAQ-urile, produsele și procesele tale — răspunsuri precise și contextuale' },
+                { problem: 'Doar butoane și meniuri — zero inteligență', solution: 'Conversație naturală cu GPT-4o — înțelege intent, context și nuanțe' },
+                { problem: 'Nu știe nimic despre business-ul tău', solution: 'Knowledge base importat din documente, site, catalog — știe tot ce știe echipa ta' },
+                { problem: 'Funcționează doar pe website', solution: 'WhatsApp, Messenger, Instagram, website — un chatbot, toate canalele' },
+                { problem: 'Setup complex — săptămâni de configurare', solution: 'Live în 48h — import date, antrenare AI, deploy pe toate canalele' },
+                { problem: 'Nu generează lead-uri, doar consumă buget', solution: 'Colectează date de contact, califică lead-uri, programează întâlniri automat' }
+            ]}
+        />
+
+        <!-- S5: Features — Ce poate face chatbotul tău -->
+        <FeaturesSection
+            title='Ce poate face <span class="brand">chatbotul tău AI</span>'
+            subtitle="Nu doar răspunde la întrebări — vinde, suportă și automatizează"
+            features={[
+                {
+                    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>`,
+                    title: 'Suport Clienți Automat',
+                    description: 'Răspunde la întrebări frecvente, rezolvă probleme standard și escaladează doar cazurile complexe către echipa ta.'
+                },
+                {
+                    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
+                    title: 'Generare Lead-uri',
+                    description: 'Colectează date de contact, califică prospecți pe baza conversației și trimite lead-urile direct în CRM-ul tău.'
+                },
+                {
+                    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/></svg>`,
+                    title: 'Programare Întâlniri',
+                    description: 'Se integrează cu Google Calendar și propune automat slot-uri libere. Clientul programează fără email-uri back-and-forth.'
+                },
+                {
+                    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>`,
+                    title: 'Recomandări Produse',
+                    description: 'Analizează nevoile clientului din conversație și recomandă produse sau servicii relevante — ca un consultant de vânzări.'
+                },
+                {
+                    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-6"/></svg>`,
+                    title: 'Analytics & Insights',
+                    description: 'Dashboard cu cele mai frecvente întrebări, sentiment analysis, rate de rezolvare și oportunități de îmbunătățire.'
+                },
+                {
+                    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>`,
+                    title: 'Handoff către Echipă',
+                    description: 'Când chatbotul nu poate rezolva, transferă conversația live la un agent uman — cu tot contextul conversației.'
+                }
+            ]}
+        />
+
+        <!-- S6: Proces — Cum implementăm -->
+        <ProcessSection
+            title="Cum implementăm chatbotul tău AI"
+            subtitle="De la idee la chatbot funcțional în 3 pași simpli"
+            steps={[
+                {
+                    number: 1,
+                    title: 'Workshop & Discovery',
+                    description: 'Analizăm business-ul tău, identificăm use case-urile prioritare și colectăm datele pentru antrenare: FAQ-uri, documente, cataloage, procese.',
+                    duration: 'Ziua 1'
+                },
+                {
+                    number: 2,
+                    title: 'Antrenare & Configurare',
+                    description: 'Importăm knowledge base-ul, configurăm fluxurile conversaționale, antrenăm AI-ul pe datele tale și setăm integrările (CRM, calendar, canale).',
+                    duration: 'Ziua 1-2'
+                },
+                {
+                    number: 3,
+                    title: 'Go Live & Optimizare',
+                    description: 'Lansăm chatbotul pe toate canalele, monitorizăm primele conversații, ajustăm răspunsurile și optimizăm continuu pe baza datelor reale.',
+                    duration: 'Ziua 2+'
+                }
+            ]}
+        />
+
+        <!-- S7: Pricing -->
+        <PricingSection
+            title="Pachete & Prețuri"
+            subtitle="Chatbot AI enterprise. Investiție predictibilă."
+            note="Toate pachetele includ: antrenare inițială, setup canale, 30 zile suport post-lansare și dashboard analytics. Prețurile sunt orientative și pot fi ajustate în funcție de complexitate."
+            tiers={[
+                {
+                    name: 'Starter',
+                    price: '€1,500',
+                    priceNote: 'setup + €99/lună',
+                    description: 'Chatbot AI de bază pentru website — suport clienți și FAQ automat.',
+                    featureGroups: [
+                        {
+                            label: 'Capabilități AI',
+                            items: [
+                                'Chatbot AI antrenat pe datele tale',
+                                'Până la 1.000 conversații / lună',
+                                'Knowledge base — până la 50 documente',
+                                'Răspunsuri în limba română și engleză'
+                            ]
+                        },
+                        {
+                            label: 'Canale & Integrări',
+                            items: [
+                                'Widget chat pe website',
+                                'Notificări email la lead-uri noi',
+                                'Dashboard analytics de bază'
+                            ]
+                        }
+                    ],
+                    timeline: 'Go live: 48h',
+                    highlighted: false
+                },
+                {
+                    name: 'Business',
+                    price: '€3,500',
+                    priceNote: 'setup + €199/lună',
+                    description: 'Chatbot AI multi-canal cu integrări CRM și generare lead-uri.',
+                    featureGroups: [
+                        {
+                            label: 'Tot ce include Starter, plus',
+                            items: [
+                                'Conversații nelimitate',
+                                'Knowledge base nelimitat',
+                                'WhatsApp + Facebook Messenger',
+                                'Generare și calificare lead-uri'
+                            ]
+                        },
+                        {
+                            label: 'Integrări & Analytics',
+                            items: [
+                                'Integrare CRM (HubSpot, Pipedrive)',
+                                'Programare întâlniri (Google Calendar)',
+                                'Analytics avansat + sentiment analysis',
+                                'Handoff live la agent uman'
+                            ]
+                        }
+                    ],
+                    timeline: 'Go live: 3-5 zile',
+                    highlighted: true
+                },
+                {
+                    name: 'Enterprise',
+                    price: 'La cerere',
+                    description: 'Soluție AI completă cu integrări custom, multi-brand și SLA dedicat.',
+                    featureGroups: [
+                        {
+                            label: 'Tot ce include Business, plus',
+                            items: [
+                                'Modele AI custom (fine-tuning)',
+                                'Multi-brand / multi-departament',
+                                'Integrări custom API',
+                                'SSO & role-based access'
+                            ]
+                        },
+                        {
+                            label: 'Enterprise',
+                            items: [
+                                'SLA & suport dedicat 24/7',
+                                'On-premise deployment opțional',
+                                'Training echipă inclusiv',
+                                'Account manager dedicat'
+                            ]
+                        }
+                    ],
+                    timeline: 'Timeline: custom',
+                    highlighted: false
+                }
+            ]}
+        />
+
+        <!-- S8: CTA Final -->
+        <CtaSection
+            title="Clienții tăi așteaptă răspunsuri. Chatbotul nu."
+            subtitle="Solicită o demonstrație gratuită și vezi chatbotul tău AI în acțiune — antrenat pe datele tale, live în 48h."
+            buttonText="Solicită Demo Gratuită"
+            note="Fără obligații. Demo funcțional pe datele tale în 48h."
+        />
+    </div>
+
+    <!-- Booking Modal -->
+    <BookingModal
+        title="Solicită Demo Chatbot AI"
+        subtitle="Completează formularul și configurăm un chatbot de test pe datele tale în 48h"
+    />
+</LandingPage>
+
+<style is:global>
+    /* Chatbot AI scoped color palette — Green-Cyan */
+    .chatbot-page {
+        --cb-primary: #10B981;
+        --cb-primary-light: #34D399;
+        --cb-secondary: #06B6D4;
+        --cb-primary-glow: rgba(16, 185, 129, 0.3);
+        --cb-gradient: linear-gradient(135deg, #10B981, #06B6D4);
+    }
+
+    [data-theme="light"] .chatbot-page {
+        --cb-primary-glow: rgba(16, 185, 129, 0.15);
+    }
+
+    /* Override Hero for green-cyan theme */
+    .chatbot-page .hero .floating-stat-value {
+        background: linear-gradient(135deg, #10B981, #06B6D4);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .chatbot-page .hero-label {
+        border-color: rgba(16, 185, 129, 0.3);
+        background: rgba(16, 185, 129, 0.08);
+    }
+
+    .chatbot-page .hero-title .gradient {
+        background: linear-gradient(135deg, #10B981, #06B6D4);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    /* Override BenefitsSection stat icon */
+    .chatbot-page .benefit-card-stat-icon {
+        background: rgba(16, 185, 129, 0.15);
+        color: #10B981;
+    }
+
+    .chatbot-page .benefit-card-visual-placeholder {
+        border-color: rgba(16, 185, 129, 0.2);
+        color: #10B981;
+    }
+
+    .chatbot-page .benefit-card:hover {
+        border-color: rgba(16, 185, 129, 0.25);
+        box-shadow: 0 8px 30px rgba(16, 185, 129, 0.12);
+    }
+
+    /* Override VendorFailures for green-cyan */
+    .chatbot-page .comparison-solution-label {
+        color: #10B981;
+    }
+
+    .chatbot-page .comparison-card:hover {
+        border-color: rgba(16, 185, 129, 0.25);
+        box-shadow: 0 8px 30px rgba(16, 185, 129, 0.12);
+    }
+
+    /* Override FeaturesSection for green-cyan */
+    .chatbot-page .feature-card:hover {
+        border-color: rgba(16, 185, 129, 0.25);
+        box-shadow: 0 8px 30px rgba(16, 185, 129, 0.12);
+    }
+
+    .chatbot-page .feature-card-icon {
+        border-color: rgba(16, 185, 129, 0.2);
+        color: #10B981;
+    }
+
+    /* Override pricing for green-cyan theme */
+    .chatbot-page .pricing-card--highlighted {
+        border-color: rgba(16, 185, 129, 0.3);
+        box-shadow: 0 0 30px rgba(16, 185, 129, 0.15);
+    }
+
+    .chatbot-page .pricing-card--highlighted:hover {
+        box-shadow: 0 0 30px rgba(16, 185, 129, 0.25), var(--shadow-lg);
+    }
+
+    .chatbot-page .pricing-badge {
+        background: linear-gradient(135deg, #10B981, #06B6D4);
+    }
+
+    .chatbot-page .pricing-price {
+        background: linear-gradient(135deg, #10B981, #06B6D4);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .chatbot-page .pricing-card--highlighted .pricing-cta {
+        background: linear-gradient(135deg, #10B981, #0e9e6f);
+    }
+
+    .chatbot-page .pricing-card--highlighted .pricing-cta:hover {
+        box-shadow: 0 0 30px rgba(16, 185, 129, 0.4);
+    }
+
+    .chatbot-page .pricing-card:hover {
+        border-color: rgba(16, 185, 129, 0.2);
+    }
+
+    .chatbot-page .pricing-cta:hover {
+        border-color: rgba(16, 185, 129, 0.5);
+        box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+    }
+
+    .chatbot-page .feature-group-label {
+        color: #10B981;
+    }
+
+    .chatbot-page .pricing-features li svg {
+        color: #10B981;
+    }
+
+    /* Override CTA section for green-cyan theme */
+    .chatbot-page .cta-btn {
+        background: linear-gradient(135deg, #10B981, #06B6D4);
+    }
+
+    .chatbot-page .cta-btn:hover {
+        box-shadow: 0 0 30px rgba(16, 185, 129, 0.4);
+    }
+
+    /* Override audit form submit for green-cyan theme */
+    .chatbot-page .audit-form-submit {
+        background: linear-gradient(135deg, #10B981, #06B6D4);
+    }
+
+    .chatbot-page .audit-form-submit:hover {
+        box-shadow: 0 0 25px rgba(16, 185, 129, 0.4);
+    }
+
+    .chatbot-page .audit-form-field input:focus {
+        border-color: rgba(16, 185, 129, 0.5);
+        box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+    }
+
+    /* Override ProcessSection for green-cyan */
+    .chatbot-page .process-step-number {
+        background: linear-gradient(135deg, #10B981, #06B6D4);
+    }
+
+    .chatbot-page .process-connector {
+        background: linear-gradient(90deg, #10B981, #06B6D4);
+    }
+</style>
