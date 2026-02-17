@@ -29,7 +29,11 @@ const blogCollection = defineCollection({
       'ai',
       'email-outreach',
       'case-study',
-      'tutorial'
+      'tutorial',
+      'chatbot-ai',
+      'outreach',
+      'market-command',
+      'platforme'
     ]).default('marketing'),
 
     tags: z.array(z.string()).default([]),

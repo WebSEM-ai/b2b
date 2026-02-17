@@ -33,10 +33,27 @@ const getReadingTime = (body: string) => {
 
 // Format category for display
 const formatCategory = (category: string) => {
-    return category.split('-').map(word =>
+    const labels: Record<string, string> = {
+        'chatbot-ai': 'Chatbot AI',
+        'outreach': 'Outreach',
+        'market-command': 'Market Command',
+        'platforme': 'Platforme',
+        'seo': 'SEO',
+        'lead-generation': 'Lead Generation',
+        'b2b-sales': 'B2B Sales',
+        'marketing': 'Marketing',
+        'ai': 'AI',
+        'email-outreach': 'Email Outreach',
+        'case-study': 'Case Study',
+        'tutorial': 'Tutorial',
+    };
+    return labels[category] || category.split('-').map(word =>
         word.charAt(0).toUpperCase() + word.slice(1)
     ).join(' ');
 };
+
+// Get unique categories from posts
+const allCategories = [...new Set(posts.map(post => post.data.category))];
 ---
 
 <LandingPage
@@ -61,6 +78,18 @@ const formatCategory = (category: string) => {
         </div>
     </section>
 
+    <!-- Category Filter -->
+    <section class="category-filter">
+        <div class="filter-container">
+            <div class="filter-scroll">
+                <button class="filter-pill active" data-filter="all">Toate</button>
+                {allCategories.map(cat => (
+                    <button class="filter-pill" data-filter={cat}>{formatCategory(cat)}</button>
+                ))}
+            </div>
+        </div>
+    </section>
+
     <!-- Featured Posts -->
     {featuredPosts.length > 0 && (
         <section class="featured-section">
@@ -70,8 +99,8 @@ const formatCategory = (category: string) => {
                     <div class="section-line"></div>
                 </div>
                 <div class="featured-grid">
-                    {featuredPosts.slice(0, 2).map(post => (
-                        <article class="featured-card">
+                    {featuredPosts.slice(0, 4).map(post => (
+                        <article class="featured-card" data-category={post.data.category}>
                             <a href={`/blog/${post.slug}`} class="featured-image">
                                 {post.data.heroImage ? (
                                     <>
@@ -146,7 +175,7 @@ const formatCategory = (category: string) => {
             {posts.length > 0 ? (
                 <div class="posts-grid">
                     {(featuredPosts.length > 0 ? regularPosts : posts).map(post => (
-                        <article class="post-card">
+                        <article class="post-card" data-category={post.data.category}>
                             <a href={`/blog/${post.slug}`} class="post-image">
                                 {post.data.heroImage ? (
                                     <>
@@ -302,6 +331,56 @@ const formatCategory = (category: string) => {
         font-size: 1.15rem;
         color: var(--text-tertiary);
         line-height: 1.6;
+    }
+
+    /* Category Filter */
+    .category-filter {
+        padding: 0 2rem;
+    }
+
+    .filter-container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .filter-scroll {
+        display: flex;
+        gap: 0.5rem;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        padding-bottom: 0.5rem;
+    }
+
+    .filter-scroll::-webkit-scrollbar {
+        display: none;
+    }
+
+    .filter-pill {
+        flex-shrink: 0;
+        padding: 0.5rem 1.15rem;
+        border-radius: 50px;
+        border: 1px solid var(--border-medium);
+        background: var(--bg-card);
+        color: var(--text-tertiary);
+        font-size: 0.8rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        white-space: nowrap;
+        font-family: inherit;
+    }
+
+    .filter-pill:hover {
+        border-color: var(--accent-light);
+        color: var(--accent-light);
+    }
+
+    .filter-pill.active {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #ffffff;
     }
 
     /* Section Styles */
@@ -817,3 +896,58 @@ const formatCategory = (category: string) => {
         }
     }
 </style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const pills = document.querySelectorAll('.filter-pill');
+        const featuredCards = document.querySelectorAll('.featured-card');
+        const postCards = document.querySelectorAll('.post-card');
+        const featuredSection = document.querySelector('.featured-section');
+        const postsSection = document.querySelector('.posts-section');
+
+        pills.forEach(pill => {
+            pill.addEventListener('click', () => {
+                const filter = pill.getAttribute('data-filter');
+
+                // Update active pill
+                pills.forEach(p => p.classList.remove('active'));
+                pill.classList.add('active');
+
+                if (filter === 'all') {
+                    // Show everything
+                    featuredCards.forEach(card => {
+                        (card as HTMLElement).style.display = '';
+                    });
+                    postCards.forEach(card => {
+                        (card as HTMLElement).style.display = '';
+                    });
+                    if (featuredSection) (featuredSection as HTMLElement).style.display = '';
+                } else {
+                    // Filter featured cards
+                    let visibleFeatured = 0;
+                    featuredCards.forEach(card => {
+                        if (card.getAttribute('data-category') === filter) {
+                            (card as HTMLElement).style.display = '';
+                            visibleFeatured++;
+                        } else {
+                            (card as HTMLElement).style.display = 'none';
+                        }
+                    });
+                    // Hide featured section if no matches
+                    if (featuredSection) {
+                        (featuredSection as HTMLElement).style.display = visibleFeatured === 0 ? 'none' : '';
+                    }
+
+                    // Filter regular post cards
+                    postCards.forEach(card => {
+                        if (card.getAttribute('data-category') === filter) {
+                            (card as HTMLElement).style.display = '';
+                        } else {
+                            (card as HTMLElement).style.display = 'none';
+                        }
+                    });
+                }
+            });
+        });
+    });
+</script>
