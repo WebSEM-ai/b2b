@@ -33,7 +33,8 @@ const blogCollection = defineCollection({
       'chatbot-ai',
       'outreach',
       'market-command',
-      'platforme'
+      'platforme',
+      'pharma'
     ]).default('marketing'),
 
     tags: z.array(z.string()).default([]),
