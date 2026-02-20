@@ -1,0 +1,325 @@
+{
+  "defaultAuthor": "WebSEM Pharma",
+  "topics": [
+    {
+      "id": "001",
+      "subject": "Biodisponibilitatea magneziului: comparație citrat vs bisglichinat vs oxid",
+      "hints": {
+        "angle": "deep-analysis",
+        "targetAudience": "farmaciști, consumatori informați",
+        "keyPoints": [
+          "Comparație absorbție intestinală per formă",
+          "Cost per mg absorbit efectiv",
+          "Recomandări pe segmente de populație"
+        ]
+      },
+      "status": "published",
+      "publishedDate": "2026-02-20",
+      "slug": "biodisponibilitatea-magneziului-citrat-vs-bisglichinat-vs-oxid"
+    },
+    {
+      "id": "002",
+      "subject": "Probioticele de ultimă generație: tulpini spore-forming vs lactobacili tradiționali",
+      "hints": {
+        "angle": "comparative-review",
+        "targetAudience": "farmaciști, medici de familie",
+        "keyPoints": [
+          "Rezistență la acid gastric și bilă",
+          "Evidențe clinice pentru Bacillus coagulans vs Lactobacillus rhamnosus",
+          "Criterii de selecție pentru practicienii din farmacie"
+        ]
+      },
+      "status": "pending",
+      "publishedDate": null,
+      "slug": null
+    },
+    {
+      "id": "003",
+      "subject": "Vitamina D3 și K2: sinergia esențială pe care mulți o ignoră",
+      "hints": {
+        "angle": "educational",
+        "targetAudience": "consumatori health-conscious, farmaciști",
+        "keyPoints": [
+          "Mecanismul sinergic D3-K2 în metabolismul calciului",
+          "Riscuri ale suplimentării cu D3 fără K2",
+          "Doze optime și raportul recomandat"
+        ]
+      },
+      "status": "pending",
+      "publishedDate": null,
+      "slug": null
+    },
+    {
+      "id": "004",
+      "subject": "Coenzima Q10: ubiquinonă vs ubiquinol — ce contează cu adevărat",
+      "hints": {
+        "angle": "myth-busting",
+        "targetAudience": "consumatori 40+, cardiologi, farmaciști",
+        "keyPoints": [
+          "Diferența biochimică între cele două forme",
+          "Impactul vârstei asupra conversiei",
+          "Interacțiuni cu statine și alte medicamente"
+        ]
+      },
+      "status": "pending",
+      "publishedDate": null,
+      "slug": null
+    },
+    {
+      "id": "005",
+      "subject": "Omega-3: ulei de pește vs ulei de krill vs alge — ghid complet de alegere",
+      "hints": {
+        "angle": "buyer-guide",
+        "targetAudience": "consumatori, farmaciști, nutriționiști",
+        "keyPoints": [
+          "Concentrație EPA/DHA per sursă",
+          "Sustenabilitate și contaminare cu metale grele",
+          "Fosfolipide vs trigliceride — absorbție reală"
+        ]
+      },
+      "status": "pending",
+      "publishedDate": null,
+      "slug": null
+    },
+    {
+      "id": "006",
+      "subject": "Fierul în suplimente: bisglichinat vs sulfat feros — tolerabilitate și eficacitate",
+      "hints": {
+        "angle": "clinical-comparison",
+        "targetAudience": "medici, farmaciști, femei de vârstă reproductivă",
+        "keyPoints": [
+          "Profile de efecte adverse gastrointestinale",
+          "Rate de absorbție și factori inhibitori",
+          "Protocoale de administrare optimă"
+        ]
+      },
+      "status": "pending",
+      "publishedDate": null,
+      "slug": null
+    },
+    {
+      "id": "007",
+      "subject": "Adaptogenii în farmacia modernă: ashwagandha, rhodiola și evidențele clinice",
+      "hints": {
+        "angle": "evidence-review",
+        "targetAudience": "farmaciști, consumatori stresați",
+        "keyPoints": [
+          "Mecanisme de acțiune pe axa HPA",
+          "Studii clinice randomizate disponibile",
+          "Doze standardizate și contraindicații"
+        ]
+      },
+      "status": "pending",
+      "publishedDate": null,
+      "slug": null
+    },
+    {
+      "id": "008",
+      "subject": "Colageul hidrolizat: tipuri I, II, III — ce spune știința despre eficacitate",
+      "hints": {
+        "angle": "science-review",
+        "targetAudience": "consumatori, dermatologi, farmaciști",
+        "keyPoints": [
+          "Diferențe între tipurile de colagen și indicații",
+          "Dovezi pentru sănătatea pielii, articulațiilor și oaselor",
+          "Surse marine vs bovine vs aviare"
+        ]
+      },
+      "status": "pending",
+      "publishedDate": null,
+      "slug": null
+    },
+    {
+      "id": "009",
+      "subject": "Curcumina și problema biodisponibilității: soluții tehnologice moderne",
+      "hints": {
+        "angle": "technology-focus",
+        "targetAudience": "farmaciști, consumatori informați",
+        "keyPoints": [
+          "De ce curcumina pură se absoarbe slab",
+          "Tehnologii: piperina, fitosomi, nanoparticule, micele",
+          "Comparație eficacitate între formulări comerciale"
+        ]
+      },
+      "status": "pending",
+      "publishedDate": null,
+      "slug": null
+    },
+    {
+      "id": "010",
+      "subject": "Zincul în imunitate: forme, doze și momentul optim de administrare",
+      "hints": {
+        "angle": "practical-guide",
+        "targetAudience": "farmaciști, consumatori, medici de familie",
+        "keyPoints": [
+          "Zinc picolinat vs gluconat vs acetat — absorbție",
+          "Rolul zincului în imunitatea înnăscută și adaptativă",
+          "Protocoale sezoniere și riscul supradozării"
+        ]
+      },
+      "status": "pending",
+      "publishedDate": null,
+      "slug": null
+    },
+    {
+      "id": "011",
+      "subject": "Melatonina: doze mici vs doze mari — ce arată noile studii",
+      "hints": {
+        "angle": "dose-analysis",
+        "targetAudience": "consumatori cu tulburări de somn, farmaciști",
+        "keyPoints": [
+          "Paradoxul dozei: de ce 0.3mg poate fi mai eficient decât 5mg",
+          "Formule cu eliberare prelungită vs imediată",
+          "Utilizare pe termen lung: siguranță și dependență"
+        ]
+      },
+      "status": "pending",
+      "publishedDate": null,
+      "slug": null
+    },
+    {
+      "id": "012",
+      "subject": "Enzimele digestive: când sunt necesare și cum să le alegi corect",
+      "hints": {
+        "angle": "clinical-guide",
+        "targetAudience": "farmaciști, gastroenterologi, consumatori",
+        "keyPoints": [
+          "Tipuri de enzime și specificitate de substrat",
+          "Indicații reale vs marketing — lipaza, proteaza, amilaza",
+          "Pancreatina vs enzime de origine fungică"
+        ]
+      },
+      "status": "pending",
+      "publishedDate": null,
+      "slug": null
+    },
+    {
+      "id": "013",
+      "subject": "Vitaminele B complex: formele active vs formele sintetice — merită diferența de preț?",
+      "hints": {
+        "angle": "value-analysis",
+        "targetAudience": "consumatori, farmaciști",
+        "keyPoints": [
+          "Metilfolat vs acid folic — polimorfismul MTHFR",
+          "Metilcobalamina vs cianocobalamina",
+          "P5P vs piridoxina — relevanță clinică reală"
+        ]
+      },
+      "status": "pending",
+      "publishedDate": null,
+      "slug": null
+    },
+    {
+      "id": "014",
+      "subject": "Silimarina și hepatoprotecția: mit sau realitate farmacologică",
+      "hints": {
+        "angle": "myth-busting",
+        "targetAudience": "farmaciști, hepatologi, consumatori",
+        "keyPoints": [
+          "Mecanisme de acțiune la nivel hepatocitar",
+          "Studii clinice în steatoză, hepatită și ciroză",
+          "Formulări cu biodisponibilitate crescută"
+        ]
+      },
+      "status": "pending",
+      "publishedDate": null,
+      "slug": null
+    },
+    {
+      "id": "015",
+      "subject": "Glucozamina și condroitina: actualizare 2026 a evidențelor pentru sănătatea articulară",
+      "hints": {
+        "angle": "evidence-update",
+        "targetAudience": "farmaciști, reumatologi, pacienți cu artroză",
+        "keyPoints": [
+          "Meta-analize recente și rezultate contradictorii",
+          "Sulfat vs clorhidrat de glucozamină",
+          "Alternative emergente: colagen tip II nedenaturat, MSM"
+        ]
+      },
+      "status": "pending",
+      "publishedDate": null,
+      "slug": null
+    },
+    {
+      "id": "016",
+      "subject": "Prebioticele de nouă generație: FOS, GOS, HMO — ghid pentru farmaciști",
+      "hints": {
+        "angle": "professional-guide",
+        "targetAudience": "farmaciști, nutriționiști",
+        "keyPoints": [
+          "Specificitate de fermentare per tip de prebiotic",
+          "HMO-uri sintetice — revoluția din nutriția infantilă",
+          "Combinații sinergice prebiotic-probiotic"
+        ]
+      },
+      "status": "pending",
+      "publishedDate": null,
+      "slug": null
+    },
+    {
+      "id": "017",
+      "subject": "Seleniul: oligoelementul cu fereastră terapeutică îngustă",
+      "hints": {
+        "angle": "safety-focus",
+        "targetAudience": "farmaciști, endocrinologi, consumatori",
+        "keyPoints": [
+          "Selenometionina vs selenit de sodiu — metabolizare",
+          "Rolul în funcția tiroidiană și imunitate",
+          "Pragul toxic și simptomele selenozei"
+        ]
+      },
+      "status": "pending",
+      "publishedDate": null,
+      "slug": null
+    },
+    {
+      "id": "018",
+      "subject": "NAC (N-acetilcisteina): de la antidot la supliment — utilizări off-label",
+      "hints": {
+        "angle": "deep-dive",
+        "targetAudience": "farmaciști, psihiatri, pneumologi",
+        "keyPoints": [
+          "Mecanism de acțiune: precursor al glutationului",
+          "Utilizări în psihiatrie, pneumologie, fertilitate",
+          "Controversa retragerii din SUA ca supliment alimentar"
+        ]
+      },
+      "status": "pending",
+      "publishedDate": null,
+      "slug": null
+    },
+    {
+      "id": "019",
+      "subject": "Interacțiuni suplimente-medicamente: cele mai frecvente 10 combinații periculoase",
+      "hints": {
+        "angle": "safety-alert",
+        "targetAudience": "farmaciști, medici, consumatori",
+        "keyPoints": [
+          "Vitamina K și anticoagulante",
+          "Sunătoarea și antidepresive/contraceptive",
+          "Calciu/magneziu și antibiotice — timing-ul administrării"
+        ]
+      },
+      "status": "pending",
+      "publishedDate": null,
+      "slug": null
+    },
+    {
+      "id": "020",
+      "subject": "Acidul hialuronic oral: promisiuni de marketing vs evidențe științifice",
+      "hints": {
+        "angle": "critical-review",
+        "targetAudience": "consumatori, dermatologi, farmaciști",
+        "keyPoints": [
+          "Greutate moleculară și absorbție orală — ce arată studiile",
+          "Comparație cu acidul hialuronic topic și injectabil",
+          "Cost-eficiența suplimentării orale"
+        ]
+      },
+      "status": "pending",
+      "publishedDate": null,
+      "slug": null
+    }
+  ]
+}
