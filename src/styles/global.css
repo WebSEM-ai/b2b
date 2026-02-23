@@ -192,6 +192,131 @@ body {
     width: 100%;
 }
 
+/* ============================================
+   NAVIGATION DROPDOWN
+   ============================================ */
+.nav-dropdown {
+    position: relative;
+}
+
+.nav-link--dropdown {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.nav-dropdown-arrow {
+    width: 10px;
+    height: 10px;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+}
+
+.nav-dropdown:hover .nav-dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+.nav-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 0.75rem);
+    left: 50%;
+    transform: translateX(-50%) translateY(4px);
+    min-width: 180px;
+    background: var(--bg-nav-scrolled);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border-medium);
+    border-radius: 12px;
+    padding: 0.5rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: var(--shadow-lg);
+    z-index: 100;
+}
+
+.nav-dropdown-menu::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid var(--border-medium);
+}
+
+.nav-dropdown:hover .nav-dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+.nav-dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1rem;
+    color: var(--text-tertiary);
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.nav-dropdown-item:hover {
+    color: var(--text-primary);
+    background: var(--bg-card-hover);
+}
+
+@media (max-width: 900px) {
+    .nav-dropdown {
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-link--dropdown {
+        justify-content: center;
+    }
+
+    .nav-dropdown-menu {
+        position: static;
+        transform: none;
+        opacity: 0;
+        visibility: hidden;
+        max-height: 0;
+        overflow: hidden;
+        padding: 0;
+        border: none;
+        box-shadow: none;
+        background: transparent;
+        backdrop-filter: none;
+        transition: all 0.3s ease;
+    }
+
+    .nav-dropdown-menu::before {
+        display: none;
+    }
+
+    .nav-dropdown.active .nav-dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+        max-height: 200px;
+        padding: 0.5rem 0;
+    }
+
+    .nav-dropdown.active .nav-dropdown-arrow {
+        transform: rotate(180deg);
+    }
+
+    .nav-dropdown-item {
+        justify-content: center;
+        font-size: 0.9rem;
+    }
+}
+
 /* Premium CTA Button */
 .nav-cta {
     position: relative;

@@ -1,9 +1,12 @@
 ---
+interface NavLink {
+    text: string;
+    href: string;
+    children?: Array<{ text: string; href: string }>;
+}
+
 interface Props {
-    links?: Array<{
-        text: string;
-        href: string;
-    }>;
+    links?: NavLink[];
     ctaText?: string;
 }
 
@@ -11,6 +14,9 @@ const {
     links = [
         { text: 'Outreach', href: '/' },
         { text: 'Market Command', href: '/market-command' },
+        { text: 'Niche Domination', href: '/niche-domination/pharma', children: [
+            { text: 'Pharma', href: '/niche-domination/pharma' }
+        ]},
         { text: 'Platforme', href: '/platforme' },
         { text: 'Chatbot AI', href: '/chatbot-ai' },
         { text: 'Blog', href: '/blog' },
@@ -43,7 +49,23 @@ const {
 
         <div class="nav-links" id="nav-links">
             {links.map(link => (
-                <a href={link.href} class="nav-link">{link.text}</a>
+                link.children ? (
+                    <div class="nav-dropdown">
+                        <a href={link.href} class="nav-link nav-link--dropdown">
+                            {link.text}
+                            <svg class="nav-dropdown-arrow" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                        <div class="nav-dropdown-menu">
+                            {link.children.map(child => (
+                                <a href={child.href} class="nav-dropdown-item">{child.text}</a>
+                            ))}
+                        </div>
+                    </div>
+                ) : (
+                    <a href={link.href} class="nav-link">{link.text}</a>
+                )
             ))}
             <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
                 <!-- Moon icon - shown in light mode -->
@@ -116,10 +138,28 @@ const {
         navLinks?.classList.toggle('active');
     });
 
-    // Close mobile menu on link click
-    document.querySelectorAll('.nav-link').forEach(link => {
+    // Close mobile menu on link click (except dropdown triggers)
+    document.querySelectorAll('.nav-link:not(.nav-link--dropdown)').forEach(link => {
         link.addEventListener('click', () => {
             navLinks?.classList.remove('active');
+        });
+    });
+
+    // Close mobile menu on dropdown item click
+    document.querySelectorAll('.nav-dropdown-item').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks?.classList.remove('active');
+        });
+    });
+
+    // Mobile dropdown toggle
+    document.querySelectorAll('.nav-link--dropdown').forEach(trigger => {
+        trigger.addEventListener('click', (e) => {
+            if (window.innerWidth <= 900) {
+                e.preventDefault();
+                const dropdown = trigger.closest('.nav-dropdown');
+                dropdown?.classList.toggle('active');
+            }
         });
     });
 

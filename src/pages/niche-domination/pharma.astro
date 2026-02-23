@@ -1,0 +1,1199 @@
+---
+import LandingPage from '../../layouts/LandingPage.astro';
+import Hero from '../../components/Hero.astro';
+import ClientsCarousel from '../../components/ClientsCarousel.astro';
+import TabSection from '../../components/TabSection.astro';
+import BenefitsSection from '../../components/BenefitsSection.astro';
+import PricingSection from '../../components/PricingSection.astro';
+import CtaSection from '../../components/CtaSection.astro';
+import BookingModal from '../../components/BookingModal.astro';
+
+const pageTitle = "Niche Domination — Pharma Intelligence | WebSEM";
+const pageDescription = "Analiză competitivă AI-powered pentru industria pharma. Identificăm nișe nevalorificate, gap-uri de comunicare și strategii disruptive care duc la monopol de segment.";
+---
+
+<LandingPage
+    title={pageTitle}
+    description={pageDescription}
+    footerCtaBadge="Niche Domination — Pharma"
+    footerCtaTitle='Competitorii tăi nu știu ce <span class="gradient-text">nu știu</span>.'
+    footerCtaSubtitle='Solicită un <strong>audit competițional gratuit</strong> și vezi exact unde sunt breșele pe care nimeni nu le exploatează.'
+    footerCtaStats={[
+        { value: 'AI', label: 'Deep Analysis' },
+        { value: '48h', label: 'Raport Inițial' },
+        { value: '∞', label: 'Avantaj Competitiv' }
+    ]}
+    footerCtaButtonText="Solicită Audit Gratuit"
+    footerCtaDisclaimer="* Auditul inițial este gratuit și confidențial. Analizăm produsul, competiția și piața — livrăm concluzii acționabile, nu generalități."
+>
+    <div class="nd-page">
+        <!-- S1: Hero -->
+        <Hero
+            badge="Niche Domination — Pharma Intelligence"
+            titleLine1='Monopolizează <strong>segmentul</strong>'
+            titleLine2="înainte să o facă alții."
+            subtitle="Analize competitive AI-powered pentru industria pharma. Identificăm exact ce caută consumatorii, ce comunică brandurile — și unde e gap-ul care te face lider de categorie."
+            floatingStats={[
+                { value: 'AI', label: 'Intelligence' },
+                { value: 'GAP', label: 'Analysis' },
+                { value: '→#1', label: 'Categorie' }
+            ]}
+            formTitle="Solicită Audit Competițional"
+            formSubtitle="Analizăm produsul tău vs. piață în 48h"
+        />
+
+        <!-- S2: Clients -->
+        <ClientsCarousel />
+
+        <!-- S3: Problema — Ce Nu Știe Nimeni -->
+        <section class="nd-problem-section">
+            <div class="nd-container">
+                <div class="nd-section-header">
+                    <span class="nd-label">Problema reală</span>
+                    <h2>Brandurile vorbesc o limbă. <br/>Consumatorii caută în alta.</h2>
+                    <p>Am descoperit același pattern în fiecare categorie pharma analizată: există o deconectare masivă între mesajele brandurilor și intenția reală de căutare a consumatorilor.</p>
+                </div>
+
+                <div class="nd-gap-grid">
+                    <div class="nd-gap-card nd-gap-card--brand">
+                        <div class="nd-gap-card-header">
+                            <span class="nd-gap-icon">✕</span>
+                            <h3>Ce comunică brandurile</h3>
+                        </div>
+                        <ul>
+                            <li>Dozaj per capsulă (mg)</li>
+                            <li>Formă chelată / biodisponibilitate</li>
+                            <li>Certificate și origine</li>
+                            <li>Fără efect laxativ</li>
+                            <li>Capsule vegetale / vegane</li>
+                        </ul>
+                        <div class="nd-gap-verdict">Limbajul chimistului.</div>
+                    </div>
+
+                    <div class="nd-gap-divider">
+                        <div class="nd-gap-divider-line"></div>
+                        <span class="nd-gap-divider-label">GAP</span>
+                        <div class="nd-gap-divider-line"></div>
+                    </div>
+
+                    <div class="nd-gap-card nd-gap-card--consumer">
+                        <div class="nd-gap-card-header">
+                            <span class="nd-gap-icon nd-gap-icon--green">→</span>
+                            <h3>Ce caută consumatorii</h3>
+                        </div>
+                        <ul>
+                            <li>"magneziu pentru somn"</li>
+                            <li>"ce magneziu să iau pentru stres"</li>
+                            <li>"de ce am ochii uscați"</li>
+                            <li>"omega 3 cel mai bun pentru colesterol"</li>
+                            <li>"cum scap de crampe musculare"</li>
+                        </ul>
+                        <div class="nd-gap-verdict nd-gap-verdict--green">Limba pacientului.</div>
+                    </div>
+                </div>
+
+                <div class="nd-gap-insight">
+                    <div class="nd-gap-insight-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l.146.146A2 2 0 0114.828 19H9.172a2 2 0 01-1.414-3.414l.146-.146z"/></svg>
+                    </div>
+                    <div>
+                        <strong>Insight-ul care schimbă totul:</strong> Cine deține informația despre simptom deține și vânzarea, înainte ca pacientul să ajungă la farmacie. Primul brand care vorbește pe limba consumatorului câștigă categoria.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- S4: Ce Livrăm — Process -->
+        <section class="nd-process-section">
+            <div class="nd-container">
+                <div class="nd-section-header">
+                    <span class="nd-label">Metodologia</span>
+                    <h2>6 straturi de intelligence. <br/>Zero presupuneri.</h2>
+                    <p>Fiecare audit folosește AI avansat pentru a analiza piața la o profunzime imposibilă manual.</p>
+                </div>
+
+                <div class="nd-process-grid">
+                    <div class="nd-process-card">
+                        <div class="nd-process-number">01</div>
+                        <h3>Hartă Competitivă</h3>
+                        <p>Identificăm <strong>toți jucătorii</strong> din segment: preț, dozaj, formă, canale, vulnerabilități. Nu top 3 — toți.</p>
+                        <div class="nd-process-tag">12+ competitori per categorie</div>
+                    </div>
+                    <div class="nd-process-card">
+                        <div class="nd-process-number">02</div>
+                        <h3>Consumer Search Intelligence</h3>
+                        <p>Ce caută consumatorii români <strong>luna aceasta</strong>. Ce întrebări pun. Ce gap-uri de conținut există. Cine răspunde — și cine nu.</p>
+                        <div class="nd-process-tag">Date reale, nu estimări</div>
+                    </div>
+                    <div class="nd-process-card">
+                        <div class="nd-process-number">03</div>
+                        <h3>Gap Analysis</h3>
+                        <p>Suprapunem mesajele brandurilor peste intențiile consumatorilor. <strong>Gap-urile devin oportunități.</strong></p>
+                        <div class="nd-process-tag">Nișe nevalorificate</div>
+                    </div>
+                    <div class="nd-process-card">
+                        <div class="nd-process-number">04</div>
+                        <h3>LLM & AI Visibility</h3>
+                        <p>Cum răspund ChatGPT, Gemini și Perplexity la întrebările din categorie. <strong>SEO-ul clasic moare.</strong> Pregătim brandul pentru AI search.</p>
+                        <div class="nd-process-tag">Search Generative Experience</div>
+                    </div>
+                    <div class="nd-process-card">
+                        <div class="nd-process-number">05</div>
+                        <h3>Strategie de Dominare</h3>
+                        <p>Planul concret: <strong>ce conținut, ce canale, ce mesaje</strong>. Prioritizat, bugetat, cu timeline de execuție.</p>
+                        <div class="nd-process-tag">Roadmap acționabil</div>
+                    </div>
+                    <div class="nd-process-card">
+                        <div class="nd-process-number">06</div>
+                        <h3>Tactici Disruptive</h3>
+                        <p>Conquesting pe competitori, parteneriate app, quiz-uri interactive, sampling — <strong>ce nu fac agențiile clasice.</strong></p>
+                        <div class="nd-process-tag">Avantaj competitiv real</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- S5: Social Proof — Metrici din auditurile reale -->
+        <section class="nd-proof-section">
+            <div class="nd-container">
+                <div class="nd-section-header">
+                    <span class="nd-label">Rezultate</span>
+                    <h2>Cifre din auditurile noastre.</h2>
+                    <p>Din analizele competitive reale livrate clienților din industria pharma.</p>
+                </div>
+
+                <div class="nd-stats-grid">
+                    <div class="nd-stat-card">
+                        <div class="nd-stat-value">12+</div>
+                        <div class="nd-stat-label">Competitori identificați per categorie</div>
+                    </div>
+                    <div class="nd-stat-card">
+                        <div class="nd-stat-value">47</div>
+                        <div class="nd-stat-label">Gap-uri de comunicare descoperite</div>
+                    </div>
+                    <div class="nd-stat-card">
+                        <div class="nd-stat-value">€726M</div>
+                        <div class="nd-stat-label">Piața suplimentelor RO analizată</div>
+                    </div>
+                    <div class="nd-stat-card">
+                        <div class="nd-stat-value">0</div>
+                        <div class="nd-stat-label">Branduri poziționate corect pe "simptom"</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- S6: TabSection — Diferențiatori -->
+        <TabSection tabs={["Ce Ne Face Diferiți", "Exemple de Output"]} id="nd-differentiators">
+            <div data-tab-panel="0">
+                <div class="nd-diff-section">
+                    <div class="nd-diff-grid">
+                        <div class="nd-diff-card">
+                            <div class="nd-diff-vs">
+                                <span class="nd-diff-vs-old">Agenție clasică</span>
+                                <span class="nd-diff-vs-arrow">→</span>
+                                <span class="nd-diff-vs-new">Niche Domination</span>
+                            </div>
+                            <div class="nd-diff-compare">
+                                <div class="nd-diff-item nd-diff-item--old">
+                                    <span class="nd-diff-x">✕</span>
+                                    Audit SEO generic cu crawl tehnic
+                                </div>
+                                <div class="nd-diff-item nd-diff-item--new">
+                                    <span class="nd-diff-check">✓</span>
+                                    Analiză competitivă pe 6 straturi cu AI
+                                </div>
+                            </div>
+                            <div class="nd-diff-compare">
+                                <div class="nd-diff-item nd-diff-item--old">
+                                    <span class="nd-diff-x">✕</span>
+                                    Raport de 100 pagini pe care nimeni nu-l citește
+                                </div>
+                                <div class="nd-diff-item nd-diff-item--new">
+                                    <span class="nd-diff-check">✓</span>
+                                    Sumar executiv + strategie prioritizată cu buget
+                                </div>
+                            </div>
+                            <div class="nd-diff-compare">
+                                <div class="nd-diff-item nd-diff-item--old">
+                                    <span class="nd-diff-x">✕</span>
+                                    Recomandări generice (optimizează meta title-urile)
+                                </div>
+                                <div class="nd-diff-item nd-diff-item--new">
+                                    <span class="nd-diff-check">✓</span>
+                                    Nișe concrete neocupate + mesaje testate pe public real
+                                </div>
+                            </div>
+                            <div class="nd-diff-compare">
+                                <div class="nd-diff-item nd-diff-item--old">
+                                    <span class="nd-diff-x">✕</span>
+                                    Nu înțelege pharma. Copy generic.
+                                </div>
+                                <div class="nd-diff-item nd-diff-item--new">
+                                    <span class="nd-diff-check">✓</span>
+                                    Deep expertise pharma: biodisponibilitate, forme, canale
+                                </div>
+                            </div>
+                            <div class="nd-diff-compare">
+                                <div class="nd-diff-item nd-diff-item--old">
+                                    <span class="nd-diff-x">✕</span>
+                                    Raportează impressions și clicks
+                                </div>
+                                <div class="nd-diff-item nd-diff-item--new">
+                                    <span class="nd-diff-check">✓</span>
+                                    Raportează cost per achiziție reală și ROAS per canal
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div data-tab-panel="1">
+                <div class="nd-output-section">
+                    <div class="nd-output-grid">
+                        <div class="nd-output-card">
+                            <div class="nd-output-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                            </div>
+                            <h4>Hartă Competitivă Completă</h4>
+                            <p>Tabel comparativ: preț, dozaj, formă, canale, vulnerabilități. Fiecare competitor analizat individual cu strategie de contracarare.</p>
+                        </div>
+                        <div class="nd-output-card">
+                            <div class="nd-output-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                            </div>
+                            <h4>Consumer Search Map</h4>
+                            <p>Ce caută consumatorii vs. cine răspunde. Gap-uri identificate cu volum estimat și oportunitate de captură.</p>
+                        </div>
+                        <div class="nd-output-card">
+                            <div class="nd-output-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                            </div>
+                            <h4>Strategie Disruptivă</h4>
+                            <p>Tactici concrete: conquesting pe competitori, quiz-uri de lead generation, parteneriate app, campanii virale sezionale.</p>
+                        </div>
+                        <div class="nd-output-card">
+                            <div class="nd-output-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                            </div>
+                            <h4>Roadmap cu KPI & Budget</h4>
+                            <p>Plan pe 12 luni: faze de lansare, acțiuni cheie per lună, buget recomandat, KPI-uri estimate la 6 și 12 luni.</p>
+                        </div>
+                        <div class="nd-output-card">
+                            <div class="nd-output-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+                            </div>
+                            <h4>Mesaje per Competitor</h4>
+                            <p>Mesaje de diferențiere testate: exact ce spui când consumatorul compară brandul tău cu fiecare competitor din categorie.</p>
+                        </div>
+                        <div class="nd-output-card">
+                            <div class="nd-output-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                            </div>
+                            <h4>AI Search Readiness</h4>
+                            <p>Audit vizibilitate în ChatGPT, Perplexity, Gemini. Structurarea datelor pentru Search Generative Experience.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </TabSection>
+
+        <!-- S7: Who This Is For -->
+        <section class="nd-audience-section">
+            <div class="nd-container">
+                <div class="nd-section-header">
+                    <span class="nd-label">Pentru cine</span>
+                    <h2>Construit pentru oamenii care iau deciziile.</h2>
+                </div>
+
+                <div class="nd-audience-grid">
+                    <div class="nd-audience-card">
+                        <div class="nd-audience-role">CEO / General Manager</div>
+                        <p>Vrei să știi exact unde e oportunitatea de creștere și cât costă să o capturezi. Fără buzzwords — date și strategie.</p>
+                    </div>
+                    <div class="nd-audience-card">
+                        <div class="nd-audience-role">Marketing Director</div>
+                        <p>Ai nevoie de intelligence real, nu de încă un audit SEO. Vrei să știi ce face competiția, ce nu face nimeni, și cum câștigi.</p>
+                    </div>
+                    <div class="nd-audience-card">
+                        <div class="nd-audience-role">Brand Manager</div>
+                        <p>Lansezi un produs sau vrei să crești cota de piață. Ai nevoie de hartă competitivă, poziționare și tactici concrete.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- S8: Pricing -->
+        <PricingSection
+            title="Investiția"
+            subtitle="Intelligence de piață care se plătește singură din prima decizie corectă."
+            note="Toate pachetele includ analiză confidențială, livrabilă board-ready, și sesiune live de prezentare. Prețurile sunt orientative."
+            tiers={[
+                {
+                    name: 'RECON',
+                    price: '€2.500',
+                    priceNote: 'per produs',
+                    description: 'Analiza competitivă completă pe un singur produs/segment. Hartă, gap-uri, strategie.',
+                    featureGroups: [
+                        {
+                            label: 'Analiză',
+                            items: [
+                                'Hartă competitivă completă (toți jucătorii din segment)',
+                                'Consumer search intelligence (gap-uri de comunicare)',
+                                'Analiză SWOT cu vulnerabilități competitor'
+                            ]
+                        },
+                        {
+                            label: 'Livrabile',
+                            items: [
+                                'Raport executiv (20-35 pagini)',
+                                'Strategie de poziționare cu mesaje per competitor',
+                                'Sesiune live de prezentare (60 min cu Q&A)'
+                            ]
+                        }
+                    ],
+                    timeline: 'Livrare: 10-14 zile lucrătoare',
+                    highlighted: false
+                },
+                {
+                    name: 'DOMINATION',
+                    price: '€5.000',
+                    priceNote: 'per produs',
+                    description: 'Recon + strategie de dominare completă cu roadmap, buget și tactici disruptive.',
+                    featureGroups: [
+                        {
+                            label: 'Tot ce include RECON, plus',
+                            items: [
+                                'LLM Visibility Audit (ChatGPT, Gemini, Perplexity)',
+                                'Strategie disruptivă (conquesting, quiz, parteneriate)',
+                                'Plan editorial SEO + LLM Traffic (12 luni)'
+                            ]
+                        },
+                        {
+                            label: 'Strategie & Execuție',
+                            items: [
+                                'Roadmap 12 luni cu KPI-uri și buget per fază',
+                                'Funnel complet: awareness → achiziție',
+                                'War room session (3h workshop cu echipa ta)'
+                            ]
+                        }
+                    ],
+                    timeline: 'Livrare: 14-21 zile lucrătoare',
+                    highlighted: true
+                },
+                {
+                    name: 'MONOPOL',
+                    price: '€8.000',
+                    priceNote: '/trimestru',
+                    description: 'Domination + monitorizare continuă. Re-audit trimestrial. Alertă la orice mișcare a competiției.',
+                    featureGroups: [
+                        {
+                            label: 'Tot ce include DOMINATION, plus',
+                            items: [
+                                'Monitorizare competiție cu trigger-uri automate',
+                                'Re-audit trimestrial (hartă + gap + strategie)',
+                                'Raport lunar consumer search trends'
+                            ]
+                        },
+                        {
+                            label: 'Enterprise',
+                            items: [
+                                'Dashboard Databox live (GA, GSC, competiție)',
+                                'Consultanță strategică săptămânală (30 min)',
+                                'Priority support — acces direct la echipa de intelligence'
+                            ]
+                        }
+                    ],
+                    timeline: 'Livrare inițială: 21 zile + monitorizare continuă',
+                    highlighted: false
+                }
+            ]}
+        />
+
+        <!-- S9: CTA Final -->
+        <CtaSection
+            title="Competitorii tăi nu știu ce nu știu. Tu?"
+            subtitle="Solicită un audit competițional gratuit și vezi exact unde sunt breșele pe care nimeni nu le exploatează."
+            buttonText="Solicită Audit Gratuit"
+            note="Confidențial. Fără obligații. Primele concluzii în 48h."
+        />
+    </div>
+
+    <!-- Booking Modal -->
+    <BookingModal
+        title="Solicită Audit Competițional"
+        subtitle="Spune-ne produsul și segmentul — primești primele insight-uri în 48h"
+    />
+</LandingPage>
+
+<style is:global>
+    /* ============================================
+       NICHE DOMINATION — Deep Crimson/Amber Theme
+       Premium intelligence feel
+       ============================================ */
+    .nd-page {
+        --nd-primary: #DC2626;
+        --nd-primary-light: #EF4444;
+        --nd-secondary: #D97706;
+        --nd-primary-glow: rgba(220, 38, 38, 0.3);
+        --nd-gradient: linear-gradient(135deg, #DC2626, #D97706);
+        --nd-gradient-subtle: linear-gradient(135deg, rgba(220, 38, 38, 0.1), rgba(217, 119, 6, 0.1));
+    }
+
+    [data-theme="light"] .nd-page {
+        --nd-primary-glow: rgba(220, 38, 38, 0.15);
+    }
+
+    /* Override Hero for ND theme */
+    .nd-page .hero .floating-stat-value {
+        background: var(--nd-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .nd-page .hero-label {
+        border-color: rgba(220, 38, 38, 0.3);
+        background: rgba(220, 38, 38, 0.08);
+    }
+
+    .nd-page .hero-title .gradient {
+        background: var(--nd-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    /* Override tabs */
+    .nd-page .tab-btn--active {
+        background: var(--nd-gradient);
+        box-shadow: 0 4px 20px rgba(220, 38, 38, 0.4);
+    }
+
+    .nd-page .tab-btn--active .tab-btn-indicator {
+        border-top-color: #D97706;
+    }
+
+    .nd-page .tab-btn:hover:not(.tab-btn--active) {
+        border-color: rgba(220, 38, 38, 0.2);
+    }
+
+    /* Override pricing */
+    .nd-page .pricing-card--highlighted {
+        border-color: rgba(220, 38, 38, 0.3);
+        box-shadow: 0 0 30px rgba(220, 38, 38, 0.15);
+    }
+
+    .nd-page .pricing-card--highlighted:hover {
+        box-shadow: 0 0 30px rgba(220, 38, 38, 0.25), var(--shadow-lg);
+    }
+
+    .nd-page .pricing-badge {
+        background: var(--nd-gradient);
+    }
+
+    .nd-page .pricing-price {
+        background: var(--nd-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .nd-page .pricing-card--highlighted .pricing-cta {
+        background: linear-gradient(135deg, #DC2626, #b91c1c);
+    }
+
+    .nd-page .pricing-card--highlighted .pricing-cta:hover {
+        box-shadow: 0 0 30px rgba(220, 38, 38, 0.4);
+    }
+
+    .nd-page .pricing-card:hover {
+        border-color: rgba(220, 38, 38, 0.2);
+    }
+
+    .nd-page .pricing-cta:hover {
+        border-color: rgba(220, 38, 38, 0.5);
+        box-shadow: 0 0 20px rgba(220, 38, 38, 0.2);
+    }
+
+    .nd-page .feature-group-label {
+        color: #DC2626;
+    }
+
+    .nd-page .pricing-features li svg {
+        color: #DC2626;
+    }
+
+    /* MONOPOL gold accent */
+    .nd-page .pricing-card:last-child .pricing-name {
+        color: #D97706;
+    }
+
+    .nd-page .pricing-card:last-child .pricing-price {
+        background: linear-gradient(135deg, #D97706, #F59E0B);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    /* Override CTA & forms */
+    .nd-page .cta-btn {
+        background: var(--nd-gradient);
+    }
+
+    .nd-page .cta-btn:hover {
+        box-shadow: 0 0 30px rgba(220, 38, 38, 0.4);
+    }
+
+    .nd-page .audit-form-submit {
+        background: var(--nd-gradient);
+    }
+
+    .nd-page .audit-form-submit:hover {
+        box-shadow: 0 0 25px rgba(220, 38, 38, 0.4);
+    }
+
+    .nd-page .audit-form-field input:focus {
+        border-color: rgba(220, 38, 38, 0.5);
+        box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+    }
+
+    /* Override benefits */
+    .nd-page .benefit-card-stat-icon {
+        background: rgba(220, 38, 38, 0.15);
+        color: #DC2626;
+    }
+
+    .nd-page .benefit-card:hover {
+        border-color: rgba(220, 38, 38, 0.25);
+        box-shadow: 0 8px 30px rgba(220, 38, 38, 0.12);
+    }
+
+    /* ============================================
+       ND CONTAINER
+       ============================================ */
+    .nd-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+
+    .nd-section-header {
+        text-align: center;
+        margin-bottom: 3.5rem;
+    }
+
+    .nd-label {
+        display: inline-block;
+        padding: 0.35rem 1rem;
+        background: rgba(220, 38, 38, 0.08);
+        border: 1px solid rgba(220, 38, 38, 0.2);
+        border-radius: 100px;
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #DC2626;
+        margin-bottom: 1.25rem;
+    }
+
+    .nd-section-header h2 {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 2.25rem;
+        font-weight: 700;
+        line-height: 1.15;
+        margin-bottom: 1rem;
+        color: var(--text-primary);
+    }
+
+    .nd-section-header p {
+        color: var(--text-secondary);
+        font-size: 1rem;
+        max-width: 650px;
+        margin: 0 auto;
+        line-height: 1.6;
+    }
+
+    /* ============================================
+       PROBLEM SECTION — GAP
+       ============================================ */
+    .nd-problem-section {
+        padding: 6rem 0;
+        background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, var(--bg-primary) 100%);
+        position: relative;
+    }
+
+    .nd-problem-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(220, 38, 38, 0.3), transparent);
+    }
+
+    .nd-gap-grid {
+        display: flex;
+        align-items: stretch;
+        gap: 0;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    .nd-gap-card {
+        flex: 1;
+        background: var(--bg-card);
+        border: 1px solid var(--border-light);
+        border-radius: 20px;
+        padding: 2rem;
+        transition: all 0.3s ease;
+    }
+
+    .nd-gap-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-lg);
+    }
+
+    .nd-gap-card--brand {
+        border-color: rgba(239, 68, 68, 0.15);
+    }
+
+    .nd-gap-card--consumer {
+        border-color: rgba(34, 197, 94, 0.15);
+    }
+
+    .nd-gap-card-header {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .nd-gap-card-header h3 {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--text-primary);
+    }
+
+    .nd-gap-icon {
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(239, 68, 68, 0.1);
+        color: #EF4444;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        font-weight: 700;
+        flex-shrink: 0;
+    }
+
+    .nd-gap-icon--green {
+        background: rgba(34, 197, 94, 0.1);
+        color: #22C55E;
+    }
+
+    .nd-gap-card ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .nd-gap-card ul li {
+        padding: 0.6rem 0;
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        border-bottom: 1px solid var(--border-light);
+        line-height: 1.4;
+    }
+
+    .nd-gap-card ul li:last-child {
+        border-bottom: none;
+    }
+
+    .nd-gap-card--consumer ul li {
+        font-style: italic;
+        color: var(--text-primary);
+    }
+
+    .nd-gap-verdict {
+        margin-top: 1.25rem;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #EF4444;
+    }
+
+    .nd-gap-verdict--green {
+        color: #22C55E;
+    }
+
+    .nd-gap-divider {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0 1.5rem;
+        gap: 0.75rem;
+    }
+
+    .nd-gap-divider-line {
+        width: 2px;
+        flex: 1;
+        background: linear-gradient(180deg, transparent, rgba(220, 38, 38, 0.3), transparent);
+    }
+
+    .nd-gap-divider-label {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: #DC2626;
+        background: rgba(220, 38, 38, 0.08);
+        border: 1px solid rgba(220, 38, 38, 0.2);
+        border-radius: 8px;
+        padding: 0.4rem 0.8rem;
+        letter-spacing: 0.15em;
+    }
+
+    .nd-gap-insight {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        max-width: 800px;
+        margin: 3rem auto 0;
+        padding: 1.5rem 2rem;
+        background: rgba(220, 38, 38, 0.04);
+        border: 1px solid rgba(220, 38, 38, 0.15);
+        border-radius: 16px;
+        font-size: 0.95rem;
+        color: var(--text-secondary);
+        line-height: 1.6;
+    }
+
+    .nd-gap-insight strong {
+        color: var(--text-primary);
+    }
+
+    .nd-gap-insight-icon {
+        flex-shrink: 0;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(220, 38, 38, 0.1);
+        border-radius: 10px;
+    }
+
+    .nd-gap-insight-icon svg {
+        width: 22px;
+        height: 22px;
+        color: #DC2626;
+    }
+
+    @media (max-width: 900px) {
+        .nd-gap-grid {
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .nd-gap-divider {
+            flex-direction: row;
+            padding: 0.5rem 0;
+        }
+
+        .nd-gap-divider-line {
+            width: auto;
+            height: 2px;
+            flex: 1;
+            background: linear-gradient(90deg, transparent, rgba(220, 38, 38, 0.3), transparent);
+        }
+    }
+
+    /* ============================================
+       PROCESS SECTION
+       ============================================ */
+    .nd-process-section {
+        padding: 6rem 0;
+        background: var(--bg-primary);
+        position: relative;
+    }
+
+    .nd-process-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.25rem;
+    }
+
+    .nd-process-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border-light);
+        border-radius: 20px;
+        padding: 2rem;
+        position: relative;
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .nd-process-card:hover {
+        border-color: rgba(220, 38, 38, 0.2);
+        transform: translateY(-6px);
+        box-shadow: var(--shadow-lg);
+    }
+
+    .nd-process-number {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 2.5rem;
+        font-weight: 800;
+        background: var(--nd-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        line-height: 1;
+        margin-bottom: 1rem;
+        opacity: 0.8;
+    }
+
+    .nd-process-card h3 {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 1.15rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 0.75rem;
+    }
+
+    .nd-process-card p {
+        font-size: 0.88rem;
+        color: var(--text-secondary);
+        line-height: 1.6;
+        margin-bottom: 1.25rem;
+    }
+
+    .nd-process-card p strong {
+        color: var(--text-primary);
+    }
+
+    .nd-process-tag {
+        display: inline-block;
+        padding: 0.3rem 0.75rem;
+        background: rgba(220, 38, 38, 0.06);
+        border: 1px solid rgba(220, 38, 38, 0.12);
+        border-radius: 6px;
+        font-size: 0.72rem;
+        font-weight: 600;
+        color: #DC2626;
+        letter-spacing: 0.03em;
+    }
+
+    @media (max-width: 1024px) {
+        .nd-process-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 640px) {
+        .nd-process-grid {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+    }
+
+    /* ============================================
+       PROOF / STATS SECTION
+       ============================================ */
+    .nd-proof-section {
+        padding: 5rem 0;
+        background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+        position: relative;
+    }
+
+    .nd-proof-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(220, 38, 38, 0.3), transparent);
+    }
+
+    .nd-stats-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.25rem;
+    }
+
+    .nd-stat-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border-light);
+        border-radius: 16px;
+        padding: 2rem 1.5rem;
+        text-align: center;
+        transition: all 0.3s ease;
+    }
+
+    .nd-stat-card:hover {
+        border-color: rgba(220, 38, 38, 0.2);
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-md);
+    }
+
+    .nd-stat-value {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 2.75rem;
+        font-weight: 800;
+        background: var(--nd-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        line-height: 1.1;
+        margin-bottom: 0.5rem;
+    }
+
+    .nd-stat-label {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        line-height: 1.4;
+    }
+
+    @media (max-width: 900px) {
+        .nd-stats-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 480px) {
+        .nd-stats-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ============================================
+       DIFFERENTIATORS TAB
+       ============================================ */
+    .nd-diff-section {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+
+    .nd-diff-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border-light);
+        border-radius: 20px;
+        padding: 2.5rem;
+    }
+
+    .nd-diff-vs {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .nd-diff-vs-old {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        font-weight: 500;
+    }
+
+    .nd-diff-vs-arrow {
+        font-size: 1.25rem;
+        background: var(--nd-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: 700;
+    }
+
+    .nd-diff-vs-new {
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: #DC2626;
+    }
+
+    .nd-diff-compare {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .nd-diff-compare:last-child {
+        margin-bottom: 0;
+    }
+
+    .nd-diff-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.5rem;
+        font-size: 0.88rem;
+        line-height: 1.5;
+        padding: 0.75rem;
+        border-radius: 10px;
+    }
+
+    .nd-diff-item--old {
+        color: var(--text-muted);
+        background: rgba(239, 68, 68, 0.03);
+    }
+
+    .nd-diff-item--new {
+        color: var(--text-primary);
+        background: rgba(34, 197, 94, 0.04);
+        font-weight: 500;
+    }
+
+    .nd-diff-x {
+        color: #EF4444;
+        font-weight: 700;
+        flex-shrink: 0;
+    }
+
+    .nd-diff-check {
+        color: #22C55E;
+        font-weight: 700;
+        flex-shrink: 0;
+    }
+
+    @media (max-width: 768px) {
+        .nd-diff-compare {
+            grid-template-columns: 1fr;
+            gap: 0.5rem;
+        }
+
+        .nd-diff-card {
+            padding: 1.5rem;
+        }
+    }
+
+    /* ============================================
+       OUTPUT GRID TAB
+       ============================================ */
+    .nd-output-section {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+
+    .nd-output-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.25rem;
+    }
+
+    .nd-output-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border-light);
+        border-radius: 16px;
+        padding: 1.75rem;
+        transition: all 0.3s ease;
+    }
+
+    .nd-output-card:hover {
+        border-color: rgba(220, 38, 38, 0.2);
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-md);
+    }
+
+    .nd-output-icon {
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(220, 38, 38, 0.08);
+        border-radius: 12px;
+        margin-bottom: 1rem;
+    }
+
+    .nd-output-icon svg {
+        width: 24px;
+        height: 24px;
+        color: #DC2626;
+    }
+
+    .nd-output-card h4 {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+    }
+
+    .nd-output-card p {
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        line-height: 1.5;
+    }
+
+    @media (max-width: 900px) {
+        .nd-output-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 640px) {
+        .nd-output-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ============================================
+       AUDIENCE SECTION
+       ============================================ */
+    .nd-audience-section {
+        padding: 5rem 0;
+        background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+    }
+
+    .nd-audience-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.25rem;
+    }
+
+    .nd-audience-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border-light);
+        border-radius: 16px;
+        padding: 2rem;
+        transition: all 0.3s ease;
+    }
+
+    .nd-audience-card:hover {
+        border-color: rgba(220, 38, 38, 0.2);
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-md);
+    }
+
+    .nd-audience-role {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 1.1rem;
+        font-weight: 700;
+        background: var(--nd-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 0.75rem;
+    }
+
+    .nd-audience-card p {
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        line-height: 1.6;
+    }
+
+    @media (max-width: 900px) {
+        .nd-audience-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ============================================
+       MOBILE RESPONSIVE OVERRIDES
+       ============================================ */
+    @media (max-width: 900px) {
+        .nd-section-header h2 {
+            font-size: 1.65rem;
+        }
+
+        .nd-section-header {
+            padding: 0 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .nd-problem-section,
+        .nd-process-section,
+        .nd-proof-section,
+        .nd-audience-section {
+            padding: 4rem 0;
+        }
+    }
+</style>
