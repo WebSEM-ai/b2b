@@ -266,6 +266,8 @@ title: "${article!.title.replace(/"/g, '\\"')}"
 description: "${article!.description.replace(/"/g, '\\"')}"
 pubDate: ${today}
 author: "${topicsData.defaultAuthor}"
+heroImage: "/pharma-hero.png"
+heroImageAlt: "Analiză competitivă pharma - WebSEM Niche Domination"
 category: "pharma"
 tags: ${JSON.stringify(article!.tags)}
 featured: false

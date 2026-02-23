@@ -3,6 +3,8 @@ title: "Probiotice spore-forming vs lactobacili: ghid complet de selecție"
 description: "Analiza comparativă a probioticelor de ultimă generație: Bacillus coagulans vs lactobacili tradiționali. Rate de supraviețuire, eficacitate clinică, costuri."
 pubDate: 2026-02-23
 author: "WebSEM Pharma"
+heroImage: "/pharma-hero.png"
+heroImageAlt: "Analiză competitivă pharma - WebSEM Niche Domination"
 category: "pharma"
 tags: ["probiotice","spore-forming","lactobacili","farmacologie clinică","disbioza intestinală"]
 featured: false

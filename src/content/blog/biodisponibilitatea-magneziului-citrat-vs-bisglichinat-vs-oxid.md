@@ -3,6 +3,8 @@ title: "Biodisponibilitatea magneziului: citrat vs bisglichinat vs oxid"
 description: "Analiză completă a biodisponibilității magneziului: comparație citrat (85-90%), bisglichinat (90-95%) vs oxid (4-30%). Ghid cost-eficiență pentru alegerea optim"
 pubDate: 2026-02-20
 author: "WebSEM Pharma"
+heroImage: "/pharma-hero.png"
+heroImageAlt: "Analiză competitivă pharma - WebSEM Niche Domination"
 category: "pharma"
 tags: ["magneziu","biodisponibilitate","citrat magneziu","bisglichinat magneziu","oxid magneziu"]
 featured: false
