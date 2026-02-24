@@ -17,6 +17,15 @@ interface Props {
     }>;
     ctaButtonText?: string;
     ctaDisclaimer?: string;
+    formWebsitePlaceholder?: string;
+    formPhonePlaceholder?: string;
+    formEmailPlaceholder?: string;
+    formSuccessTitle?: string;
+    formSuccessSubtitle?: string;
+    formLoadingText?: string;
+    formErrorText?: string;
+    copyrightText?: string;
+    poweredByText?: string;
 }
 
 const {
@@ -39,7 +48,16 @@ const {
         { value: '72h', label: 'Setup Complet' }
     ],
     ctaButtonText = 'Solicită Audit Gratuit',
-    ctaDisclaimer = '* Datele de contact sunt furnizate prin <strong>Apollo.io</strong>, <strong>LinkedIn Sales Navigator</strong> și alte platforme B2B outreach. Nu deținem aceste baze de date - oferim servicii de prospectare și outreach.'
+    ctaDisclaimer = '* Datele de contact sunt furnizate prin <strong>Apollo.io</strong>, <strong>LinkedIn Sales Navigator</strong> și alte platforme B2B outreach. Nu deținem aceste baze de date - oferim servicii de prospectare și outreach.',
+    formWebsitePlaceholder = 'Website-ul tău',
+    formPhonePlaceholder = 'Telefon',
+    formEmailPlaceholder = 'Email',
+    formSuccessTitle = 'Excelent!',
+    formSuccessSubtitle = 'Te contactăm în maximum 24h cu analiza completă.',
+    formLoadingText = 'Se trimite...',
+    formErrorText = 'A apărut o eroare. Te rugăm să încerci din nou.',
+    copyrightText = 'Toate drepturile rezervate.',
+    poweredByText = 'un serviciu'
 } = Astro.props;
 
 const year = new Date().getFullYear();
@@ -72,10 +90,10 @@ const year = new Date().getFullYear();
         </div>
 
         <div class="footer-cta-form-wrapper">
-            <form class="footer-cta-form" id="footerCtaForm">
+            <form class="footer-cta-form" id="footerCtaForm" data-loading-text={formLoadingText} data-error-text={formErrorText}>
                 <div class="footer-form-row">
                     <div class="footer-form-field">
-                        <input type="url" name="website" placeholder="Website-ul tău" required>
+                        <input type="url" name="website" placeholder={formWebsitePlaceholder} required>
                         <span class="field-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <circle cx="12" cy="12" r="10"/>
@@ -85,7 +103,7 @@ const year = new Date().getFullYear();
                         </span>
                     </div>
                     <div class="footer-form-field">
-                        <input type="tel" name="phone" placeholder="Telefon" required>
+                        <input type="tel" name="phone" placeholder={formPhonePlaceholder} required>
                         <span class="field-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
@@ -95,7 +113,7 @@ const year = new Date().getFullYear();
                 </div>
                 <div class="footer-form-row">
                     <div class="footer-form-field footer-form-field-full">
-                        <input type="email" name="email" placeholder="Email" required>
+                        <input type="email" name="email" placeholder={formEmailPlaceholder} required>
                         <span class="field-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
@@ -122,8 +140,8 @@ const year = new Date().getFullYear();
                     </svg>
                 </div>
                 <div class="success-content">
-                    <h4>Excelent!</h4>
-                    <p>Te contactăm în maximum 24h cu analiza completă.</p>
+                    <h4>{formSuccessTitle}</h4>
+                    <p>{formSuccessSubtitle}</p>
                 </div>
             </div>
             <p class="footer-form-disclaimer" set:html={ctaDisclaimer} />
@@ -144,7 +162,7 @@ const year = new Date().getFullYear();
                                 <span class="logo-alpha">ALPHA</span><span class="logo-sep">/</span><span class="logo-grade">GRADE</span>
                             </span>
                         </div>
-                        <span class="footer-powered">un serviciu <strong>WebSEM</strong></span>
+                        <span class="footer-powered">{poweredByText} <strong>WebSEM</strong></span>
                     </div>
                 </a>
             </div>
@@ -166,7 +184,7 @@ const year = new Date().getFullYear();
         </div>
 
         <div class="footer-bottom">
-            <p class="copyright">© {year} {companyName}. Toate drepturile rezervate.</p>
+            <p class="copyright">© {year} {companyName}. {copyrightText}</p>
             <div class="footer-links">
                 {links.map(link => (
                     <a href={link.href}>{link.text}</a>
@@ -188,12 +206,13 @@ const year = new Date().getFullYear();
 
         if (footerSubmitBtn) {
             footerSubmitBtn.disabled = true;
+            const loadingText = footerForm.dataset.loadingText || 'Se trimite...';
             footerSubmitBtn.innerHTML = `
                 <svg class="spinner" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:20px;height:20px;animation:spin 1s linear infinite">
                     <circle cx="12" cy="12" r="10" stroke-opacity="0.25"/>
                     <path d="M12 2a10 10 0 0 1 10 10" stroke-opacity="1"/>
                 </svg>
-                Se trimite...
+                ${loadingText}
             `;
         }
 
@@ -224,7 +243,8 @@ const year = new Date().getFullYear();
                 footerSubmitBtn.disabled = false;
                 footerSubmitBtn.innerHTML = originalFooterBtnText;
             }
-            alert('A apărut o eroare. Te rugăm să încerci din nou.');
+            const errorText = footerForm.dataset.errorText || 'A apărut o eroare. Te rugăm să încerci din nou.';
+            alert(errorText);
             console.error('Footer form error:', error);
         }
     });

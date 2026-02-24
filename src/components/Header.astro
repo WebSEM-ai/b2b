@@ -8,6 +8,11 @@ interface NavLink {
 interface Props {
     links?: NavLink[];
     ctaText?: string;
+    poweredByText?: string;
+    langSwitch?: {
+        current: 'ro' | 'en';
+        alternateUrl: string;
+    };
 }
 
 const {
@@ -22,7 +27,9 @@ const {
         { text: 'Blog', href: '/blog' },
         { text: 'Contact', href: '#contact' }
     ],
-    ctaText = 'Solicită Demo'
+    ctaText = 'Solicită Demo',
+    poweredByText = 'un serviciu',
+    langSwitch
 } = Astro.props;
 ---
 
@@ -37,7 +44,7 @@ const {
                         <span class="logo-alpha">ALPHA</span><span class="logo-separator">/</span><span class="logo-grade">GRADE</span>
                     </span>
                 </div>
-                <span class="logo-powered">un serviciu <strong>WebSEM</strong></span>
+                <span class="logo-powered">{poweredByText} <strong>WebSEM</strong></span>
             </div>
         </a>
 
@@ -77,6 +84,13 @@ const {
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
                 </svg>
             </button>
+            {langSwitch && (
+                <a href={langSwitch.alternateUrl} class="lang-switch" aria-label={`Switch to ${langSwitch.current === 'ro' ? 'English' : 'Română'}`}>
+                    <span class={`lang-option ${langSwitch.current === 'ro' ? 'lang-active' : ''}`}>RO</span>
+                    <span class="lang-divider"></span>
+                    <span class={`lang-option ${langSwitch.current === 'en' ? 'lang-active' : ''}`}>EN</span>
+                </a>
+            )}
             <a href="javascript:void(0)" class="nav-cta" id="open-booking-modal">
                 <span class="nav-cta-glow"></span>
                 {ctaText}
@@ -253,6 +267,58 @@ const {
         background: linear-gradient(135deg, #667eea, #764ba2);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+    }
+
+    /* Language Switch */
+    .lang-switch {
+        display: flex;
+        align-items: center;
+        gap: 0;
+        background: var(--bg-card);
+        border: 1px solid var(--border-light);
+        border-radius: 8px;
+        padding: 0.3rem 0.1rem;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .lang-switch:hover {
+        border-color: var(--border-accent);
+        box-shadow: 0 0 12px rgba(99, 102, 241, 0.15);
+    }
+
+    .lang-option {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        padding: 0.25rem 0.5rem;
+        border-radius: 6px;
+        color: var(--text-muted);
+        transition: all 0.3s ease;
+        line-height: 1;
+    }
+
+    .lang-option.lang-active {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: #fff;
+        box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+    }
+
+    .lang-divider {
+        width: 1px;
+        height: 14px;
+        background: var(--border-light);
+    }
+
+    @media (max-width: 900px) {
+        .lang-switch {
+            order: -1;
+            align-self: center;
+        }
     }
 
     @media (max-width: 900px) {

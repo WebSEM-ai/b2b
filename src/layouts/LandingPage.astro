@@ -9,12 +9,24 @@ interface Props {
     ogImage?: string;
     navLinks?: Array<{ text: string; href: string }>;
     navCta?: { text: string; href: string };
+    navPoweredByText?: string;
+    langSwitch?: { current: 'ro' | 'en'; alternateUrl: string };
+    lang?: string;
     footerCtaBadge?: string;
     footerCtaTitle?: string;
     footerCtaSubtitle?: string;
     footerCtaStats?: Array<{ value: string; label: string }>;
     footerCtaButtonText?: string;
     footerCtaDisclaimer?: string;
+    footerFormWebsitePlaceholder?: string;
+    footerFormPhonePlaceholder?: string;
+    footerFormEmailPlaceholder?: string;
+    footerFormSuccessTitle?: string;
+    footerFormSuccessSubtitle?: string;
+    footerFormLoadingText?: string;
+    footerFormErrorText?: string;
+    footerCopyrightText?: string;
+    footerPoweredByText?: string;
 }
 
 const {
@@ -23,12 +35,24 @@ const {
     ogImage = '/images/og-default.jpg',
     navLinks,
     navCta,
+    navPoweredByText,
+    langSwitch,
+    lang = 'ro',
     footerCtaBadge,
     footerCtaTitle,
     footerCtaSubtitle,
     footerCtaStats,
     footerCtaButtonText,
-    footerCtaDisclaimer
+    footerCtaDisclaimer,
+    footerFormWebsitePlaceholder,
+    footerFormPhonePlaceholder,
+    footerFormEmailPlaceholder,
+    footerFormSuccessTitle,
+    footerFormSuccessSubtitle,
+    footerFormLoadingText,
+    footerFormErrorText,
+    footerCopyrightText,
+    footerPoweredByText
 } = Astro.props;
 
 const siteUrl = Astro.site?.toString() || 'https://b2b.websem.ro';
@@ -36,7 +60,7 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
 ---
 
 <!DOCTYPE html>
-<html lang="ro">
+<html lang={lang}>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -93,10 +117,12 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
     </script>
 </head>
 <body>
-    <Header 
-        links={navLinks} 
-        ctaText={navCta?.text} 
-        ctaHref={navCta?.href} 
+    <Header
+        links={navLinks}
+        ctaText={navCta?.text}
+        ctaHref={navCta?.href}
+        poweredByText={navPoweredByText}
+        langSwitch={langSwitch}
     />
     
     <main>
@@ -110,6 +136,15 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
         ctaStats={footerCtaStats}
         ctaButtonText={footerCtaButtonText}
         ctaDisclaimer={footerCtaDisclaimer}
+        formWebsitePlaceholder={footerFormWebsitePlaceholder}
+        formPhonePlaceholder={footerFormPhonePlaceholder}
+        formEmailPlaceholder={footerFormEmailPlaceholder}
+        formSuccessTitle={footerFormSuccessTitle}
+        formSuccessSubtitle={footerFormSuccessSubtitle}
+        formLoadingText={footerFormLoadingText}
+        formErrorText={footerFormErrorText}
+        copyrightText={footerCopyrightText}
+        poweredByText={footerPoweredByText}
     />
 </body>
 </html>

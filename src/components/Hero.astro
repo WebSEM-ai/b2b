@@ -12,6 +12,11 @@ interface Props {
     formSubtitle?: string;
     formPlaceholder?: string;
     formButtonText?: string;
+    formPhonePlaceholder?: string;
+    formSuccessTitle?: string;
+    formSuccessSubtitle?: string;
+    formLoadingText?: string;
+    formErrorText?: string;
 }
 
 const {
@@ -27,7 +32,12 @@ const {
     formTitle = 'Solicită Audit Gratuit',
     formSubtitle = 'Analizăm potențialul tău de lead generation în 24h',
     formPlaceholder = 'Website-ul tău',
-    formButtonText = 'Trimite'
+    formButtonText = 'Trimite',
+    formPhonePlaceholder = 'Telefon',
+    formSuccessTitle = 'Mulțumim!',
+    formSuccessSubtitle = 'Te vom contacta în curând.',
+    formLoadingText = 'Se trimite...',
+    formErrorText = 'A apărut o eroare. Te rugăm să încerci din nou sau să ne contactezi direct.'
 } = Astro.props;
 ---
 
@@ -71,7 +81,7 @@ const {
                 <p>{formSubtitle}</p>
             </div>
             <div class="audit-form-wrapper">
-                <form class="audit-form" id="auditForm">
+                <form class="audit-form" id="auditForm" data-loading-text={formLoadingText} data-error-text={formErrorText}>
                     <div class="audit-form-field">
                         <input type="url" name="website" placeholder={formPlaceholder} required>
                         <span class="audit-form-field-icon">
@@ -83,7 +93,7 @@ const {
                         </span>
                     </div>
                     <div class="audit-form-field">
-                        <input type="tel" name="phone" placeholder="Telefon" required>
+                        <input type="tel" name="phone" placeholder={formPhonePlaceholder} required>
                         <span class="audit-form-field-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
@@ -114,8 +124,8 @@ const {
                         </svg>
                     </div>
                     <div class="success-text">
-                        <span class="success-title">Mulțumim!</span>
-                        <span class="success-subtitle">Te vom contacta în curând.</span>
+                        <span class="success-title">{formSuccessTitle}</span>
+                        <span class="success-subtitle">{formSuccessSubtitle}</span>
                     </div>
                 </div>
             </div>
@@ -198,12 +208,13 @@ const {
         // Disable button and show loading
         if (submitBtn) {
             submitBtn.disabled = true;
+            const loadingText = auditForm.dataset.loadingText || 'Se trimite...';
             submitBtn.innerHTML = `
                 <svg class="spinner" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:18px;height:18px;animation:spin 1s linear infinite">
                     <circle cx="12" cy="12" r="10" stroke-opacity="0.25"/>
                     <path d="M12 2a10 10 0 0 1 10 10" stroke-opacity="1"/>
                 </svg>
-                Se trimite...
+                ${loadingText}
             `;
         }
 
@@ -238,7 +249,8 @@ const {
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = originalBtnText;
             }
-            alert('A apărut o eroare. Te rugăm să încerci din nou sau să ne contactezi direct.');
+            const errorText = auditForm.dataset.errorText || 'A apărut o eroare. Te rugăm să încerci din nou sau să ne contactezi direct.';
+            alert(errorText);
             console.error('Form error:', error);
         }
     });
