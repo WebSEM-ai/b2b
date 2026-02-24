@@ -1,8 +1,14 @@
 ---
-interface NavLink {
+interface NavChild {
     text: string;
     href: string;
     children?: Array<{ text: string; href: string }>;
+}
+
+interface NavLink {
+    text: string;
+    href: string;
+    children?: NavChild[];
 }
 
 interface Props {
@@ -20,7 +26,9 @@ const {
         { text: 'Servicii', href: '#', children: [
             { text: 'Outreach', href: '/' },
             { text: 'Market Command', href: '/market-command' },
-            { text: 'Niche Domination', href: '/niche-domination/pharma' },
+            { text: 'Niche Domination', href: '/niche-domination/pharma', children: [
+                { text: 'Pharma', href: '/niche-domination/pharma' }
+            ]},
             { text: 'Platforme', href: '/platforme' },
             { text: 'Chatbot AI', href: '/chatbot-ai' }
         ]},
@@ -66,7 +74,18 @@ const {
                         </a>
                         <div class="nav-dropdown-menu">
                             {link.children.map(child => (
-                                <a href={child.href} class="nav-dropdown-item">{child.text}</a>
+                                child.children ? (
+                                    <div class="nav-dropdown-group">
+                                        <a href={child.href} class="nav-dropdown-item nav-dropdown-item--parent">{child.text}</a>
+                                        <div class="nav-dropdown-sub">
+                                            {child.children.map(sub => (
+                                                <a href={sub.href} class="nav-dropdown-item nav-dropdown-item--sub">{sub.text}</a>
+                                            ))}
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <a href={child.href} class="nav-dropdown-item">{child.text}</a>
+                                )
                             ))}
                         </div>
                     </div>
