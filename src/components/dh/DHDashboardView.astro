@@ -1,0 +1,131 @@
+---
+const dashboardItems = [
+    'Conversii pe canal, defalcate pe gen, vârstă, funcție, țară, oraș',
+    'Comparații directe între canale — care aduce lead-uri, care aduce vânzări, care arde buget',
+    'Campanii neprofitabile marcate automat (ROAS sub target)',
+    'Buget cheltuit vs buget recomandat în timp real',
+    'KPI-uri per rol: view de CEO, view de CMO, view de Media Buyer',
+    'Alerte automate când un KPI iese din parametri',
+    'Istoric complet — compari luna asta cu luna trecută sau cu același trimestru an trecut'
+];
+---
+
+<div class="dh-dashboard-view">
+    <div class="dh-dashboard-list">
+        {dashboardItems.map((item, i) => (
+            <div class="dh-dashboard-item">
+                <div class="dh-dashboard-check">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                </div>
+                <div class="dh-dashboard-line"></div>
+                <p>{item}</p>
+            </div>
+        ))}
+    </div>
+</div>
+
+<script>
+    const dhDashObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.dh-dashboard-item').forEach(item => {
+        dhDashObserver.observe(item);
+    });
+</script>
+
+<style>
+    .dh-dashboard-view {
+        padding: var(--section-padding);
+        max-width: var(--container-max);
+        margin: 0 auto;
+    }
+
+    .dh-dashboard-list {
+        max-width: 700px;
+        margin: 0 auto;
+        position: relative;
+    }
+
+    .dh-dashboard-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 1.25rem;
+        padding: 1.25rem 0;
+        position: relative;
+        opacity: 0;
+        transform: translateX(-20px);
+        transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .dh-dashboard-item.visible {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    .dh-dashboard-item:nth-child(2).visible { transition-delay: 0.05s; }
+    .dh-dashboard-item:nth-child(3).visible { transition-delay: 0.1s; }
+    .dh-dashboard-item:nth-child(4).visible { transition-delay: 0.15s; }
+    .dh-dashboard-item:nth-child(5).visible { transition-delay: 0.2s; }
+    .dh-dashboard-item:nth-child(6).visible { transition-delay: 0.25s; }
+    .dh-dashboard-item:nth-child(7).visible { transition-delay: 0.3s; }
+
+    .dh-dashboard-check {
+        flex-shrink: 0;
+        width: 36px;
+        height: 36px;
+        background: rgba(30, 64, 175, 0.1);
+        border: 2px solid var(--dh-primary, #1E40AF);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--dh-primary, #1E40AF);
+        z-index: 1;
+    }
+
+    .dh-dashboard-check svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .dh-dashboard-line {
+        position: absolute;
+        left: 17px;
+        top: 48px;
+        width: 2px;
+        height: calc(100% - 12px);
+        background: linear-gradient(to bottom, rgba(30, 64, 175, 0.3), rgba(30, 64, 175, 0.05));
+    }
+
+    .dh-dashboard-item:last-child .dh-dashboard-line {
+        display: none;
+    }
+
+    .dh-dashboard-item p {
+        font-size: 0.95rem;
+        color: var(--text-secondary);
+        line-height: 1.6;
+        padding-top: 0.35rem;
+    }
+
+    :global([data-theme="light"]) .dh-dashboard-check {
+        background: rgba(30, 64, 175, 0.06);
+    }
+
+    @media (max-width: 600px) {
+        .dh-dashboard-list {
+            padding: 0 0.5rem;
+        }
+
+        .dh-dashboard-item {
+            gap: 1rem;
+        }
+    }
+</style>

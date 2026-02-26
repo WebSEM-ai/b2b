@@ -1,0 +1,376 @@
+---
+import LandingPage from '../layouts/LandingPage.astro';
+import Hero from '../components/Hero.astro';
+import ClientsCarousel from '../components/ClientsCarousel.astro';
+import BenefitsSection from '../components/BenefitsSection.astro';
+import TabSection from '../components/TabSection.astro';
+import DHConnections from '../components/dh/DHConnections.astro';
+import DHDashboardView from '../components/dh/DHDashboardView.astro';
+import ProcessSection from '../components/ProcessSection.astro';
+import PricingSection from '../components/PricingSection.astro';
+import CtaSection from '../components/CtaSection.astro';
+import BookingModal from '../components/BookingModal.astro';
+
+const pageTitle = "Decision Hub — Toate Datele Tale de Marketing într-un Singur Loc | AlphaGrade by WebSEM";
+const pageDescription = "Campaniile tale merg în orb? Decision Hub centralizează toate canalele în Databox. Vezi ce face bani, ce arde buget, ia decizii în minute. Demo gratuit în 48h.";
+---
+
+<LandingPage
+    title={pageTitle}
+    description={pageDescription}
+    footerCtaBadge="Decision Hub"
+    footerCtaTitle='Toate datele tale de marketing, <span class="gradient-text">într-un singur loc</span>'
+    footerCtaSubtitle='Solicită un <strong>demo gratuit</strong> și construim un prototip live cu datele tale în 48h.'
+    footerCtaStats={[
+        { value: '+23', label: 'Surse de Date' },
+        { value: '1', label: 'Panou de Bord' },
+        { value: '14 Zile', label: 'Până la Lansare' }
+    ]}
+    footerCtaButtonText="Solicită Demo Gratuit"
+    footerCtaDisclaimer="* Construim un prototip funcțional cu datele tale reale. Fără obligații."
+>
+    <div class="dh-page">
+        <!-- S1: Hero -->
+        <Hero
+            badge="DECISION HUB — MARKETING INTELLIGENCE"
+            titleLine1='Toate datele de marketing. <strong>Un singur loc.</strong>'
+            titleLine2="Decizii clare, nu instinct."
+            subtitle="Campaniile tale merg în orb? Decision Hub centralizează Google Ads, Meta, SEO, CRM și toate celelalte surse într-un singur dashboard Databox. Vezi ce face bani, ce arde buget și ia decizii în minute, nu în zile."
+            floatingStats={[
+                { value: '+23', label: 'SURSE DE DATE' },
+                { value: '1', label: 'PANOU DE BORD' },
+                { value: '14 ZILE', label: 'PÂNĂ LA LANSARE' }
+            ]}
+            formTitle="Solicită Demo Gratuit"
+            formSubtitle="Construim un prototip live cu datele tale în 48h"
+        />
+
+        <!-- S2: Clients Carousel -->
+        <ClientsCarousel />
+
+        <!-- S3: Benefits — Campaniile tale merg in orb -->
+        <BenefitsSection
+            title="Campaniile tale merg în orb."
+            subtitle="Datele există. Problema e că sunt în 6 platforme diferite și nimeni nu le vede împreună."
+            benefits={[
+                {
+                    title: 'Silouri de Date',
+                    description: 'Google Ads într-un tab, Meta în altul, SEO în al treilea. Nimeni nu vede imaginea completă. Deciziile se iau pe bucăți, nu pe ansamblu.',
+                    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>`,
+                    stat: { icon: '!', text: '6+ Platforme Separate' }
+                },
+                {
+                    title: 'Decizii pe Instinct',
+                    description: 'Fără un view consolidat, echipa decide pe feeling. Bugetul se mută unde "pare" că merge, nu unde datele arată că merge.',
+                    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 15h8"/><circle cx="9" cy="9" r="1"/><circle cx="15" cy="9" r="1"/></svg>`,
+                    stat: { icon: '!', text: '~40% Buget Irosit' }
+                },
+                {
+                    title: 'Rapoarte care Vin Prea Târziu',
+                    description: 'Raportul vine la finalul lunii. Campania deja a cheltuit bugetul. Problema deja s-a transformat în pierdere.',
+                    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`,
+                    stat: { icon: '!', text: '3-5 Zile Întârziere' }
+                },
+                {
+                    title: 'Zero Vizibilitate Demografică',
+                    description: 'Știi câte click-uri ai. Nu știi cine dă click. Fără date demografice, targetarea rămâne generică și costisitoare.',
+                    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
+                    stat: { icon: '!', text: 'Date Demografice Lipsă' }
+                }
+            ]}
+        />
+
+        <!-- S4: TabSection — Ce Conectam + Ce Vezi in Dashboard -->
+        <TabSection tabs={["Ce Conectăm", "Ce Vezi în Dashboard"]} id="dh-scope">
+            <div data-tab-panel="0">
+                <DHConnections />
+            </div>
+            <div data-tab-panel="1">
+                <DHDashboardView />
+            </div>
+        </TabSection>
+
+        <!-- S5: ProcessSection — 3 pasi -->
+        <ProcessSection
+            title="De la haos la control, în 14 zile."
+            subtitle="Trei pași simpli. La final, ai un dashboard funcțional cu datele tale reale."
+            steps={[
+                { number: 1, title: 'Audit & Conectare', description: 'Identificăm toate sursele de date, stabilim KPI-urile relevante și conectăm platformele la Databox.', duration: '3-5 zile' },
+                { number: 2, title: 'Configurare Dashboard', description: 'Construim vizualizările custom: per canal, per campanie, per demografic. Fiecare metric are context și comparație.', duration: '5-7 zile' },
+                { number: 3, title: 'Handover & Training', description: 'Sesiune live cu echipa ta. Explicăm fiecare view, setăm alertele și predăm dashboard-ul gata de folosit.', duration: '1-2 zile' }
+            ]}
+        />
+
+        <!-- S6: Pricing — RECON / OFFENSIVE / FULL COMMAND -->
+        <PricingSection
+            title="Pachete & Prețuri"
+            subtitle="Un dashboard care se plătește singur din prima lună."
+            note="Toate pachetele includ: audit inițial, conectare surse, configurare Databox și sesiune de training. Prețurile sunt orientative și pot fi ajustate în funcție de complexitate."
+            tiers={[
+                {
+                    name: 'RECON',
+                    price: '€1.200',
+                    priceNote: 'setup',
+                    description: 'Baza de date conectată. Dashboard esențial cu KPI-urile principale.',
+                    featureGroups: [
+                        {
+                            label: 'Setup & Dashboard',
+                            items: [
+                                'Conectare până la 5 surse de date',
+                                'Dashboard cu KPI-uri esențiale',
+                                'View unic (all-in-one)',
+                                'Sesiune de training (60 min)'
+                            ]
+                        },
+                        {
+                            label: 'Mentenanță',
+                            items: [
+                                '€300/lună — monitorizare & suport',
+                                'Update-uri lunare pe dashboard',
+                                'Raport lunar automat'
+                            ]
+                        }
+                    ],
+                    timeline: 'Livrare: 10-14 zile lucrătoare',
+                    highlighted: false
+                },
+                {
+                    name: 'OFFENSIVE',
+                    price: '€2.500',
+                    priceNote: 'setup',
+                    description: 'Dashboard complet cu views per rol, alerte automate și date demografice.',
+                    featureGroups: [
+                        {
+                            label: 'Tot ce include RECON, plus',
+                            items: [
+                                'Conectare până la 15 surse de date',
+                                'Views per rol (CEO, CMO, Media Buyer)',
+                                'Alerte automate pe KPI-uri critice',
+                                'Date demografice integrate'
+                            ]
+                        },
+                        {
+                            label: 'Mentenanță',
+                            items: [
+                                '€600/lună — monitorizare & optimizare',
+                                'Sesiune bi-lunară de review (30 min)',
+                                'Ajustări continue pe dashboard'
+                            ]
+                        }
+                    ],
+                    timeline: 'Livrare: 14-21 zile lucrătoare',
+                    highlighted: true
+                },
+                {
+                    name: 'FULL COMMAND',
+                    price: '€4.500',
+                    priceNote: 'setup',
+                    description: 'Control total. Surse nelimitate, integrări custom, date offline incluse.',
+                    featureGroups: [
+                        {
+                            label: 'Tot ce include OFFENSIVE, plus',
+                            items: [
+                                'Surse de date nelimitate',
+                                'Integrări custom (API, ERP, date offline)',
+                                'Dashboard-uri multiple per departament',
+                                'Istoric complet cu comparații YoY'
+                            ]
+                        },
+                        {
+                            label: 'Enterprise',
+                            items: [
+                                '€1.200/lună — managed service complet',
+                                'War room session trimestrial (2h)',
+                                'Priority support — acces direct la echipă'
+                            ]
+                        }
+                    ],
+                    timeline: 'Livrare: 21-30 zile + ongoing',
+                    highlighted: false
+                }
+            ]}
+        />
+
+        <!-- S7: CTA Final -->
+        <CtaSection
+            title="Cât te costă să nu vezi imaginea completă?"
+            subtitle="Solicită un demo gratuit și construim un prototip live cu datele tale în 48h. Fără obligații, fără surprize."
+            buttonText="Solicită Demo Gratuit"
+            note="Construim prototipul cu datele tale reale. Gratuit."
+        />
+    </div>
+
+    <!-- Booking Modal -->
+    <BookingModal
+        title="Solicită Demo Decision Hub"
+        subtitle="Completează formularul și construim un prototip cu datele tale în 48h"
+    />
+</LandingPage>
+
+<style is:global>
+    /* Decision Hub scoped color palette — Deep Blue */
+    .dh-page {
+        --dh-primary: #1E40AF;
+        --dh-primary-light: #3B82F6;
+        --dh-secondary: #60A5FA;
+        --dh-primary-glow: rgba(30, 64, 175, 0.3);
+        --dh-gradient: linear-gradient(135deg, #1E40AF, #3B82F6);
+    }
+
+    [data-theme="light"] .dh-page {
+        --dh-primary-glow: rgba(30, 64, 175, 0.15);
+    }
+
+    /* Override Hero floating stats for deep blue theme */
+    .dh-page .hero .floating-stat-value {
+        background: linear-gradient(135deg, #1E40AF, #3B82F6);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .dh-page .hero-label {
+        border-color: rgba(30, 64, 175, 0.3);
+        background: rgba(30, 64, 175, 0.08);
+    }
+
+    .dh-page .hero-title .gradient {
+        background: linear-gradient(135deg, #1E40AF, #3B82F6);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    /* Override tab active button for deep blue theme */
+    .dh-page .tab-btn--active {
+        background: linear-gradient(135deg, #1E40AF, #3B82F6);
+        box-shadow: 0 4px 20px rgba(30, 64, 175, 0.4);
+    }
+
+    .dh-page .tab-btn--active .tab-btn-indicator {
+        border-top-color: #3B82F6;
+    }
+
+    .dh-page .tab-btn:hover:not(.tab-btn--active) {
+        border-color: rgba(30, 64, 175, 0.2);
+    }
+
+    /* Override BenefitsSection stat icon for deep blue */
+    .dh-page .benefit-card-stat-icon {
+        background: rgba(30, 64, 175, 0.15);
+        color: #1E40AF;
+    }
+
+    .dh-page .benefit-card-visual-placeholder {
+        border-color: rgba(30, 64, 175, 0.2);
+        color: #1E40AF;
+    }
+
+    .dh-page .benefit-card:hover {
+        border-color: rgba(30, 64, 175, 0.25);
+        box-shadow: 0 8px 30px rgba(30, 64, 175, 0.12);
+    }
+
+    /* Override pricing gradient for deep blue theme */
+    .dh-page .pricing-card--highlighted {
+        border-color: rgba(30, 64, 175, 0.3);
+        box-shadow: 0 0 30px rgba(30, 64, 175, 0.15);
+    }
+
+    .dh-page .pricing-card--highlighted:hover {
+        box-shadow: 0 0 30px rgba(30, 64, 175, 0.25), var(--shadow-lg);
+    }
+
+    .dh-page .pricing-badge {
+        background: linear-gradient(135deg, #1E40AF, #3B82F6);
+    }
+
+    .dh-page .pricing-price {
+        background: linear-gradient(135deg, #1E40AF, #3B82F6);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .dh-page .pricing-card--highlighted .pricing-cta {
+        background: linear-gradient(135deg, #1E40AF, #1e3a8a);
+    }
+
+    .dh-page .pricing-card--highlighted .pricing-cta:hover {
+        box-shadow: 0 0 30px rgba(30, 64, 175, 0.4);
+    }
+
+    .dh-page .pricing-card:hover {
+        border-color: rgba(30, 64, 175, 0.2);
+    }
+
+    .dh-page .pricing-cta:hover {
+        border-color: rgba(30, 64, 175, 0.5);
+        box-shadow: 0 0 20px rgba(30, 64, 175, 0.2);
+    }
+
+    .dh-page .feature-group-label {
+        color: #1E40AF;
+    }
+
+    .dh-page .pricing-features li svg {
+        color: #1E40AF;
+    }
+
+    /* Override CTA section for deep blue theme */
+    .dh-page .cta-btn {
+        background: linear-gradient(135deg, #1E40AF, #3B82F6);
+    }
+
+    .dh-page .cta-btn:hover {
+        box-shadow: 0 0 30px rgba(30, 64, 175, 0.4);
+    }
+
+    /* Override audit form submit for deep blue theme */
+    .dh-page .audit-form-submit {
+        background: linear-gradient(135deg, #1E40AF, #3B82F6);
+    }
+
+    .dh-page .audit-form-submit:hover {
+        box-shadow: 0 0 25px rgba(30, 64, 175, 0.4);
+    }
+
+    .dh-page .audit-form-field input:focus {
+        border-color: rgba(30, 64, 175, 0.5);
+        box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+    }
+
+    /* ProcessSection override — 3 columns instead of default 4 */
+    .dh-page .process-timeline {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .dh-page .process-step-number {
+        background: linear-gradient(135deg, rgba(30, 64, 175, 0.1), rgba(59, 130, 246, 0.1));
+        border-color: #3B82F6;
+    }
+
+    .dh-page .process-step-number span {
+        background: linear-gradient(135deg, #1E40AF, #3B82F6);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .dh-page .process-line {
+        background: linear-gradient(90deg, #1E40AF, #3B82F6);
+        opacity: 0.3;
+    }
+
+    .dh-page .process-step-content:hover {
+        border-color: rgba(30, 64, 175, 0.3);
+        box-shadow: 0 0 25px rgba(30, 64, 175, 0.15);
+    }
+
+    .dh-page .process-step-duration {
+        color: #3B82F6;
+        background: rgba(30, 64, 175, 0.1);
+    }
+
+    @media (max-width: 900px) {
+        .dh-page .process-timeline {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
