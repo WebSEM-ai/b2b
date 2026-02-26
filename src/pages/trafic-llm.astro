@@ -1,0 +1,303 @@
+---
+import LandingPage from '../layouts/LandingPage.astro';
+import Hero from '../components/Hero.astro';
+import ClientsCarousel from '../components/ClientsCarousel.astro';
+import BenefitsSection from '../components/BenefitsSection.astro';
+import TabSection from '../components/TabSection.astro';
+import LLMOptimizations from '../components/llm/LLMOptimizations.astro';
+import LLMDeliverables from '../components/llm/LLMDeliverables.astro';
+import PricingSection from '../components/PricingSection.astro';
+import CtaSection from '../components/CtaSection.astro';
+import BookingModal from '../components/BookingModal.astro';
+
+const pageTitle = "Trafic LLM — Fii Recomandat de AI | AlphaGrade by WebSEM";
+const pageDescription = "ChatGPT si Gemini recomanda branduri de milioane de ori pe zi. Optimizam prezenta ta digitala ca sa fii in acele recomandari. Analiza gratuita in 24h.";
+---
+
+<LandingPage
+    title={pageTitle}
+    description={pageDescription}
+    footerCtaBadge="Trafic LLM"
+    footerCtaTitle='Ești în răspunsurile AI <span class="gradient-text">ale competiției tale</span>?'
+    footerCtaSubtitle='Solicită o <strong>analiză gratuită</strong> și îți arătăm în 24h exact unde apari tu — și unde apare competiția ta — în ChatGPT, Gemini și Perplexity.'
+    footerCtaStats={[
+        { value: '5', label: 'AI-uri Analizate' },
+        { value: '24h', label: 'Livrare' },
+        { value: 'Gratuit', label: 'Analiza Inițială' }
+    ]}
+    footerCtaButtonText="Solicită Analiză Gratuită"
+    footerCtaDisclaimer="* Analizăm prezența ta în principalele AI-uri și îți livrăm un sumar acționabil gratuit."
+>
+    <div class="llm-page">
+        <!-- S1: Hero -->
+        <Hero
+            badge="LLM TRAFFIC — OPTIMIZARE AI"
+            titleLine1='Brandul tău apare când <strong>AI-ul face recomandări</strong>?'
+            titleLine2="Dacă nu, competiția ta e deja acolo."
+            subtitle="ChatGPT, Gemini și Perplexity recomandă branduri de milioane de ori pe zi. Optimizăm prezența ta digitală ca să fii în acele recomandări — înainte ca fereastra să se închidă."
+            floatingStats={[
+                { value: '3.2B', label: 'Întrebări/Zi în AI' },
+                { value: '40%', label: 'Research B2B prin AI' },
+                { value: '<3%', label: 'Au Început în RO' }
+            ]}
+            formTitle="Solicită Analiză Gratuită"
+            formSubtitle="Analizăm vizibilitatea ta în AI în 24h"
+        />
+
+        <!-- S2: Clients Carousel -->
+        <ClientsCarousel />
+
+        <!-- S3: Benefits — De ce acum -->
+        <BenefitsSection
+            title="De ce contează azi, nu peste 2 ani."
+            subtitle="Nu e un trend. E o schimbare structurală în cum cumpără B2B."
+            benefits={[
+                {
+                    title: 'Schimbarea Canalului',
+                    description: '40% din research-ul B2B se face acum prin AI, nu prin Google. Procentul crește cu 3-5% lunar.',
+                    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>`,
+                    stat: { icon: '↑', text: '40% B2B' }
+                },
+                {
+                    title: 'Fereastra First-Mover',
+                    description: 'Pozițiile în răspunsurile AI nu se cumpără. Se câștigă prin relevanță și consistență. Primii care intră, rămân.',
+                    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`,
+                    stat: { icon: '✓', text: 'Early-Adopter RO' }
+                },
+                {
+                    title: 'Costul Așteptării',
+                    description: 'Companiile care intră în LLM optimization în 2025 plătesc de 8-10x mai puțin decât vor plăti în 2027 pentru același rezultat.',
+                    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`,
+                    stat: { icon: '✓', text: '8x Mai Ieftin Acum' }
+                },
+                {
+                    title: 'Zero Competiție Locală',
+                    description: 'În România, sub 3% din companii au o strategie activă de LLM visibility. Piața e deschisă.',
+                    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>`,
+                    stat: { icon: '✓', text: '<3% Au Început' }
+                }
+            ]}
+        />
+
+        <!-- S4: TabSection — Ce Optimizam + Ce Primesti -->
+        <TabSection tabs={["Ce Optimizăm", "Ce Primești"]} id="llm-scope">
+            <div data-tab-panel="0">
+                <LLMOptimizations />
+            </div>
+            <div data-tab-panel="1">
+                <LLMDeliverables />
+            </div>
+        </TabSection>
+
+        <!-- S5: Pricing — SIGNAL / PRESENCE / DOMINANCE -->
+        <PricingSection
+            title="Pachete & Prețuri"
+            subtitle="Vizibilitate AI la nivel enterprise. Investiție, nu cost."
+            note="Toate pachetele includ: analiză inițială, benchmark competitiv și raportare lunară. Prețurile sunt orientative și pot fi ajustate în funcție de complexitate."
+            tiers={[
+                {
+                    name: 'SIGNAL',
+                    price: '€800',
+                    priceNote: '/lună',
+                    description: 'Intri pe radar. Benchmark + primele optimizări.',
+                    featureGroups: [
+                        {
+                            label: 'Analiză & Conținut',
+                            items: [
+                                'Analiză vizibilitate LLM (5 AI-uri)',
+                                'Raport competitiv inițial',
+                                '3 pagini de conținut optimizat/lună',
+                                'Raport lunar de monitorizare'
+                            ]
+                        }
+                    ],
+                    timeline: 'Livrare: 7-10 zile lucrătoare',
+                    highlighted: false
+                },
+                {
+                    name: 'PRESENCE',
+                    price: '€1.800',
+                    priceNote: '/lună',
+                    description: 'Ești recomandat. Strategie completă + implementare continuă.',
+                    featureGroups: [
+                        {
+                            label: 'Tot ce include SIGNAL, plus',
+                            items: [
+                                'Strategie completă de conținut AI-first',
+                                '8 pagini optimizate/lună',
+                                'Optimizare profil de autoritate (mențiuni, date structurate)',
+                                'Sesiune lunară de review cu echipa ta (60 min)'
+                            ]
+                        }
+                    ],
+                    timeline: 'Livrare: 14 zile lucrătoare',
+                    highlighted: true
+                },
+                {
+                    name: 'DOMINANCE',
+                    price: '€3.500',
+                    priceNote: '/lună',
+                    description: 'Controlezi narativul. Dominanță în toate AI-urile relevante.',
+                    featureGroups: [
+                        {
+                            label: 'Tot ce include PRESENCE, plus',
+                            items: [
+                                'Conținut nelimitat',
+                                'Monitorizare săptămânală',
+                                'War room session trimestrial (workshop 2h cu echipa ta)',
+                                'Priority support — acces direct la echipa de analiști'
+                            ]
+                        }
+                    ],
+                    timeline: 'Livrare: ongoing',
+                    highlighted: false
+                }
+            ]}
+        />
+
+        <!-- S6: CTA Final -->
+        <CtaSection
+            title="Ești în răspunsurile AI ale competiției tale?"
+            subtitle="Solicită o analiză gratuită și îți arătăm în 24h exact unde apari tu — și unde apare competiția ta — în ChatGPT, Gemini și Perplexity."
+            buttonText="Solicită Analiză Gratuită"
+            note="Fără obligații. Primești răspuns în 24h."
+        />
+    </div>
+
+    <!-- Booking Modal -->
+    <BookingModal
+        title="Solicită Analiză LLM Gratuită"
+        subtitle="Completează formularul și analizăm vizibilitatea ta în AI în 24h"
+    />
+</LandingPage>
+
+<style is:global>
+    /* Trafic LLM scoped color palette — Electric Violet/Purple */
+    .llm-page {
+        --llm-primary: #8B5CF6;
+        --llm-primary-light: #A78BFA;
+        --llm-secondary: #D946EF;
+        --llm-primary-glow: rgba(139, 92, 246, 0.3);
+        --llm-gradient: linear-gradient(135deg, #8B5CF6, #D946EF);
+    }
+
+    [data-theme="light"] .llm-page {
+        --llm-primary-glow: rgba(139, 92, 246, 0.15);
+    }
+
+    /* Override Hero floating stats for violet theme */
+    .llm-page .hero .floating-stat-value {
+        background: linear-gradient(135deg, #8B5CF6, #D946EF);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .llm-page .hero-label {
+        border-color: rgba(139, 92, 246, 0.3);
+        background: rgba(139, 92, 246, 0.08);
+    }
+
+    .llm-page .hero-title .gradient {
+        background: linear-gradient(135deg, #8B5CF6, #D946EF);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    /* Override tab active button for violet theme */
+    .llm-page .tab-btn--active {
+        background: linear-gradient(135deg, #8B5CF6, #D946EF);
+        box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4);
+    }
+
+    .llm-page .tab-btn--active .tab-btn-indicator {
+        border-top-color: #D946EF;
+    }
+
+    .llm-page .tab-btn:hover:not(.tab-btn--active) {
+        border-color: rgba(139, 92, 246, 0.2);
+    }
+
+    /* Override BenefitsSection stat icon for violet */
+    .llm-page .benefit-card-stat-icon {
+        background: rgba(139, 92, 246, 0.15);
+        color: #8B5CF6;
+    }
+
+    .llm-page .benefit-card-visual-placeholder {
+        border-color: rgba(139, 92, 246, 0.2);
+        color: #8B5CF6;
+    }
+
+    .llm-page .benefit-card:hover {
+        border-color: rgba(139, 92, 246, 0.25);
+        box-shadow: 0 8px 30px rgba(139, 92, 246, 0.12);
+    }
+
+    /* Override pricing gradient for LLM violet theme */
+    .llm-page .pricing-card--highlighted {
+        border-color: rgba(139, 92, 246, 0.3);
+        box-shadow: 0 0 30px rgba(139, 92, 246, 0.15);
+    }
+
+    .llm-page .pricing-card--highlighted:hover {
+        box-shadow: 0 0 30px rgba(139, 92, 246, 0.25), var(--shadow-lg);
+    }
+
+    .llm-page .pricing-badge {
+        background: linear-gradient(135deg, #8B5CF6, #D946EF);
+    }
+
+    .llm-page .pricing-price {
+        background: linear-gradient(135deg, #8B5CF6, #D946EF);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .llm-page .pricing-card--highlighted .pricing-cta {
+        background: linear-gradient(135deg, #8B5CF6, #7c3aed);
+    }
+
+    .llm-page .pricing-card--highlighted .pricing-cta:hover {
+        box-shadow: 0 0 30px rgba(139, 92, 246, 0.4);
+    }
+
+    .llm-page .pricing-card:hover {
+        border-color: rgba(139, 92, 246, 0.2);
+    }
+
+    .llm-page .pricing-cta:hover {
+        border-color: rgba(139, 92, 246, 0.5);
+        box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
+    }
+
+    .llm-page .feature-group-label {
+        color: #8B5CF6;
+    }
+
+    .llm-page .pricing-features li svg {
+        color: #8B5CF6;
+    }
+
+    /* Override CTA section for violet theme */
+    .llm-page .cta-btn {
+        background: linear-gradient(135deg, #8B5CF6, #D946EF);
+    }
+
+    .llm-page .cta-btn:hover {
+        box-shadow: 0 0 30px rgba(139, 92, 246, 0.4);
+    }
+
+    /* Override audit form submit for violet theme */
+    .llm-page .audit-form-submit {
+        background: linear-gradient(135deg, #8B5CF6, #D946EF);
+    }
+
+    .llm-page .audit-form-submit:hover {
+        box-shadow: 0 0 25px rgba(139, 92, 246, 0.4);
+    }
+
+    .llm-page .audit-form-field input:focus {
+        border-color: rgba(139, 92, 246, 0.5);
+        box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+    }
+</style>

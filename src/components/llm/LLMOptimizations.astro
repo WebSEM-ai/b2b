@@ -1,0 +1,145 @@
+---
+const optimizations = [
+    {
+        num: '01',
+        title: 'Autoritate de Brand în AI',
+        desc: 'Cum te descrie internetul despre tine — articole, mențiuni, structura site-ului. AI-ul citește tot.',
+        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>`
+    },
+    {
+        num: '02',
+        title: 'Conținut Optimizat pentru Răspunsuri',
+        desc: 'Paginile tale răspund la întrebările pe care AI-ul le primește? Le restructurăm și le optimizăm.',
+        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>`
+    },
+    {
+        num: '03',
+        title: 'Consistența Semnalelor Digitale',
+        desc: 'NAP, date structurate, profiluri de autoritate. Tot ce influențează încrederea AI-ului în brandul tău.',
+        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>`
+    }
+];
+---
+
+<div class="llm-optimizations">
+    <div class="llm-opt-grid">
+        {optimizations.map(opt => (
+            <div class="llm-opt-card">
+                <div class="llm-opt-num">{opt.num}</div>
+                <div class="llm-opt-icon" set:html={opt.icon} />
+                <h3>{opt.title}</h3>
+                <p>{opt.desc}</p>
+            </div>
+        ))}
+    </div>
+</div>
+
+<script>
+    const llmOptObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.llm-opt-card').forEach(card => {
+        llmOptObserver.observe(card);
+    });
+</script>
+
+<style>
+    .llm-optimizations {
+        padding: var(--section-padding);
+        max-width: var(--container-max);
+        margin: 0 auto;
+    }
+
+    .llm-opt-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.25rem;
+    }
+
+    .llm-opt-card {
+        padding: 1.5rem;
+        background: var(--bg-card);
+        border: 1px solid var(--border-light);
+        border-radius: 14px;
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    .llm-opt-card.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .llm-opt-card:nth-child(2).visible { transition-delay: 0.05s; }
+    .llm-opt-card:nth-child(3).visible { transition-delay: 0.1s; }
+
+    .llm-opt-card:hover {
+        border-color: rgba(139, 92, 246, 0.3);
+        box-shadow: 0 0 25px var(--llm-primary-glow, rgba(139, 92, 246, 0.15));
+        transform: translateY(-3px);
+    }
+
+    .llm-opt-num {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 0.7rem;
+        font-weight: 700;
+        color: var(--llm-primary, #8B5CF6);
+        letter-spacing: 0.1em;
+        margin-bottom: 0.5rem;
+        opacity: 0.7;
+    }
+
+    .llm-opt-icon {
+        width: 32px;
+        height: 32px;
+        color: var(--llm-primary, #8B5CF6);
+        margin-bottom: 0.5rem;
+    }
+
+    .llm-opt-icon :global(svg) {
+        width: 100%;
+        height: 100%;
+    }
+
+    .llm-opt-card h3 {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 0.4rem;
+    }
+
+    .llm-opt-card p {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        line-height: 1.5;
+    }
+
+    :global([data-theme="light"]) .llm-opt-card {
+        background: #fff;
+        border-color: rgba(0, 0, 0, 0.06);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    }
+
+    :global([data-theme="light"]) .llm-opt-card:hover {
+        box-shadow: 0 4px 20px rgba(139, 92, 246, 0.1);
+    }
+
+    @media (max-width: 900px) {
+        .llm-opt-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 600px) {
+        .llm-opt-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
