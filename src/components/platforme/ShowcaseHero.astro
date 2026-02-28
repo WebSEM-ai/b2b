@@ -1,0 +1,381 @@
+---
+interface Props {
+    badge?: string;
+    title?: string;
+    subtitle?: string;
+    heroImage?: string;
+    heroImageAlt?: string;
+    browserUrl?: string;
+    ctaPrimaryText?: string;
+    ctaPrimaryHref?: string;
+    ctaSecondaryText?: string;
+    ctaSecondaryHref?: string;
+    stats?: Array<{ value: string; label: string }>;
+}
+
+const {
+    badge = 'SMART PERFORMANCE — CASE STUDY',
+    title = 'Panama Van <strong>Ford</strong>',
+    subtitle = 'Platformă web enterprise pentru Trigano Group — configurator interactiv, animații premium și PageSpeed 95+. Zero costuri de server.',
+    heroImage = '/images/platforme/ford/Platforme-web-moderne1.webp',
+    heroImageAlt = 'Panama Van Ford — Homepage',
+    browserUrl = 'panamavan.ro',
+    ctaPrimaryText = 'Vezi Site-ul Live',
+    ctaPrimaryHref = '#',
+    ctaSecondaryText = 'Vezi Galeria',
+    ctaSecondaryHref = '#galerie',
+    stats = [
+        { value: '95+', label: 'PageSpeed' },
+        { value: '€0', label: 'Server Costs' },
+        { value: '10', label: 'Pagini' },
+        { value: '0.8s', label: 'Load Time' }
+    ]
+} = Astro.props;
+---
+
+<section class="showcase-hero">
+    <div class="showcase-hero-bg">
+        <div class="grid-lines"></div>
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+    </div>
+
+    <div class="showcase-hero-content">
+        <div class="showcase-hero-text">
+            <div class="showcase-hero-badge">{badge}</div>
+            <h1 class="showcase-hero-title" set:html={title} />
+            <p class="showcase-hero-subtitle">{subtitle}</p>
+            <div class="showcase-hero-actions">
+                {ctaPrimaryHref !== '#' && (
+                    <a href={ctaPrimaryHref} target="_blank" rel="noopener noreferrer" class="showcase-btn showcase-btn--primary">
+                        {ctaPrimaryText}
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                            <polyline points="15 3 21 3 21 9"/>
+                            <line x1="10" y1="14" x2="21" y2="3"/>
+                        </svg>
+                    </a>
+                )}
+                <a href={ctaSecondaryHref} class="showcase-btn showcase-btn--secondary">
+                    {ctaSecondaryText}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <div class="showcase-hero-visual">
+            <div class="browser-frame-hero">
+                <div class="browser-frame-bar">
+                    <span class="browser-dot browser-dot--red"></span>
+                    <span class="browser-dot browser-dot--yellow"></span>
+                    <span class="browser-dot browser-dot--green"></span>
+                    <span class="browser-url">{browserUrl}</span>
+                </div>
+                <div class="browser-frame-content">
+                    <img src={heroImage} alt={heroImageAlt} />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="showcase-stats-bar">
+        {stats.map((stat) => (
+            <div class="showcase-stat">
+                <span class="showcase-stat-value">{stat.value}</span>
+                <span class="showcase-stat-label">{stat.label}</span>
+            </div>
+        ))}
+    </div>
+</section>
+
+<style>
+    .showcase-hero {
+        position: relative;
+        padding: 8rem 3rem 4rem;
+        overflow: hidden;
+        min-height: 90vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    /* Background */
+    .showcase-hero-bg {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+    }
+
+    .grid-lines {
+        position: absolute;
+        inset: 0;
+        background-image:
+            linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+        background-size: 60px 60px;
+    }
+
+    :global([data-theme="light"]) .grid-lines {
+        background-image:
+            linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px);
+    }
+
+    .orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(100px);
+        opacity: var(--orb-opacity);
+    }
+
+    .orb-1 {
+        width: 500px;
+        height: 500px;
+        top: -100px;
+        right: -100px;
+        background: radial-gradient(circle, rgba(245, 158, 11, 0.25), transparent 70%);
+    }
+
+    .orb-2 {
+        width: 400px;
+        height: 400px;
+        bottom: -50px;
+        left: -100px;
+        background: radial-gradient(circle, rgba(249, 115, 22, 0.2), transparent 70%);
+    }
+
+    /* Content */
+    .showcase-hero-content {
+        position: relative;
+        z-index: 1;
+        max-width: var(--container-max);
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1.2fr;
+        gap: 4rem;
+        align-items: center;
+        width: 100%;
+    }
+
+    .showcase-hero-badge {
+        display: inline-block;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 0.5rem 1rem;
+        border-radius: 100px;
+        border: 1px solid rgba(245, 158, 11, 0.3);
+        background: rgba(245, 158, 11, 0.08);
+        color: var(--text-secondary);
+        margin-bottom: 1.5rem;
+    }
+
+    .showcase-hero-title {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 3.5rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        line-height: 1.1;
+        margin-bottom: 1.25rem;
+    }
+
+    .showcase-hero-title :global(strong) {
+        background: linear-gradient(135deg, #F59E0B, #F97316);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .showcase-hero-subtitle {
+        font-size: 1.1rem;
+        color: var(--text-tertiary);
+        line-height: 1.7;
+        margin-bottom: 2rem;
+        max-width: 520px;
+    }
+
+    .showcase-hero-actions {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .showcase-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.85rem 1.75rem;
+        border-radius: 12px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        font-family: 'Inter', sans-serif;
+    }
+
+    .showcase-btn svg {
+        width: 18px;
+        height: 18px;
+        transition: transform 0.3s ease;
+    }
+
+    .showcase-btn:hover svg {
+        transform: translateX(3px);
+    }
+
+    .showcase-btn--primary {
+        background: linear-gradient(135deg, #F59E0B, #F97316);
+        color: #fff;
+    }
+
+    .showcase-btn--primary:hover {
+        box-shadow: 0 10px 30px rgba(245, 158, 11, 0.3);
+        transform: translateY(-2px);
+    }
+
+    .showcase-btn--secondary {
+        background: transparent;
+        color: var(--text-primary);
+        border: 1px solid var(--border-medium);
+    }
+
+    .showcase-btn--secondary:hover {
+        border-color: rgba(245, 158, 11, 0.4);
+        box-shadow: 0 0 20px rgba(245, 158, 11, 0.1);
+    }
+
+    /* Browser frame */
+    .browser-frame-hero {
+        border-radius: 14px;
+        overflow: hidden;
+        border: 1px solid var(--border-light);
+        background: var(--bg-card);
+        box-shadow: var(--shadow-lg);
+        transition: all 0.4s ease;
+    }
+
+    .browser-frame-hero:hover {
+        box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        transform: translateY(-6px);
+    }
+
+    .browser-frame-bar {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 12px 16px;
+        background: var(--bg-card);
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .browser-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+    }
+
+    .browser-dot--red { background: #ff5f57; }
+    .browser-dot--yellow { background: #febc2e; }
+    .browser-dot--green { background: #28c840; }
+
+    .browser-url {
+        margin-left: 10px;
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        font-family: 'Inter', monospace;
+        background: var(--bg-input);
+        padding: 4px 14px;
+        border-radius: 6px;
+        flex: 1;
+        max-width: 300px;
+    }
+
+    .browser-frame-content {
+        line-height: 0;
+    }
+
+    .browser-frame-content img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    /* Stats bar */
+    .showcase-stats-bar {
+        position: relative;
+        z-index: 1;
+        max-width: var(--container-max);
+        margin: 4rem auto 0;
+        display: flex;
+        justify-content: center;
+        gap: 3rem;
+        padding: 1.5rem 2rem;
+        background: var(--bg-card);
+        border: 1px solid var(--border-light);
+        border-radius: 16px;
+        width: 100%;
+    }
+
+    .showcase-stat {
+        text-align: center;
+    }
+
+    .showcase-stat-value {
+        display: block;
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 1.75rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, #F59E0B, #F97316);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        line-height: 1.2;
+    }
+
+    .showcase-stat-label {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        letter-spacing: 0.02em;
+    }
+
+    @media (max-width: 900px) {
+        .showcase-hero {
+            padding: 7rem 1.5rem 3rem;
+            min-height: auto;
+        }
+
+        .showcase-hero-content {
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+        }
+
+        .showcase-hero-title {
+            font-size: 2.5rem;
+        }
+
+        .showcase-stats-bar {
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .showcase-stat-value {
+            font-size: 1.4rem;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .showcase-hero-title {
+            font-size: 2rem;
+        }
+
+        .showcase-hero-actions {
+            flex-direction: column;
+        }
+
+        .showcase-btn {
+            justify-content: center;
+        }
+    }
+</style>

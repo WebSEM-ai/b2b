@@ -1,0 +1,166 @@
+---
+const dimensions = [
+    {
+        num: '01',
+        title: 'Google Tag Manager',
+        desc: 'Audit complet al containerului GTM: tag-uri redundante, triggere în conflict, variabile nefolosite. Reconstrucție curată cu naming convention și documentație.',
+        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>`
+    },
+    {
+        num: '02',
+        title: 'Google Analytics 4',
+        desc: 'Configurare corectă a proprietății GA4: evenimente custom, conversii, audiențe, e-commerce tracking, atribuire cross-channel și filtrare trafic intern.',
+        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>`
+    },
+    {
+        num: '03',
+        title: 'Pixels & Scripts Advertising',
+        desc: 'Meta Pixel, Google Ads Tag, TikTok Pixel, LinkedIn Insight — verificare, deduplicare și implementare corectă cu event matching și deduplication.',
+        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>`
+    },
+    {
+        num: '04',
+        title: 'Cookies Consent (CMP)',
+        desc: 'Implementare Google Consent Mode v2, banner GDPR conform, blocare scripturi înainte de consimțământ. Compatibil cu Cookiebot, CookieYes sau custom.',
+        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`
+    },
+    {
+        num: '05',
+        title: 'Server-Side Tracking',
+        desc: 'Setup server-side GTM pe Google Cloud sau Stape.io. First-party data collection, bypass ad blockers, tracking rezistent și compliant.',
+        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>`
+    },
+    {
+        num: '06',
+        title: 'Validare & QA Complet',
+        desc: 'Testare end-to-end cu Tag Assistant, GA4 DebugView, Meta Events Manager. Raport de validare per event, per platformă, per dispozitiv.',
+        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>`
+    }
+];
+---
+
+<div class="df-dimensions">
+    <div class="df-dim-grid">
+        {dimensions.map(dim => (
+            <div class="df-dim-card">
+                <div class="df-dim-num">{dim.num}</div>
+                <div class="df-dim-icon" set:html={dim.icon} />
+                <h3>{dim.title}</h3>
+                <p>{dim.desc}</p>
+            </div>
+        ))}
+    </div>
+</div>
+
+<script>
+    const dfDimObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.df-dim-card').forEach(card => {
+        dfDimObserver.observe(card);
+    });
+</script>
+
+<style>
+    .df-dimensions {
+        padding: var(--section-padding);
+        max-width: var(--container-max);
+        margin: 0 auto;
+    }
+
+    .df-dim-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.25rem;
+    }
+
+    .df-dim-card {
+        padding: 1.5rem;
+        background: var(--bg-card);
+        border: 1px solid var(--border-light);
+        border-radius: 14px;
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    .df-dim-card.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .df-dim-card:nth-child(2).visible { transition-delay: 0.05s; }
+    .df-dim-card:nth-child(3).visible { transition-delay: 0.1s; }
+    .df-dim-card:nth-child(4).visible { transition-delay: 0.15s; }
+    .df-dim-card:nth-child(5).visible { transition-delay: 0.2s; }
+    .df-dim-card:nth-child(6).visible { transition-delay: 0.25s; }
+
+    .df-dim-card:hover {
+        border-color: rgba(0, 201, 167, 0.3);
+        box-shadow: 0 0 25px var(--df-primary-glow, rgba(0, 201, 167, 0.15));
+        transform: translateY(-3px);
+    }
+
+    .df-dim-num {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 0.7rem;
+        font-weight: 700;
+        color: var(--df-primary, #00C9A7);
+        letter-spacing: 0.1em;
+        margin-bottom: 0.5rem;
+        opacity: 0.7;
+    }
+
+    .df-dim-icon {
+        width: 32px;
+        height: 32px;
+        color: var(--df-primary, #00C9A7);
+        margin-bottom: 0.5rem;
+    }
+
+    .df-dim-icon :global(svg) {
+        width: 100%;
+        height: 100%;
+    }
+
+    .df-dim-card h3 {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 0.4rem;
+    }
+
+    .df-dim-card p {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        line-height: 1.5;
+    }
+
+    :global([data-theme="light"]) .df-dim-card {
+        background: #fff;
+        border-color: rgba(0, 0, 0, 0.06);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    }
+
+    :global([data-theme="light"]) .df-dim-card:hover {
+        box-shadow: 0 4px 20px rgba(0, 201, 167, 0.1);
+    }
+
+    @media (max-width: 900px) {
+        .df-dim-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 600px) {
+        .df-dim-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>

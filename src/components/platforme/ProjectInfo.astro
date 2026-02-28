@@ -1,0 +1,230 @@
+---
+interface Props {
+    description?: string;
+    client?: string;
+    projectType?: string;
+    timeline?: string;
+    features?: string[];
+    liveUrl?: string;
+}
+
+const {
+    description = `<p>Panama Van este distribuitorul oficial Ford pentru vehicule comerciale ușoare și rulote în cadrul grupului Trigano — cel mai mare producător european de vehicule recreaționale.</p>
+    <p>Am construit o platformă web modernă care transformă experiența de prezentare a flotei de vehicule, de la un catalog static într-o experiență interactivă premium. Site-ul include un configurator wizard în 5 pași, comparator de modele cu taburi interactive, și animații parallax care ridică percepția de brand la nivel premium.</p>
+    <p>Întregul proiect a fost livrat cu un stack modern (Astro + Tailwind + GSAP), deploy-at pe Vercel edge network cu <strong>zero costuri de server</strong> și un <strong>PageSpeed score de 95+</strong>.</p>`,
+    client = 'Panama Van / Ford / Trigano Group',
+    projectType = 'Platformă Web Enterprise',
+    timeline = '6 săptămâni',
+    features = [
+        'Configurator interactiv în 5 pași',
+        'Comparator modele cu taburi',
+        'Animații parallax & GSAP',
+        'Catalog cu filtrare dinamică',
+        'Design responsive premium',
+        'Optimizare PageSpeed 95+',
+        'Deploy static pe edge network',
+        'Branding aliniat Trigano Group'
+    ],
+    liveUrl = ''
+} = Astro.props;
+---
+
+<section class="project-info">
+    <div class="project-info-container">
+        <div class="project-info-text" set:html={description} />
+
+        <div class="project-info-card">
+            <div class="info-card-inner">
+                <h3 class="info-card-title">Detalii Proiect</h3>
+
+                <div class="info-card-meta">
+                    <div class="info-meta-item">
+                        <span class="info-meta-label">Client</span>
+                        <span class="info-meta-value">{client}</span>
+                    </div>
+                    <div class="info-meta-item">
+                        <span class="info-meta-label">Tip Proiect</span>
+                        <span class="info-meta-value">{projectType}</span>
+                    </div>
+                    <div class="info-meta-item">
+                        <span class="info-meta-label">Timeline</span>
+                        <span class="info-meta-value">{timeline}</span>
+                    </div>
+                </div>
+
+                <div class="info-card-divider"></div>
+
+                <h4 class="info-features-title">Funcționalități</h4>
+                <ul class="info-features-list">
+                    {features.map((feature) => (
+                        <li class="info-feature-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            {feature}
+                        </li>
+                    ))}
+                </ul>
+
+                {liveUrl && (
+                    <a href={liveUrl} target="_blank" rel="noopener noreferrer" class="info-card-link">
+                        Vezi Site-ul Live
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                            <polyline points="15 3 21 3 21 9"/>
+                            <line x1="10" y1="14" x2="21" y2="3"/>
+                        </svg>
+                    </a>
+                )}
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .project-info {
+        padding: var(--section-padding);
+    }
+
+    .project-info-container {
+        max-width: var(--container-max);
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 380px;
+        gap: 3rem;
+        align-items: start;
+    }
+
+    .project-info-text {
+        font-size: 1.05rem;
+        color: var(--text-secondary);
+        line-height: 1.8;
+    }
+
+    .project-info-text :global(p) {
+        margin-bottom: 1.25rem;
+    }
+
+    .project-info-text :global(p:last-child) {
+        margin-bottom: 0;
+    }
+
+    .project-info-text :global(strong) {
+        color: var(--text-primary);
+        font-weight: 600;
+    }
+
+    .info-card-inner {
+        background: var(--bg-card);
+        border: 1px solid var(--border-light);
+        border-radius: 20px;
+        padding: 2rem;
+        position: sticky;
+        top: 100px;
+    }
+
+    .info-card-title {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 1.5rem;
+    }
+
+    .info-card-meta {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .info-meta-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+    }
+
+    .info-meta-label {
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--text-muted);
+    }
+
+    .info-meta-value {
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: var(--text-primary);
+    }
+
+    .info-card-divider {
+        height: 1px;
+        background: var(--border-light);
+        margin: 1.5rem 0;
+    }
+
+    .info-features-title {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 1rem;
+    }
+
+    .info-features-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+    }
+
+    .info-feature-item {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+    }
+
+    .info-feature-item svg {
+        width: 16px;
+        height: 16px;
+        flex-shrink: 0;
+        color: var(--text-muted);
+    }
+
+    .info-card-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 1.5rem;
+        padding: 0.75rem 1.5rem;
+        border-radius: 10px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--white);
+        text-decoration: none;
+        transition: all 0.3s ease;
+        background: var(--gradient-primary);
+    }
+
+    .info-card-link:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-glow);
+    }
+
+    .info-card-link svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    @media (max-width: 900px) {
+        .project-info-container {
+            grid-template-columns: 1fr;
+        }
+
+        .info-card-inner {
+            position: static;
+        }
+    }
+</style>

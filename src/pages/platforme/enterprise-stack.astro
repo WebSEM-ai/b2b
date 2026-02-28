@@ -1,0 +1,292 @@
+---
+import LandingPage from '../../layouts/LandingPage.astro';
+import ShowcaseHero from '../../components/platforme/ShowcaseHero.astro';
+import ProjectInfo from '../../components/platforme/ProjectInfo.astro';
+import ScreenshotGallery from '../../components/platforme/ScreenshotGallery.astro';
+import TechStack from '../../components/platforme/TechStack.astro';
+import ProjectResults from '../../components/platforme/ProjectResults.astro';
+import CtaSection from '../../components/CtaSection.astro';
+import BookingModal from '../../components/BookingModal.astro';
+
+const pageTitle = "Enterprise Stack — Haier | WebSEM Platforme";
+const pageDescription = "Case study: arhitectură e-commerce enterprise pentru Haier — Next.js 15, Sanity CMS, PlanetScale, Stripe, Algolia. PageSpeed 95+, sub 1 secundă load time.";
+---
+
+<LandingPage
+    title={pageTitle}
+    description={pageDescription}
+    footerCtaBadge="WebSEM Platforme"
+    footerCtaTitle='Vrei o arhitectură <span class="gradient-text">de nivel enterprise</span>?'
+    footerCtaSubtitle='Construim platforme e-commerce cu <strong>10 servicii de top</strong> integrate — aceeași arhitectură folosită de Stripe, Netflix și Notion. Solicită o consultație gratuită.'
+    footerCtaStats={[
+        { value: '95+', label: 'PageSpeed' },
+        { value: '<200ms', label: 'TTFB' },
+        { value: '99.99%', label: 'Uptime' }
+    ]}
+    footerCtaButtonText="Solicită Consultație"
+    footerCtaDisclaimer="* Discuție inițială gratuită. Analizăm cerințele și pregătim o propunere personalizată."
+>
+    <div class="es-page">
+        <!-- S1: Showcase Hero -->
+        <ShowcaseHero
+            badge="ENTERPRISE STACK — CASE STUDY"
+            title='Haier <strong>Enterprise</strong>'
+            subtitle="Arhitectură e-commerce de nivel enterprise pentru Haier — 10 servicii premium integrate, PageSpeed 95+, TTFB sub 200ms și căutare instant sub 50ms."
+            heroImage="/images/platforme/haier/Platforma-Moderna-Tehnologie4.webp"
+            heroImageAlt="Haier — Sisteme de Climatizare"
+            browserUrl="haier.ro"
+            ctaSecondaryText="Vezi Galeria"
+            ctaSecondaryHref="#galerie"
+            stats={[
+                { value: '95+', label: 'PageSpeed' },
+                { value: '<200ms', label: 'TTFB Global' },
+                { value: '10', label: 'Servicii' },
+                { value: '<50ms', label: 'Search' }
+            ]}
+        />
+
+        <!-- S2: Tech Stack -->
+        <TechStack
+            title="Enterprise Tech Stack"
+            subtitle="10 servicii de top — fiecare lider în categoria sa"
+            technologies={[
+                {
+                    name: 'Next.js 15',
+                    description: 'React Server Components',
+                    icon: `<svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg"><circle cx="128" cy="128" r="126" fill="none" stroke="currentColor" stroke-width="8"/><path d="M109 63v130l80-110" fill="none" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></svg>`
+                },
+                {
+                    name: 'Sanity.io',
+                    description: 'Visual CMS',
+                    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L2 7l10 5 10-5-10-5Z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></svg>`
+                },
+                {
+                    name: 'PlanetScale',
+                    description: 'MySQL Distribuit',
+                    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`
+                },
+                {
+                    name: 'Stripe',
+                    description: 'Plăți & Checkout',
+                    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>`
+                },
+                {
+                    name: 'Algolia',
+                    description: 'Căutare Instant <50ms',
+                    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>`
+                }
+            ]}
+        />
+
+        <!-- S3: Project Info -->
+        <ProjectInfo
+            description={`<p>Haier este marca Nr. 1 în lume pentru echipamente de climatizare conectate, cu o cotă de piață de peste 33% la nivel global. Am construit pentru ei o arhitectură e-commerce enterprise cu 10 servicii premium integrate.</p>
+            <p>Spre deosebire de platformele monolitice (Shopify, WooCommerce), această arhitectură este modulară: Next.js 15 cu React Server Components pentru un frontend ultra-rapid, Sanity.io v3 pentru administrare vizuală în timp real, PlanetScale (MySQL distribuit folosit de YouTube) pentru date, Stripe pentru plăți, Clerk pentru autentificare securizată, Algolia pentru căutare instant și Cloudflare pentru imagini optimizate global.</p>
+            <p>Rezultatul: <strong>PageSpeed 95+</strong>, <strong>TTFB sub 200ms</strong> global, căutare sub 50ms și <strong>uptime 99.99%</strong>. Echipa Haier gestionează conținutul fără suport tehnic prin editare vizuală directă pe site.</p>`}
+            client="Haier — Nr. 1 Global Climatizare"
+            projectType="E-Commerce Enterprise"
+            timeline="12 săptămâni"
+            features={[
+                'Next.js 15 + React Server Components',
+                'Sanity.io v3 — editare vizuală live',
+                'PlanetScale — MySQL distribuit',
+                'Stripe — plăți, Apple Pay, Google Pay',
+                'Clerk — autentificare MFA, SSO, GDPR',
+                'Algolia — căutare instant sub 50ms',
+                'Cloudflare R2 — imagini WebP/AVIF',
+                'Sentry — monitoring în timp real'
+            ]}
+        />
+
+        <!-- S4: Screenshot Gallery -->
+        <ScreenshotGallery
+            title="Galeria Proiectului"
+            subtitle="Explorează fiecare secțiune a platformei enterprise"
+            screenshots={[
+                { src: '/images/platforme/haier/Platforma-Moderna-Tehnologie4.webp', alt: 'Hero climatizare', caption: 'Hero Climatizare — Design imersiv dark cu produs interactiv și hotspots' },
+                { src: '/images/platforme/haier/Platforma-Moderna-Tehnologie1.webp', alt: 'Homepage pompe de căldură', caption: 'Homepage — Sisteme de Pompe de Căldură cu slider și specificații A+++' },
+                { src: '/images/platforme/haier/Platforma-Moderna-Tehnologie5.webp', alt: 'Climatizatoare features', caption: 'Climatizatoare — Purificare & Igienă, Self Clean, UV-C PRO, Wi-Fi' },
+                { src: '/images/platforme/haier/Platforma-Moderna-Tehnologie6.webp', alt: 'Brand story', caption: 'Marca Nr. 1 în Lume — Brand story cu certificare Euromonitor International' },
+                { src: '/images/platforme/haier/Platforma-Moderna-Tehnologie2.webp', alt: 'Diagrame tehnice', caption: 'Diagrame Tehnice — Specificații unitate interioară cu game de produse' },
+                { src: '/images/platforme/haier/Platforma-Moderna-Tehnologie8.webp', alt: 'Pagina climatizare', caption: 'Climatizare — Categorie cu badges A+++, R32, Wi-Fi, UV-C și game de produse' },
+                { src: '/images/platforme/haier/Platforma-Moderna-Tehnologie9.webp', alt: 'Produse populare', caption: 'Produse Populare — Carousel Pearl Premium cu specificații și prețuri' },
+                { src: '/images/platforme/haier/Platforma-Moderna-Tehnologie10.webp', alt: 'Pompe de căldură', caption: 'Pompe de Căldură — Monobloc GT R290 carousel cu modele de la 4kW la 10kW' },
+                { src: '/images/platforme/haier/Platforma-Moderna-Tehnologie7.webp', alt: 'Diagrame tehnice full', caption: 'Diagrame Tehnice Full — Pagină completă cu tabs și specificații detaliate' },
+                { src: '/images/platforme/haier/Platforma-Moderna-Tehnologie3.webp', alt: 'Homepage PL', caption: 'Versiune Internațională — Platformă multilingvă cu aceleași performanțe' }
+            ]}
+        />
+
+        <!-- S5: Project Results -->
+        <ProjectResults
+            title="Rezultate & Performanță"
+            stats={[
+                { value: '95+', label: 'PageSpeed Score' },
+                { value: '<200ms', label: 'TTFB Global' },
+                { value: '<50ms', label: 'Algolia Search' },
+                { value: '99.99%', label: 'Uptime SLA' }
+            ]}
+            highlights={[
+                {
+                    title: 'PageSpeed 95+ constant',
+                    description: 'Core Web Vitals în verde pe toate paginile. LCP sub 1.5 secunde, TTFB sub 200ms global datorită edge rendering-ului Vercel.',
+                    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>`
+                },
+                {
+                    title: 'Căutare instant Algolia',
+                    description: 'Sub 50ms timp de răspuns. Typo tolerance, faceted search și AI recommendations. Aceeași tehnologie folosită de Stripe și Twitch.',
+                    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>`
+                },
+                {
+                    title: '10 servicii enterprise',
+                    description: 'Next.js, Sanity, PlanetScale, Stripe, Clerk, Cloudflare, Algolia, Resend, Sentry, Vercel — fiecare lider în categoria sa.',
+                    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/></svg>`
+                },
+                {
+                    title: 'Admin vizual Sanity',
+                    description: 'Echipa Haier gestionează conținutul fără suport tehnic. Editare vizuală direct pe site, colaborare în timp real, Content Lake distribuit global.',
+                    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>`
+                }
+            ]}
+        />
+
+        <!-- S6: CTA -->
+        <CtaSection
+            title="Vrei o arhitectură de nivel enterprise?"
+            subtitle="Construim platforme e-commerce cu aceleași tehnologii folosite de Stripe, Netflix și Notion. Solicită o consultație gratuită."
+            buttonText="Solicită Consultație"
+            note="Fără obligații. Discuție inițială gratuită."
+        />
+    </div>
+
+    <!-- Booking Modal -->
+    <BookingModal
+        title="Solicită Consultație Enterprise"
+        subtitle="Completează formularul și te contactăm în 24h pentru a discuta proiectul tău"
+    />
+</LandingPage>
+
+<style is:global>
+    /* Enterprise Stack scoped color palette — Cyan/Blue (Haier brand) */
+    .es-page {
+        --sp-primary: #0EA5E9;
+        --sp-primary-light: #38BDF8;
+        --sp-secondary: #0284C7;
+        --sp-primary-glow: rgba(14, 165, 233, 0.3);
+        --sp-gradient: linear-gradient(135deg, #0EA5E9, #0284C7);
+    }
+
+    [data-theme="light"] .es-page {
+        --sp-primary-glow: rgba(14, 165, 233, 0.15);
+    }
+
+    /* ShowcaseHero overrides */
+    .es-page .showcase-hero-badge {
+        border-color: rgba(14, 165, 233, 0.3);
+        background: rgba(14, 165, 233, 0.08);
+    }
+
+    .es-page .showcase-hero-title strong {
+        background: linear-gradient(135deg, #0EA5E9, #0284C7) !important;
+        -webkit-background-clip: text !important;
+        -webkit-text-fill-color: transparent !important;
+    }
+
+    .es-page .showcase-btn--primary {
+        background: linear-gradient(135deg, #0EA5E9, #0284C7) !important;
+    }
+
+    .es-page .showcase-btn--primary:hover {
+        box-shadow: 0 10px 30px rgba(14, 165, 233, 0.3) !important;
+    }
+
+    .es-page .showcase-btn--secondary:hover {
+        border-color: rgba(14, 165, 233, 0.4) !important;
+        box-shadow: 0 0 20px rgba(14, 165, 233, 0.1) !important;
+    }
+
+    .es-page .showcase-stat-value {
+        background: linear-gradient(135deg, #0EA5E9, #0284C7) !important;
+        -webkit-background-clip: text !important;
+        -webkit-text-fill-color: transparent !important;
+    }
+
+    .es-page .orb-1 {
+        background: radial-gradient(circle, rgba(14, 165, 233, 0.25), transparent 70%) !important;
+    }
+
+    .es-page .orb-2 {
+        background: radial-gradient(circle, rgba(2, 132, 199, 0.2), transparent 70%) !important;
+    }
+
+    /* Override CTA section for cyan theme */
+    .es-page .cta-btn {
+        background: linear-gradient(135deg, #0EA5E9, #0284C7);
+    }
+
+    .es-page .cta-btn:hover {
+        box-shadow: 0 0 30px rgba(14, 165, 233, 0.4);
+    }
+
+    /* Override booking modal submit for cyan theme */
+    .es-page ~ .booking-modal .modal-form-submit {
+        background: linear-gradient(135deg, #0EA5E9, #0284C7);
+    }
+
+    .es-page ~ .booking-modal .modal-form-submit:hover {
+        box-shadow: 0 0 30px rgba(14, 165, 233, 0.4);
+    }
+
+    .es-page ~ .booking-modal .modal-input-wrapper input:focus {
+        border-color: rgba(14, 165, 233, 0.5);
+        box-shadow: 0 0 20px rgba(14, 165, 233, 0.15);
+    }
+
+    /* ProjectInfo feature checkmarks */
+    .es-page .info-feature-item svg {
+        color: #0EA5E9;
+    }
+
+    .es-page .info-card-link {
+        background: linear-gradient(135deg, #0EA5E9, #0284C7);
+    }
+
+    .es-page .info-card-link:hover {
+        box-shadow: 0 10px 30px rgba(14, 165, 233, 0.3);
+    }
+
+    /* Gallery caption border */
+    .es-page .gallery-item-caption {
+        border-left-color: rgba(14, 165, 233, 0.4);
+    }
+
+    .es-page .browser-frame:hover,
+    .es-page .browser-frame-hero:hover {
+        border-color: rgba(14, 165, 233, 0.3);
+    }
+
+    /* TechStack card hover */
+    .es-page .tech-card:hover {
+        border-color: rgba(14, 165, 233, 0.25);
+        box-shadow: 0 8px 30px rgba(14, 165, 233, 0.1);
+    }
+
+    .es-page .tech-card:hover .tech-card-icon {
+        color: #0EA5E9;
+    }
+
+    /* ProjectResults gradient stats */
+    .es-page .results-stat-value {
+        background: linear-gradient(135deg, #0EA5E9, #0284C7);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .es-page .highlight-card:hover {
+        border-color: rgba(14, 165, 233, 0.25);
+        box-shadow: 0 8px 30px rgba(14, 165, 233, 0.1);
+    }
+
+    .es-page .highlight-card-icon {
+        color: #0EA5E9;
+    }
+</style>

@@ -1,0 +1,329 @@
+---
+import LandingPage from '../layouts/LandingPage.astro';
+import Hero from '../components/Hero.astro';
+import ClientsCarousel from '../components/ClientsCarousel.astro';
+import BenefitsSection from '../components/BenefitsSection.astro';
+import TabSection from '../components/TabSection.astro';
+import DFAuditScope from '../components/df/DFAuditScope.astro';
+import DFDeliverables from '../components/df/DFDeliverables.astro';
+import DFTechChecklist from '../components/df/DFTechChecklist.astro';
+import PricingSection from '../components/PricingSection.astro';
+import CtaSection from '../components/CtaSection.astro';
+import BookingModal from '../components/BookingModal.astro';
+
+const pageTitle = "Data Foundation — Tracking Corect, Campanii Clare | AlphaGrade by WebSEM";
+const pageDescription = "73% din site-uri au tracking deficitar. GA4 greșit, pixeli în conflict, cookies consent neconform. Data Foundation auditează și reconstruiește infrastructura ta. Diagnostic gratuit în 24h.";
+---
+
+<LandingPage
+    title={pageTitle}
+    description={pageDescription}
+    footerCtaBadge="Data Foundation"
+    footerCtaTitle='Tracking corect, <span class="gradient-text">campanii clare</span>'
+    footerCtaSubtitle='Solicită un <strong>audit gratuit</strong> și primești diagnosticul infrastructurii tale de tracking în 24h.'
+    footerCtaStats={[
+        { value: '73%', label: 'Site-uri cu Tracking Deficitar' },
+        { value: '€0', label: 'Date Corecte Fără Infrastructură' },
+        { value: '24h', label: 'Diagnostic Gratuit' }
+    ]}
+    footerCtaButtonText="Solicită Audit Gratuit"
+    footerCtaDisclaimer="* Auditul inițial este gratuit. Primești diagnosticul în 24h."
+>
+    <div class="df-page">
+        <!-- S1: Hero -->
+        <Hero
+            badge="DATA FOUNDATION — TRACKING INFRASTRUCTURE"
+            titleLine1='Campaniile tale cheltuie bani <strong>pe date greșite.</strong>'
+            titleLine2="Tracking-ul deficitar costă mai mult decât crezi."
+            subtitle="Tag Manager neconfigurat. GA4 fără conversii. Pixeli în conflict. Data Foundation auditează, curăță și reconstruiește infrastructura de tracking — corect, complet, GDPR-compliant."
+            floatingStats={[
+                { value: '73%', label: 'SITE-URI CU TRACKING DEFICITAR' },
+                { value: '€0', label: 'DATE CORECTE FĂRĂ INFRASTRUCTURĂ' }
+            ]}
+            formTitle="Solicită Audit Gratuit"
+            formSubtitle="Primești diagnosticul în 24h"
+        />
+
+        <!-- S2: Clients Carousel -->
+        <ClientsCarousel />
+
+        <!-- S3: Benefits — Nu stii ce campanii fac bani -->
+        <BenefitsSection
+            title="Nu știi ce campanii fac bani."
+            subtitle="Datele există. Problema e că infrastructura care le colectează e stricată, incompletă sau neconfigurată."
+            benefits={[
+                {
+                    title: 'Conversii Fantomă',
+                    description: 'Raportezi conversii care nu s-au întâmplat. Tag-uri duplicate, evenimente configurate greșit, tranzacții contorizate de 2 ori. Bugetul se optimizează pe date false.',
+                    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>`,
+                    stat: { icon: '!', text: 'Date Corupte' }
+                },
+                {
+                    title: 'Canale Judecate Greșit',
+                    description: 'Atribuirea e stricată. Google ia credit pentru organic, Meta pentru direct. Oprești campaniile care chiar funcționează și păstrezi pe cele care nu.',
+                    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 15h8"/><circle cx="9" cy="9" r="1"/><circle cx="15" cy="9" r="1"/></svg>`,
+                    stat: { icon: '!', text: 'Decizii Pe Instinct' }
+                },
+                {
+                    title: 'Risc GDPR Neacoperit',
+                    description: 'Pixeli care se încarcă înainte de consimțământ. Cookies fără banner. Consent Mode neimplementat. Risc de amendă de până la 4% din cifra de afaceri.',
+                    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
+                    stat: { icon: '!', text: 'Expunere Legală' }
+                },
+                {
+                    title: 'Date Pierdute Permanent',
+                    description: 'Ad blockers elimină pixelii client-side. Fără server-side tracking, pierzi 20-40% din date. Date care nu se mai recuperează niciodată.',
+                    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>`,
+                    stat: { icon: '!', text: '20-40% Date Lipsă' }
+                }
+            ]}
+        />
+
+        <!-- S4: TabSection — Ce Audităm & Implementăm + Ce Primești -->
+        <TabSection tabs={["Ce Audităm & Implementăm", "Ce Primești"]} id="df-scope">
+            <div data-tab-panel="0">
+                <DFAuditScope />
+            </div>
+            <div data-tab-panel="1">
+                <DFDeliverables />
+            </div>
+        </TabSection>
+
+        <!-- S5: DFTechChecklist — Secțiune unică pentru echipa tehnică -->
+        <DFTechChecklist />
+
+        <!-- S6: Pricing — RECON / OFFENSIVE / FULL COMMAND -->
+        <PricingSection
+            title="Pachete & Prețuri"
+            subtitle="Tracking corect de la prima zi. Fără surprize, fără costuri ascunse."
+            note="Toate pachetele includ: audit inițial, raport de probleme și sesiune de prezentare. Prețurile sunt orientative și pot fi ajustate în funcție de complexitatea setup-ului existent."
+            tiers={[
+                {
+                    name: 'RECON',
+                    price: '€900',
+                    priceNote: 'one-time',
+                    description: 'Audit complet al infrastructurii de tracking. Primești raportul cu toate problemele și planul de remediere.',
+                    featureGroups: [
+                        {
+                            label: 'Audit & Raport',
+                            items: [
+                                'Audit GTM, GA4, Pixels complet',
+                                'Raport cu probleme + impact estimat în €',
+                                'Plan de remediere prioritizat',
+                                'Sesiune de prezentare (60 min)'
+                            ]
+                        },
+                        {
+                            label: 'Ce nu include',
+                            items: [
+                                'Implementare (doar audit)',
+                                'Ideal ca prim pas diagnostic'
+                            ]
+                        }
+                    ],
+                    timeline: 'Livrare: 5-7 zile lucrătoare',
+                    highlighted: false
+                },
+                {
+                    name: 'OFFENSIVE',
+                    price: '€2.800',
+                    priceNote: 'one-time',
+                    description: 'Audit + implementare completă. GTM, GA4, Pixels, Consent Mode — totul configurat corect.',
+                    featureGroups: [
+                        {
+                            label: 'Tot ce include RECON, plus',
+                            items: [
+                                'Reconstrucție completă GTM',
+                                'GA4 cu conversii și audiențe',
+                                'Pixels advertising (Meta, Google, TikTok)',
+                                'Consent Mode v2 + CMP setup'
+                            ]
+                        },
+                        {
+                            label: 'Suport',
+                            items: [
+                                'Dashboard monitoring calitate date',
+                                'Handover sesiune (60 min)',
+                                'Garanție 30 zile'
+                            ]
+                        }
+                    ],
+                    timeline: 'Livrare: 10-14 zile lucrătoare',
+                    highlighted: true
+                },
+                {
+                    name: 'FULL COMMAND',
+                    price: '€4.500',
+                    priceNote: 'one-time',
+                    description: 'Enterprise. Tot ce include OFFENSIVE + server-side tracking + integrări custom.',
+                    featureGroups: [
+                        {
+                            label: 'Tot ce include OFFENSIVE, plus',
+                            items: [
+                                'Server-side GTM (Google Cloud / Stape)',
+                                'First-party data collection',
+                                'Integrări custom (CRM, ERP)',
+                                'Enhanced conversions setup'
+                            ]
+                        },
+                        {
+                            label: 'Enterprise',
+                            items: [
+                                'Documentație completă de arhitectură',
+                                'Training echipă tehnică (2h)',
+                                'Priority support 60 zile'
+                            ]
+                        }
+                    ],
+                    timeline: 'Livrare: 14-21 zile lucrătoare',
+                    highlighted: false
+                }
+            ]}
+        />
+
+        <!-- S7: CTA Final -->
+        <CtaSection
+            title="Cât te costă tracking-ul greșit?"
+            subtitle="Solicită un audit gratuit și primești diagnosticul complet al infrastructurii tale de tracking în 24h. Fără obligații, fără surprize."
+            buttonText="Solicită Audit Gratuit"
+            note="Diagnosticul inițial este gratuit. Primești raportul în 24h."
+        />
+    </div>
+
+    <!-- Booking Modal -->
+    <BookingModal
+        title="Solicită Audit Data Foundation"
+        subtitle="Completează formularul și primești diagnosticul în 24h"
+    />
+</LandingPage>
+
+<style is:global>
+    /* Data Foundation scoped color palette — Bright Cyan-Teal */
+    .df-page {
+        --df-primary: #00C9A7;
+        --df-primary-light: #00E4BF;
+        --df-secondary: #34D399;
+        --df-primary-glow: rgba(0, 201, 167, 0.3);
+        --df-gradient: linear-gradient(135deg, #00C9A7, #00E4BF);
+    }
+
+    [data-theme="light"] .df-page {
+        --df-primary-glow: rgba(0, 201, 167, 0.15);
+    }
+
+    /* Override Hero floating stats for bright teal theme */
+    .df-page .hero .floating-stat-value {
+        background: linear-gradient(135deg, #00C9A7, #00E4BF);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .df-page .hero-label {
+        border-color: rgba(0, 201, 167, 0.3);
+        background: rgba(0, 201, 167, 0.08);
+    }
+
+    .df-page .hero-title .gradient {
+        background: linear-gradient(135deg, #00C9A7, #00E4BF);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    /* Override tab active button for bright teal theme */
+    .df-page .tab-btn--active {
+        background: linear-gradient(135deg, #00C9A7, #00E4BF);
+        box-shadow: 0 4px 20px rgba(0, 201, 167, 0.4);
+    }
+
+    .df-page .tab-btn--active .tab-btn-indicator {
+        border-top-color: #00E4BF;
+    }
+
+    .df-page .tab-btn:hover:not(.tab-btn--active) {
+        border-color: rgba(0, 201, 167, 0.2);
+    }
+
+    /* Override BenefitsSection stat icon for bright teal */
+    .df-page .benefit-card-stat-icon {
+        background: rgba(0, 201, 167, 0.15);
+        color: #00C9A7;
+    }
+
+    .df-page .benefit-card-visual-placeholder {
+        border-color: rgba(0, 201, 167, 0.2);
+        color: #00C9A7;
+    }
+
+    .df-page .benefit-card:hover {
+        border-color: rgba(0, 201, 167, 0.25);
+        box-shadow: 0 8px 30px rgba(0, 201, 167, 0.12);
+    }
+
+    /* Override pricing gradient for bright teal theme */
+    .df-page .pricing-card--highlighted {
+        border-color: rgba(0, 201, 167, 0.3);
+        box-shadow: 0 0 30px rgba(0, 201, 167, 0.15);
+    }
+
+    .df-page .pricing-card--highlighted:hover {
+        box-shadow: 0 0 30px rgba(0, 201, 167, 0.25), var(--shadow-lg);
+    }
+
+    .df-page .pricing-badge {
+        background: linear-gradient(135deg, #00C9A7, #00E4BF);
+    }
+
+    .df-page .pricing-price {
+        background: linear-gradient(135deg, #00C9A7, #00E4BF);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .df-page .pricing-card--highlighted .pricing-cta {
+        background: linear-gradient(135deg, #00C9A7, #00A88C);
+    }
+
+    .df-page .pricing-card--highlighted .pricing-cta:hover {
+        box-shadow: 0 0 30px rgba(0, 201, 167, 0.4);
+    }
+
+    .df-page .pricing-card:hover {
+        border-color: rgba(0, 201, 167, 0.2);
+    }
+
+    .df-page .pricing-cta:hover {
+        border-color: rgba(0, 201, 167, 0.5);
+        box-shadow: 0 0 20px rgba(0, 201, 167, 0.2);
+    }
+
+    .df-page .feature-group-label {
+        color: #00C9A7;
+    }
+
+    .df-page .pricing-features li svg {
+        color: #00C9A7;
+    }
+
+    /* Override CTA section for bright teal theme */
+    .df-page .cta-btn {
+        background: linear-gradient(135deg, #00C9A7, #00E4BF);
+    }
+
+    .df-page .cta-btn:hover {
+        box-shadow: 0 0 30px rgba(0, 201, 167, 0.4);
+    }
+
+    /* Override audit form submit for bright teal theme */
+    .df-page .audit-form-submit {
+        background: linear-gradient(135deg, #00C9A7, #00E4BF);
+    }
+
+    .df-page .audit-form-submit:hover {
+        box-shadow: 0 0 25px rgba(0, 201, 167, 0.4);
+    }
+
+    .df-page .audit-form-field input:focus {
+        border-color: rgba(0, 201, 167, 0.5);
+        box-shadow: 0 0 0 3px rgba(0, 201, 167, 0.1);
+    }
+</style>

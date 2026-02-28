@@ -1,0 +1,184 @@
+---
+interface StatItem {
+    value: string;
+    label: string;
+}
+
+interface HighlightCard {
+    title: string;
+    description: string;
+    icon: string;
+}
+
+interface Props {
+    title?: string;
+    stats?: StatItem[];
+    highlights?: HighlightCard[];
+}
+
+const {
+    title = 'Rezultate & Performanță',
+    stats = [
+        { value: '95+', label: 'PageSpeed Score' },
+        { value: '€0', label: 'Server Costs' },
+        { value: '0.8s', label: 'Load Time' },
+        { value: '100%', label: 'Mobile Score' }
+    ],
+    highlights = [
+        {
+            title: 'PageSpeed 95+',
+            description: 'Performanță Google excelentă pe toate paginile, atât mobile cât și desktop. Core Web Vitals în verde.',
+            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>`
+        },
+        {
+            title: '€0 costuri server',
+            description: 'Deploy static pe edge network (Vercel). Zero costuri de hosting, scalare automată, uptime 99.99%.',
+            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg>`
+        },
+        {
+            title: 'Configurator interactiv',
+            description: 'Wizard în 5 pași care ghidează utilizatorul prin selecția modelului, amenajării și opțiunilor. Experiență premium.',
+            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>`
+        },
+        {
+            title: 'Animații GSAP',
+            description: 'Parallax scroll, fade-in effects și micro-interactions. Experiență vizuală de nivel premium, fără sacrifice la performanță.',
+            icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/></svg>`
+        }
+    ]
+} = Astro.props;
+---
+
+<section class="project-results">
+    <div class="project-results-container">
+        <h2 class="project-results-title">{title}</h2>
+
+        <div class="results-stats">
+            {stats.map((stat) => (
+                <div class="results-stat">
+                    <span class="results-stat-value">{stat.value}</span>
+                    <span class="results-stat-label">{stat.label}</span>
+                </div>
+            ))}
+        </div>
+
+        <div class="results-highlights">
+            {highlights.map((card) => (
+                <div class="highlight-card">
+                    <div class="highlight-card-icon" set:html={card.icon} />
+                    <h3 class="highlight-card-title">{card.title}</h3>
+                    <p class="highlight-card-desc">{card.description}</p>
+                </div>
+            ))}
+        </div>
+    </div>
+</section>
+
+<style>
+    .project-results {
+        padding: var(--section-padding);
+    }
+
+    .project-results-container {
+        max-width: var(--container-max);
+        margin: 0 auto;
+    }
+
+    .project-results-title {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    .results-stats {
+        display: flex;
+        justify-content: center;
+        gap: 3rem;
+        margin-bottom: 4rem;
+        flex-wrap: wrap;
+    }
+
+    .results-stat {
+        text-align: center;
+    }
+
+    .results-stat-value {
+        display: block;
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 2.75rem;
+        font-weight: 700;
+        line-height: 1.1;
+        margin-bottom: 0.35rem;
+        /* gradient applied via page theme override */
+        color: var(--text-primary);
+    }
+
+    .results-stat-label {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+        letter-spacing: 0.02em;
+    }
+
+    .results-highlights {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+
+    .highlight-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border-light);
+        border-radius: 16px;
+        padding: 2rem;
+        transition: all 0.3s ease;
+    }
+
+    .highlight-card:hover {
+        border-color: var(--border-medium);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+    }
+
+    .highlight-card-icon {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 1rem;
+        color: var(--text-tertiary);
+    }
+
+    .highlight-card-icon :global(svg) {
+        width: 100%;
+        height: 100%;
+    }
+
+    .highlight-card-title {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 1.15rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+    }
+
+    .highlight-card-desc {
+        font-size: 0.95rem;
+        color: var(--text-tertiary);
+        line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+        .results-stats {
+            gap: 2rem;
+        }
+
+        .results-stat-value {
+            font-size: 2rem;
+        }
+
+        .results-highlights {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>

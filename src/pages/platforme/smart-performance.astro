@@ -1,0 +1,226 @@
+---
+import LandingPage from '../../layouts/LandingPage.astro';
+import ShowcaseHero from '../../components/platforme/ShowcaseHero.astro';
+import ProjectInfo from '../../components/platforme/ProjectInfo.astro';
+import ScreenshotGallery from '../../components/platforme/ScreenshotGallery.astro';
+import TechStack from '../../components/platforme/TechStack.astro';
+import ProjectResults from '../../components/platforme/ProjectResults.astro';
+import CtaSection from '../../components/CtaSection.astro';
+import BookingModal from '../../components/BookingModal.astro';
+
+const pageTitle = "Smart Performance — Panama Van / Ford | WebSEM Platforme";
+const pageDescription = "Case study: platformă web enterprise pentru Panama Van (Ford / Trigano Group). Configurator interactiv, animații premium, PageSpeed 95+, zero costuri server.";
+---
+
+<LandingPage
+    title={pageTitle}
+    description={pageDescription}
+    footerCtaBadge="WebSEM Platforme"
+    footerCtaTitle='Vrei o platformă <span class="gradient-text">la fel de performantă</span>?'
+    footerCtaSubtitle='Construim platforme web enterprise cu <strong>PageSpeed 95+</strong> și <strong>zero costuri de server</strong>. Solicită o consultație gratuită.'
+    footerCtaStats={[
+        { value: '95+', label: 'PageSpeed' },
+        { value: '€0', label: 'Server Costs' },
+        { value: '6 săpt.', label: 'Livrare' }
+    ]}
+    footerCtaButtonText="Solicită Consultație"
+    footerCtaDisclaimer="* Discuție inițială gratuită. Analizăm cerințele și pregătim o propunere personalizată."
+>
+    <div class="sp-page">
+        <!-- S1: Showcase Hero -->
+        <ShowcaseHero
+            badge="SMART PERFORMANCE — CASE STUDY"
+            title='Panama Van <strong>Ford</strong>'
+            subtitle="Platformă web enterprise pentru Trigano Group — configurator interactiv, animații premium și PageSpeed 95+. Zero costuri de server."
+            heroImage="/images/platforme/ford/Platforme-web-moderne1.webp"
+            heroImageAlt="Panama Van Ford — Homepage"
+            browserUrl="panamavan.ro"
+            ctaSecondaryText="Vezi Galeria"
+            ctaSecondaryHref="#galerie"
+            stats={[
+                { value: '95+', label: 'PageSpeed' },
+                { value: '€0', label: 'Server Costs' },
+                { value: '10', label: 'Pagini' },
+                { value: '0.8s', label: 'Load Time' }
+            ]}
+        />
+
+        <!-- S2: Tech Stack -->
+        <TechStack
+            title="Tehnologii Utilizate"
+            subtitle="Stack-ul modern din spatele performanței"
+        />
+
+        <!-- S3: Project Info -->
+        <ProjectInfo
+            description={`<p>Panama Van este distribuitorul oficial Ford pentru vehicule comerciale ușoare și rulote în cadrul grupului Trigano — cel mai mare producător european de vehicule recreaționale.</p>
+            <p>Am construit o platformă web modernă care transformă experiența de prezentare a flotei de vehicule, de la un catalog static într-o experiență interactivă premium. Site-ul include un configurator wizard în 5 pași, comparator de modele cu taburi interactive, și animații parallax care ridică percepția de brand la nivel premium.</p>
+            <p>Întregul proiect a fost livrat cu un stack modern (Astro + Tailwind + GSAP), deploy-at pe Vercel edge network cu <strong>zero costuri de server</strong> și un <strong>PageSpeed score de 95+</strong>.</p>`}
+            client="Panama Van / Ford / Trigano Group"
+            projectType="Platformă Web Enterprise"
+            timeline="6 săptămâni"
+            features={[
+                'Configurator interactiv în 5 pași',
+                'Comparator modele cu taburi',
+                'Animații parallax & GSAP',
+                'Catalog cu filtrare dinamică',
+                'Design responsive premium',
+                'Optimizare PageSpeed 95+',
+                'Deploy static pe edge network',
+                'Branding aliniat Trigano Group'
+            ]}
+        />
+
+        <!-- S3: Screenshot Gallery -->
+        <ScreenshotGallery
+            title="Galeria Proiectului"
+            subtitle="Explorează fiecare secțiune a platformei"
+            screenshots={[
+                { src: '/images/platforme/ford/Platforme-web-moderne1.webp', alt: 'Homepage hero', caption: 'Homepage Hero — Prezentare vizuală cu slogan de impact și CTA proeminent' },
+                { src: '/images/platforme/ford/Platforme-web-moderne2.webp', alt: 'Catalog modele', caption: 'Catalog Modele — Cards interactive cu prețuri și specificații cheie' },
+                { src: '/images/platforme/ford/Platforme-web-moderne3.webp', alt: 'Comparație modele', caption: 'Comparație Modele — Taburi interactive pentru comparare rapidă' },
+                { src: '/images/platforme/ford/Platforme-web-moderne4.webp', alt: 'Footer și newsletter', caption: 'Footer & Newsletter — Branding Trigano Group integrat' },
+                { src: '/images/platforme/ford/Platforme-web-moderne5.webp', alt: 'Model detail parallax', caption: 'Pagină Model — Hero cu efect parallax și galerie foto' },
+                { src: '/images/platforme/ford/Platforme-web-moderne6.webp', alt: 'Specificații modele', caption: 'Specificații Tehnice — Detalii complete pentru fiecare model' },
+                { src: '/images/platforme/ford/Platforme-web-moderne7.webp', alt: 'Universul Panama Peak', caption: 'Universul Panama Peak — Brand story cu imagini imersive' },
+                { src: '/images/platforme/ford/Platforme-web-moderne8.webp', alt: 'Use cases interactive', caption: 'Use Cases — Scenarii de utilizare cu cards interactive' },
+                { src: '/images/platforme/ford/Platforme-web-moderne9.webp', alt: 'Configurator wizard', caption: 'Configurator — Wizard interactiv în 5 pași' },
+                { src: '/images/platforme/ford/Platforme-web-moderne10.webp', alt: 'Flow experiențial', caption: 'Try It / Love It / Buy It — Flow experiențial complet' }
+            ]}
+        />
+
+        <!-- S5: Project Results -->
+        <ProjectResults
+            title="Rezultate & Performanță"
+            stats={[
+                { value: '95+', label: 'PageSpeed Score' },
+                { value: '€0', label: 'Server Costs' },
+                { value: '0.8s', label: 'Load Time' },
+                { value: '100%', label: 'Mobile Score' }
+            ]}
+            highlights={[
+                {
+                    title: 'PageSpeed 95+',
+                    description: 'Performanță Google excelentă pe toate paginile, atât mobile cât și desktop. Core Web Vitals în verde.',
+                    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>`
+                },
+                {
+                    title: '€0 costuri server',
+                    description: 'Deploy static pe edge network (Vercel). Zero costuri de hosting, scalare automată, uptime 99.99%.',
+                    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg>`
+                },
+                {
+                    title: 'Configurator interactiv',
+                    description: 'Wizard în 5 pași care ghidează utilizatorul prin selecția modelului, amenajării și opțiunilor.',
+                    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>`
+                },
+                {
+                    title: 'Animații GSAP premium',
+                    description: 'Parallax scroll, fade-in effects și micro-interactions. Experiență vizuală premium, fără sacrifice la performanță.',
+                    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/></svg>`
+                }
+            ]}
+        />
+
+        <!-- S6: CTA -->
+        <CtaSection
+            title="Vrei o platformă la fel de performantă?"
+            subtitle="Construim platforme web enterprise cu tehnologii de ultimă generație. Solicită o consultație gratuită."
+            buttonText="Solicită Consultație"
+            note="Fără obligații. Discuție inițială gratuită."
+        />
+    </div>
+
+    <!-- Booking Modal -->
+    <BookingModal
+        title="Solicită Consultație Platforme"
+        subtitle="Completează formularul și te contactăm în 24h pentru a discuta proiectul tău"
+    />
+</LandingPage>
+
+<style is:global>
+    /* Smart Performance scoped color palette — Amber/Orange */
+    .sp-page {
+        --sp-primary: #F59E0B;
+        --sp-primary-light: #FBBF24;
+        --sp-secondary: #F97316;
+        --sp-primary-glow: rgba(245, 158, 11, 0.3);
+        --sp-gradient: linear-gradient(135deg, #F59E0B, #F97316);
+    }
+
+    [data-theme="light"] .sp-page {
+        --sp-primary-glow: rgba(245, 158, 11, 0.15);
+    }
+
+    /* Override CTA section for amber theme */
+    .sp-page .cta-btn {
+        background: linear-gradient(135deg, #F59E0B, #F97316);
+    }
+
+    .sp-page .cta-btn:hover {
+        box-shadow: 0 0 30px rgba(245, 158, 11, 0.4);
+    }
+
+    /* Override booking modal submit for amber theme */
+    .sp-page ~ .booking-modal .modal-form-submit {
+        background: linear-gradient(135deg, #F59E0B, #F97316);
+    }
+
+    .sp-page ~ .booking-modal .modal-form-submit:hover {
+        box-shadow: 0 0 30px rgba(245, 158, 11, 0.4);
+    }
+
+    .sp-page ~ .booking-modal .modal-input-wrapper input:focus {
+        border-color: rgba(245, 158, 11, 0.5);
+        box-shadow: 0 0 20px rgba(245, 158, 11, 0.15);
+    }
+
+    /* ProjectInfo feature checkmarks */
+    .sp-page .info-feature-item svg {
+        color: #F59E0B;
+    }
+
+    .sp-page .info-card-link {
+        background: linear-gradient(135deg, #F59E0B, #F97316);
+    }
+
+    .sp-page .info-card-link:hover {
+        box-shadow: 0 10px 30px rgba(245, 158, 11, 0.3);
+    }
+
+    /* Gallery caption border */
+    .sp-page .gallery-item-caption {
+        border-left-color: rgba(245, 158, 11, 0.4);
+    }
+
+    .sp-page .browser-frame:hover,
+    .sp-page .browser-frame-hero:hover {
+        border-color: rgba(245, 158, 11, 0.3);
+    }
+
+    /* TechStack card hover */
+    .sp-page .tech-card:hover {
+        border-color: rgba(245, 158, 11, 0.25);
+        box-shadow: 0 8px 30px rgba(245, 158, 11, 0.1);
+    }
+
+    .sp-page .tech-card:hover .tech-card-icon {
+        color: #F59E0B;
+    }
+
+    /* ProjectResults gradient stats */
+    .sp-page .results-stat-value {
+        background: linear-gradient(135deg, #F59E0B, #F97316);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .sp-page .highlight-card:hover {
+        border-color: rgba(245, 158, 11, 0.25);
+        box-shadow: 0 8px 30px rgba(245, 158, 11, 0.1);
+    }
+
+    .sp-page .highlight-card-icon {
+        color: #F59E0B;
+    }
+</style>

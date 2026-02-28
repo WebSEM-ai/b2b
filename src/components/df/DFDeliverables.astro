@@ -1,0 +1,129 @@
+---
+const deliverables = [
+    'Raport de audit inițial cu toate problemele + impact estimat în €',
+    'Implementare completă documentată — fiecare tag, trigger și variabilă explicată',
+    'Dashboard de monitoring al calității datelor — vezi în timp real ce funcționează',
+    'Document de arhitectură GTM — schema completă a containerului tău',
+    'Sesiune de handover cu echipa ta (60 min) — explicăm tot ce am implementat',
+    'Garanție 30 zile — dacă ceva se strică, reparăm gratuit'
+];
+---
+
+<div class="df-deliverables">
+    <div class="df-deliverables-list">
+        {deliverables.map((item, i) => (
+            <div class="df-deliverable-item">
+                <div class="df-deliverable-check">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                </div>
+                <div class="df-deliverable-line"></div>
+                <p>{item}</p>
+            </div>
+        ))}
+    </div>
+</div>
+
+<script>
+    const dfDelObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.df-deliverable-item').forEach(item => {
+        dfDelObserver.observe(item);
+    });
+</script>
+
+<style>
+    .df-deliverables {
+        padding: var(--section-padding);
+        max-width: var(--container-max);
+        margin: 0 auto;
+    }
+
+    .df-deliverables-list {
+        max-width: 700px;
+        margin: 0 auto;
+        position: relative;
+    }
+
+    .df-deliverable-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 1.25rem;
+        padding: 1.25rem 0;
+        position: relative;
+        opacity: 0;
+        transform: translateX(-20px);
+        transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .df-deliverable-item.visible {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    .df-deliverable-item:nth-child(2).visible { transition-delay: 0.05s; }
+    .df-deliverable-item:nth-child(3).visible { transition-delay: 0.1s; }
+    .df-deliverable-item:nth-child(4).visible { transition-delay: 0.15s; }
+    .df-deliverable-item:nth-child(5).visible { transition-delay: 0.2s; }
+    .df-deliverable-item:nth-child(6).visible { transition-delay: 0.25s; }
+
+    .df-deliverable-check {
+        flex-shrink: 0;
+        width: 36px;
+        height: 36px;
+        background: rgba(0, 201, 167, 0.1);
+        border: 2px solid var(--df-primary, #00C9A7);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--df-primary, #00C9A7);
+        z-index: 1;
+    }
+
+    .df-deliverable-check svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .df-deliverable-line {
+        position: absolute;
+        left: 17px;
+        top: 48px;
+        width: 2px;
+        height: calc(100% - 12px);
+        background: linear-gradient(to bottom, rgba(0, 201, 167, 0.3), rgba(0, 201, 167, 0.05));
+    }
+
+    .df-deliverable-item:last-child .df-deliverable-line {
+        display: none;
+    }
+
+    .df-deliverable-item p {
+        font-size: 0.95rem;
+        color: var(--text-secondary);
+        line-height: 1.6;
+        padding-top: 0.35rem;
+    }
+
+    :global([data-theme="light"]) .df-deliverable-check {
+        background: rgba(0, 201, 167, 0.06);
+    }
+
+    @media (max-width: 600px) {
+        .df-deliverables-list {
+            padding: 0 0.5rem;
+        }
+
+        .df-deliverable-item {
+            gap: 1rem;
+        }
+    }
+</style>

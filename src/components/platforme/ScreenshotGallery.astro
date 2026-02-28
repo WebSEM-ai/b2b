@@ -1,0 +1,399 @@
+---
+interface Screenshot {
+    src: string;
+    alt: string;
+    caption: string;
+}
+
+interface Props {
+    title?: string;
+    subtitle?: string;
+    screenshots?: Screenshot[];
+}
+
+const {
+    title = 'Galeria Proiectului',
+    subtitle = 'Explorează fiecare secțiune a platformei',
+    screenshots = [
+        { src: '/images/platforme/ford/Platforme-web-moderne1.webp', alt: 'Homepage hero — van + slogan', caption: 'Homepage Hero — Prezentare vizuală cu slogan de impact și CTA proeminent' },
+        { src: '/images/platforme/ford/Platforme-web-moderne2.webp', alt: 'Catalog modele — 3 cards cu prețuri', caption: 'Catalog Modele — Cards interactive cu prețuri și specificații cheie' },
+        { src: '/images/platforme/ford/Platforme-web-moderne3.webp', alt: 'Comparație modele — taburi interactive', caption: 'Comparație Modele — Taburi interactive pentru comparare rapidă' },
+        { src: '/images/platforme/ford/Platforme-web-moderne4.webp', alt: 'Footer + newsletter + branding Trigano', caption: 'Footer & Newsletter — Branding Trigano Group integrat' },
+        { src: '/images/platforme/ford/Platforme-web-moderne5.webp', alt: 'Model detail — parallax hero', caption: 'Pagină Model — Hero cu efect parallax și galerie foto' },
+        { src: '/images/platforme/ford/Platforme-web-moderne6.webp', alt: 'Specificații modele P09, P10+', caption: 'Specificații Tehnice — Detalii complete pentru fiecare model' },
+        { src: '/images/platforme/ford/Platforme-web-moderne7.webp', alt: 'Universul Panama Peak — brand story', caption: 'Universul Panama Peak — Brand story cu imagini imersive' },
+        { src: '/images/platforme/ford/Platforme-web-moderne8.webp', alt: 'Use cases — 3 cards interactive', caption: 'Use Cases — Scenarii de utilizare cu cards interactive' },
+        { src: '/images/platforme/ford/Platforme-web-moderne9.webp', alt: 'Configurator — wizard 5 pași', caption: 'Configurator — Wizard interactiv în 5 pași' },
+        { src: '/images/platforme/ford/Platforme-web-moderne10.webp', alt: 'Try it / Love it / Buy it — flow experiențial', caption: 'Try It / Love It / Buy It — Flow experiențial complet' }
+    ]
+} = Astro.props;
+---
+
+<section class="screenshot-gallery" id="galerie">
+    <div class="gallery-container">
+        <div class="gallery-header">
+            <h2 class="gallery-title">{title}</h2>
+            <p class="gallery-subtitle">{subtitle}</p>
+        </div>
+
+        <div class="gallery-grid">
+            {screenshots.map((shot, i) => (
+                <div class="gallery-item" data-gallery-item>
+                    <div class="browser-frame" data-lightbox-trigger={i}>
+                        <div class="browser-frame-bar">
+                            <span class="browser-dot browser-dot--red"></span>
+                            <span class="browser-dot browser-dot--yellow"></span>
+                            <span class="browser-dot browser-dot--green"></span>
+                            <span class="browser-url-mini">{String(i + 1).padStart(2, '0')}</span>
+                        </div>
+                        <div class="browser-frame-content">
+                            <img
+                                src={shot.src}
+                                alt={shot.alt}
+                                loading="lazy"
+                                decoding="async"
+                            />
+                        </div>
+                    </div>
+                    <p class="gallery-item-caption">{shot.caption}</p>
+                </div>
+            ))}
+        </div>
+    </div>
+</section>
+
+<!-- Lightbox -->
+<div class="gallery-lightbox" id="gallery-lightbox">
+    <div class="lightbox-backdrop"></div>
+    <button class="lightbox-close" aria-label="Închide">&times;</button>
+    <button class="lightbox-prev" aria-label="Anterior">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="15 18 9 12 15 6"/>
+        </svg>
+    </button>
+    <button class="lightbox-next" aria-label="Următor">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="9 18 15 12 9 6"/>
+        </svg>
+    </button>
+    <div class="lightbox-content">
+        <img class="lightbox-img" id="lightbox-img" src="" alt="" />
+    </div>
+    <div class="lightbox-counter" id="lightbox-counter"></div>
+</div>
+
+<script>
+    // Lightbox
+    const lightbox = document.getElementById('gallery-lightbox');
+    const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
+    const lightboxCounter = document.getElementById('lightbox-counter');
+    const triggers = document.querySelectorAll('[data-lightbox-trigger]');
+    const gallerySection = document.querySelector('.screenshot-gallery');
+    let currentIndex = 0;
+
+    const images: { src: string; alt: string }[] = [];
+    triggers.forEach((trigger) => {
+        const img = trigger.querySelector('img');
+        if (img) {
+            images.push({ src: img.src, alt: img.alt });
+        }
+    });
+
+    function openLightbox(index: number) {
+        currentIndex = index;
+        updateLightbox();
+        lightbox?.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+        lightbox?.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    function updateLightbox() {
+        if (!lightboxImg || !lightboxCounter) return;
+        lightboxImg.src = images[currentIndex].src;
+        lightboxImg.alt = images[currentIndex].alt;
+        lightboxCounter.textContent = `${currentIndex + 1} / ${images.length}`;
+    }
+
+    function nextImage() {
+        currentIndex = (currentIndex + 1) % images.length;
+        updateLightbox();
+    }
+
+    function prevImage() {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        updateLightbox();
+    }
+
+    triggers.forEach((trigger) => {
+        trigger.addEventListener('click', () => {
+            const index = parseInt(trigger.getAttribute('data-lightbox-trigger') || '0');
+            openLightbox(index);
+        });
+    });
+
+    lightbox?.querySelector('.lightbox-backdrop')?.addEventListener('click', closeLightbox);
+    lightbox?.querySelector('.lightbox-close')?.addEventListener('click', closeLightbox);
+    lightbox?.querySelector('.lightbox-prev')?.addEventListener('click', prevImage);
+    lightbox?.querySelector('.lightbox-next')?.addEventListener('click', nextImage);
+
+    document.addEventListener('keydown', (e) => {
+        if (!lightbox?.classList.contains('active')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') prevImage();
+        if (e.key === 'ArrowRight') nextImage();
+    });
+
+    // IntersectionObserver scroll animations
+    const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -50px 0px' };
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('[data-gallery-item]').forEach(item => {
+        observer.observe(item);
+    });
+</script>
+
+<style>
+    .screenshot-gallery {
+        padding: var(--section-padding);
+    }
+
+    .gallery-container {
+        max-width: var(--container-max);
+        margin: 0 auto;
+    }
+
+    .gallery-header {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    .gallery-title {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 0.75rem;
+    }
+
+    .gallery-subtitle {
+        font-size: 1.05rem;
+        color: var(--text-tertiary);
+    }
+
+    .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+    }
+
+    .gallery-item {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .gallery-item.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Browser frame */
+    .browser-frame {
+        border-radius: 10px;
+        overflow: hidden;
+        border: 1px solid var(--border-light);
+        background: var(--bg-card);
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .browser-frame:hover {
+        border-color: var(--border-medium);
+        box-shadow: var(--shadow-lg);
+        transform: translateY(-4px);
+    }
+
+    .browser-frame-bar {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        padding: 8px 12px;
+        background: var(--bg-card);
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    .browser-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+    }
+
+    .browser-dot--red { background: #ff5f57; }
+    .browser-dot--yellow { background: #febc2e; }
+    .browser-dot--green { background: #28c840; }
+
+    .browser-url-mini {
+        margin-left: auto;
+        font-size: 0.7rem;
+        color: var(--text-muted);
+        font-family: 'Space Grotesk', sans-serif;
+        font-weight: 600;
+        opacity: 0.5;
+    }
+
+    .browser-frame-content {
+        line-height: 0;
+    }
+
+    .browser-frame-content img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .gallery-item-caption {
+        margin-top: 0.6rem;
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        line-height: 1.4;
+    }
+
+    /* Lightbox */
+    .gallery-lightbox {
+        position: fixed;
+        inset: 0;
+        z-index: 10000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .gallery-lightbox.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .lightbox-backdrop {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.92);
+    }
+
+    .lightbox-close {
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        background: none;
+        border: none;
+        color: #fff;
+        font-size: 2.5rem;
+        cursor: pointer;
+        z-index: 10;
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        transition: background 0.2s;
+    }
+
+    .lightbox-close:hover {
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .lightbox-prev,
+    .lightbox-next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 50%;
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 10;
+        color: #fff;
+        transition: all 0.2s;
+    }
+
+    .lightbox-prev { left: 1.5rem; }
+    .lightbox-next { right: 1.5rem; }
+
+    .lightbox-prev:hover,
+    .lightbox-next:hover {
+        background: rgba(255, 255, 255, 0.15);
+    }
+
+    .lightbox-prev svg,
+    .lightbox-next svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    .lightbox-content {
+        position: relative;
+        z-index: 5;
+        max-width: 90vw;
+        max-height: 85vh;
+    }
+
+    .lightbox-img {
+        max-width: 100%;
+        max-height: 85vh;
+        border-radius: 8px;
+        object-fit: contain;
+    }
+
+    .lightbox-counter {
+        position: absolute;
+        bottom: 1.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.9rem;
+        font-family: 'Inter', sans-serif;
+        z-index: 10;
+    }
+
+    @media (max-width: 900px) {
+        .gallery-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .gallery-grid {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        .lightbox-prev,
+        .lightbox-next {
+            width: 40px;
+            height: 40px;
+        }
+
+        .lightbox-prev { left: 0.75rem; }
+        .lightbox-next { right: 0.75rem; }
+    }
+</style>
