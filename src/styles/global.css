@@ -221,7 +221,7 @@ body {
     top: calc(100% + 0.75rem);
     left: 50%;
     transform: translateX(-50%) translateY(4px);
-    min-width: 180px;
+    min-width: 220px;
     background: var(--bg-nav-scrolled);
     backdrop-filter: blur(20px);
     border: 1px solid var(--border-medium);
