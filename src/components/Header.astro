@@ -83,7 +83,12 @@ const {
                             {link.children.map(child => (
                                 child.children ? (
                                     <div class="nav-dropdown-group">
-                                        <a href={child.href} class="nav-dropdown-item nav-dropdown-item--parent">{child.text}</a>
+                                        <a href={child.href} class="nav-dropdown-item nav-dropdown-item--parent">
+                                            {child.text}
+                                            <svg class="nav-sub-arrow" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        </a>
                                         <div class="nav-dropdown-sub">
                                             {child.children.map(sub => (
                                                 <a href={sub.href} class="nav-dropdown-item nav-dropdown-item--sub">{sub.text}</a>
@@ -185,20 +190,39 @@ const {
         });
     });
 
-    // Close mobile menu on dropdown item click
-    document.querySelectorAll('.nav-dropdown-item').forEach(link => {
+    // Close mobile menu on dropdown item click (exclude parent items with children)
+    document.querySelectorAll('.nav-dropdown-item:not(.nav-dropdown-item--parent)').forEach(link => {
         link.addEventListener('click', () => {
             navLinks?.classList.remove('active');
         });
     });
 
-    // Mobile dropdown toggle
+    // Mobile dropdown toggle (Level 1 - Servicii)
     document.querySelectorAll('.nav-link--dropdown').forEach(trigger => {
         trigger.addEventListener('click', (e) => {
             if (window.innerWidth <= 900) {
                 e.preventDefault();
                 const dropdown = trigger.closest('.nav-dropdown');
                 dropdown?.classList.toggle('active');
+                // Close all open sub-groups when toggling Level 1
+                dropdown?.querySelectorAll('.nav-dropdown-group.active').forEach(g => {
+                    g.classList.remove('active');
+                });
+            }
+        });
+    });
+
+    // Mobile dropdown toggle (Level 2 - Niche Domination, Platforme)
+    document.querySelectorAll('.nav-dropdown-item--parent').forEach(trigger => {
+        trigger.addEventListener('click', (e) => {
+            if (window.innerWidth <= 900) {
+                e.preventDefault();
+                const group = trigger.closest('.nav-dropdown-group');
+                // Close sibling groups
+                group?.parentElement?.querySelectorAll('.nav-dropdown-group.active').forEach(g => {
+                    if (g !== group) g.classList.remove('active');
+                });
+                group?.classList.toggle('active');
             }
         });
     });
@@ -344,6 +368,20 @@ const {
         .lang-switch {
             order: -1;
             align-self: center;
+        }
+    }
+
+    .nav-sub-arrow {
+        display: none;
+        width: 10px;
+        height: 10px;
+        transition: transform 0.3s ease;
+        flex-shrink: 0;
+    }
+
+    @media (max-width: 900px) {
+        .nav-sub-arrow {
+            display: inline-block;
         }
     }
 

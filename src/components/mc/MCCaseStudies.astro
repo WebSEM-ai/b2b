@@ -89,6 +89,12 @@ const caseStudies = [
             </div>
         ))}
     </div>
+
+    <div class="carousel-dots carousel-dots--768 mc-case-dots">
+        {caseStudies.map((_, i) => (
+            <button class={`carousel-dot ${i === 0 ? 'active' : ''}`} data-index={i} aria-label={`Slide ${i + 1}`}></button>
+        ))}
+    </div>
 </div>
 
 <script>
@@ -103,6 +109,28 @@ const caseStudies = [
     document.querySelectorAll('.mc-case-card').forEach(card => {
         caseObserver.observe(card);
     });
+
+    // Carousel dots sync
+    const mcGrid = document.querySelector('.mc-case-grid');
+    const mcDots = document.querySelectorAll('.mc-case-dots .carousel-dot');
+    if (mcGrid && mcDots.length) {
+        const cards = mcGrid.querySelectorAll('.mc-case-card');
+        const dotObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const idx = Array.from(cards).indexOf(entry.target as Element);
+                    mcDots.forEach((d, i) => d.classList.toggle('active', i === idx));
+                }
+            });
+        }, { root: mcGrid, threshold: 0.6 });
+        cards.forEach(c => dotObserver.observe(c));
+        mcDots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                const idx = Number((dot as HTMLElement).dataset.index);
+                cards[idx]?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            });
+        });
+    }
 </script>
 
 <style>
@@ -258,10 +286,26 @@ const caseStudies = [
 
     @media (max-width: 768px) {
         .mc-case-grid {
-            grid-template-columns: 1fr;
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            gap: 1rem;
+            padding: 0 1rem 1rem;
+            scrollbar-width: none;
+        }
+
+        .mc-case-grid::-webkit-scrollbar {
+            display: none;
+        }
+
+        .mc-case-card {
+            flex: 0 0 85%;
+            scroll-snap-align: center;
         }
 
         .mc-case-card:last-child {
+            grid-column: unset;
             max-width: none;
         }
     }
@@ -273,6 +317,20 @@ const caseStudies = [
 
         .mc-case-metric-value {
             font-size: 1.6rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .mc-case-bullets li {
+            font-size: 0.9rem;
+        }
+
+        .mc-case-quote p {
+            font-size: 0.88rem;
+        }
+
+        .mc-case-pill {
+            font-size: 0.72rem;
         }
     }
 </style>

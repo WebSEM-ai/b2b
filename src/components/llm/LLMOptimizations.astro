@@ -32,6 +32,12 @@ const optimizations = [
             </div>
         ))}
     </div>
+
+    <div class="carousel-dots llm-opt-dots">
+        {optimizations.map((_, i) => (
+            <button class={`carousel-dot ${i === 0 ? 'active' : ''}`} data-index={i} aria-label={`Slide ${i + 1}`}></button>
+        ))}
+    </div>
 </div>
 
 <script>
@@ -46,6 +52,28 @@ const optimizations = [
     document.querySelectorAll('.llm-opt-card').forEach(card => {
         llmOptObserver.observe(card);
     });
+
+    // Carousel dots sync
+    const llmGrid = document.querySelector('.llm-opt-grid');
+    const llmDots = document.querySelectorAll('.llm-opt-dots .carousel-dot');
+    if (llmGrid && llmDots.length) {
+        const cards = llmGrid.querySelectorAll('.llm-opt-card');
+        const dotObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const idx = Array.from(cards).indexOf(entry.target as Element);
+                    llmDots.forEach((d, i) => d.classList.toggle('active', i === idx));
+                }
+            });
+        }, { root: llmGrid, threshold: 0.6 });
+        cards.forEach(c => dotObserver.observe(c));
+        llmDots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                const idx = Number((dot as HTMLElement).dataset.index);
+                cards[idx]?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            });
+        });
+    }
 </script>
 
 <style>
@@ -133,13 +161,28 @@ const optimizations = [
 
     @media (max-width: 900px) {
         .llm-opt-grid {
-            grid-template-columns: repeat(2, 1fr);
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            gap: 1rem;
+            padding: 0 1rem 1rem;
+            scrollbar-width: none;
+        }
+
+        .llm-opt-grid::-webkit-scrollbar {
+            display: none;
+        }
+
+        .llm-opt-card {
+            flex: 0 0 85%;
+            scroll-snap-align: center;
         }
     }
 
-    @media (max-width: 600px) {
-        .llm-opt-grid {
-            grid-template-columns: 1fr;
+    @media (max-width: 480px) {
+        .llm-opt-card p {
+            font-size: 0.88rem;
         }
     }
 </style>

@@ -71,8 +71,38 @@ const {
                 </div>
             ))}
         </div>
+
+        <div class="carousel-dots carousel-dots--768 results-dots">
+            {highlights.map((_, i) => (
+                <button class={`carousel-dot ${i === 0 ? 'active' : ''}`} data-index={i} aria-label={`Slide ${i + 1}`}></button>
+            ))}
+        </div>
     </div>
 </section>
+
+<script>
+    // Carousel dots sync for results highlights
+    const resGrid = document.querySelector('.results-highlights');
+    const resDots = document.querySelectorAll('.results-dots .carousel-dot');
+    if (resGrid && resDots.length) {
+        const cards = resGrid.querySelectorAll('.highlight-card');
+        const dotObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const idx = Array.from(cards).indexOf(entry.target as Element);
+                    resDots.forEach((d, i) => d.classList.toggle('active', i === idx));
+                }
+            });
+        }, { root: resGrid, threshold: 0.6 });
+        cards.forEach(c => dotObserver.observe(c));
+        resDots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                const idx = Number((dot as HTMLElement).dataset.index);
+                cards[idx]?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            });
+        });
+    }
+</script>
 
 <style>
     .project-results {
@@ -178,7 +208,28 @@ const {
         }
 
         .results-highlights {
-            grid-template-columns: 1fr;
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            gap: 1rem;
+            padding: 0 1rem 1rem;
+            scrollbar-width: none;
+        }
+
+        .results-highlights::-webkit-scrollbar {
+            display: none;
+        }
+
+        .highlight-card {
+            flex: 0 0 85%;
+            scroll-snap-align: center;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .highlight-card-desc {
+            font-size: 1rem;
         }
     }
 </style>

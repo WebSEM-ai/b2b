@@ -40,6 +40,12 @@ const {
             </div>
         ))}
     </div>
+
+    <div class="carousel-dots carousel-dots--600 stats-dots">
+        {stats.map((_, i) => (
+            <button class={`carousel-dot ${i === 0 ? 'active' : ''}`} data-index={i} aria-label={`Slide ${i + 1}`}></button>
+        ))}
+    </div>
 </section>
 
 <script>
@@ -81,6 +87,28 @@ const {
     }, { threshold: 0.5 });
 
     counters.forEach(counter => observer.observe(counter));
+
+    // Carousel dots sync
+    const statsGrid = document.querySelector('.stats-grid');
+    const statsDots = document.querySelectorAll('.stats-dots .carousel-dot');
+    if (statsGrid && statsDots.length) {
+        const cards = statsGrid.querySelectorAll('.stat-item');
+        const dotObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const idx = Array.from(cards).indexOf(entry.target as Element);
+                    statsDots.forEach((d, i) => d.classList.toggle('active', i === idx));
+                }
+            });
+        }, { root: statsGrid, threshold: 0.6 });
+        cards.forEach(c => dotObserver.observe(c));
+        statsDots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                const idx = Number((dot as HTMLElement).dataset.index);
+                cards[idx]?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            });
+        });
+    }
 </script>
 
 <style>
@@ -181,16 +209,33 @@ const {
 
     @media (max-width: 600px) {
         .stats-grid {
-            grid-template-columns: 1fr;
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
             gap: 1rem;
+            padding: 0 1rem 1rem;
+            scrollbar-width: none;
+        }
+
+        .stats-grid::-webkit-scrollbar {
+            display: none;
         }
 
         .stat-item {
+            flex: 0 0 70%;
+            scroll-snap-align: center;
             padding: 1.5rem;
         }
 
         .stat-item-value {
             font-size: 2.5rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .stat-item-desc {
+            font-size: 0.88rem;
         }
     }
 </style>

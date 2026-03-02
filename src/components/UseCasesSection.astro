@@ -60,6 +60,12 @@ const {
             </div>
         ))}
     </div>
+
+    <div class="carousel-dots usecases-dots">
+        {useCases.map((_, i) => (
+            <button class={`carousel-dot ${i === 0 ? 'active' : ''}`} data-index={i} aria-label={`Slide ${i + 1}`}></button>
+        ))}
+    </div>
 </section>
 
 <script>
@@ -74,6 +80,28 @@ const {
     document.querySelectorAll('.usecase-card').forEach(card => {
         observer.observe(card);
     });
+
+    // Carousel dots sync
+    const ucGrid = document.querySelector('.usecases-grid');
+    const ucDots = document.querySelectorAll('.usecases-dots .carousel-dot');
+    if (ucGrid && ucDots.length) {
+        const cards = ucGrid.querySelectorAll('.usecase-card');
+        const dotObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const idx = Array.from(cards).indexOf(entry.target as Element);
+                    ucDots.forEach((d, i) => d.classList.toggle('active', i === idx));
+                }
+            });
+        }, { root: ucGrid, threshold: 0.6 });
+        cards.forEach(c => dotObserver.observe(c));
+        ucDots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                const idx = Number((dot as HTMLElement).dataset.index);
+                cards[idx]?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            });
+        });
+    }
 </script>
 
 <style>
@@ -174,8 +202,33 @@ const {
 
     @media (max-width: 900px) {
         .usecases-grid {
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            gap: 1rem;
+            padding: 0 1rem 1rem;
+            scrollbar-width: none;
+        }
+
+        .usecases-grid::-webkit-scrollbar {
+            display: none;
+        }
+
+        .usecase-card {
+            flex: 0 0 85%;
+            scroll-snap-align: center;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .usecase-desc {
+            font-size: 0.9rem;
+        }
+
+        .usecase-example p,
+        .usecase-ideal p {
+            font-size: 0.9rem;
         }
     }
 </style>

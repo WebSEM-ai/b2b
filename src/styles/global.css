@@ -350,6 +350,29 @@ body {
         justify-content: center;
         font-size: 0.9rem;
     }
+
+    .nav-dropdown-sub {
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        visibility: hidden;
+        transition: max-height 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .nav-dropdown-group.active .nav-dropdown-sub {
+        max-height: 300px;
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .nav-dropdown-group.active .nav-sub-arrow {
+        transform: rotate(180deg);
+    }
+
+    .nav-dropdown-item--parent {
+        justify-content: center;
+        gap: 0.4rem;
+    }
 }
 
 /* Premium CTA Button */
@@ -1953,7 +1976,7 @@ body.modal-open {
     }
 
     .hero-sub {
-        font-size: 0.85rem;
+        font-size: 0.95rem;
     }
 
     .benefit-card {
@@ -1981,6 +2004,58 @@ body.modal-open {
     .cap-grid::after {
         content: '';
         flex: 0 0 1rem;
+    }
+}
+
+/* ============================================
+   CAROUSEL DOTS INDICATOR
+   ============================================ */
+.carousel-dots {
+    display: none;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem 0 0;
+}
+
+.carousel-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: none;
+    background: var(--border-medium);
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.3s ease;
+}
+
+.carousel-dot.active {
+    background: var(--accent);
+    transform: scale(1.3);
+}
+
+@media (max-width: 900px) {
+    .carousel-dots {
+        display: flex;
+    }
+}
+
+.carousel-dots--600 {
+    display: none;
+}
+
+@media (max-width: 600px) {
+    .carousel-dots--600 {
+        display: flex;
+    }
+}
+
+.carousel-dots--768 {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .carousel-dots--768 {
+        display: flex;
     }
 }
 

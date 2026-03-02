@@ -50,6 +50,12 @@ const dimensions = [
             </div>
         ))}
     </div>
+
+    <div class="carousel-dots df-dim-dots">
+        {dimensions.map((_, i) => (
+            <button class={`carousel-dot ${i === 0 ? 'active' : ''}`} data-index={i} aria-label={`Slide ${i + 1}`}></button>
+        ))}
+    </div>
 </div>
 
 <script>
@@ -64,6 +70,28 @@ const dimensions = [
     document.querySelectorAll('.df-dim-card').forEach(card => {
         dfDimObserver.observe(card);
     });
+
+    // Carousel dots sync
+    const dfGrid = document.querySelector('.df-dim-grid');
+    const dfDots = document.querySelectorAll('.df-dim-dots .carousel-dot');
+    if (dfGrid && dfDots.length) {
+        const cards = dfGrid.querySelectorAll('.df-dim-card');
+        const dotObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const idx = Array.from(cards).indexOf(entry.target as Element);
+                    dfDots.forEach((d, i) => d.classList.toggle('active', i === idx));
+                }
+            });
+        }, { root: dfGrid, threshold: 0.6 });
+        cards.forEach(c => dotObserver.observe(c));
+        dfDots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                const idx = Number((dot as HTMLElement).dataset.index);
+                cards[idx]?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            });
+        });
+    }
 </script>
 
 <style>
@@ -154,13 +182,28 @@ const dimensions = [
 
     @media (max-width: 900px) {
         .df-dim-grid {
-            grid-template-columns: repeat(2, 1fr);
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            gap: 1rem;
+            padding: 0 1rem 1rem;
+            scrollbar-width: none;
+        }
+
+        .df-dim-grid::-webkit-scrollbar {
+            display: none;
+        }
+
+        .df-dim-card {
+            flex: 0 0 75%;
+            scroll-snap-align: center;
         }
     }
 
-    @media (max-width: 600px) {
-        .df-dim-grid {
-            grid-template-columns: 1fr;
+    @media (max-width: 480px) {
+        .df-dim-card p {
+            font-size: 0.88rem;
         }
     }
 </style>
