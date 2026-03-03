@@ -1,0 +1,331 @@
+---
+interface CaseStudy {
+    title: string;
+    description: string;
+    url: string;
+    tag: string;
+    filters: string;
+}
+
+interface Props {
+    title?: string;
+    subtitle?: string;
+    studies?: CaseStudy[];
+}
+
+const {
+    title = 'Studii de Caz',
+    subtitle = 'Cum construim segmente invizibile — cu date reale și calificare AI',
+    studies = [
+        {
+            title: 'România → Italia: exportatori calificați AI',
+            description: 'Cum identificăm automat companiile românești care exportă în Italia, folosind date de pe site, descrieri oficiale și verdict AI pe fiecare lead.',
+            url: '/blog/studiu-de-caz-targeting-romania-italia/',
+            tag: 'Export B2B',
+            filters: 'Origine + Export Italia'
+        },
+        {
+            title: 'CEO român, firmă britanică',
+            description: 'Cum targetăm antreprenorii români care conduc companii în UK — un segment invizibil pentru outreach-ul clasic, construit prin dublu filtru AI.',
+            url: '/blog/ceo-romani-uk-targetare-outreach/',
+            tag: 'Diaspora UK',
+            filters: 'Origine + Locație companie'
+        },
+        {
+            title: 'Manageri români în industria germană',
+            description: 'Targetarea românilor din automotive, construcții și logistică din Germania — plant manageri și directori de operațiuni cu dublu filtru AI.',
+            url: '/blog/romani-germania-industrial-outreach-b2b/',
+            tag: 'Industrial DE',
+            filters: 'Origine + Locație + Industrie'
+        },
+        {
+            title: 'CTO român în San Francisco',
+            description: 'Fondatori și directori tehnici români din SUA și Canada — segmentul tech construit cu trei filtre AI: origine, locație, seniority.',
+            url: '/blog/romani-sua-canada-tech-outreach-b2b/',
+            tag: 'Tech US/CA',
+            filters: 'Origine + Locație + Seniority + Tech'
+        }
+    ]
+} = Astro.props;
+---
+
+<section class="case-studies-section" id="case-studies">
+    <div class="case-studies-header">
+        <span class="case-studies-label">Studii de Caz</span>
+        <h2 set:html={title} />
+        <p>{subtitle}</p>
+    </div>
+
+    <div class="case-studies-grid">
+        {studies.map((study, i) => (
+            <a href={study.url} class="case-study-card">
+                <div class="case-study-tag">{study.tag}</div>
+                <h3 class="case-study-title">{study.title}</h3>
+                <p class="case-study-desc">{study.description}</p>
+                <div class="case-study-footer">
+                    <div class="case-study-filters">
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
+                        </svg>
+                        <span>{study.filters}</span>
+                    </div>
+                    <div class="case-study-arrow">
+                        <span>Citește</span>
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </div>
+                </div>
+            </a>
+        ))}
+    </div>
+
+    <div class="carousel-dots carousel-dots--600 case-studies-dots">
+        {studies.map((_, i) => (
+            <button class={`carousel-dot ${i === 0 ? 'active' : ''}`} data-index={i} aria-label={`Slide ${i + 1}`}></button>
+        ))}
+    </div>
+</section>
+
+<script>
+    // Animate cards on scroll
+    const csObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.case-study-card').forEach(card => {
+        csObserver.observe(card);
+    });
+
+    // Carousel dots sync for mobile
+    const csGrid = document.querySelector('.case-studies-grid');
+    const csDots = document.querySelectorAll('.case-studies-dots .carousel-dot');
+    if (csGrid && csDots.length) {
+        const cards = csGrid.querySelectorAll('.case-study-card');
+        const dotObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const idx = Array.from(cards).indexOf(entry.target as Element);
+                    csDots.forEach((d, i) => d.classList.toggle('active', i === idx));
+                }
+            });
+        }, { root: csGrid, threshold: 0.6 });
+        cards.forEach(c => dotObserver.observe(c));
+        csDots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                const idx = Number((dot as HTMLElement).dataset.index);
+                cards[idx]?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            });
+        });
+    }
+</script>
+
+<style>
+    .case-studies-section {
+        padding: 5rem 2rem;
+        background: var(--bg-primary);
+        position: relative;
+    }
+
+    .case-studies-header {
+        text-align: center;
+        margin-bottom: 3.5rem;
+    }
+
+    .case-studies-label {
+        display: inline-block;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #667eea;
+        background: rgba(102, 126, 234, 0.1);
+        padding: 0.35rem 1rem;
+        border-radius: 100px;
+        margin-bottom: 1rem;
+    }
+
+    .case-studies-header h2 {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        color: var(--text-primary);
+    }
+
+    .case-studies-header p {
+        color: var(--text-muted);
+        font-size: 0.95rem;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .case-studies-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+
+    .case-study-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border-light);
+        border-radius: 20px;
+        padding: 2rem;
+        text-decoration: none;
+        color: inherit;
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    .case-study-card.visible {
+        opacity: 1;
+        transform: translateY(0);
+        transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .case-study-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #667eea, #764ba2);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .case-study-card:hover {
+        transform: translateY(-8px);
+        border-color: var(--border-accent);
+        box-shadow: var(--shadow-lg);
+    }
+
+    .case-study-card.visible:hover {
+        transform: translateY(-8px);
+    }
+
+    .case-study-card:hover::before {
+        opacity: 1;
+    }
+
+    .case-study-tag {
+        display: inline-block;
+        font-size: 0.7rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #a78bfa;
+        background: rgba(167, 139, 250, 0.1);
+        padding: 0.25rem 0.75rem;
+        border-radius: 100px;
+        margin-bottom: 1rem;
+        align-self: flex-start;
+    }
+
+    .case-study-title {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 0.75rem;
+        line-height: 1.3;
+    }
+
+    .case-study-desc {
+        font-size: 0.88rem;
+        color: var(--text-muted);
+        line-height: 1.6;
+        flex: 1;
+        margin-bottom: 1.5rem;
+    }
+
+    .case-study-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 1rem;
+        border-top: 1px solid var(--border-light);
+    }
+
+    .case-study-filters {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.75rem;
+        color: var(--text-muted);
+    }
+
+    .case-study-filters svg {
+        opacity: 0.5;
+        flex-shrink: 0;
+    }
+
+    .case-study-arrow {
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: #667eea;
+        transition: gap 0.3s ease;
+    }
+
+    .case-study-card:hover .case-study-arrow {
+        gap: 0.6rem;
+    }
+
+    @media (max-width: 768px) {
+        .case-studies-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .case-studies-section {
+            padding: 3rem 0;
+        }
+
+        .case-studies-header {
+            padding: 0 1.5rem;
+        }
+
+        .case-studies-grid {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            gap: 1rem;
+            padding: 0 1rem 1rem;
+            scrollbar-width: none;
+        }
+
+        .case-studies-grid::-webkit-scrollbar {
+            display: none;
+        }
+
+        .case-study-card {
+            flex: 0 0 85%;
+            scroll-snap-align: center;
+        }
+
+        .case-study-title {
+            font-size: 1.1rem;
+        }
+
+        .case-study-desc {
+            font-size: 0.9rem;
+        }
+    }
+</style>
