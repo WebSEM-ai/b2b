@@ -5,8 +5,6 @@ pubDate: 2026-03-03
 author: "WebSEM Team"
 category: "outreach"
 tags: ["Outreach B2B", "Targetare", "AI", "SUA", "Canada", "Tech", "Diaspora", "Studiu de Caz", "Lead Qualification"]
-heroImage: "/images/blog/romani-sua-canada-tech.webp"
-heroImageAlt: "Targetare outreach: fondatori și CTO români din SUA și Canada"
 featured: true
 draft: false
 ---

@@ -5,8 +5,6 @@ pubDate: 2026-03-03
 author: "WebSEM Team"
 category: "outreach"
 tags: ["Outreach B2B", "Targetare", "AI", "Germania", "Industrie", "Diaspora", "Studiu de Caz", "Lead Qualification"]
-heroImage: "/images/blog/romani-germania-industrial.webp"
-heroImageAlt: "Targetare outreach: manageri români din industria germană"
 featured: true
 draft: false
 ---
