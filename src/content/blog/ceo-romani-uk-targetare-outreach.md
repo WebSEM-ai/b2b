@@ -7,6 +7,8 @@ category: "outreach"
 tags: ["Outreach B2B", "Targetare", "AI", "Diaspora", "Romania", "UK", "Studiu de Caz", "Lead Qualification"]
 featured: true
 draft: false
+heroImage: "/images/blog/outreach-ceo-uk.jpg"
+heroImageAlt: "CEO român firmă britanică - targetare outreach"
 ---
 
 <div class="key-takeaway">

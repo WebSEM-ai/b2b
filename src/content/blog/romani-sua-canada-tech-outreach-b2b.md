@@ -7,6 +7,8 @@ category: "outreach"
 tags: ["Outreach B2B", "Targetare", "AI", "SUA", "Canada", "Tech", "Diaspora", "Studiu de Caz", "Lead Qualification"]
 featured: true
 draft: false
+heroImage: "/images/blog/outreach-cto-usa.jpg"
+heroImageAlt: "CTO român în San Francisco - outreach B2B tech"
 ---
 
 <div class="key-takeaway">

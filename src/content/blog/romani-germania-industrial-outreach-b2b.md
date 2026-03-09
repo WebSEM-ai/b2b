@@ -7,6 +7,8 @@ category: "outreach"
 tags: ["Outreach B2B", "Targetare", "AI", "Germania", "Industrie", "Diaspora", "Studiu de Caz", "Lead Qualification"]
 featured: true
 draft: false
+heroImage: "/images/blog/outreach-germania-industrial.jpg"
+heroImageAlt: "Manageri români în industria germană - outreach B2B"
 ---
 
 <div class="key-takeaway">

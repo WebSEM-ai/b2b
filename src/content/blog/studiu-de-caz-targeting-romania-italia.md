@@ -7,6 +7,8 @@ category: "outreach"
 tags: ["Outreach B2B", "Targeting", "AI", "Export", "Romania", "Italia", "Studiu de Caz", "Lead Qualification"]
 featured: true
 draft: false
+heroImage: "/images/blog/outreach-romania-italia.jpg"
+heroImageAlt: "Studiu de caz targeting România Italia"
 ---
 
 <div class="key-takeaway">
