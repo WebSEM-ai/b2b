@@ -1,0 +1,416 @@
+---
+interface Service {
+    name: string;
+    href: string;
+    description: string;
+    icon: string;
+}
+
+interface Props {
+    title?: string;
+    subtitle?: string;
+}
+
+const {
+    title = 'Serviciile Noastre',
+    subtitle = 'Un ecosistem complet de soluții B2B — de la prospectare la raportare.'
+} = Astro.props;
+
+const services: Service[] = [
+    {
+        name: 'Outreach',
+        href: '/outreach',
+        description: 'Pipeline B2B de €250K+ în 90 de zile. Identificăm decision-makers cu buget și livrăm meetings calificate.',
+        icon: 'outreach'
+    },
+    {
+        name: 'Market Command',
+        href: '/market-command',
+        description: 'Audit enterprise pe 6 dimensiuni. Analiză completă de piață, concurență și oportunități de creștere.',
+        icon: 'market-command'
+    },
+    {
+        name: 'Niche Domination',
+        href: '/niche-domination/pharma',
+        description: 'Dominare completă pe nișa ta. Strategie verticală cu outreach, conținut și autoritate de brand.',
+        icon: 'niche-domination'
+    },
+    {
+        name: 'Chatbot AI',
+        href: '/chatbot-ai',
+        description: 'Asistenți AI antrenați pe datele companiei tale. Suport 24/7, calificare lead-uri și automatizare.',
+        icon: 'chatbot-ai'
+    },
+    {
+        name: 'Trafic LLM',
+        href: '/trafic-llm',
+        description: 'Vizibilitate în ChatGPT, Gemini, Perplexity. Optimizare pentru motoarele AI de căutare.',
+        icon: 'trafic-llm'
+    },
+    {
+        name: 'Decision Hub',
+        href: '/decision-hub',
+        description: 'Centralizare date marketing via Databox. Dashboard-uri real-time pentru decizii rapide.',
+        icon: 'decision-hub'
+    },
+    {
+        name: 'Data Foundation',
+        href: '/data-foundation',
+        description: 'Audit și setup infrastructură tracking. GTM, GA4, conversii — totul configurat corect.',
+        icon: 'data-foundation'
+    },
+    {
+        name: 'Platforme',
+        href: '/platforme',
+        description: 'Platforme web B2B custom — de la e-commerce modern la enterprise stack cu CMS headless.',
+        icon: 'platforme'
+    }
+];
+---
+
+<section class="services-section" id="servicii">
+    <div class="services-header">
+        <h2>{title}</h2>
+        <p>{subtitle}</p>
+    </div>
+
+    <div class="services-grid">
+        {services.map(service => (
+            <a href={service.href} class="service-card" data-icon={service.icon}>
+                <div class="service-icon">
+                    {service.icon === 'outreach' && (
+                        <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="26" cy="26" r="4" fill="currentColor" class="outreach-dot"/>
+                            <circle cx="26" cy="26" r="10" stroke="currentColor" stroke-width="1.5" fill="none" class="outreach-wave1" opacity="0.6"/>
+                            <circle cx="26" cy="26" r="16" stroke="currentColor" stroke-width="1.5" fill="none" class="outreach-wave2" opacity="0.35"/>
+                            <circle cx="26" cy="26" r="22" stroke="currentColor" stroke-width="1.5" fill="none" class="outreach-wave3" opacity="0.15"/>
+                        </svg>
+                    )}
+                    {service.icon === 'market-command' && (
+                        <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="8" y="28" width="7" height="14" rx="2" fill="currentColor" opacity="0.4" class="bar1"/>
+                            <rect x="17" y="22" width="7" height="20" rx="2" fill="currentColor" opacity="0.6" class="bar2"/>
+                            <rect x="26" y="16" width="7" height="26" rx="2" fill="currentColor" opacity="0.8" class="bar3"/>
+                            <rect x="35" y="10" width="7" height="32" rx="2" fill="currentColor" class="bar4"/>
+                            <path d="M36 8 L42 8 L42 14" stroke="#FF4D6D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="arrow-up" opacity="0"/>
+                            <path d="M42 8 L30 20" stroke="#FF4D6D" stroke-width="1.8" stroke-linecap="round" class="arrow-up" opacity="0"/>
+                        </svg>
+                    )}
+                    {service.icon === 'niche-domination' && (
+                        <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="26" cy="26" r="18" stroke="currentColor" stroke-width="1.5" fill="none" class="target-ring"/>
+                            <circle cx="26" cy="26" r="11" stroke="currentColor" stroke-width="1.5" fill="none" class="target-ring"/>
+                            <circle cx="26" cy="26" r="5" stroke="currentColor" stroke-width="1.5" fill="none" class="target-ring"/>
+                            <circle cx="26" cy="26" r="2" fill="currentColor" class="target-dot"/>
+                            <line x1="26" y1="4" x2="26" y2="10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                            <line x1="26" y1="42" x2="26" y2="48" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                            <line x1="4" y1="26" x2="10" y2="26" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                            <line x1="42" y1="26" x2="48" y2="26" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                    )}
+                    {service.icon === 'chatbot-ai' && (
+                        <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="8" y="10" width="36" height="26" rx="8" stroke="currentColor" stroke-width="1.8" fill="none"/>
+                            <path d="M16 42 L20 36 H32 L36 42" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                            <circle cx="19" cy="23" r="2.5" fill="currentColor" class="chat-dot1"/>
+                            <circle cx="26" cy="23" r="2.5" fill="currentColor" class="chat-dot2"/>
+                            <circle cx="33" cy="23" r="2.5" fill="currentColor" class="chat-dot3"/>
+                        </svg>
+                    )}
+                    {service.icon === 'trafic-llm' && (
+                        <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="10" cy="26" r="4" fill="currentColor" opacity="0.5" class="flow-node"/>
+                            <circle cx="26" cy="14" r="4" fill="currentColor" opacity="0.75" class="flow-node"/>
+                            <circle cx="26" cy="38" r="4" fill="currentColor" opacity="0.75" class="flow-node"/>
+                            <circle cx="42" cy="26" r="4" fill="currentColor" class="flow-node"/>
+                            <line x1="14" y1="26" x2="22" y2="14" stroke="currentColor" stroke-width="1.5" class="flow-line"/>
+                            <line x1="14" y1="26" x2="22" y2="38" stroke="currentColor" stroke-width="1.5" class="flow-line"/>
+                            <line x1="30" y1="14" x2="38" y2="26" stroke="currentColor" stroke-width="1.5" class="flow-line"/>
+                            <line x1="30" y1="38" x2="38" y2="26" stroke="currentColor" stroke-width="1.5" class="flow-line"/>
+                        </svg>
+                    )}
+                    {service.icon === 'decision-hub' && (
+                        <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="26" cy="10" r="4" fill="currentColor"/>
+                            <circle cx="12" cy="38" r="3.5" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                            <circle cx="26" cy="38" r="3.5" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                            <circle cx="40" cy="38" r="3.5" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                            <path d="M26 14 L26 26 L12 34" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="branch"/>
+                            <path d="M26 26 L26 34" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="branch2"/>
+                            <path d="M26 26 L40 34" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="branch3"/>
+                        </svg>
+                    )}
+                    {service.icon === 'data-foundation' && (
+                        <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <ellipse cx="26" cy="38" rx="18" ry="6" stroke="currentColor" stroke-width="1.5" fill="rgba(99,102,241,0.08)" class="layer1"/>
+                            <ellipse cx="26" cy="30" rx="18" ry="6" stroke="currentColor" stroke-width="1.5" fill="rgba(99,102,241,0.12)" class="layer2"/>
+                            <ellipse cx="26" cy="22" rx="18" ry="6" stroke="currentColor" stroke-width="1.5" fill="rgba(99,102,241,0.18)" class="layer3"/>
+                            <ellipse cx="26" cy="14" rx="18" ry="6" fill="currentColor" opacity="0.9" class="layer3"/>
+                        </svg>
+                    )}
+                    {service.icon === 'platforme' && (
+                        <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="8" y="8" width="36" height="10" rx="3" stroke="currentColor" stroke-width="1.5" fill="rgba(99,102,241,0.06)"/>
+                            <rect x="8" y="21" width="36" height="10" rx="3" stroke="currentColor" stroke-width="1.5" fill="rgba(99,102,241,0.06)"/>
+                            <rect x="8" y="34" width="36" height="10" rx="3" stroke="currentColor" stroke-width="1.5" fill="rgba(99,102,241,0.06)"/>
+                            <circle cx="38" cy="13" r="2" fill="currentColor" class="server-light1"/>
+                            <circle cx="38" cy="26" r="2" fill="currentColor" class="server-light2"/>
+                            <circle cx="38" cy="39" r="2" fill="currentColor" class="server-light3"/>
+                            <rect x="12" y="11" width="16" height="4" rx="1.5" fill="currentColor" opacity="0.25"/>
+                            <rect x="12" y="24" width="12" height="4" rx="1.5" fill="currentColor" opacity="0.25"/>
+                            <rect x="12" y="37" width="14" height="4" rx="1.5" fill="currentColor" opacity="0.25"/>
+                        </svg>
+                    )}
+                </div>
+                <div class="service-content">
+                    <h3>{service.name}</h3>
+                    <p>{service.description}</p>
+                    <span class="service-link">
+                        Află mai mult
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </div>
+            </a>
+        ))}
+    </div>
+</section>
+
+<style>
+    .services-section {
+        padding: 5rem 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .services-header {
+        text-align: center;
+        margin-bottom: 3.5rem;
+    }
+
+    .services-header h2 {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 0.75rem;
+    }
+
+    .services-header p {
+        font-size: 1.05rem;
+        color: var(--text-muted);
+        max-width: 600px;
+        margin: 0 auto;
+        line-height: 1.6;
+    }
+
+    .services-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.25rem;
+    }
+
+    .service-card {
+        display: flex;
+        align-items: flex-start;
+        gap: 1.25rem;
+        background: var(--bg-card);
+        border: 1px solid var(--border-light);
+        border-radius: 20px;
+        padding: 1.75rem;
+        text-decoration: none;
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .service-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #667eea, #764ba2);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .service-card:hover {
+        transform: translateY(-6px);
+        border-color: var(--border-accent);
+        box-shadow: 0 12px 40px rgba(99, 102, 241, 0.12);
+    }
+
+    .service-card:hover::before {
+        opacity: 1;
+    }
+
+    .service-icon {
+        flex-shrink: 0;
+        width: 52px;
+        height: 52px;
+        color: var(--accent-light, #667eea);
+    }
+
+    .service-icon svg {
+        width: 52px;
+        height: 52px;
+    }
+
+    .service-content {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .service-content h3 {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+    }
+
+    .service-content p {
+        font-size: 0.88rem;
+        line-height: 1.6;
+        color: var(--text-muted);
+        margin-bottom: 0.75rem;
+    }
+
+    .service-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--accent-light, #667eea);
+        transition: gap 0.3s ease;
+    }
+
+    .service-card:hover .service-link {
+        gap: 0.6rem;
+    }
+
+    /* === Icon Hover Animations === */
+
+    /* Outreach — signal waves */
+    .service-card:hover .outreach-wave1 { animation: sg-ripple 1.2s ease-out infinite; }
+    .service-card:hover .outreach-wave2 { animation: sg-ripple 1.2s ease-out 0.3s infinite; }
+    .service-card:hover .outreach-wave3 { animation: sg-ripple 1.2s ease-out 0.6s infinite; }
+    @keyframes sg-ripple {
+        0% { opacity: 0.8; stroke-width: 1.5; }
+        100% { opacity: 0; stroke-width: 0.5; }
+    }
+
+    /* Market Command — chart bars rising */
+    .service-card:hover .bar1 { animation: sg-rise 0.5s ease-out forwards; }
+    .service-card:hover .bar2 { animation: sg-rise 0.5s 0.1s ease-out forwards; }
+    .service-card:hover .bar3 { animation: sg-rise 0.5s 0.2s ease-out forwards; }
+    .service-card:hover .bar4 { animation: sg-rise 0.5s 0.3s ease-out forwards; }
+    .service-card:hover .arrow-up { animation: sg-slideUp 0.5s 0.4s ease-out forwards; opacity: 0; }
+    @keyframes sg-rise {
+        0% { transform: scaleY(0.5); transform-origin: bottom; }
+        100% { transform: scaleY(1); transform-origin: bottom; }
+    }
+    @keyframes sg-slideUp {
+        0% { transform: translateY(4px); opacity: 0; }
+        100% { transform: translateY(0); opacity: 1; }
+    }
+
+    /* Niche Domination — target crosshair */
+    .service-card:hover .target-ring { animation: sg-pulse-ring 1s ease-in-out infinite alternate; }
+    .service-card:hover .target-dot { animation: sg-pulse-dot 1s ease-in-out infinite alternate; }
+    @keyframes sg-pulse-ring {
+        0% { stroke-width: 1.5; }
+        100% { stroke-width: 2.5; }
+    }
+    @keyframes sg-pulse-dot {
+        0% { r: 2; fill: currentColor; }
+        100% { r: 3.5; fill: #FF4D6D; }
+    }
+
+    /* Chatbot AI — typing dots */
+    .service-card:hover .chat-dot1 { animation: sg-blink 1s 0s infinite; }
+    .service-card:hover .chat-dot2 { animation: sg-blink 1s 0.25s infinite; }
+    .service-card:hover .chat-dot3 { animation: sg-blink 1s 0.5s infinite; }
+    @keyframes sg-blink {
+        0%, 100% { opacity: 0.25; transform: translateY(0); }
+        50% { opacity: 1; transform: translateY(-2px); }
+    }
+
+    /* Traffic LLM — flowing path */
+    .service-card:hover .flow-line { animation: sg-dash 1.5s linear infinite; stroke-dasharray: 4 4; }
+    .service-card:hover .flow-node { animation: sg-glow-node 1.5s ease-in-out infinite alternate; }
+    @keyframes sg-dash {
+        to { stroke-dashoffset: -16; }
+    }
+    @keyframes sg-glow-node {
+        0% { r: 2.5; }
+        100% { r: 4; }
+    }
+
+    /* Decision Hub — branching tree */
+    .service-card:hover .branch { animation: sg-draw 0.6s ease-out forwards; stroke-dasharray: 30; stroke-dashoffset: 30; }
+    .service-card:hover .branch2 { animation: sg-draw 0.6s 0.2s ease-out forwards; stroke-dasharray: 20; stroke-dashoffset: 20; }
+    .service-card:hover .branch3 { animation: sg-draw 0.6s 0.4s ease-out forwards; stroke-dasharray: 20; stroke-dashoffset: 20; }
+    @keyframes sg-draw { to { stroke-dashoffset: 0; } }
+
+    /* Data Foundation — stacking layers */
+    .service-card:hover .layer1 { animation: sg-stack 0.4s ease-out forwards; }
+    .service-card:hover .layer2 { animation: sg-stack 0.4s 0.15s ease-out forwards; }
+    .service-card:hover .layer3 { animation: sg-stack 0.4s 0.3s ease-out forwards; }
+    @keyframes sg-stack {
+        0% { transform: translateY(4px); opacity: 0.3; }
+        100% { transform: translateY(0); opacity: 1; }
+    }
+
+    /* Platforme — server blink */
+    .service-card:hover .server-light1 { animation: sg-server-blink 1s 0s infinite; }
+    .service-card:hover .server-light2 { animation: sg-server-blink 1s 0.3s infinite; }
+    .service-card:hover .server-light3 { animation: sg-server-blink 1s 0.6s infinite; }
+    @keyframes sg-server-blink {
+        0%, 100% { opacity: 0.3; }
+        50% { fill: #34D399; opacity: 1; }
+    }
+
+    /* === Responsive === */
+
+    @media (max-width: 1024px) {
+        .services-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 640px) {
+        .services-section {
+            padding: 3rem 1.25rem;
+        }
+
+        .services-header h2 {
+            font-size: 1.75rem;
+        }
+
+        .services-grid {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        .service-card {
+            padding: 1.25rem;
+            gap: 1rem;
+        }
+
+        .service-icon {
+            width: 44px;
+            height: 44px;
+        }
+
+        .service-icon svg {
+            width: 44px;
+            height: 44px;
+        }
+    }
+</style>

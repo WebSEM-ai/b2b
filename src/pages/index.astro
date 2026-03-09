@@ -1,178 +1,63 @@
 ---
 import LandingPage from '../layouts/LandingPage.astro';
-import Hero from '../components/Hero.astro';
+import HomepageHero from '../components/HomepageHero.astro';
 import ClientsCarousel from '../components/ClientsCarousel.astro';
-import BenefitsSection from '../components/BenefitsSection.astro';
+import ServicesGrid from '../components/ServicesGrid.astro';
 import StatsSection from '../components/StatsSection.astro';
-import VendorFailures from '../components/VendorFailures.astro';
-import FeaturesSection from '../components/FeaturesSection.astro';
-import CapabilitiesSection from '../components/CapabilitiesSection.astro';
-import TabSection from '../components/TabSection.astro';
-import CaseStudiesSection from '../components/CaseStudiesSection.astro';
-import PricingSection from '../components/PricingSection.astro';
+import WhySection from '../components/WhySection.astro';
+import ProcessSection from '../components/ProcessSection.astro';
 import CtaSection from '../components/CtaSection.astro';
 import BookingModal from '../components/BookingModal.astro';
 
 // Page metadata
-const pageTitle = "WebSEM | B2B Lead Intelligence";
-const pageDescription = "Pipeline B2B de €250K+ în 90 de zile. Identificăm decision-makers cu buget. Livrăm meetings cu VP+ din companii €10M+ revenue.";
+const pageTitle = "AlphaGrade by WebSEM | Ecosistem B2B Growth";
+const pageDescription = "Creștem revenue-ul B2B prin tehnologie și date. Outreach, AI, tracking, raportare și platforme custom — un ecosistem complet de servicii enterprise.";
 ---
 
 <LandingPage title={pageTitle} description={pageDescription} langSwitch={{ current: 'ro', alternateUrl: '/en' }}>
 
     <!-- Hero Section -->
-    <Hero />
+    <HomepageHero />
 
     <!-- Clients Logo Carousel -->
     <ClientsCarousel />
 
-    <!-- Benefits Section - Why companies choose AlphaGrade -->
-    <BenefitsSection />
+    <!-- Services Grid -->
+    <ServicesGrid />
 
-    <!-- Tab Group 1: Rezultate + Comparație -->
-    <TabSection tabs={['Rezultate Dovedite', 'De ce au eșuat alții']} id="outreach-proof">
-        <div data-tab-panel="0">
-            <StatsSection />
-        </div>
-        <div data-tab-panel="1">
-            <VendorFailures />
-        </div>
-    </TabSection>
+    <!-- Stats / Social Proof -->
+    <StatsSection
+        title="Cifre din Ecosistem"
+        subtitle="Rezultate agregate din toate serviciile AlphaGrade."
+        stats={[
+            { value: '265', suffix: 'M+', label: 'Contacte B2B', description: 'Bază de date verificată' },
+            { value: '98', suffix: '%', label: 'Acuratețe Date', description: 'Emailuri validate' },
+            { value: '45', suffix: '+', label: 'Clienți Enterprise', description: 'Companii €1M+ revenue' },
+            { value: '72', suffix: 'h', label: 'Time to Launch', description: 'De la brief la execuție' }
+        ]}
+    />
 
-    <!-- Tab Group 2: Avantaje + Capabilități -->
-    <TabSection tabs={['Avantajele AlphaGrade', 'Capabilități Tehnice']} id="outreach-tech">
-        <div data-tab-panel="0">
-            <FeaturesSection />
-        </div>
-        <div data-tab-panel="1">
-            <CapabilitiesSection />
-        </div>
-    </TabSection>
+    <!-- Why AlphaGrade -->
+    <WhySection />
 
-    <!-- Case Studies Section -->
-    <CaseStudiesSection />
-
-    <!-- Pricing Section - Outreach Tools -->
-    <PricingSection
-        title="Pachete & Prețuri"
-        subtitle="Tool-uri enterprise. One-time payment."
-        note="Toate tool-urile rămân ale tale. Mentenanță opțională — preț negociabil separat."
-        tiers={[
-            {
-                name: 'Starter',
-                price: '€3,500',
-                priceNote: 'one-time',
-                description: 'Setup complet outreach cu tool-uri enterprise.',
-                featureGroups: [
-                    {
-                        label: 'Infrastructură',
-                        items: [
-                            'Servere dedicate Amazon AWS',
-                            'Elastic IP Microsoft Azure',
-                            'Interfață Google Suites',
-                            'Baze de date B2B verificate',
-                            '100% GDPR & compliance'
-                        ]
-                    },
-                    {
-                        label: 'Automatizare',
-                        items: [
-                            '10+ triggere automate',
-                            'Trimitere fluidă pe triggere',
-                            'Inbox management optimizat',
-                            'Email warmup inclus',
-                            'A/B testing campanii'
-                        ]
-                    },
-                    {
-                        label: 'Targetare',
-                        items: [
-                            'ICP workshop dedicat',
-                            'Targetare pe nișă principală',
-                            'Verificare email 98%+'
-                        ]
-                    }
-                ],
-                timeline: 'Setup: 24-72h',
-                highlighted: false
-            },
-            {
-                name: 'Enterprise',
-                price: '€7,500',
-                priceNote: 'one-time',
-                description: 'Stack complet outreach multichannel cu targetare avansată.',
-                featureGroups: [
-                    {
-                        label: 'Infrastructură',
-                        items: [
-                            'Tot din Starter, plus:',
-                            'Multi-server Amazon AWS',
-                            'IP rotation & warm-up avansat',
-                            'Inbox pool dedicat',
-                            'Domenii multiple configurate'
-                        ]
-                    },
-                    {
-                        label: 'Automatizare',
-                        items: [
-                            '20+ triggere multi-canal',
-                            'Email + LinkedIn + SMS sincronizat',
-                            'Trimitere fluidă bazată pe triggere',
-                            'Sequences cu logică condițională',
-                            'Dashboard Databox analytics'
-                        ]
-                    },
-                    {
-                        label: 'Targetare',
-                        items: [
-                            'Baze de date masive multi-nișă',
-                            'AI micro-segmentation',
-                            'Targetare impecabilă — VP+ decision makers',
-                            'Studiu concurență complet'
-                        ]
-                    }
-                ],
-                timeline: 'Setup: 24-72h',
-                highlighted: true
-            },
-            {
-                name: 'Custom',
-                price: 'La cerere',
-                description: 'Outreach enterprise cu cerințe specifice și volume mari.',
-                featureGroups: [
-                    {
-                        label: 'Scale',
-                        items: [
-                            'Infrastructură nelimitată',
-                            'Volume custom de contacte',
-                            'Multi-brand / multi-entitate'
-                        ]
-                    },
-                    {
-                        label: 'Integrări',
-                        items: [
-                            'CRM integration (HubSpot, Pipedrive)',
-                            'API custom & webhooks',
-                            'Workflow automation avansat'
-                        ]
-                    },
-                    {
-                        label: 'Suport',
-                        items: [
-                            'Account manager dedicat',
-                            'Strategie & execuție inclusă',
-                            'Raportare white-label'
-                        ]
-                    }
-                ],
-                timeline: 'Timeline: custom',
-                highlighted: false
-            }
+    <!-- Process -->
+    <ProcessSection
+        title="Cum Lucrăm"
+        subtitle="De la primul apel la rezultate — în 3 pași simpli."
+        steps={[
+            { number: 1, title: 'Audit & Discovery', description: 'Analizăm business-ul, piața și obiectivele tale. Identificăm serviciile potrivite din ecosistem.', duration: '1-3 zile' },
+            { number: 2, title: 'Strategie & Setup', description: 'Configurăm stack-ul tehnic, definim ICP-ul și pregătim infrastructura pentru execuție.', duration: '3-7 zile' },
+            { number: 3, title: 'Execuție & Optimizare', description: 'Lansăm campaniile, monitorizăm KPI-urile și optimizăm continuu pentru rezultate maxime.', duration: 'Ongoing' }
         ]}
     />
 
     <!-- CTA Section -->
-    <CtaSection />
+    <CtaSection
+        title="Gata să-ți accelerezi creșterea B2B?"
+        subtitle="Solicită o consultanță gratuită și descoperă ce servicii din ecosistemul AlphaGrade se potrivesc business-ului tău."
+        buttonText="Solicită Consultanță Gratuită"
+        note="Fără obligații. Răspuns în 24h."
+    />
 
     <!-- Booking Modal -->
     <BookingModal />

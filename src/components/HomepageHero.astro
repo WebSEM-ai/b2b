@@ -1,0 +1,318 @@
+---
+interface Props {
+    badge?: string;
+    titleLine1?: string;
+    titleLine2?: string;
+    subtitle?: string;
+    ctaPrimary?: string;
+    ctaSecondary?: string;
+}
+
+const {
+    badge = 'AlphaGrade — Ecosistem B2B Growth',
+    titleLine1 = 'Creștem Revenue-ul B2B',
+    titleLine2 = 'prin Tehnologie și Date.',
+    subtitle = 'De la lead generation la analytics — un ecosistem complet de servicii B2B enterprise. Outreach, AI, tracking, raportare și platforme custom.',
+    ctaPrimary = 'Solicită Consultanță',
+    ctaSecondary = 'Vezi Serviciile'
+} = Astro.props;
+---
+
+<section class="hp-hero" id="hero">
+    <div class="hp-hero-bg">
+        <div class="hp-grid-lines"></div>
+        <div class="hp-orb hp-orb-1"></div>
+        <div class="hp-orb hp-orb-2"></div>
+        <div class="hp-orb hp-orb-3"></div>
+        <canvas id="hp-network-canvas"></canvas>
+    </div>
+
+    <div class="hp-hero-content">
+        <div class="hp-hero-label">{badge}</div>
+        <h1 class="hp-hero-title">
+            <span class="line">{titleLine1}</span>
+            <span class="line"><span class="gradient">{titleLine2}</span></span>
+        </h1>
+        <p class="hp-hero-sub">{subtitle}</p>
+        <div class="hp-hero-actions">
+            <a href="javascript:void(0)" class="hp-btn-primary" id="hp-open-modal">
+                {ctaPrimary}
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </a>
+            <a href="#servicii" class="hp-btn-secondary">
+                {ctaSecondary}
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Network Canvas Animation
+    const canvas = document.getElementById('hp-network-canvas') as HTMLCanvasElement;
+    if (canvas) {
+        const ctx = canvas.getContext('2d');
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        const particles: Array<{x: number; y: number; vx: number; vy: number}> = [];
+        const particleCount = 40;
+
+        for (let i = 0; i < particleCount; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                vx: (Math.random() - 0.5) * 0.4,
+                vy: (Math.random() - 0.5) * 0.4
+            });
+        }
+
+        function animate() {
+            if (!ctx) return;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach((p, i) => {
+                p.x += p.vx;
+                p.y += p.vy;
+
+                if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(99, 102, 241, 0.4)';
+                ctx.fill();
+
+                particles.slice(i + 1).forEach(p2 => {
+                    const dx = p.x - p2.x;
+                    const dy = p.y - p2.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < 150) {
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(p2.x, p2.y);
+                        ctx.strokeStyle = `rgba(99, 102, 241, ${0.15 * (1 - dist / 150)})`;
+                        ctx.stroke();
+                    }
+                });
+            });
+
+            requestAnimationFrame(animate);
+        }
+        animate();
+    }
+
+    // Open booking modal
+    const hpOpenModal = document.getElementById('hp-open-modal');
+    hpOpenModal?.addEventListener('click', () => {
+        const modal = document.getElementById('booking-modal');
+        modal?.classList.add('active');
+        document.body.classList.add('modal-open');
+    });
+</script>
+
+<style>
+    .hp-hero {
+        position: relative;
+        min-height: 85vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8rem 2rem 5rem;
+        overflow: hidden;
+    }
+
+    .hp-hero-bg {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+    }
+
+    .hp-grid-lines {
+        position: absolute;
+        inset: 0;
+        background-image:
+            linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px);
+        background-size: 60px 60px;
+    }
+
+    #hp-network-canvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.6;
+    }
+
+    .hp-orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(80px);
+        opacity: 0.15;
+    }
+
+    .hp-orb-1 {
+        width: 500px;
+        height: 500px;
+        background: #667eea;
+        top: -10%;
+        right: -5%;
+        animation: hp-float 20s ease-in-out infinite;
+    }
+
+    .hp-orb-2 {
+        width: 400px;
+        height: 400px;
+        background: #764ba2;
+        bottom: -5%;
+        left: -5%;
+        animation: hp-float 25s ease-in-out infinite reverse;
+    }
+
+    .hp-orb-3 {
+        width: 300px;
+        height: 300px;
+        background: #f093fb;
+        top: 40%;
+        left: 50%;
+        animation: hp-float 15s ease-in-out infinite;
+    }
+
+    @keyframes hp-float {
+        0%, 100% { transform: translate(0, 0); }
+        33% { transform: translate(30px, -20px); }
+        66% { transform: translate(-20px, 15px); }
+    }
+
+    .hp-hero-content {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        max-width: 800px;
+    }
+
+    .hp-hero-label {
+        display: inline-block;
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--accent-light);
+        background: rgba(99, 102, 241, 0.1);
+        border: 1px solid rgba(99, 102, 241, 0.2);
+        padding: 0.5rem 1.25rem;
+        border-radius: 100px;
+        margin-bottom: 2rem;
+    }
+
+    .hp-hero-title {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: clamp(2.2rem, 5vw, 3.8rem);
+        font-weight: 700;
+        line-height: 1.15;
+        color: var(--text-primary);
+        margin-bottom: 1.5rem;
+    }
+
+    .hp-hero-title .line {
+        display: block;
+    }
+
+    .hp-hero-title .gradient {
+        background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .hp-hero-sub {
+        font-size: 1.15rem;
+        line-height: 1.7;
+        color: var(--text-secondary);
+        max-width: 620px;
+        margin: 0 auto 2.5rem;
+    }
+
+    .hp-hero-actions {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .hp-btn-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.9rem 2rem;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: #fff;
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 0.95rem;
+        font-weight: 600;
+        border-radius: 12px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+    }
+
+    .hp-btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 30px rgba(102, 126, 234, 0.5);
+    }
+
+    .hp-btn-secondary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.9rem 2rem;
+        background: var(--bg-card);
+        color: var(--text-primary);
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 0.95rem;
+        font-weight: 600;
+        border-radius: 12px;
+        border: 1px solid var(--border-light);
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .hp-btn-secondary:hover {
+        border-color: var(--border-accent);
+        box-shadow: var(--shadow-glow);
+        transform: translateY(-2px);
+    }
+
+    @media (max-width: 640px) {
+        .hp-hero {
+            min-height: 70vh;
+            padding: 7rem 1.5rem 3rem;
+        }
+
+        .hp-hero-sub {
+            font-size: 1rem;
+        }
+
+        .hp-hero-actions {
+            flex-direction: column;
+        }
+
+        .hp-btn-primary,
+        .hp-btn-secondary {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+</style>
