@@ -1,6 +1,18 @@
 ---
 const caseStudies = [
     {
+        company: 'Dealer Auto Multi-Brand',
+        industry: 'Automotive & Fleet',
+        metric: '5 Module',
+        metricLabel: 'audit interactiv complet de strategie de brand',
+        bullets: [
+            'Analiză strategică a 4 branduri auto: poziționare, competitori, lacune de vizibilitate',
+            'Simulator de sinergii revenue, radar strategic, matrice de prioritizare, customer lifecycle'
+        ],
+        quote: 'Auditul a dezvăluit un ecosistem de 12 servicii integrate pe care piața nu-l cunoștea — fiecare serviciu necomunicat era revenue pierdut.',
+        link: '/showcase/brand-strategy-audit.html'
+    },
+    {
         company: 'ASUS Romania',
         industry: 'Tehnologie & IT',
         metric: '€3.6 MLD',
@@ -61,7 +73,7 @@ const caseStudies = [
 <div class="mc-case-studies">
     <div class="mc-case-grid">
         {caseStudies.map(study => (
-            <div class="mc-case-card">
+            <div class={`mc-case-card ${study.link ? 'mc-case-card--linked' : ''}`}>
                 <div class="mc-case-header">
                     <span class="mc-case-pill">{study.industry}</span>
                     <h3 class="mc-case-company">{study.company}</h3>
@@ -86,6 +98,15 @@ const caseStudies = [
                 <blockquote class="mc-case-quote">
                     <p>{study.quote}</p>
                 </blockquote>
+
+                {study.link && (
+                    <a href={study.link} target="_blank" class="mc-case-link">
+                        Vezi studiul interactiv complet
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                            <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                        </svg>
+                    </a>
+                )}
             </div>
         ))}
     </div>
@@ -282,6 +303,45 @@ const caseStudies = [
 
     :global([data-theme="light"]) .mc-case-quote {
         background: rgba(13, 148, 136, 0.03);
+    }
+
+    .mc-case-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 1rem;
+        padding: 0.6rem 1.2rem;
+        background: linear-gradient(135deg, rgba(13, 148, 136, 0.12), rgba(8, 145, 178, 0.12));
+        border: 1px solid rgba(13, 148, 136, 0.25);
+        border-radius: 8px;
+        color: var(--mc-primary, #0D9488);
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 0.03em;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .mc-case-link:hover {
+        background: linear-gradient(135deg, rgba(13, 148, 136, 0.2), rgba(8, 145, 178, 0.2));
+        border-color: rgba(13, 148, 136, 0.4);
+        transform: translateX(4px);
+    }
+
+    .mc-case-card--linked {
+        position: relative;
+        border-color: rgba(13, 148, 136, 0.2);
+    }
+
+    .mc-case-card--linked::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #0D9488, #0891B2);
+        border-radius: 16px 16px 0 0;
     }
 
     @media (max-width: 768px) {

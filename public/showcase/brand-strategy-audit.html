@@ -1,0 +1,1943 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Studiu de Caz: Audit de Strategie de Brand — Dealer Auto Multi-Brand | WebSEM Market Command</title>
+<meta name="description" content="Exemplu real de audit strategic de brand realizat de WebSEM pentru un dealer auto multi-brand din România. 5 module de analiză, vizualizări interactive, strategie media completă.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://b2b.websem.ro/showcase/brand-strategy-audit.html">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#0a0a0a;--surface:#141414;--surface2:#1e1e1e;--surface3:#282828;
+    --text:#e8e8e8;--text-muted:#999;--border:#333;
+    --peugeot:#0095d9;--citroen:#d4001a;--ds:#b8860b;--opel:#FFD700;
+    --radius:12px;--transition:0.35s cubic-bezier(.4,0,.2,1);
+  }
+  html{scroll-behavior:smooth}
+  body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+
+  /* Header */
+  .header{text-align:center;padding:60px 20px 40px;position:relative;overflow:hidden}
+  .header::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(ellipse at center,rgba(255,255,255,.02) 0%,transparent 70%);pointer-events:none}
+  .header h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:300;letter-spacing:6px;text-transform:uppercase;margin-bottom:8px}
+  .header h1 span{font-weight:700}
+  .header .subtitle{font-size:1.1rem;color:var(--text-muted);letter-spacing:3px;text-transform:uppercase;margin-bottom:6px}
+  .header .tagline{font-size:.9rem;color:#666;letter-spacing:1px;margin-top:12px}
+  .brand-dots{display:flex;justify-content:center;gap:12px;margin-top:20px}
+  .brand-dots span{width:10px;height:10px;border-radius:50%;display:inline-block;opacity:.7}
+
+  /* Navigation */
+  .nav-bar{position:sticky;top:0;z-index:100;background:rgba(10,10,10,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 20px;display:flex;justify-content:center;gap:0}
+  .nav-btn{padding:14px 28px;background:none;border:none;color:var(--text-muted);font-size:.85rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:var(--transition);position:relative;font-family:inherit}
+  .nav-btn::after{content:'';position:absolute;bottom:0;left:50%;width:0;height:2px;transition:var(--transition);transform:translateX(-50%)}
+  .nav-btn:hover{color:var(--text)}
+  .nav-btn:hover::after{width:60%}
+  .nav-btn[data-brand="peugeot"]:hover::after,.nav-btn[data-brand="peugeot"].active::after{background:var(--peugeot);width:60%}
+  .nav-btn[data-brand="citroen"]:hover::after,.nav-btn[data-brand="citroen"].active::after{background:var(--citroen);width:60%}
+  .nav-btn[data-brand="ds"]:hover::after,.nav-btn[data-brand="ds"].active::after{background:var(--ds);width:60%}
+  .nav-btn[data-brand="opel"]:hover::after,.nav-btn[data-brand="opel"].active::after{background:var(--opel);width:60%}
+  .nav-btn[data-brand="chart"]:hover::after,.nav-btn[data-brand="chart"].active::after{background:#fff;width:60%}
+  .nav-btn[data-brand="strategy"]:hover::after,.nav-btn[data-brand="strategy"].active::after{background:#fff;width:60%}
+  .nav-btn.active{color:var(--text)}
+
+  /* Container */
+  .container{max-width:1400px;margin:0 auto;padding:20px}
+
+  /* Section titles */
+  .section-title{text-align:center;padding:50px 20px 30px;font-size:1.6rem;font-weight:300;letter-spacing:4px;text-transform:uppercase}
+  .section-title .accent{font-weight:700}
+
+  /* Brand Grid */
+  .brands-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;padding:0 20px 40px}
+  @media(max-width:1200px){.brands-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:700px){.brands-grid{grid-template-columns:1fr}}
+
+  /* Brand Column */
+  .brand-col{display:flex;flex-direction:column;gap:12px}
+  .brand-header{padding:24px 20px;border-radius:var(--radius);text-align:center;position:relative;overflow:hidden;cursor:default}
+  .brand-header h2{font-size:1.4rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;position:relative;z-index:1}
+  .brand-header .brand-niche{font-size:.75rem;color:rgba(255,255,255,.7);margin-top:6px;position:relative;z-index:1;letter-spacing:1px}
+  .brand-header::before{content:'';position:absolute;inset:0;opacity:.15;transition:var(--transition)}
+  .brand-header:hover::before{opacity:.25}
+
+  .brand-col[data-brand="peugeot"] .brand-header{background:linear-gradient(135deg,rgba(0,149,217,.2),rgba(0,149,217,.05));border:1px solid rgba(0,149,217,.3)}
+  .brand-col[data-brand="peugeot"] .brand-header::before{background:var(--peugeot)}
+  .brand-col[data-brand="citroen"] .brand-header{background:linear-gradient(135deg,rgba(212,0,26,.2),rgba(212,0,26,.05));border:1px solid rgba(212,0,26,.3)}
+  .brand-col[data-brand="citroen"] .brand-header::before{background:var(--citroen)}
+  .brand-col[data-brand="ds"] .brand-header{background:linear-gradient(135deg,rgba(184,134,11,.2),rgba(184,134,11,.05));border:1px solid rgba(184,134,11,.3)}
+  .brand-col[data-brand="ds"] .brand-header::before{background:var(--ds)}
+  .brand-col[data-brand="opel"] .brand-header{background:linear-gradient(135deg,rgba(255,215,0,.2),rgba(255,215,0,.05));border:1px solid rgba(255,215,0,.3)}
+  .brand-col[data-brand="opel"] .brand-header::before{background:var(--opel)}
+
+  /* Cards */
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:var(--transition)}
+  .card:hover{border-color:#444;transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,.4)}
+  .card-head{padding:16px 20px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;transition:var(--transition)}
+  .card-head:hover{background:var(--surface2)}
+  .card-head h3{font-size:.8rem;letter-spacing:2px;text-transform:uppercase;font-weight:600;display:flex;align-items:center;gap:10px}
+  .card-head h3 .icon{font-size:1rem;opacity:.6}
+  .card-chevron{transition:var(--transition);opacity:.4;font-size:.8rem}
+  .card.open .card-chevron{transform:rotate(180deg);opacity:.8}
+  .card-body{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.4,0,.2,1),padding .3s ease}
+  .card.open .card-body{max-height:800px;padding:0 20px 20px}
+  .card-body ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+  .card-body li{font-size:.85rem;color:var(--text-muted);padding-left:16px;position:relative;line-height:1.5}
+  .card-body li::before{content:'';position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:50%;opacity:.6}
+
+  .brand-col[data-brand="peugeot"] .card-body li::before{background:var(--peugeot)}
+  .brand-col[data-brand="citroen"] .card-body li::before{background:var(--citroen)}
+  .brand-col[data-brand="ds"] .card-body li::before{background:var(--ds)}
+  .brand-col[data-brand="opel"] .card-body li::before{background:var(--opel)}
+
+  .brand-col[data-brand="peugeot"] .card-head h3{color:var(--peugeot)}
+  .brand-col[data-brand="citroen"] .card-head h3{color:var(--citroen)}
+  .brand-col[data-brand="ds"] .card-head h3{color:var(--ds)}
+  .brand-col[data-brand="opel"] .card-head h3{color:var(--opel)}
+
+  .model-tag{display:inline-block;padding:4px 12px;border-radius:20px;font-size:.78rem;font-weight:600;margin:3px 4px 3px 0;letter-spacing:.5px}
+  .brand-col[data-brand="peugeot"] .model-tag{background:rgba(0,149,217,.15);color:var(--peugeot);border:1px solid rgba(0,149,217,.25)}
+  .brand-col[data-brand="citroen"] .model-tag{background:rgba(212,0,26,.15);color:var(--citroen);border:1px solid rgba(212,0,26,.25)}
+  .brand-col[data-brand="ds"] .model-tag{background:rgba(184,134,11,.15);color:var(--ds);border:1px solid rgba(184,134,11,.25)}
+  .brand-col[data-brand="opel"] .model-tag{background:rgba(255,215,0,.15);color:var(--opel);border:1px solid rgba(255,215,0,.25)}
+
+  .models-wrap{display:flex;flex-wrap:wrap;gap:0}
+
+  /* Chart Section */
+  .chart-section{padding:40px 20px 60px;max-width:900px;margin:0 auto}
+  .chart-container{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:30px;position:relative}
+  .chart-container canvas{width:100%!important;height:500px!important}
+  .chart-legend{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin-top:20px;padding-top:20px;border-top:1px solid var(--border)}
+  .chart-legend-item{display:flex;align-items:center;gap:6px;font-size:.78rem;color:var(--text-muted)}
+  .chart-legend-dot{width:10px;height:10px;border-radius:50%}
+
+  /* Strategy Section */
+  .strategy-section{padding:40px 20px 80px;max-width:1200px;margin:0 auto}
+  .strategy-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:20px;margin-bottom:40px}
+  .strategy-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px;transition:var(--transition)}
+  .strategy-card:hover{border-color:#444;transform:translateY(-2px)}
+  .strategy-card h3{font-size:.85rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;font-weight:600}
+  .strategy-card p,.strategy-card li{font-size:.85rem;color:var(--text-muted);line-height:1.7}
+  .strategy-card ul{list-style:none;display:flex;flex-direction:column;gap:6px}
+  .strategy-card li{padding-left:16px;position:relative}
+  .strategy-card li::before{content:'▸';position:absolute;left:0;color:#555}
+  .urgency-badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:.7rem;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+  .urgency-critical{background:rgba(255,60,60,.15);color:#ff4444;border:1px solid rgba(255,60,60,.3)}
+  .urgency-high{background:rgba(255,165,0,.15);color:#ffa500;border:1px solid rgba(255,165,0,.3)}
+  .urgency-medium{background:rgba(0,149,217,.15);color:#0095d9;border:1px solid rgba(0,149,217,.3)}
+
+  /* Priority Matrix */
+  .matrix-container{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:30px;margin-top:30px}
+  .matrix-grid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:2px;margin-top:20px;background:var(--border);border-radius:8px;overflow:hidden;min-height:340px}
+  .matrix-cell{background:var(--surface2);padding:20px;display:flex;flex-direction:column;gap:10px}
+  .matrix-cell h4{font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:#666;margin-bottom:4px}
+  .matrix-item{display:flex;align-items:center;gap:8px;font-size:.82rem;color:var(--text-muted)}
+  .matrix-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+  .matrix-labels{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:4px}
+  .matrix-label{text-align:center;font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:#555;padding:6px}
+  .matrix-y-labels{position:relative}
+  .matrix-y-label{font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:#555;writing-mode:vertical-rl;text-orientation:mixed;transform:rotate(180deg);position:absolute;right:-30px}
+
+  /* Channels Grid */
+  .channels-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:20px}
+  @media(max-width:1000px){.channels-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:600px){.channels-grid{grid-template-columns:1fr}}
+  .channel-card{background:var(--surface2);border-radius:10px;padding:18px;border-left:3px solid transparent}
+  .channel-card h4{font-size:.75rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;font-weight:700}
+  .channel-card ul{list-style:none;display:flex;flex-direction:column;gap:4px}
+  .channel-card li{font-size:.78rem;color:var(--text-muted);padding-left:12px;position:relative}
+  .channel-card li::before{content:'•';position:absolute;left:0;color:#555}
+
+  /* Scroll indicator */
+  .scroll-top{position:fixed;bottom:30px;right:30px;width:44px;height:44px;border-radius:50%;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;transition:var(--transition);z-index:99;color:var(--text-muted);font-size:1.2rem}
+  .scroll-top.visible{opacity:1}
+  .scroll-top:hover{background:var(--surface3);transform:translateY(-2px)}
+
+  /* Animations */
+  @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+  .animate-in{animation:fadeUp .6s ease forwards;opacity:0}
+  .animate-in:nth-child(1){animation-delay:.05s}
+  .animate-in:nth-child(2){animation-delay:.1s}
+  .animate-in:nth-child(3){animation-delay:.15s}
+  .animate-in:nth-child(4){animation-delay:.2s}
+
+  /* Sections */
+  .section{display:none}
+  .section.active{display:block}
+
+  /* Footer */
+  .footer{text-align:center;padding:40px 20px;border-top:1px solid var(--border);color:#444;font-size:.75rem;letter-spacing:2px}
+
+  /* ============================================ */
+  /* ECOSYSTEM INTELLIGENCE MODULE                */
+  /* ============================================ */
+  .nav-btn[data-brand="ecosystem"]:hover::after,.nav-btn[data-brand="ecosystem"].active::after{background:linear-gradient(90deg,var(--peugeot),var(--citroen),var(--ds),var(--opel));width:60%}
+
+  .eco-hero{text-align:center;padding:40px 20px 20px;position:relative}
+  .eco-hero .eco-badge{display:inline-block;padding:6px 20px;border-radius:30px;font-size:.65rem;letter-spacing:3px;text-transform:uppercase;background:linear-gradient(135deg,rgba(0,149,217,.15),rgba(184,134,11,.15));border:1px solid rgba(255,255,255,.1);color:var(--text-muted);margin-bottom:16px}
+  .eco-hero h2{font-size:1.8rem;font-weight:200;letter-spacing:4px;text-transform:uppercase;margin-bottom:8px}
+  .eco-hero h2 strong{font-weight:700;background:linear-gradient(90deg,var(--peugeot),var(--citroen),var(--ds),var(--opel));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+  .eco-hero p{color:var(--text-muted);font-size:.9rem;max-width:700px;margin:0 auto}
+
+  /* KPI counters */
+  .kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:900px;margin:30px auto;padding:0 20px}
+  @media(max-width:700px){.kpi-row{grid-template-columns:repeat(2,1fr)}}
+  .kpi-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;text-align:center;transition:var(--transition)}
+  .kpi-box:hover{border-color:#444;transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,.5)}
+  .kpi-number{font-size:2.2rem;font-weight:700;line-height:1;margin-bottom:4px}
+  .kpi-label{font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted)}
+
+  /* Radar section */
+  .radar-section{display:grid;grid-template-columns:1fr 1fr;gap:30px;max-width:1100px;margin:40px auto;padding:0 20px;align-items:center}
+  @media(max-width:900px){.radar-section{grid-template-columns:1fr}}
+  .radar-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px;position:relative}
+  .radar-wrap canvas{width:100%!important;height:400px!important}
+  .radar-insights{display:flex;flex-direction:column;gap:14px}
+  .radar-insight{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;transition:var(--transition);cursor:default}
+  .radar-insight:hover{border-color:#444;transform:translateX(4px)}
+  .radar-insight h4{font-size:.75rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;font-weight:600}
+  .radar-insight p{font-size:.82rem;color:var(--text-muted);line-height:1.6}
+
+  /* Lifecycle funnel */
+  .lifecycle-section{max-width:1100px;margin:50px auto;padding:0 20px}
+  .lifecycle-title{text-align:center;font-size:1.1rem;font-weight:300;letter-spacing:3px;text-transform:uppercase;margin-bottom:30px}
+  .lifecycle-title strong{font-weight:700}
+  .lifecycle-track{position:relative;display:flex;flex-direction:column;gap:0}
+  .lifecycle-stage{display:grid;grid-template-columns:120px 1fr 1fr;gap:0;align-items:stretch;min-height:90px;position:relative}
+  @media(max-width:800px){.lifecycle-stage{grid-template-columns:80px 1fr 1fr}}
+  .lifecycle-age{display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;letter-spacing:1px;color:var(--text-muted);position:relative;padding:16px 0}
+  .lifecycle-age::after{content:'';position:absolute;right:0;top:0;bottom:0;width:2px;background:linear-gradient(180deg,transparent,rgba(255,255,255,.15),transparent)}
+  .lifecycle-brand{padding:16px 24px;display:flex;flex-direction:column;justify-content:center;border-bottom:1px solid rgba(255,255,255,.04);transition:var(--transition)}
+  .lifecycle-brand:hover{background:rgba(255,255,255,.03)}
+  .lifecycle-brand h4{font-size:.8rem;font-weight:700;letter-spacing:1px;margin-bottom:3px}
+  .lifecycle-brand p{font-size:.75rem;color:var(--text-muted);line-height:1.5}
+  .lifecycle-brand .lc-tag{display:inline-block;padding:2px 8px;border-radius:10px;font-size:.65rem;font-weight:600;letter-spacing:.5px;margin-top:4px}
+  .lifecycle-connector{position:absolute;left:60px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--citroen),var(--peugeot),var(--opel),var(--ds));opacity:.3}
+  @media(max-width:800px){.lifecycle-connector{left:40px}}
+  .lifecycle-arrow{text-align:center;padding:6px;font-size:.7rem;color:#555;letter-spacing:2px}
+
+  /* Blue Ocean */
+  .blueocean-section{max-width:1100px;margin:50px auto;padding:0 20px}
+  .bo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+  @media(max-width:900px){.bo-grid{grid-template-columns:1fr}}
+  .bo-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px;transition:var(--transition);position:relative;overflow:hidden}
+  .bo-card:hover{border-color:#555;transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,.5)}
+  .bo-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+  .bo-card:nth-child(1)::before{background:linear-gradient(90deg,var(--peugeot),var(--ds))}
+  .bo-card:nth-child(2)::before{background:linear-gradient(90deg,var(--citroen),var(--opel))}
+  .bo-card:nth-child(3)::before{background:linear-gradient(90deg,var(--ds),var(--peugeot))}
+  .bo-card:nth-child(4)::before{background:linear-gradient(90deg,var(--opel),var(--citroen))}
+  .bo-card:nth-child(5)::before{background:linear-gradient(90deg,var(--peugeot),var(--citroen),var(--ds),var(--opel))}
+  .bo-card:nth-child(6)::before{background:linear-gradient(90deg,var(--ds),var(--opel))}
+  .bo-card h4{font-size:.8rem;letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:8px}
+  .bo-card .bo-brands{font-size:.7rem;color:#666;letter-spacing:1px;margin-bottom:10px}
+  .bo-card p{font-size:.82rem;color:var(--text-muted);line-height:1.6}
+  .bo-card .bo-value{display:inline-block;margin-top:10px;padding:3px 10px;border-radius:10px;font-size:.7rem;font-weight:700;background:rgba(0,255,136,.1);color:#00ff88;border:1px solid rgba(0,255,136,.2);letter-spacing:1px}
+
+  /* Synergy simulator */
+  .sim-section{max-width:1000px;margin:50px auto;padding:0 20px}
+  .sim-container{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:30px;position:relative;overflow:hidden}
+  .sim-container::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--peugeot),var(--citroen),var(--ds),var(--opel))}
+  .sim-row{display:grid;grid-template-columns:200px 1fr 80px;gap:16px;align-items:center;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+  @media(max-width:700px){.sim-row{grid-template-columns:1fr;gap:8px}}
+  .sim-row:last-child{border-bottom:none}
+  .sim-label{font-size:.8rem;font-weight:600;letter-spacing:1px}
+  .sim-label span{display:block;font-size:.7rem;font-weight:400;color:var(--text-muted);margin-top:2px}
+  .sim-slider{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:3px;background:var(--surface3);outline:none;cursor:pointer}
+  .sim-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:20px;height:20px;border-radius:50%;cursor:pointer;border:2px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.4);background:var(--surface3)}
+  .sim-slider::-moz-range-thumb{width:20px;height:20px;border-radius:50%;cursor:pointer;border:2px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.4);background:var(--surface3)}
+  .sim-val{font-size:1.1rem;font-weight:700;text-align:right;font-variant-numeric:tabular-nums}
+  .sim-result{margin-top:24px;padding:20px;background:rgba(0,255,136,.05);border:1px solid rgba(0,255,136,.15);border-radius:10px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;text-align:center}
+  @media(max-width:700px){.sim-result{grid-template-columns:1fr}}
+  .sim-result-num{font-size:2rem;font-weight:700;color:#00ff88;line-height:1}
+  .sim-result-label{font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-top:4px}
+
+  /* Competitive moat */
+  .moat-section{max-width:1000px;margin:50px auto 30px;padding:0 20px}
+  .moat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:30px;position:relative;overflow:hidden}
+  .moat-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at top right,rgba(0,255,136,.03),transparent 70%);pointer-events:none}
+  .moat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:20px}
+  @media(max-width:700px){.moat-grid{grid-template-columns:1fr}}
+  .moat-item{padding:16px;border-radius:10px;background:var(--surface2);transition:var(--transition)}
+  .moat-item:hover{background:var(--surface3);transform:translateY(-2px)}
+  .moat-item h4{font-size:.8rem;letter-spacing:1px;margin-bottom:6px;font-weight:700}
+  .moat-item p{font-size:.82rem;color:var(--text-muted);line-height:1.6}
+  .moat-item .moat-icon{font-size:1.4rem;margin-bottom:6px;display:block}
+
+  /* Animated gradient border for hero section */
+  @keyframes gradientShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+  .eco-divider{height:1px;max-width:200px;margin:30px auto;background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent)}
+
+  /* ============================================ */
+  /* SERVICES INTELLIGENCE MODULE                 */
+  /* ============================================ */
+  .nav-btn[data-brand="services"]:hover::after,.nav-btn[data-brand="services"].active::after{background:linear-gradient(90deg,#00ff88,#0095d9);width:60%}
+
+  .svc-hero{text-align:center;padding:40px 20px 10px}
+  .svc-hero h2{font-size:1.8rem;font-weight:200;letter-spacing:4px;text-transform:uppercase;margin-bottom:8px}
+  .svc-hero h2 strong{font-weight:700;color:#00ff88}
+  .svc-hero p{color:var(--text-muted);font-size:.88rem;max-width:750px;margin:0 auto}
+
+  /* Financial KPIs */
+  .fin-row{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;max-width:1100px;margin:30px auto;padding:0 20px}
+  @media(max-width:900px){.fin-row{grid-template-columns:repeat(3,1fr)}}
+  @media(max-width:550px){.fin-row{grid-template-columns:repeat(2,1fr)}}
+  .fin-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 14px;text-align:center;transition:var(--transition);position:relative;overflow:hidden}
+  .fin-box:hover{border-color:#444;transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,.5)}
+  .fin-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:#00ff88;opacity:.4}
+  .fin-num{font-size:1.6rem;font-weight:700;line-height:1.1;margin-bottom:4px;color:#00ff88}
+  .fin-label{font-size:.65rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted)}
+
+  /* Service Map — Orbital layout */
+  .svc-map{max-width:1100px;margin:30px auto;padding:0 20px}
+  .svc-map-title{text-align:center;font-size:1.1rem;font-weight:300;letter-spacing:3px;text-transform:uppercase;margin-bottom:24px}
+  .svc-map-title strong{font-weight:700}
+
+  /* Hub-and-spoke visual */
+  .hub-container{position:relative;min-height:520px;display:flex;align-items:center;justify-content:center}
+  @media(max-width:900px){.hub-container{min-height:auto;flex-direction:column}}
+  .hub-center{width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(0,255,136,.12),rgba(0,255,136,.02));border:2px solid rgba(0,255,136,.3);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;z-index:2;flex-shrink:0}
+  .hub-center h3{font-size:1rem;font-weight:700;letter-spacing:2px;color:#00ff88}
+  .hub-center .hub-sub{font-size:.65rem;color:var(--text-muted);letter-spacing:1px;margin-top:4px}
+  .hub-center .hub-num{font-size:2rem;font-weight:200;color:#fff;margin-bottom:2px}
+
+  .spoke-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;flex:1;padding:0 20px}
+  @media(max-width:900px){.spoke-grid{grid-template-columns:1fr;padding:20px 0;width:100%}}
+  .spoke-left,.spoke-right{display:flex;flex-direction:column;gap:12px}
+
+  .svc-node{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;transition:var(--transition);cursor:pointer;position:relative;overflow:hidden}
+  .svc-node:hover{border-color:#555;transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,.4)}
+  .svc-node.expanded .svc-expand{max-height:300px;padding-top:12px;opacity:1}
+  .svc-node-head{display:flex;align-items:center;gap:12px}
+  .svc-icon{font-size:1.3rem;width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .svc-node-info h4{font-size:.8rem;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;margin-bottom:2px}
+  .svc-node-info p{font-size:.72rem;color:var(--text-muted);line-height:1.4}
+  .svc-node-tag{position:absolute;top:12px;right:14px;font-size:.6rem;letter-spacing:1px;text-transform:uppercase;padding:2px 8px;border-radius:10px;font-weight:600}
+  .svc-expand{max-height:0;overflow:hidden;opacity:0;transition:all .4s ease;font-size:.8rem;color:var(--text-muted);line-height:1.7;border-top:1px solid transparent}
+  .svc-node.expanded .svc-expand{border-top-color:var(--border)}
+  .svc-expand ul{list-style:none;display:flex;flex-direction:column;gap:4px;margin-top:4px}
+  .svc-expand li{padding-left:14px;position:relative}
+  .svc-expand li::before{content:'▸';position:absolute;left:0;color:#555}
+  .svc-expand .svc-stat{display:inline-block;padding:2px 8px;border-radius:8px;font-size:.68rem;font-weight:600;margin-top:6px}
+
+  /* Locations Map */
+  .loc-section{max-width:1100px;margin:40px auto;padding:0 20px}
+  .loc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:20px}
+  .loc-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px;text-align:center;transition:var(--transition)}
+  .loc-card:hover{border-color:#444;transform:translateY(-2px)}
+  .loc-card h4{font-size:.85rem;font-weight:700;margin-bottom:4px}
+  .loc-card p{font-size:.72rem;color:var(--text-muted);line-height:1.5}
+  .loc-card .loc-brands{display:flex;justify-content:center;gap:6px;margin-top:8px}
+  .loc-card .loc-dot{width:8px;height:8px;border-radius:50%;opacity:.7}
+  .loc-services{display:flex;flex-wrap:wrap;justify-content:center;gap:4px;margin-top:8px}
+  .loc-svc-tag{font-size:.58rem;padding:2px 6px;border-radius:6px;background:var(--surface2);color:var(--text-muted);letter-spacing:.5px;text-transform:uppercase}
+
+  /* Revenue Breakdown */
+  .rev-section{max-width:1000px;margin:40px auto;padding:0 20px}
+  .rev-container{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px}
+  .rev-bar-row{display:flex;align-items:center;gap:14px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+  .rev-bar-row:last-child{border-bottom:none}
+  .rev-bar-label{font-size:.78rem;font-weight:600;width:180px;flex-shrink:0;letter-spacing:.5px}
+  @media(max-width:700px){.rev-bar-label{width:120px;font-size:.7rem}}
+  .rev-bar-track{flex:1;height:28px;background:var(--surface3);border-radius:6px;overflow:hidden;position:relative}
+  .rev-bar-fill{height:100%;border-radius:6px;transition:width 1.5s cubic-bezier(.4,0,.2,1);display:flex;align-items:center;padding:0 10px;font-size:.7rem;font-weight:600;color:rgba(0,0,0,.8);min-width:0}
+  .rev-bar-pct{font-size:.78rem;font-weight:700;width:45px;text-align:right;flex-shrink:0;font-variant-numeric:tabular-nums}
+
+  /* Value chain */
+  .chain-section{max-width:1100px;margin:40px auto;padding:0 20px}
+  .chain-flow{display:flex;align-items:stretch;gap:0;overflow-x:auto;padding-bottom:10px}
+  .chain-step{flex:1;min-width:130px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px 14px;text-align:center;position:relative;transition:var(--transition)}
+  .chain-step:hover{border-color:#555;transform:translateY(-3px)}
+  .chain-step h4{font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;margin:6px 0 4px}
+  .chain-step p{font-size:.68rem;color:var(--text-muted);line-height:1.4}
+  .chain-step .chain-icon{font-size:1.4rem;display:block}
+  .chain-arrow{display:flex;align-items:center;color:#333;font-size:1.2rem;padding:0 2px;flex-shrink:0}
+  .chain-revenue{font-size:.6rem;font-weight:700;letter-spacing:1px;padding:2px 6px;border-radius:6px;margin-top:6px;display:inline-block}
+  /* WebSEM Banner */
+  .websem-banner{background:linear-gradient(135deg,#0D9488,#0891B2);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;position:relative;z-index:101}
+  .websem-banner-left{display:flex;align-items:center;gap:14px}
+  .websem-banner-logo{font-size:1.1rem;font-weight:700;color:#fff;letter-spacing:2px;text-decoration:none}
+  .websem-banner-text{font-size:.82rem;color:rgba(255,255,255,.9);line-height:1.4}
+  .websem-banner-text strong{color:#fff}
+  .websem-banner-cta{padding:8px 20px;background:#fff;color:#0D9488;font-size:.78rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;border-radius:6px;text-decoration:none;transition:.3s;white-space:nowrap}
+  .websem-banner-cta:hover{background:rgba(255,255,255,.9);transform:translateY(-1px)}
+  .websem-banner-badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:.6rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;background:rgba(255,255,255,.15);color:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.2);margin-bottom:4px}
+  @media(max-width:700px){.websem-banner{flex-direction:column;text-align:center}.websem-banner-left{flex-direction:column}}
+</style>
+</head>
+<body>
+
+<!-- WebSEM Banner -->
+<div class="websem-banner">
+  <div class="websem-banner-left">
+    <a href="https://b2b.websem.ro" class="websem-banner-logo">WebSEM</a>
+    <div class="websem-banner-text">
+      <div class="websem-banner-badge">Market Command — Case Study</div><br>
+      <strong>Studiu real, date anonimizate.</strong> Acesta este un audit de strategie de brand realizat de WebSEM pentru un dealer auto multi-brand din Romania.
+    </div>
+  </div>
+  <a href="https://b2b.websem.ro/market-command" class="websem-banner-cta">Solicita Audit</a>
+</div>
+
+<div class="header">
+  <div class="subtitle">Analiză Strategică de Brand & Vizibilitate</div>
+  <h1>DEALER <span>AUTO</span></h1>
+  <div class="tagline">Peugeot · Citroën · DS · Opel — Piața din România</div>
+  <div class="brand-dots">
+    <span style="background:var(--peugeot)"></span>
+    <span style="background:var(--citroen)"></span>
+    <span style="background:var(--ds)"></span>
+    <span style="background:var(--opel)"></span>
+  </div>
+</div>
+
+<nav class="nav-bar">
+  <button class="nav-btn active" data-brand="all" onclick="showSection('brands',this)">Branduri</button>
+  <button class="nav-btn" data-brand="chart" onclick="showSection('chart',this)">Poziționare</button>
+  <button class="nav-btn" data-brand="services" onclick="showSection('services',this)">Servicii</button>
+  <button class="nav-btn" data-brand="ecosystem" onclick="showSection('ecosystem',this)">Ecosistem</button>
+  <button class="nav-btn" data-brand="strategy" onclick="showSection('strategy',this)">Strategie</button>
+</nav>
+
+<!-- BRANDS SECTION -->
+<div id="section-brands" class="section active">
+  <div class="container">
+    <div class="section-title">Analiza celor <span class="accent">4 Branduri</span></div>
+    <div class="brands-grid">
+
+      <!-- PEUGEOT -->
+      <div class="brand-col animate-in" data-brand="peugeot">
+        <div class="brand-header">
+          <h2>Peugeot</h2>
+          <div class="brand-niche">Design premium francez la preț accesibil</div>
+        </div>
+        <div class="card">
+          <div class="card-head" onclick="toggleCard(this)">
+            <h3><span class="icon">👤</span> Public Țintă</h3>
+            <span class="card-chevron">▼</span>
+          </div>
+          <div class="card-body">
+            <ul>
+              <li>Clasă medie-superioară, 35–55 ani</li>
+              <li>Profesioniști urbani din marile orașe</li>
+              <li>Cumpărători atenți la design și estetică</li>
+              <li>Segment în creștere: tineri 25–35 atrași de design modern</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head" onclick="toggleCard(this)">
+            <h3><span class="icon">🚗</span> Modele Cheie</h3>
+            <span class="card-chevron">▼</span>
+          </div>
+          <div class="card-body">
+            <div class="models-wrap">
+              <span class="model-tag">208</span><span class="model-tag">308</span><span class="model-tag">2008</span><span class="model-tag">3008</span><span class="model-tag">408</span><span class="model-tag">e-208</span><span class="model-tag">e-3008</span>
+            </div>
+            <ul style="margin-top:12px">
+              <li>e-208 și e-3008 — lideri în electrificarea gamei</li>
+              <li>3008 — cel mai popular SUV al brandului în România</li>
+              <li>408 — fastback unic pe piață, diferențiator de design</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head" onclick="toggleCard(this)">
+            <h3><span class="icon">⚔️</span> Competitori Direcți</h3>
+            <span class="card-chevron">▼</span>
+          </div>
+          <div class="card-body">
+            <ul>
+              <li><strong>Volkswagen</strong> Golf / Tiguan — referință de segment</li>
+              <li><strong>Renault</strong> Megane / Austral — principal rival francez</li>
+              <li><strong>Kia</strong> Sportage — raport dotări/preț agresiv</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head" onclick="toggleCard(this)">
+            <h3><span class="icon">📈</span> Oportunități de Creștere</h3>
+            <span class="card-chevron">▼</span>
+          </div>
+          <div class="card-body">
+            <ul>
+              <li>Segment EV în expansiune (e-208, e-3008)</li>
+              <li>Electrificarea flotelor corporate</li>
+              <li>Atragerea publicului tânăr 25–35, orientat spre design</li>
+              <li>Parteneriate cu companii tech/startup pentru flote EV</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head" onclick="toggleCard(this)">
+            <h3><span class="icon">🔍</span> Lacune de Vizibilitate</h3>
+            <span class="card-chevron">▼</span>
+          </div>
+          <div class="card-body">
+            <ul>
+              <li>Awareness scăzut vs. VW și Renault în România</li>
+              <li>Subreprezentare pe digital/social media față de competitori</li>
+              <li>Lipsa unui narativ clar „premium accesibil" în comunicare</li>
+              <li>Conținut video/experiențial insuficient</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- CITROËN -->
+      <div class="brand-col animate-in" data-brand="citroen">
+        <div class="brand-header">
+          <h2>Citroën</h2>
+          <div class="brand-niche">Inovație în confort, mașini de familie accesibile</div>
+        </div>
+        <div class="card">
+          <div class="card-head" onclick="toggleCard(this)">
+            <h3><span class="icon">👤</span> Public Țintă</h3>
+            <span class="card-chevron">▼</span>
+          </div>
+          <div class="card-body">
+            <ul>
+              <li>Familii, cumpărători pragmatici, 30–50 ani</li>
+              <li>Orientați spre raportul calitate/preț</li>
+              <li>Căutători de confort superior în clasă accesibilă</li>
+              <li>Segmentul suburban și rural cu potențial ridicat</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head" onclick="toggleCard(this)">
+            <h3><span class="icon">🚗</span> Modele Cheie</h3>
+            <span class="card-chevron">▼</span>
+          </div>
+          <div class="card-body">
+            <div class="models-wrap">
+              <span class="model-tag">C3</span><span class="model-tag">C4</span><span class="model-tag">C5 Aircross</span><span class="model-tag">Berlingo</span>
+            </div>
+            <ul style="margin-top:12px">
+              <li>C3 — poartă de intrare accesibilă în brand</li>
+              <li>C5 Aircross — suspensia Progressive Hydraulic Cushions®</li>
+              <li>Berlingo — lider în segmentul vehicule utilitare/familii mari</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head" onclick="toggleCard(this)">
+            <h3><span class="icon">⚔️</span> Competitori Direcți</h3>
+            <span class="card-chevron">▼</span>
+          </div>
+          <div class="card-body">
+            <ul>
+              <li><strong>Dacia</strong> Logan / Sandero / Duster — lider absolut pe preț</li>
+              <li><strong>Renault</strong> Clio / Captur — rival francez direct</li>
+              <li><strong>Škoda</strong> Fabia / Octavia — percepție solidă de fiabilitate</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head" onclick="toggleCard(this)">
+            <h3><span class="icon">📈</span> Oportunități de Creștere</h3>
+            <span class="card-chevron">▼</span>
+          </div>
+          <div class="card-body">
+            <ul>
+              <li>Cucerirea clienților Dacia care doresc mai mult confort</li>
+              <li>Vehicule comerciale (Berlingo) — segment în creștere</li>
+              <li>Expansiune rurală/suburbană</li>
+              <li>Repoziționare pe narativul confort + valoare</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head" onclick="toggleCard(this)">
+            <h3><span class="icon">🔍</span> Lacune de Vizibilitate</h3>
+            <span class="card-chevron">▼</span>
+          </div>
+          <div class="card-body">
+            <ul>
+              <li>Eclipsat de războiul prețurilor Dacia</li>
+              <li>Necesită repoziționare pe narativul confort/valoare</li>
+              <li>Comunicare insuficientă a diferențiatorilor tehnici</li>
+              <li>Percepție greșită: „aproape Dacia, dar mai scump"</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- DS -->
+      <div class="brand-col animate-in" data-brand="ds">
+        <div class="brand-header">
+          <h2>DS</h2>
+          <div class="brand-niche">Lux francez, alternativa la premium german</div>
+        </div>
+        <div class="card">
+          <div class="card-head" onclick="toggleCard(this)">
+            <h3><span class="icon">👤</span> Public Țintă</h3>
+            <span class="card-chevron">▼</span>
+          </div>
+          <div class="card-body">
+            <ul>
+              <li>Cumpărători premium, 40–60 ani</li>
+              <li>Executivi și profesioniști de top</li>
+              <li>Conștienți de lux, căutători de individualitate</li>
+              <li>Alternativa franceză la BMW/Audi/Mercedes</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head" onclick="toggleCard(this)">
+            <h3><span class="icon">🚗</span> Modele Cheie</h3>
+            <span class="card-chevron">▼</span>
+          </div>
+          <div class="card-body">
+            <div class="models-wrap">
+              <span class="model-tag">DS 4</span><span class="model-tag">DS 7</span>
+            </div>
+            <ul style="margin-top:12px">
+              <li>DS 7 — vârf de gamă, interioare handcrafted</li>
+              <li>DS 4 — acces în universul premium DS</li>
+              <li>Personalizare ultra-detaliată: materiale, culori, finisaje</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head" onclick="toggleCard(this)">
+            <h3><span class="icon">⚔️</span> Competitori Direcți</h3>
+            <span class="card-chevron">▼</span>
+          </div>
+          <div class="card-body">
+            <ul>
+              <li><strong>BMW</strong> Seria 1 / Seria 3 — referință premium sport</li>
+              <li><strong>Audi</strong> A3 / A4 — premium tehnic german</li>
+              <li><strong>Volvo</strong> V40 / V60 — premium scandinav, siguranță</li>
+              <li><strong>Alfa Romeo</strong> Giulia — premium latin, design emoțional</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head" onclick="toggleCard(this)">
+            <h3><span class="icon">📈</span> Oportunități de Creștere</h3>
+            <span class="card-chevron">▼</span>
+          </div>
+          <div class="card-body">
+            <ul>
+              <li>Nișă extrem de mică — potențial imens de creștere</li>
+              <li>B2B: flote corporate premium, cadouri instituționale</li>
+              <li>Flote diplomatice și instituționale</li>
+              <li>Marketing ultra-personalizat, experiențe exclusive</li>
+              <li>First-mover advantage în conținut digital premium</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head" onclick="toggleCard(this)">
+            <h3><span class="icon">🔍</span> Lacune de Vizibilitate</h3>
+            <span class="card-chevron">▼</span>
+          </div>
+          <div class="card-body">
+            <ul>
+              <li>Aproape invizibil în media românească</li>
+              <li>Oportunitate masivă: dominanță prin conținut ca first-mover</li>
+              <li>Majoritatea românilor nu știu că DS există ca brand separat</li>
+              <li>Zero prezență în conversațiile auto online din România</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- OPEL -->
+      <div class="brand-col animate-in" data-brand="opel">
+        <div class="brand-header">
+          <h2>Opel</h2>
+          <div class="brand-niche">Inginerie germană la preț de clasă medie</div>
+        </div>
+        <div class="card">
+          <div class="card-head" onclick="toggleCard(this)">
+            <h3><span class="icon">👤</span> Public Țintă</h3>
+            <span class="card-chevron">▼</span>
+          </div>
+          <div class="card-body">
+            <ul>
+              <li>Clasa medie largă, 30–55 ani</li>
+              <li>Cumpărători practici, rațional-orientați</li>
+              <li>Loialiști de brand — nostalgia erei Opel din România</li>
+              <li>Segment fleet/corporate cu potențial semnificativ</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head" onclick="toggleCard(this)">
+            <h3><span class="icon">🚗</span> Modele Cheie</h3>
+            <span class="card-chevron">▼</span>
+          </div>
+          <div class="card-body">
+            <div class="models-wrap">
+              <span class="model-tag">Astra</span><span class="model-tag">Mokka</span><span class="model-tag">Frontera</span><span class="model-tag">Corsa</span>
+            </div>
+            <ul style="margin-top:12px">
+              <li>Astra — vârf de gamă, competiția directă cu Golf</li>
+              <li>Mokka / Mokka-e — SUV compact urban, variantă EV</li>
+              <li>Frontera BEV — noul SUV electric accesibil</li>
+              <li>Corsa — city car versatil, preț competitiv</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head" onclick="toggleCard(this)">
+            <h3><span class="icon">⚔️</span> Competitori Direcți</h3>
+            <span class="card-chevron">▼</span>
+          </div>
+          <div class="card-body">
+            <ul>
+              <li><strong>Volkswagen</strong> Polo / Golf — referință absolută de segment</li>
+              <li><strong>Ford</strong> Focus / Puma — rival puternic, bine cunoscut</li>
+              <li><strong>Hyundai</strong> i30 / Tucson — raport preț/dotări excelent</li>
+              <li><strong>Toyota</strong> Corolla — fiabilitate legendară</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head" onclick="toggleCard(this)">
+            <h3><span class="icon">📈</span> Oportunități de Creștere</h3>
+            <span class="card-chevron">▼</span>
+          </div>
+          <div class="card-body">
+            <ul>
+              <li>Vânzări fleet/corporate — „fiabilitate germană" la preț bun</li>
+              <li>Electrificare: Mokka-e, Frontera BEV</li>
+              <li>Valorificarea percepției de „inginerie germană"</li>
+              <li>Reconectarea cu baza de fani loialiști din România</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head" onclick="toggleCard(this)">
+            <h3><span class="icon">🔍</span> Lacune de Vizibilitate</h3>
+            <span class="card-chevron">▼</span>
+          </div>
+          <div class="card-body">
+            <ul>
+              <li>Repoziționare necesară post-achiziție PSA</li>
+              <li>Mulți români nu știu că Opel e acum deținut de Stellantis</li>
+              <li>Confuzie de identitate: german sau francez?</li>
+              <li>Trebuie clarificat narativul: „inginerit german, susținut de un grup global"</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- CHART SECTION -->
+<div id="section-chart" class="section">
+  <div class="container">
+    <div class="section-title">Hartă de <span class="accent">Poziționare Competitivă</span></div>
+    <p style="text-align:center;color:var(--text-muted);font-size:.85rem;margin-bottom:30px;padding:0 20px">
+      Axa X: Poziționare preț (buget → premium) · Axa Y: Notorietate de brand în România (scăzută → ridicată)
+    </p>
+    <div class="chart-section" style="padding-top:0">
+      <div class="chart-container">
+        <canvas id="positionChart"></canvas>
+      </div>
+      <div class="chart-legend">
+        <div class="chart-legend-item"><div class="chart-legend-dot" style="background:var(--peugeot)"></div>Peugeot & competitori</div>
+        <div class="chart-legend-item"><div class="chart-legend-dot" style="background:var(--citroen)"></div>Citroën & competitori</div>
+        <div class="chart-legend-item"><div class="chart-legend-dot" style="background:var(--ds)"></div>DS & competitori</div>
+        <div class="chart-legend-item"><div class="chart-legend-dot" style="background:var(--opel)"></div>Opel & competitori</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES INTELLIGENCE MODULE -->
+<div id="section-services" class="section">
+  <div class="container">
+
+    <!-- Hero -->
+    <div class="svc-hero">
+      <h2>Arhitectura <strong>Serviciilor</strong></h2>
+      <p>Radiografia completă a tuturor liniilor de business AutoGroup — de la vânzare la post-vânzare, de la leasing la broker, de la retail la B2B. Un ecosistem de servicii integrat pe care <strong>niciun competitor din România nu îl replică la această scară</strong>.</p>
+    </div>
+
+    <!-- Financial KPIs -->
+    <div class="fin-row">
+      <div class="fin-box">
+        <div class="fin-num">250M+</div>
+        <div class="fin-label">RON Cifra Afaceri 2024</div>
+      </div>
+      <div class="fin-box">
+        <div class="fin-num">+30%+</div>
+        <div class="fin-label">Creștere YoY</div>
+      </div>
+      <div class="fin-box">
+        <div class="fin-num">300+</div>
+        <div class="fin-label">Angajați</div>
+      </div>
+      <div class="fin-box">
+        <div class="fin-num">7</div>
+        <div class="fin-label">Centre autorizate</div>
+      </div>
+      <div class="fin-box">
+        <div class="fin-num">30+</div>
+        <div class="fin-label">Ani experiență</div>
+      </div>
+    </div>
+
+    <div class="eco-divider"></div>
+
+    <!-- Customer Value Chain -->
+    <div class="chain-section">
+      <div style="text-align:center;margin-bottom:20px">
+        <h3 style="font-size:1.1rem;font-weight:300;letter-spacing:3px;text-transform:uppercase">Lanțul de <strong>Valoare</strong> al Clientului</h3>
+        <p style="color:var(--text-muted);font-size:.8rem;margin-top:6px">Fiecare etapă generează revenue și fidelizare — clientul nu părăsește niciodată ecosistemul</p>
+      </div>
+      <div class="chain-flow">
+        <div class="chain-step">
+          <span class="chain-icon">🔍</span>
+          <h4>Descoperire</h4>
+          <p>Test drive, showroom, digital</p>
+          <span class="chain-revenue" style="background:rgba(0,149,217,.15);color:var(--peugeot)">Marketing</span>
+        </div>
+        <div class="chain-arrow">→</div>
+        <div class="chain-step">
+          <span class="chain-icon">🚗</span>
+          <h4>Achiziție</h4>
+          <p>Mașină nouă sau Certified</p>
+          <span class="chain-revenue" style="background:rgba(0,255,136,.1);color:#00ff88">Revenue #1</span>
+        </div>
+        <div class="chain-arrow">→</div>
+        <div class="chain-step">
+          <span class="chain-icon">📋</span>
+          <h4>Finanțare</h4>
+          <p>Leasing, credit, CASCO via Broker</p>
+          <span class="chain-revenue" style="background:rgba(0,255,136,.1);color:#00ff88">Revenue #2</span>
+        </div>
+        <div class="chain-arrow">→</div>
+        <div class="chain-step">
+          <span class="chain-icon">🔧</span>
+          <h4>Mentenanță</h4>
+          <p>Service, ITP, piese, Extra Care</p>
+          <span class="chain-revenue" style="background:rgba(0,255,136,.1);color:#00ff88">Revenue #3</span>
+        </div>
+        <div class="chain-arrow">→</div>
+        <div class="chain-step">
+          <span class="chain-icon">🛡️</span>
+          <h4>Asigurare</h4>
+          <p>CASCO, RCA via Broker Intern</p>
+          <span class="chain-revenue" style="background:rgba(0,255,136,.1);color:#00ff88">Revenue #4</span>
+        </div>
+        <div class="chain-arrow">→</div>
+        <div class="chain-step">
+          <span class="chain-icon">🔄</span>
+          <h4>Reutilizare</h4>
+          <p>Trade-in → Certified/Ocazii</p>
+          <span class="chain-revenue" style="background:rgba(0,255,136,.1);color:#00ff88">Revenue #5</span>
+        </div>
+        <div class="chain-arrow">→</div>
+        <div class="chain-step">
+          <span class="chain-icon">⬆️</span>
+          <h4>Upgrade</h4>
+          <p>Următorul model, brand superior</p>
+          <span class="chain-revenue" style="background:rgba(255,215,0,.15);color:var(--opel)">Ciclul se repetă</span>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:16px;padding:14px;background:var(--surface);border:1px solid var(--border);border-radius:10px">
+        <p style="font-size:.85rem;color:var(--text-muted)">Un singur client generează <strong style="color:#00ff88">minimum 5 fluxuri de revenue</strong> pe durata relației cu dealer-ul.</p>
+        <p style="font-size:.75rem;color:#555;margin-top:4px">Competitorii mono-serviciu captează maximum 1-2 din aceste fluxuri.</p>
+      </div>
+    </div>
+
+    <div class="eco-divider"></div>
+
+    <!-- Service Map — All 12 Services -->
+    <div class="svc-map">
+      <div class="svc-map-title">Harta completă a <strong>12 Servicii</strong> integrate</div>
+      <p style="text-align:center;color:var(--text-muted);font-size:.8rem;margin-bottom:24px">Click pe fiecare serviciu pentru detalii complete</p>
+
+      <div style="display:grid;grid-template-columns:180px 1fr 1fr;gap:16px;align-items:center">
+        <!-- Center hub - hidden on mobile, shown via CSS -->
+        <div class="hub-center" style="margin:0 auto">
+          <div class="hub-num">12</div>
+          <h3>DEALER</h3>
+          <div class="hub-sub">Servicii Integrate</div>
+        </div>
+
+        <!-- Left column -->
+        <div class="spoke-left">
+          <div class="svc-node" onclick="this.classList.toggle('expanded')">
+            <div class="svc-node-tag" style="background:rgba(0,255,136,.12);color:#00ff88">Core</div>
+            <div class="svc-node-head">
+              <div class="svc-icon" style="background:rgba(0,149,217,.15)">🚗</div>
+              <div class="svc-node-info">
+                <h4 style="color:var(--peugeot)">Vânzări Vehicule Noi</h4>
+                <p>4 branduri Stellantis — unicat în România</p>
+              </div>
+            </div>
+            <div class="svc-expand">
+              <ul>
+                <li>Peugeot: 208, 308, 2008, 3008, 408, e-208, e-3008</li>
+                <li>Citroën: C3, C4, C5 Aircross, Berlingo</li>
+                <li>DS: DS 4, DS 7</li>
+                <li>Opel: Corsa, Astra, Mokka, Frontera</li>
+                <li>Showroom-uri dedicate + livrare imediată</li>
+                <li>Configurator, test drive, consultanță</li>
+              </ul>
+              <span class="svc-stat" style="background:rgba(0,149,217,.15);color:var(--peugeot)">17+ modele disponibile</span>
+            </div>
+          </div>
+
+          <div class="svc-node" onclick="this.classList.toggle('expanded')">
+            <div class="svc-node-tag" style="background:rgba(0,255,136,.12);color:#00ff88">Core</div>
+            <div class="svc-node-head">
+              <div class="svc-icon" style="background:rgba(184,134,11,.15)">✅</div>
+              <div class="svc-node-info">
+                <h4 style="color:var(--ds)">Certified Pre-Owned</h4>
+                <p>Mașini rulate certificate — garanție 36 luni</p>
+              </div>
+            </div>
+            <div class="svc-expand">
+              <ul>
+                <li>Proces certificare 360° cu diagnostic computerizat</li>
+                <li>Garanție internațională până la 36 luni (Defend Car Protect)</li>
+                <li>CASCO inclus în primul an</li>
+                <li>Certificare TÜV — standard premium</li>
+                <li>Peugeot, Citroën, DS, Opel + alte mărci</li>
+                <li>Showroom-uri dedicate în toate cele 7 centre</li>
+              </ul>
+              <span class="svc-stat" style="background:rgba(184,134,11,.15);color:var(--ds)">certified.dealer.ro</span>
+            </div>
+          </div>
+
+          <div class="svc-node" onclick="this.classList.toggle('expanded')">
+            <div class="svc-node-head">
+              <div class="svc-icon" style="background:rgba(212,0,26,.15)">🏷️</div>
+              <div class="svc-node-info">
+                <h4 style="color:var(--citroen)">Vehicule Ocazii</h4>
+                <p>Vehicule second-hand — autoturisme & utilitare</p>
+              </div>
+            </div>
+            <div class="svc-expand">
+              <ul>
+                <li>Platformă online dedicată: ocazii.dealer.ro</li>
+                <li>Autoturisme și vehicule utilitare</li>
+                <li>Verificare tehnică înainte de vânzare</li>
+                <li>Opțiuni de finanțare disponibile</li>
+                <li>Trade-in acceptat din orice marcă</li>
+              </ul>
+              <span class="svc-stat" style="background:rgba(212,0,26,.15);color:var(--citroen)">ocazii.dealer.ro</span>
+            </div>
+          </div>
+
+          <div class="svc-node" onclick="this.classList.toggle('expanded')">
+            <div class="svc-node-tag" style="background:rgba(255,165,0,.12);color:#ffa500">Revenue recurent</div>
+            <div class="svc-node-head">
+              <div class="svc-icon" style="background:rgba(0,149,217,.15)">🔧</div>
+              <div class="svc-node-info">
+                <h4 style="color:var(--peugeot)">Service Mecanic Autorizat</h4>
+                <p>Întreținere, reparații, diagnostic — toate brandurile</p>
+              </div>
+            </div>
+            <div class="svc-expand">
+              <ul>
+                <li>Revizie și întreținere periodică</li>
+                <li>Sistem frânare, direcție, suspensie, evacuare</li>
+                <li>Instalații electrice, climatizare</li>
+                <li>Diagnostic computerizat</li>
+                <li>Geometrie și echilibrare roți</li>
+                <li>Montaj accesorii</li>
+                <li>Autorizare anuală RAR + certificare producător</li>
+              </ul>
+              <span class="svc-stat" style="background:rgba(0,149,217,.15);color:var(--peugeot)">7 centre service</span>
+            </div>
+          </div>
+
+          <div class="svc-node" onclick="this.classList.toggle('expanded')">
+            <div class="svc-node-tag" style="background:rgba(255,165,0,.12);color:#ffa500">Revenue recurent</div>
+            <div class="svc-node-head">
+              <div class="svc-icon" style="background:rgba(255,215,0,.15)">🎨</div>
+              <div class="svc-node-info">
+                <h4 style="color:var(--opel)">Service Caroserie</h4>
+                <p>Tinichigerie, vopsitorie, constatare daune</p>
+              </div>
+            </div>
+            <div class="svc-expand">
+              <ul>
+                <li>Tinichigerie auto — reparații și înlocuiri panouri</li>
+                <li>Vopsitorie auto — sisteme PPG și RM</li>
+                <li>Sistem computerizat pregătire vopsea (aprobat producător)</li>
+                <li>2 cabine de vopsire cu uscare rapidă per centru</li>
+                <li>Detailing și polish profesional</li>
+                <li>Constatare daune CASCO/RCA</li>
+                <li>Decontare directă: Groupama, Allianz, Omniasig, Generali, Euroins, Asirom, City</li>
+              </ul>
+              <span class="svc-stat" style="background:rgba(255,215,0,.15);color:var(--opel)">7 asigurători parteneri</span>
+            </div>
+          </div>
+
+          <div class="svc-node" onclick="this.classList.toggle('expanded')">
+            <div class="svc-node-head">
+              <div class="svc-icon" style="background:rgba(0,149,217,.15)">⚙️</div>
+              <div class="svc-node-info">
+                <h4 style="color:var(--peugeot)">Piese & Accesorii</h4>
+                <p>Originale + economice, e-commerce integrat</p>
+              </div>
+            </div>
+            <div class="svc-expand">
+              <ul>
+                <li>Piese originale Peugeot, Citroën, DS, Opel</li>
+                <li>Piese economice echivalente certificate</li>
+                <li>Gamă completă consumabile auto</li>
+                <li>Accesorii din catalogul oficial</li>
+                <li>Consultanță prin ingineri specializați</li>
+                <li>Platformă e-commerce WooCommerce</li>
+              </ul>
+              <span class="svc-stat" style="background:rgba(0,149,217,.15);color:var(--peugeot)">dealer.ro/piese</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right column -->
+        <div class="spoke-right">
+          <div class="svc-node" onclick="this.classList.toggle('expanded')">
+            <div class="svc-node-tag" style="background:rgba(255,165,0,.12);color:#ffa500">Revenue recurent</div>
+            <div class="svc-node-head">
+              <div class="svc-icon" style="background:rgba(212,0,26,.15)">📋</div>
+              <div class="svc-node-info">
+                <h4 style="color:var(--citroen)">Stații ITP</h4>
+                <p>Inspecție Tehnică Periodică — vehicule ≤3.5t</p>
+              </div>
+            </div>
+            <div class="svc-expand">
+              <ul>
+                <li>ITP pentru toate tipurile de vehicule ≤3.5 tone</li>
+                <li>Remorcuri fără sistem propriu de frânare (≤1500 kg)</li>
+                <li>Stații în 5 centre din țară</li>
+                <li>Programare online + walk-in</li>
+                <li>Cross-sell natural: ITP → identificare necesități service</li>
+              </ul>
+              <span class="svc-stat" style="background:rgba(212,0,26,.15);color:var(--citroen)">5+ stații active</span>
+            </div>
+          </div>
+
+          <div class="svc-node" onclick="this.classList.toggle('expanded')">
+            <div class="svc-node-tag" style="background:rgba(0,255,136,.12);color:#00ff88">Financiar</div>
+            <div class="svc-node-head">
+              <div class="svc-icon" style="background:rgba(0,255,136,.12)">🛡️</div>
+              <div class="svc-node-info">
+                <h4 style="color:#00ff88">Broker Asigurare Integrat</h4>
+                <p>Broker autorizat din 2003 — CASCO, RCA</p>
+              </div>
+            </div>
+            <div class="svc-expand">
+              <ul>
+                <li>Operațional de peste 20 ani</li>
+                <li>Sediu Oraș B + 6 puncte în dealership-uri</li>
+                <li>Negociere oferte cu asigurătorii majori</li>
+                <li>CASCO + RCA cu decontare directă la service-ul propriu</li>
+                <li>2 departamente: Asigurări-Leasing & Vânzări Directe</li>
+                <li>Avantaj unic: daună → constatare → reparație → decontare, totul in-house</li>
+              </ul>
+              <span class="svc-stat" style="background:rgba(0,255,136,.1);color:#00ff88">broker.dealer.ro</span>
+            </div>
+          </div>
+
+          <div class="svc-node" onclick="this.classList.toggle('expanded')">
+            <div class="svc-node-tag" style="background:rgba(0,255,136,.12);color:#00ff88">Financiar</div>
+            <div class="svc-node-head">
+              <div class="svc-icon" style="background:rgba(0,255,136,.12)">💼</div>
+              <div class="svc-node-info">
+                <h4 style="color:#00ff88">Leasing Operațional</h4>
+                <p>Rată fixă all-inclusive — flotă completă</p>
+              </div>
+            </div>
+            <div class="svc-expand">
+              <ul>
+                <li>Transfer drept utilizare vehicule (1 sau mai multe)</li>
+                <li>Rată lunară fixă inclusiv: asigurare, taxe, întreținere</li>
+                <li>Destinat companii, PFA, persoane fizice autorizate</li>
+                <li>Flexibilitate pe durată și km</li>
+                <li>Leasing operațional — activitate principală</li>
+                <li>Avantaj competitiv: 4 branduri într-un singur contract</li>
+              </ul>
+              <span class="svc-stat" style="background:rgba(0,255,136,.1);color:#00ff88">dealer.ro/leasing</span>
+            </div>
+          </div>
+
+          <div class="svc-node" onclick="this.classList.toggle('expanded')">
+            <div class="svc-node-head">
+              <div class="svc-icon" style="background:rgba(255,215,0,.15)">🚙</div>
+              <div class="svc-node-info">
+                <h4 style="color:var(--opel)">Rent-a-Car Intern</h4>
+                <p>Rent-a-Car — short-term, flotă proprie</p>
+              </div>
+            </div>
+            <div class="svc-expand">
+              <ul>
+                <li>Platformă dedicată: rent.dealer.ro</li>
+                <li>300 km/zi inclus, suplimentar: 0.2 EUR/km</li>
+                <li>Opțiune km nelimitați: +3 EUR/zi</li>
+                <li>Include: CASCO, RCA, rovignetă, trusă</li>
+                <li>Vârsta minimă: 21 ani, permis ≥12 luni</li>
+                <li>Flotă: modele Peugeot, Citroën, Opel</li>
+              </ul>
+              <span class="svc-stat" style="background:rgba(255,215,0,.15);color:var(--opel)">rent.dealer.ro</span>
+            </div>
+          </div>
+
+          <div class="svc-node" onclick="this.classList.toggle('expanded')">
+            <div class="svc-node-tag" style="background:rgba(184,134,11,.12);color:var(--ds)">B2B</div>
+            <div class="svc-node-head">
+              <div class="svc-icon" style="background:rgba(184,134,11,.15)">🏢</div>
+              <div class="svc-node-info">
+                <h4 style="color:var(--ds)">Flote Corporate B2B</h4>
+                <p>Soluții complete — ex: 550+ mașini [Client B2B]</p>
+              </div>
+            </div>
+            <div class="svc-expand">
+              <ul>
+                <li>Parteneriat client major: 500+ vehicule pe 18 luni</li>
+                <li>Mix turisme: C4, C5 Aircross, 308, DS 4, DS 7</li>
+                <li>Mix utilitare: Boxer, Jumper, Spacetourer</li>
+                <li>Post-vânzare + service + mentenanță incluse</li>
+                <li>Un singur interlocutor pentru toate brandurile</li>
+                <li>Vehicule cu emisii reduse — component ESG</li>
+              </ul>
+              <span class="svc-stat" style="background:rgba(184,134,11,.15);color:var(--ds)">Cel mai mare deal B2B</span>
+            </div>
+          </div>
+
+          <div class="svc-node" onclick="this.classList.toggle('expanded')">
+            <div class="svc-node-head">
+              <div class="svc-icon" style="background:rgba(212,0,26,.15)">⭐</div>
+              <div class="svc-node-info">
+                <h4 style="color:var(--citroen)">Programe Extra Care</h4>
+                <p>Garanție extinsă + CASCO inclus</p>
+              </div>
+            </div>
+            <div class="svc-expand">
+              <ul>
+                <li>Peugeot Extra Care — garanție extinsă + CASCO</li>
+                <li>Citroën Extra Care — garanție extinsă + CASCO</li>
+                <li>Finanțare personalizată cu consultanță dedicată</li>
+                <li>Valabil vehicule noi și Certified</li>
+                <li>Fidelizare puternică: clientul rămâne în ecosistem</li>
+              </ul>
+              <span class="svc-stat" style="background:rgba(212,0,26,.15);color:var(--citroen)">Programe active</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="eco-divider"></div>
+
+    <!-- Revenue Potential Breakdown -->
+    <div class="rev-section">
+      <div style="text-align:center;margin-bottom:20px">
+        <h3 style="font-size:1.1rem;font-weight:300;letter-spacing:3px;text-transform:uppercase">Potențial de <strong>Revenue</strong> per Linie de Serviciu</h3>
+        <p style="color:var(--text-muted);font-size:.8rem;margin-top:6px">Estimare contribuție la cifra de afaceri și potențial de creștere</p>
+      </div>
+      <div class="rev-container">
+        <div class="rev-bar-row">
+          <div class="rev-bar-label">🚗 Vânzări Noi</div>
+          <div class="rev-bar-track"><div class="rev-bar-fill" style="width:0;background:linear-gradient(90deg,var(--peugeot),rgba(0,149,217,.6))" data-width="65">65%</div></div>
+          <div class="rev-bar-pct" style="color:var(--peugeot)">~65%</div>
+        </div>
+        <div class="rev-bar-row">
+          <div class="rev-bar-label">✅ Certified + Ocazii</div>
+          <div class="rev-bar-track"><div class="rev-bar-fill" style="width:0;background:linear-gradient(90deg,var(--ds),rgba(184,134,11,.6))" data-width="12">12%</div></div>
+          <div class="rev-bar-pct" style="color:var(--ds)">~12%</div>
+        </div>
+        <div class="rev-bar-row">
+          <div class="rev-bar-label">🔧 Service + Caroserie</div>
+          <div class="rev-bar-track"><div class="rev-bar-fill" style="width:0;background:linear-gradient(90deg,var(--opel),rgba(255,215,0,.6))" data-width="10">10%</div></div>
+          <div class="rev-bar-pct" style="color:var(--opel)">~10%</div>
+        </div>
+        <div class="rev-bar-row">
+          <div class="rev-bar-label">⚙️ Piese & Accesorii</div>
+          <div class="rev-bar-track"><div class="rev-bar-fill" style="width:0;background:linear-gradient(90deg,var(--citroen),rgba(212,0,26,.6))" data-width="6">6%</div></div>
+          <div class="rev-bar-pct" style="color:var(--citroen)">~6%</div>
+        </div>
+        <div class="rev-bar-row">
+          <div class="rev-bar-label">💼 Leasing + Rent</div>
+          <div class="rev-bar-track"><div class="rev-bar-fill" style="width:0;background:linear-gradient(90deg,#00ff88,rgba(0,255,136,.5))" data-width="5">5%</div></div>
+          <div class="rev-bar-pct" style="color:#00ff88">~5%</div>
+        </div>
+        <div class="rev-bar-row">
+          <div class="rev-bar-label">🛡️ Broker + Extra Care</div>
+          <div class="rev-bar-track"><div class="rev-bar-fill" style="width:0;background:linear-gradient(90deg,#a855f7,rgba(168,85,247,.5))" data-width="2">2%</div></div>
+          <div class="rev-bar-pct" style="color:#a855f7">~2%</div>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:16px;padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:10px">
+        <p style="font-size:.85rem;color:var(--text-muted)"><strong style="color:#ffa500">Insight strategic:</strong> Serviciile post-vânzare (service, piese, broker, leasing) au <strong style="color:#00ff88">marje de profit de 3-5× mai mari</strong> decât vânzările noi. Creșterea ponderii acestor servicii la 30%+ din revenue ar transforma profitabilitatea dealer-ului auto.</p>
+      </div>
+    </div>
+
+    <div class="eco-divider"></div>
+
+    <!-- Locations Network -->
+    <div class="loc-section">
+      <div style="text-align:center;margin-bottom:10px">
+        <h3 style="font-size:1.1rem;font-weight:300;letter-spacing:3px;text-transform:uppercase">Rețeaua <strong>Națională</strong> a Dealer-ului</h3>
+        <p style="color:var(--text-muted);font-size:.8rem;margin-top:6px">7 centre autorizate — acoperire strategică în principalele axe economice ale României</p>
+      </div>
+      <div class="loc-grid">
+        <div class="loc-card">
+          <h4>Oraș A — Nord</h4>
+          <p>Locație Nord</p>
+          <div class="loc-brands">
+            <span class="loc-dot" style="background:var(--peugeot)"></span>
+            <span class="loc-dot" style="background:var(--citroen)"></span>
+            <span class="loc-dot" style="background:var(--opel)"></span>
+          </div>
+          <div class="loc-services">
+            <span class="loc-svc-tag">Showroom</span><span class="loc-svc-tag">Service</span><span class="loc-svc-tag">Caroserie</span><span class="loc-svc-tag">ITP</span><span class="loc-svc-tag">Piese</span>
+          </div>
+        </div>
+        <div class="loc-card">
+          <h4>Oraș A — Vest</h4>
+          <p>Locație Vest</p>
+          <div class="loc-brands">
+            <span class="loc-dot" style="background:var(--peugeot)"></span>
+            <span class="loc-dot" style="background:var(--citroen)"></span>
+            <span class="loc-dot" style="background:var(--ds)"></span>
+            <span class="loc-dot" style="background:var(--opel)"></span>
+          </div>
+          <div class="loc-services">
+            <span class="loc-svc-tag">Showroom</span><span class="loc-svc-tag">Service</span><span class="loc-svc-tag">Certified HQ</span><span class="loc-svc-tag">Piese</span>
+          </div>
+        </div>
+        <div class="loc-card">
+          <h4>Oraș A — Est</h4>
+          <p>Locație Est</p>
+          <div class="loc-brands">
+            <span class="loc-dot" style="background:var(--peugeot)"></span>
+            <span class="loc-dot" style="background:var(--citroen)"></span>
+            <span class="loc-dot" style="background:var(--ds)"></span>
+            <span class="loc-dot" style="background:var(--opel)"></span>
+          </div>
+          <div class="loc-services">
+            <span class="loc-svc-tag">Showroom</span><span class="loc-svc-tag">Service</span><span class="loc-svc-tag">Caroserie</span><span class="loc-svc-tag">ITP</span>
+          </div>
+        </div>
+        <div class="loc-card">
+          <h4>Oraș B</h4>
+          <p>Sediu Central</p>
+          <div class="loc-brands">
+            <span class="loc-dot" style="background:var(--peugeot)"></span>
+            <span class="loc-dot" style="background:var(--citroen)"></span>
+            <span class="loc-dot" style="background:var(--opel)"></span>
+          </div>
+          <div class="loc-services">
+            <span class="loc-svc-tag">Sediu Central</span><span class="loc-svc-tag">Showroom</span><span class="loc-svc-tag">Service</span><span class="loc-svc-tag">Caroserie</span><span class="loc-svc-tag">Broker HQ</span>
+          </div>
+        </div>
+        <div class="loc-card">
+          <h4>Oraș C</h4>
+          <p>Locație Regională</p>
+          <div class="loc-brands">
+            <span class="loc-dot" style="background:var(--peugeot)"></span>
+            <span class="loc-dot" style="background:var(--citroen)"></span>
+            <span class="loc-dot" style="background:var(--opel)"></span>
+          </div>
+          <div class="loc-services">
+            <span class="loc-svc-tag">Showroom</span><span class="loc-svc-tag">Service</span><span class="loc-svc-tag">ITP</span><span class="loc-svc-tag">Caroserie</span>
+          </div>
+        </div>
+        <div class="loc-card">
+          <h4>Oraș D</h4>
+          <p>Dealer Regional 1</p>
+          <div class="loc-brands">
+            <span class="loc-dot" style="background:var(--peugeot)"></span>
+            <span class="loc-dot" style="background:var(--citroen)"></span>
+            <span class="loc-dot" style="background:var(--ds)"></span>
+            <span class="loc-dot" style="background:var(--opel)"></span>
+          </div>
+          <div class="loc-services">
+            <span class="loc-svc-tag">Showroom</span><span class="loc-svc-tag">Service</span><span class="loc-svc-tag">Caroserie</span><span class="loc-svc-tag">ITP</span>
+          </div>
+        </div>
+        <div class="loc-card">
+          <h4>Oraș E</h4>
+          <p>Dealer Regional 2</p>
+          <div class="loc-brands">
+            <span class="loc-dot" style="background:var(--peugeot)"></span>
+            <span class="loc-dot" style="background:var(--citroen)"></span>
+            <span class="loc-dot" style="background:var(--opel)"></span>
+          </div>
+          <div class="loc-services">
+            <span class="loc-svc-tag">Showroom</span><span class="loc-svc-tag">Service</span><span class="loc-svc-tag">Caroserie</span><span class="loc-svc-tag">ITP</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Strategic insight -->
+    <div style="max-width:1000px;margin:30px auto 40px;padding:0 20px">
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px;position:relative;overflow:hidden">
+        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--peugeot),var(--citroen),var(--ds),var(--opel))"></div>
+        <h3 style="text-align:center;font-size:.9rem;letter-spacing:3px;text-transform:uppercase;font-weight:300;margin-bottom:16px">Concluzie strategică pentru <strong>Management</strong></h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+          <div>
+            <h4 style="font-size:.8rem;color:#00ff88;letter-spacing:1px;margin-bottom:8px">CE ARE DEALER-UL</h4>
+            <p style="font-size:.82rem;color:var(--text-muted);line-height:1.7">12 linii de business integrate, 7 locații, 4 branduri, servicii financiare proprii, cel mai complet ecosistem auto din portofoliul Stellantis România. <strong>Un avantaj competitiv structural pe care niciun competitor nu-l poate replica.</strong></p>
+          </div>
+          <div>
+            <h4 style="font-size:.8rem;color:#ffa500;letter-spacing:1px;margin-bottom:8px">CE TREBUIE COMUNICAT</h4>
+            <p style="font-size:.82rem;color:var(--text-muted);line-height:1.7">Piața nu știe de acest ecosistem. Clientul mediu cunoaște dealer-ul doar ca „dealer auto". <strong>Strategia media trebuie să facă vizibile TOATE cele 12 servicii</strong> — fiecare serviciu necomunicat este revenue pierdut.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ECOSYSTEM INTELLIGENCE MODULE -->
+<div id="section-ecosystem" class="section">
+  <div class="container">
+
+    <!-- Hero -->
+    <div class="eco-hero">
+      <div class="eco-badge">Analiză exclusivă — Date neaccesibile competiției</div>
+      <h2>Ecosistemul <strong>Dealer-ului</strong></h2>
+      <p>Puterea reală a dealer-ului nu e în cele 4 branduri individual. E în faptul că le dețineți pe <strong>toate 4 simultan</strong>. Acest modul dezvăluie sinergiile pe care niciun competitor mono-brand nu le poate replica.</p>
+    </div>
+
+    <!-- KPI Counters -->
+    <div class="kpi-row">
+      <div class="kpi-box">
+        <div class="kpi-number" style="color:var(--peugeot)" data-count="17">0</div>
+        <div class="kpi-label">Modele Active</div>
+      </div>
+      <div class="kpi-box">
+        <div class="kpi-number" style="color:var(--citroen)" data-count="4">0</div>
+        <div class="kpi-label">Segmente Acoperite</div>
+      </div>
+      <div class="kpi-box">
+        <div class="kpi-number" style="color:var(--ds)" data-count="92">0</div>
+        <div class="kpi-label">% din spectrul preț</div>
+      </div>
+      <div class="kpi-box">
+        <div class="kpi-number" style="color:var(--opel)" data-count="6">0</div>
+        <div class="kpi-label">Modele EV / PHEV</div>
+      </div>
+    </div>
+
+    <div class="eco-divider"></div>
+
+    <!-- Radar Chart + Insights -->
+    <div style="text-align:center;margin-bottom:10px">
+      <h3 style="font-size:1.1rem;font-weight:300;letter-spacing:3px;text-transform:uppercase">Radar Strategic: <strong>Forțele celor 4 Branduri</strong></h3>
+      <p style="color:var(--text-muted);font-size:.8rem;margin-top:6px">8 dimensiuni critice — unde domină fiecare brand și unde se completează reciproc</p>
+    </div>
+    <div class="radar-section">
+      <div class="radar-wrap">
+        <canvas id="radarChart"></canvas>
+      </div>
+      <div class="radar-insights">
+        <div class="radar-insight" style="border-left:3px solid #00ff88">
+          <h4 style="color:#00ff88">Complementaritate perfectă</h4>
+          <p>Cele 4 branduri nu se canibalizează — se completează. Unde Citroën e slab pe premium, DS excelează. Unde DS e invizibil pe masă, Opel domină. <strong>Niciun competitor nu are acest spectru complet.</strong></p>
+        </div>
+        <div class="radar-insight" style="border-left:3px solid var(--peugeot)">
+          <h4 style="color:var(--peugeot)">Peugeot — Liderul echilibrat</h4>
+          <p>Scoruri ridicate pe design, electrificare și potențial digital. Rolul său: <strong>vârful de lance</strong> în comunicarea dealer-ului.</p>
+        </div>
+        <div class="radar-insight" style="border-left:3px solid var(--ds)">
+          <h4 style="color:var(--ds)">DS — Diamantul neșlefuit</h4>
+          <p>Scor maxim pe percepție premium, aproape zero pe awareness. Cel mai mare potențial de creștere procentuală din portofoliu.</p>
+        </div>
+        <div class="radar-insight" style="border-left:3px solid var(--opel)">
+          <h4 style="color:var(--opel)">Opel + Citroën — Baza piramidei</h4>
+          <p>Împreună acoperă cel mai mare segment de piață: clasa medie largă, familii, flote. <strong>Volumul vine de aici.</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="eco-divider"></div>
+
+    <!-- Customer Lifecycle Funnel -->
+    <div class="lifecycle-section">
+      <div class="lifecycle-title">Ciclul de viață al clientului <strong>Dealer Auto</strong></div>
+      <p style="text-align:center;color:var(--text-muted);font-size:.82rem;margin-bottom:30px;max-width:700px;margin-left:auto;margin-right:auto">Un client care intră în ecosistemul dealer-ului la 22 de ani poate rămâne <strong>client pe viață</strong> — fără să părăsească vreodată showroom-ul. Niciun dealer mono-brand nu poate face asta.</p>
+
+      <div class="lifecycle-track" style="position:relative">
+        <div class="lifecycle-connector"></div>
+
+        <div class="lifecycle-stage">
+          <div class="lifecycle-age">22–28 ani</div>
+          <div class="lifecycle-brand" style="background:rgba(212,0,26,.06)">
+            <h4 style="color:var(--citroen)">Citroën C3 / Opel Corsa</h4>
+            <p>Primul automobil. Preț accesibil, design tânăr, consum redus. Clientul descoperă ecosistemul dealer-ului.</p>
+            <span class="lc-tag" style="background:rgba(212,0,26,.15);color:var(--citroen)">Achiziție</span>
+          </div>
+          <div class="lifecycle-brand" style="background:rgba(255,215,0,.04)">
+            <h4 style="color:var(--opel)">Alternativă: Opel Corsa-e</h4>
+            <p>Dacă tânărul e eco-conscious → prima mașină electrică. Dealer-ul acoperă ambele profiluri.</p>
+            <span class="lc-tag" style="background:rgba(255,215,0,.12);color:var(--opel)">EV Entry</span>
+          </div>
+        </div>
+
+        <div class="lifecycle-arrow">▼ UPGRADE NATURAL</div>
+
+        <div class="lifecycle-stage">
+          <div class="lifecycle-age">28–38 ani</div>
+          <div class="lifecycle-brand" style="background:rgba(0,149,217,.06)">
+            <h4 style="color:var(--peugeot)">Peugeot 2008 / 3008</h4>
+            <p>Carieră în ascensiune, posibil prima familie. Upgrade pe design și spațiu. Clientul rămâne în ecosistem.</p>
+            <span class="lc-tag" style="background:rgba(0,149,217,.15);color:var(--peugeot)">Upgrade</span>
+          </div>
+          <div class="lifecycle-brand" style="background:rgba(212,0,26,.04)">
+            <h4 style="color:var(--citroen)">Citroën C5 Aircross / Berlingo</h4>
+            <p>Familie mai mare, nevoie de spațiu maxim. Berlingo = soluția practică. Confortul Citroën fidelizează.</p>
+            <span class="lc-tag" style="background:rgba(212,0,26,.12);color:var(--citroen)">Familie</span>
+          </div>
+        </div>
+
+        <div class="lifecycle-arrow">▼ PREMIUM ASPIRATION</div>
+
+        <div class="lifecycle-stage">
+          <div class="lifecycle-age">38–50 ani</div>
+          <div class="lifecycle-brand" style="background:rgba(0,149,217,.06)">
+            <h4 style="color:var(--peugeot)">Peugeot 408 / e-3008</h4>
+            <p>Vârful carierei. Vrea design premium, posibil electrificare. 408 oferă exclusivitate accesibilă.</p>
+            <span class="lc-tag" style="background:rgba(0,149,217,.15);color:var(--peugeot)">Premium accesibil</span>
+          </div>
+          <div class="lifecycle-brand" style="background:rgba(255,215,0,.04)">
+            <h4 style="color:var(--opel)">Opel Astra / Mokka-e (mașina 2)</h4>
+            <p>Al doilea automobil al familiei. Practică, fleet-ready. Opel ca mașină secundară inteligentă.</p>
+            <span class="lc-tag" style="background:rgba(255,215,0,.12);color:var(--opel)">Mașina 2</span>
+          </div>
+        </div>
+
+        <div class="lifecycle-arrow">▼ LUXURY TRANSITION</div>
+
+        <div class="lifecycle-stage">
+          <div class="lifecycle-age">50–65 ani</div>
+          <div class="lifecycle-brand" style="background:rgba(184,134,11,.08)">
+            <h4 style="color:var(--ds)">DS 7</h4>
+            <p>Succes profesional. Vrea lux, individualitate, artizanat. DS 7 e recompensa. Clientul atinge vârful ecosistemului dealer-ului.</p>
+            <span class="lc-tag" style="background:rgba(184,134,11,.15);color:var(--ds)">Lux</span>
+          </div>
+          <div class="lifecycle-brand" style="background:rgba(0,149,217,.04)">
+            <h4 style="color:var(--peugeot)">Peugeot e-208 (pentru copii)</h4>
+            <p>Copiii clientului intră la rândul lor în ecosistem. Ciclul se repetă. <strong>Generația 2 din ecosistem.</strong></p>
+            <span class="lc-tag" style="background:rgba(0,149,217,.12);color:var(--peugeot)">Next Gen</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align:center;margin-top:30px;padding:20px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius)">
+        <p style="font-size:.9rem;color:var(--text-muted)">Valoarea medie pe viață a unui client auto: <strong style="color:var(--text)">~3-5 mașini</strong> în 40 de ani.</p>
+        <p style="font-size:1rem;color:#00ff88;font-weight:600;margin-top:6px">Un dealer mono-brand reține maximum 2. dealer-ul poate reține TOATE 5.</p>
+        <p style="font-size:.75rem;color:#555;margin-top:8px;letter-spacing:1px">Aceasta este definiția avantajului competitiv structural.</p>
+      </div>
+    </div>
+
+    <div class="eco-divider"></div>
+
+    <!-- Blue Ocean Opportunities -->
+    <div class="blueocean-section">
+      <div style="text-align:center;margin-bottom:10px">
+        <h3 style="font-size:1.1rem;font-weight:300;letter-spacing:3px;text-transform:uppercase">Oportunitățile <strong>Blue Ocean</strong></h3>
+        <p style="color:var(--text-muted);font-size:.82rem;margin-top:6px">Segmente de piață pe care <strong>doar un dealer multi-brand</strong> le poate ataca. Competiția mono-brand nu are acces.</p>
+      </div>
+      <div class="bo-grid">
+        <div class="bo-card">
+          <h4>Programul „Lifecycle Program"</h4>
+          <div class="bo-brands">CITROËN + PEUGEOT + DS</div>
+          <p>Program de loializare cross-brand: la fiecare upgrade, clientul primește evaluare premium trade-in + bonus de loialitate. <strong>Nimeni</strong> din România nu are un astfel de program.</p>
+          <span class="bo-value">Retenție +40%</span>
+        </div>
+        <div class="bo-card">
+          <h4>Flote Corporate „4-în-1"</h4>
+          <div class="bo-brands">OPEL + PEUGEOT + CITROËN + DS</div>
+          <p>Ofertă unică: o singură companie echipează toată flota — Corsa pentru field sales, 3008 pentru management, DS 7 pentru C-suite, Berlingo pentru logistică. Un singur contract, un singur interlocutor.</p>
+          <span class="bo-value">Contract mediu ×3</span>
+        </div>
+        <div class="bo-card">
+          <h4>Hub de Electrificare dealer-ul</h4>
+          <div class="bo-brands">e-208 + MOKKA-E + FRONTERA BEV + DS E-TENSE</div>
+          <p>Cel mai larg portofoliu EV dintr-un singur showroom din România. Poziționare ca „centru de expertiză electrificare" — un concept complet nou pe piață.</p>
+          <span class="bo-value">First-mover EV Hub</span>
+        </div>
+        <div class="bo-card">
+          <h4>Serviciul „Familia Auto"</h4>
+          <div class="bo-brands">CITROËN + OPEL + PEUGEOT</div>
+          <p>Pachet pentru familii: mașina principală (C5 Aircross/3008) + mașina secundară (Corsa/C3) la preț de pachet. Cross-sell natural pe care mono-brand-urile nu-l pot face.</p>
+          <span class="bo-value">Vânzare duală +25%</span>
+        </div>
+        <div class="bo-card">
+          <h4>Platforma „Portal Business"</h4>
+          <div class="bo-brands">TOATE 4 BRANDURILE</div>
+          <p>Portal B2B dedicat cu configurator multi-brand. Managerul de flotă vede toate opțiunile într-un singur loc. Niciun competitor din RO nu oferă asta. Parteneriate cu firme de leasing.</p>
+          <span class="bo-value">Pipeline B2B ×4</span>
+        </div>
+        <div class="bo-card">
+          <h4>Experience Center Unic</h4>
+          <div class="bo-brands">DS + PEUGEOT PREMIUM</div>
+          <p>Showroom premium combinat DS + Peugeot 408/e-3008 cu experiență de tip boutique. Targetează cumpărătorii BMW/Audi cu o alternativă franceză curatorială. Primul din Europa de Est.</p>
+          <span class="bo-value">Diferențiator unic</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="eco-divider"></div>
+
+    <!-- Revenue Synergy Simulator -->
+    <div class="sim-section">
+      <div style="text-align:center;margin-bottom:20px">
+        <h3 style="font-size:1.1rem;font-weight:300;letter-spacing:3px;text-transform:uppercase">Simulator de <strong>Sinergii Revenue</strong></h3>
+        <p style="color:var(--text-muted);font-size:.82rem;margin-top:6px">Ajustați parametrii pentru a estima impactul strategiilor cross-brand</p>
+      </div>
+      <div class="sim-container">
+        <div class="sim-row">
+          <div class="sim-label" style="color:var(--citroen)">Conversie Citroën → Peugeot<span>% din clienții Citroën care fac upgrade</span></div>
+          <input type="range" class="sim-slider" id="sim1" min="0" max="30" value="8" oninput="updateSim()" style="accent-color:var(--citroen)">
+          <div class="sim-val" id="sim1val" style="color:var(--citroen)">8%</div>
+        </div>
+        <div class="sim-row">
+          <div class="sim-label" style="color:var(--peugeot)">Conversie Peugeot → DS<span>% din clienții Peugeot premium care migrează</span></div>
+          <input type="range" class="sim-slider" id="sim2" min="0" max="15" value="3" oninput="updateSim()" style="accent-color:var(--peugeot)">
+          <div class="sim-val" id="sim2val" style="color:var(--peugeot)">3%</div>
+        </div>
+        <div class="sim-row">
+          <div class="sim-label" style="color:var(--opel)">Cross-sell Mașină 2<span>% din familii care cumpără al doilea vehicul dealer-ul</span></div>
+          <input type="range" class="sim-slider" id="sim3" min="0" max="25" value="5" oninput="updateSim()" style="accent-color:var(--opel)">
+          <div class="sim-val" id="sim3val" style="color:var(--opel)">5%</div>
+        </div>
+        <div class="sim-row">
+          <div class="sim-label" style="color:#00ff88">Contracte Fleet Multi-Brand<span>Contracte corporate noi datorită ofertei 4-în-1</span></div>
+          <input type="range" class="sim-slider" id="sim4" min="0" max="20" value="4" oninput="updateSim()" style="accent-color:#00ff88">
+          <div class="sim-val" id="sim4val" style="color:#00ff88">4</div>
+        </div>
+        <div class="sim-result">
+          <div>
+            <div class="sim-result-num" id="simTotalUnits">+47</div>
+            <div class="sim-result-label">Unități suplimentare / an</div>
+          </div>
+          <div>
+            <div class="sim-result-num" id="simTotalRevenue">+€1.2M</div>
+            <div class="sim-result-label">Revenue adițional estimat</div>
+          </div>
+          <div>
+            <div class="sim-result-num" id="simRetention">+34%</div>
+            <div class="sim-result-label">Creștere retenție clienți</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="eco-divider"></div>
+
+    <!-- Competitive Moat -->
+    <div class="moat-section">
+      <div style="text-align:center;margin-bottom:20px">
+        <h3 style="font-size:1.1rem;font-weight:300;letter-spacing:3px;text-transform:uppercase">De ce <strong>nimeni</strong> nu poate copia asta</h3>
+        <p style="color:var(--text-muted);font-size:.82rem;margin-top:6px">Avantajul competitiv structural al dealer-ul — un „moat" de neegalat</p>
+      </div>
+      <div class="moat-card">
+        <div class="moat-grid">
+          <div class="moat-item">
+            <span class="moat-icon">🏰</span>
+            <h4>Barieră de intrare</h4>
+            <p>Obținerea reprezentanței pentru 4 branduri Stellantis e un proces de ani. Un competitor nou nu poate replica portofoliul dealer-ului peste noapte. <strong>Aceasta e o franciză strategică, nu un simplu dealership.</strong></p>
+          </div>
+          <div class="moat-item">
+            <span class="moat-icon">🔄</span>
+            <h4>Efectul de rețea internă</h4>
+            <p>Fiecare client adăugat crește valoarea ecosistemului. Fiecare brand se hrănește din traficul celuilalt. Un showroom cu 4 branduri atrage vizitatori pe care mono-brand-urile nu-i pot genera.</p>
+          </div>
+          <div class="moat-item">
+            <span class="moat-icon">📊</span>
+            <h4>Datele cross-brand</h4>
+            <p>dealer-ul are o viziune unică: știe cum migrează clienții între segmente. Aceste date sunt <strong>imposibil de obținut</strong> de un dealer mono-brand. Fundamentul deciziilor strategice.</p>
+          </div>
+          <div class="moat-item">
+            <span class="moat-icon">💎</span>
+            <h4>Spectrul complet</h4>
+            <p>De la 14.000€ (Citroën C3) la 60.000€+ (DS 7). De la primul vehicul la limuzina de lux. De la familie la fleet. <strong>dealer-ul e singurul „one-stop-shop" auto multi-segment din portofoliul său.</strong></p>
+          </div>
+        </div>
+        <div style="text-align:center;margin-top:24px;padding-top:20px;border-top:1px solid var(--border)">
+          <p style="font-size:1rem;font-weight:300;letter-spacing:2px;color:var(--text-muted)">Concluzie pentru strategia media:</p>
+          <p style="font-size:1.1rem;font-weight:600;color:#00ff88;margin-top:6px;letter-spacing:1px">Nu promovați 4 branduri separat. Promovați ECOSISTEMUL dealer-ului.</p>
+          <p style="font-size:.8rem;color:#555;margin-top:8px">Brandurile individuale sunt instrumentele. dealer-ul este orkestra.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- STRATEGY SECTION -->
+<div id="section-strategy" class="section">
+  <div class="container">
+    <div class="section-title">Strategia Media <span class="accent">Recomandată</span></div>
+
+    <!-- Urgency Cards -->
+    <div class="strategy-grid">
+      <div class="strategy-card" style="border-left:3px solid var(--ds)">
+        <h3 style="color:var(--ds)">🥇 DS — Prioritate Critică <span class="urgency-badge urgency-critical">Urgent</span></h3>
+        <p style="margin-bottom:12px"><strong>De ce:</strong> Brand aproape invizibil pe piața românească. Majoritatea consumatorilor nu cunosc DS ca brand premium independent. Oportunitate unică de first-mover în conținut digital.</p>
+        <ul>
+          <li>Construirea completă a prezenței digitale de la zero</li>
+          <li>Content premium: video lifestyle, parteneriate cu publicații de lux</li>
+          <li>Targetare B2B: flote executive, instituții, diplomație</li>
+          <li>Evenimente exclusive de test-drive pentru audiența premium</li>
+        </ul>
+      </div>
+
+      <div class="strategy-card" style="border-left:3px solid var(--opel)">
+        <h3 style="color:var(--opel)">🥈 Opel — Prioritate Ridicată <span class="urgency-badge urgency-high">Prioritar</span></h3>
+        <p style="margin-bottom:12px"><strong>De ce:</strong> Criză de identitate post-achiziție PSA. Brandul trebuie repoziționat clar. Baza de fani loialiști există dar e neactivată.</p>
+        <ul>
+          <li>Campanie de clarificare: „Inginerie germană, forță globală"</li>
+          <li>Reconectare cu comunitatea de fani Opel din România</li>
+          <li>Push pe electrificare: Mokka-e și Frontera BEV</li>
+          <li>Accent pe fleet sales și parteneriate corporate</li>
+        </ul>
+      </div>
+
+      <div class="strategy-card" style="border-left:3px solid var(--peugeot)">
+        <h3 style="color:var(--peugeot)">🥉 Peugeot — Prioritate Medie <span class="urgency-badge urgency-medium">Important</span></h3>
+        <p style="margin-bottom:12px"><strong>De ce:</strong> Brand bine poziționat dar subreprezintat digital vs. VW/Renault. Are nevoie de amplificare, nu de reconstrucție.</p>
+        <ul>
+          <li>Intensificarea prezenței pe social media și YouTube</li>
+          <li>Conținut focusat pe EV (e-208, e-3008)</li>
+          <li>Campanii targetate 25–35 ani, design-driven</li>
+          <li>SEO agresiv pe termeni de comparație (Peugeot vs VW)</li>
+        </ul>
+      </div>
+
+      <div class="strategy-card" style="border-left:3px solid var(--citroen)">
+        <h3 style="color:var(--citroen)">🏅 Citroën — Prioritate Medie <span class="urgency-badge urgency-medium">Important</span></h3>
+        <p style="margin-bottom:12px"><strong>De ce:</strong> Nivel decent de cunoaștere dar narativ greșit perceput. Trebuie diferențiat clar de Dacia prin confort și valoare.</p>
+        <ul>
+          <li>Repoziționare narativă: „Mai mult confort, nu doar preț"</li>
+          <li>Campanii comparative subtile vs. Dacia pe confort</li>
+          <li>Focus pe Berlingo pentru vehicule comerciale</li>
+          <li>Expansiune comunicare în mediul rural/suburban</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Recommended Channels -->
+    <div style="margin-top:40px">
+      <h3 style="text-align:center;font-size:1rem;letter-spacing:3px;text-transform:uppercase;font-weight:300;margin-bottom:24px">Canale Recomandate <span style="font-weight:700">per Brand</span></h3>
+      <div class="channels-grid">
+        <div class="channel-card" style="border-left-color:var(--peugeot)">
+          <h4 style="color:var(--peugeot)">Peugeot</h4>
+          <ul>
+            <li>Instagram & TikTok (design visual)</li>
+            <li>YouTube (test-drive, review-uri EV)</li>
+            <li>SEO (comparații, „Peugeot vs...")</li>
+            <li>Google Ads (modele EV + configurator)</li>
+            <li>Influenceri auto & tech</li>
+          </ul>
+        </div>
+        <div class="channel-card" style="border-left-color:var(--citroen)">
+          <h4 style="color:var(--citroen)">Citroën</h4>
+          <ul>
+            <li>Facebook (audiență familii 30–50)</li>
+            <li>YouTube (confort, călătorii în familie)</li>
+            <li>SEO local (dealeri, oferte regionale)</li>
+            <li>OOH suburban/rural (panouri, radio)</li>
+            <li>Parteneriate cu bloguri de parenting</li>
+          </ul>
+        </div>
+        <div class="channel-card" style="border-left-color:var(--ds)">
+          <h4 style="color:var(--ds)">DS</h4>
+          <ul>
+            <li>LinkedIn (B2B, executive fleet)</li>
+            <li>Publicații premium (Forbes, Business Magazin)</li>
+            <li>Evenimente private de test-drive</li>
+            <li>Video cinematic (brand film, lifestyle)</li>
+            <li>Influenceri lifestyle/lux</li>
+          </ul>
+        </div>
+        <div class="channel-card" style="border-left-color:var(--opel)">
+          <h4 style="color:var(--opel)">Opel</h4>
+          <ul>
+            <li>Facebook & YouTube (bază largă 30–55)</li>
+            <li>SEO (fiabilitate germană, comparații)</li>
+            <li>Fleet marketing direct (B2B)</li>
+            <li>Campanii de nostalgie/rebranding</li>
+            <li>Google Ads (Frontera BEV, Mokka-e)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Priority Matrix -->
+    <div class="matrix-container" style="margin-top:50px">
+      <h3 style="text-align:center;font-size:1rem;letter-spacing:3px;text-transform:uppercase;font-weight:300">Matrice de Prioritizare: <span style="font-weight:700">Efort vs. Impact</span></h3>
+      <div style="display:grid;grid-template-columns:24px 1fr;gap:8px;margin-top:24px">
+        <div style="display:flex;align-items:center;justify-content:center">
+          <span style="writing-mode:vertical-rl;transform:rotate(180deg);font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:#555">← Efort mic &nbsp;&nbsp;&nbsp; Efort mare →</span>
+        </div>
+        <div>
+          <div class="matrix-grid">
+            <div class="matrix-cell" style="background:rgba(0,200,100,.08)">
+              <h4 style="color:#4caf50">✦ Impact Mare / Efort Mic — Quick Wins</h4>
+              <div class="matrix-item"><div class="matrix-dot" style="background:var(--ds)"></div>DS: Creare conținut SEO (zero competiție)</div>
+              <div class="matrix-item"><div class="matrix-dot" style="background:var(--peugeot)"></div>Peugeot: Campanii Instagram design-focused</div>
+              <div class="matrix-item"><div class="matrix-dot" style="background:var(--opel)"></div>Opel: Postări nostalgie/comunitate pe Facebook</div>
+            </div>
+            <div class="matrix-cell" style="background:rgba(0,149,217,.08)">
+              <h4 style="color:#2196f3">✦ Impact Mare / Efort Mare — Investiții Strategice</h4>
+              <div class="matrix-item"><div class="matrix-dot" style="background:var(--ds)"></div>DS: Brand awareness de la zero (video, PR, evenimente)</div>
+              <div class="matrix-item"><div class="matrix-dot" style="background:var(--opel)"></div>Opel: Campanie de repoziționare/rebranding</div>
+              <div class="matrix-item"><div class="matrix-dot" style="background:var(--peugeot)"></div>Peugeot: Campanie EV integrată multi-channel</div>
+            </div>
+            <div class="matrix-cell" style="background:rgba(255,255,255,.03)">
+              <h4>✦ Impact Mic / Efort Mic — Întreținere</h4>
+              <div class="matrix-item"><div class="matrix-dot" style="background:var(--citroen)"></div>Citroën: Menținere postări sociale organice</div>
+              <div class="matrix-item"><div class="matrix-dot" style="background:var(--peugeot)"></div>Peugeot: Actualizare continuă SEO modele</div>
+              <div class="matrix-item"><div class="matrix-dot" style="background:var(--opel)"></div>Opel: Newsletter comunitate existentă</div>
+            </div>
+            <div class="matrix-cell" style="background:rgba(255,60,60,.05)">
+              <h4 style="color:#666">✦ Impact Mic / Efort Mare — De Evitat</h4>
+              <div class="matrix-item"><div class="matrix-dot" style="background:var(--citroen)"></div>Citroën: Război de prețuri cu Dacia (neproductiv)</div>
+              <div class="matrix-item"><div class="matrix-dot" style="background:var(--ds)"></div>DS: OOH masiv (audiența prea nișată)</div>
+              <div class="matrix-item"><div class="matrix-dot" style="background:var(--opel)"></div>Opel: Rebranding complet al identității vizuale</div>
+            </div>
+          </div>
+          <div class="matrix-labels">
+            <div class="matrix-label">← Impact mic</div>
+            <div class="matrix-label">Impact mare →</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="footer">
+  Audit realizat de <a href="https://b2b.websem.ro/market-command" style="color:#0D9488;text-decoration:none">WebSEM Market Command</a> · Date anonimizate · 2026
+</div>
+
+<div class="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
+
+<script>
+// Card toggle
+function toggleCard(head) {
+  const card = head.parentElement;
+  card.classList.toggle('open');
+}
+
+// Section navigation
+function showSection(name, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById('section-' + name).classList.add('active');
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (name === 'chart' && !window._chartInit) initChart();
+  if (name === 'ecosystem' && !window._ecoInit) initEcosystem();
+  if (name === 'services' && !window._svcInit) initServices();
+}
+
+// Scroll-to-top button
+window.addEventListener('scroll', () => {
+  document.querySelector('.scroll-top').classList.toggle('visible', window.scrollY > 400);
+});
+
+// Open first card of each brand on load
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.brand-col').forEach(col => {
+    const first = col.querySelector('.card');
+    if (first) first.classList.add('open');
+  });
+});
+
+// Services Module
+function initServices() {
+  window._svcInit = true;
+  // Animate revenue bars
+  setTimeout(() => {
+    document.querySelectorAll('.rev-bar-fill[data-width]').forEach(bar => {
+      bar.style.width = bar.dataset.width + '%';
+    });
+  }, 300);
+}
+
+// Ecosystem Module
+function initEcosystem() {
+  window._ecoInit = true;
+  // Animated counters
+  document.querySelectorAll('.kpi-number[data-count]').forEach(el => {
+    const target = parseInt(el.dataset.count);
+    let current = 0;
+    const step = Math.max(1, Math.floor(target / 40));
+    const interval = setInterval(() => {
+      current += step;
+      if (current >= target) { current = target; clearInterval(interval); }
+      el.textContent = current;
+    }, 30);
+  });
+  // Radar Chart
+  const rctx = document.getElementById('radarChart').getContext('2d');
+  new Chart(rctx, {
+    type: 'radar',
+    data: {
+      labels: ['Design & Imagine', 'Notorietate RO', 'Potențial EV', 'Preț competitiv', 'Apel Fleet/B2B', 'Potențial Digital', 'Percepție Premium', 'Acoperire Segment'],
+      datasets: [
+        { label: 'Peugeot', data: [92, 45, 88, 60, 55, 70, 68, 65], borderColor: '#0095d9', backgroundColor: 'rgba(0,149,217,0.08)', borderWidth: 2, pointBackgroundColor: '#0095d9', pointRadius: 4 },
+        { label: 'Citroën', data: [50, 40, 35, 85, 60, 40, 30, 70], borderColor: '#d4001a', backgroundColor: 'rgba(212,0,26,0.08)', borderWidth: 2, pointBackgroundColor: '#d4001a', pointRadius: 4 },
+        { label: 'DS', data: [85, 8, 60, 20, 45, 15, 95, 15], borderColor: '#b8860b', backgroundColor: 'rgba(184,134,11,0.08)', borderWidth: 2, pointBackgroundColor: '#b8860b', pointRadius: 4 },
+        { label: 'Opel', data: [45, 38, 65, 75, 80, 35, 40, 60], borderColor: '#FFD700', backgroundColor: 'rgba(255,215,0,0.08)', borderWidth: 2, pointBackgroundColor: '#FFD700', pointRadius: 4 }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      scales: {
+        r: {
+          beginAtZero: true, max: 100,
+          grid: { color: 'rgba(255,255,255,0.06)' },
+          angleLines: { color: 'rgba(255,255,255,0.06)' },
+          pointLabels: { color: '#999', font: { size: 10 } },
+          ticks: { display: false, stepSize: 25 }
+        }
+      },
+      plugins: {
+        legend: { position: 'bottom', labels: { color: '#999', padding: 20, usePointStyle: true, pointStyle: 'circle', font: { size: 11 } } },
+        tooltip: { backgroundColor: 'rgba(20,20,20,0.95)', titleFont: { size: 13, weight: 'bold' }, bodyFont: { size: 11 }, padding: 12, cornerRadius: 8 }
+      },
+      animation: { duration: 1500, easing: 'easeOutQuart' }
+    }
+  });
+  // Init simulator
+  updateSim();
+}
+
+function updateSim() {
+  const v1 = parseInt(document.getElementById('sim1').value);
+  const v2 = parseInt(document.getElementById('sim2').value);
+  const v3 = parseInt(document.getElementById('sim3').value);
+  const v4 = parseInt(document.getElementById('sim4').value);
+  document.getElementById('sim1val').textContent = v1 + '%';
+  document.getElementById('sim2val').textContent = v2 + '%';
+  document.getElementById('sim3val').textContent = v3 + '%';
+  document.getElementById('sim4val').textContent = v4;
+  // Estimates (based on ~500 units/year base across all brands)
+  const upgradeUnits = Math.round((v1 / 100) * 200 + (v2 / 100) * 150);
+  const crossSellUnits = Math.round((v3 / 100) * 180);
+  const fleetUnits = v4 * 8; // avg 8 cars per fleet contract
+  const totalUnits = upgradeUnits + crossSellUnits + fleetUnits;
+  const avgPrice = 26000;
+  const revenue = totalUnits * avgPrice;
+  const retention = Math.min(95, Math.round(15 + v1 * 1.2 + v3 * 1.5 + v2 * 0.8));
+  document.getElementById('simTotalUnits').textContent = '+' + totalUnits;
+  document.getElementById('simTotalRevenue').textContent = revenue >= 1000000 ? '+€' + (revenue / 1000000).toFixed(1) + 'M' : '+€' + Math.round(revenue / 1000) + 'K';
+  document.getElementById('simRetention').textContent = '+' + retention + '%';
+}
+
+// Chart
+function initChart() {
+  window._chartInit = true;
+  const ctx = document.getElementById('positionChart').getContext('2d');
+
+  const brandData = [
+    // Peugeot ecosystem
+    { x: 60, y: 45, label: 'Peugeot', r: 14, bg: 'rgba(0,149,217,0.85)', border: '#0095d9' },
+    { x: 65, y: 82, label: 'VW', r: 10, bg: 'rgba(0,149,217,0.3)', border: 'rgba(0,149,217,0.5)' },
+    { x: 55, y: 70, label: 'Renault', r: 10, bg: 'rgba(0,149,217,0.3)', border: 'rgba(0,149,217,0.5)' },
+    { x: 55, y: 50, label: 'Kia', r: 9, bg: 'rgba(0,149,217,0.3)', border: 'rgba(0,149,217,0.5)' },
+    // Citroën ecosystem
+    { x: 35, y: 38, label: 'Citroën', r: 13, bg: 'rgba(212,0,26,0.85)', border: '#d4001a' },
+    { x: 20, y: 92, label: 'Dacia', r: 11, bg: 'rgba(212,0,26,0.3)', border: 'rgba(212,0,26,0.5)' },
+    { x: 40, y: 72, label: 'Renault²', r: 9, bg: 'rgba(212,0,26,0.3)', border: 'rgba(212,0,26,0.5)' },
+    { x: 42, y: 58, label: 'Škoda', r: 9, bg: 'rgba(212,0,26,0.3)', border: 'rgba(212,0,26,0.5)' },
+    // DS ecosystem
+    { x: 82, y: 12, label: 'DS', r: 11, bg: 'rgba(184,134,11,0.85)', border: '#b8860b' },
+    { x: 85, y: 72, label: 'BMW', r: 11, bg: 'rgba(184,134,11,0.3)', border: 'rgba(184,134,11,0.5)' },
+    { x: 88, y: 70, label: 'Audi', r: 10, bg: 'rgba(184,134,11,0.3)', border: 'rgba(184,134,11,0.5)' },
+    { x: 78, y: 40, label: 'Volvo', r: 9, bg: 'rgba(184,134,11,0.3)', border: 'rgba(184,134,11,0.5)' },
+    // Opel ecosystem
+    { x: 48, y: 35, label: 'Opel', r: 13, bg: 'rgba(255,215,0,0.85)', border: '#FFD700' },
+    { x: 50, y: 75, label: 'VW²', r: 10, bg: 'rgba(255,215,0,0.3)', border: 'rgba(255,215,0,0.5)' },
+    { x: 45, y: 52, label: 'Ford', r: 10, bg: 'rgba(255,215,0,0.3)', border: 'rgba(255,215,0,0.5)' },
+    { x: 50, y: 55, label: 'Hyundai', r: 9, bg: 'rgba(255,215,0,0.3)', border: 'rgba(255,215,0,0.5)' },
+  ];
+
+  new Chart(ctx, {
+    type: 'bubble',
+    data: {
+      datasets: [{
+        data: brandData.map(d => ({ x: d.x, y: d.y, r: d.r })),
+        backgroundColor: brandData.map(d => d.bg),
+        borderColor: brandData.map(d => d.border),
+        borderWidth: 2,
+        hoverBorderWidth: 3
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      layout: { padding: { top: 20, right: 30, bottom: 10, left: 10 } },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: 'rgba(20,20,20,0.95)',
+          titleFont: { size: 14, weight: 'bold' },
+          bodyFont: { size: 12 },
+          padding: 12,
+          cornerRadius: 8,
+          callbacks: {
+            title: function(items) {
+              return brandData[items[0].dataIndex].label;
+            },
+            label: function(item) {
+              const d = brandData[item.dataIndex];
+              const price = d.x < 35 ? 'Buget' : d.x < 55 ? 'Mediu' : d.x < 75 ? 'Mediu-Premium' : 'Premium';
+              const aware = d.y < 30 ? 'Foarte scăzută' : d.y < 50 ? 'Scăzută' : d.y < 70 ? 'Medie' : 'Ridicată';
+              return ['Preț: ' + price, 'Notorietate: ' + aware];
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          min: 0, max: 100,
+          title: { display: true, text: 'PREȚ  →  Buget ──────────── Premium', color: '#666', font: { size: 12, letterSpacing: '2px' } },
+          grid: { color: 'rgba(255,255,255,0.05)', drawBorder: false },
+          ticks: { display: false }
+        },
+        y: {
+          min: 0, max: 100,
+          title: { display: true, text: 'NOTORIETATE  →  Scăzută ──────────── Ridicată', color: '#666', font: { size: 12 } },
+          grid: { color: 'rgba(255,255,255,0.05)', drawBorder: false },
+          ticks: { display: false }
+        }
+      },
+      animation: { duration: 1200, easing: 'easeOutQuart' }
+    },
+    plugins: [{
+      afterDraw: function(chart) {
+        const ctx = chart.ctx;
+        const meta = chart.getDatasetMeta(0);
+        ctx.save();
+        ctx.font = '11px "Segoe UI", system-ui, sans-serif';
+        ctx.textAlign = 'center';
+        meta.data.forEach((point, i) => {
+          const d = brandData[i];
+          const isBrand = ['Peugeot','Citroën','DS','Opel'].includes(d.label);
+          ctx.fillStyle = isBrand ? '#fff' : 'rgba(255,255,255,0.7)';
+          ctx.font = isBrand ? 'bold 12px "Segoe UI", system-ui, sans-serif' : '10px "Segoe UI", system-ui, sans-serif';
+          ctx.fillText(d.label, point.x, point.y - d.r - 6);
+        });
+        ctx.restore();
+      }
+    }]
+  });
+}
+</script>
+</body>
+</html>
