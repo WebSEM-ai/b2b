@@ -1,0 +1,308 @@
+---
+// ModulesGrid - Descriptions of all 15 MarketingIQ modules
+const modules = [
+    {
+        name: 'PromptIQ',
+        icon: 'pen',
+        color: '#6366f1',
+        desc: 'Analizează și optimizează prompturile AI pentru vizibilitate maximă în motoarele de răspuns generativ.',
+        synergy: 'Alimentează modulul de Conținut și AEO Tracker'
+    },
+    {
+        name: 'AEO Tracker',
+        icon: 'target',
+        color: '#22d3ee',
+        desc: 'Monitorizează vizibilitatea brandului pe 5 platforme AI: Perplexity, ChatGPT, Claude, Gemini și Grok.',
+        synergy: 'Datele de vizibilitate AI ghidează strategia de Conținut'
+    },
+    {
+        name: 'Competitori',
+        icon: 'users',
+        color: '#f472b6',
+        desc: 'Intelligence competitiv cu monitorizare în timp real — prețuri, keywords, poziții și strategie de conținut.',
+        synergy: 'Gap-urile competitive alimentează Cuvinte Cheie'
+    },
+    {
+        name: 'Tendințe',
+        icon: 'trending',
+        color: '#34d399',
+        desc: 'Analiză Google Trends cu interes în timp, interogări asociate și distribuție regională pe piața din România.',
+        synergy: 'Termenii trending sunt preluați de Google Ads și Conținut'
+    },
+    {
+        name: 'Cuvinte Cheie',
+        icon: 'search',
+        color: '#a78bfa',
+        desc: 'Cercetare keywords cu sugestii autocomplete, clustere de intenție și oportunități long-tail.',
+        synergy: 'Hub central — alimentează Conținut, PPC și Rank Tracking'
+    },
+    {
+        name: 'Conținut',
+        icon: 'doc',
+        color: '#fb923c',
+        desc: 'Calendar editorial, clustere tematice și gap analysis bazat pe date din toate celelalte module.',
+        synergy: 'Verificat de Compliance, optimizat pentru AEO'
+    },
+    {
+        name: 'Google Shopping',
+        icon: 'shop',
+        color: '#facc15',
+        desc: 'Analiză piață: prețuri, distribuție, top selleri și produse competitive — date reale din Google Shopping.',
+        synergy: 'Datele de piață optimizează biddingul Google Ads'
+    },
+    {
+        name: 'YouTube',
+        icon: 'video',
+        color: '#f87171',
+        desc: 'Monitorizare videoclipuri, canale și Shorts. Identifică oportunități de conținut video pe nișa ta.',
+        synergy: 'Strategia video se sincronizează cu Conținut'
+    },
+    {
+        name: 'Rank Tracking',
+        icon: 'chart',
+        color: '#38bdf8',
+        desc: 'Poziții Google, analiză SERP și monitorizare SEO în timp real pe cuvintele cheie relevante.',
+        synergy: 'Pozițiile alimentează cercetarea de Keywords și validarea SEO'
+    },
+    {
+        name: 'Landing Page',
+        icon: 'layout',
+        color: '#2dd4bf',
+        desc: 'Audit UX/UI + Technical Health — scoruri pe Overall, UX și Tech cu recomandări acționabile.',
+        synergy: 'Optimizat de Compliance, performance-ul afectează Google Ads'
+    },
+    {
+        name: 'Tracking Audit',
+        icon: 'check',
+        color: '#c084fc',
+        desc: 'Audit Meta Pixel, GA4, GTM, TikTok — verifică implementarea și integritatea datelor de tracking.',
+        synergy: 'Date corecte de tracking = campanii Ads performante'
+    },
+    {
+        name: 'Compliance',
+        icon: 'shield',
+        color: '#4ade80',
+        desc: 'Verificare conformitate produse — identifică riscuri critice, majore și minore cu referințe legale.',
+        synergy: 'Validează Conținut și Landing Page înainte de publicare'
+    },
+    {
+        name: 'Google News',
+        icon: 'news',
+        color: '#fbbf24',
+        desc: 'Monitorizare știri, mențiuni și analiză media — oportunitățile sunt preluate de strategia de conținut.',
+        synergy: 'Semnalele media alimentează Tendințe și Conținut'
+    },
+    {
+        name: 'Meta Ads',
+        icon: 'star',
+        color: '#818cf8',
+        desc: 'Campanii Facebook & Instagram cu analiză audiențe, creative și optimizare bazată pe date cross-modul.',
+        synergy: 'Tracking Audit validează pixelii; Keywords ghidează targetarea'
+    },
+    {
+        name: 'Google Ads',
+        icon: 'zap',
+        color: '#fb7185',
+        desc: 'Campanii Google Ads cu keywords, metrici și analiză performanță — sincronizat cu SEO pentru anti-canibalizare.',
+        synergy: 'Nu se canibalizează cu SEO; Tendințe și Shopping optimizează biddingul'
+    },
+];
+
+const iconPaths: Record<string, string> = {
+    pen: 'M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z',
+    target: 'M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zM12 18c3.314 0 6-2.686 6-6s-2.686-6-6-6-6 2.686-6 6 2.686 6 6 6zM12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4z',
+    users: 'M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75',
+    trending: 'M23 6l-9.5 9.5-5-5L1 18M17 6h6v6',
+    search: 'M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM21 21l-4.35-4.35',
+    doc: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M16 13H8M16 17H8',
+    shop: 'M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0',
+    video: 'M23 7l-7 5 7 5zM1 5h15v14H1z',
+    chart: 'M18 20V10M12 20V4M6 20v-6',
+    layout: 'M3 3h18v18H3zM3 9h18M9 21V9',
+    check: 'M22 11.08V12a10 10 0 1 1-5.93-9.14M22 4L12 14.01l-3-3',
+    shield: 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z',
+    news: 'M19 20H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v1M21 12h-8M21 8h-5M21 16h-3',
+    star: 'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z',
+    zap: 'M13 2L3 14h9l-1 8 10-12h-9l1-8z',
+};
+---
+
+<section class="modules-section">
+    <div class="modules-container">
+        <div class="modules-header">
+            <span class="modules-badge">15 Module Integrate</span>
+            <h2 class="modules-title">Fiecare modul. <span class="gradient">Fiecare conexiune.</span></h2>
+            <p class="modules-subtitle">
+                Module specializate care lucrează împreună — datele din fiecare modul alimentează și optimizează pe celelalte.
+            </p>
+        </div>
+
+        <div class="modules-grid">
+            {modules.map((mod) => (
+                <div class="module-card" style={`--card-color: ${mod.color}`}>
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d={iconPaths[mod.icon]} />
+                        </svg>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-name">{mod.name}</h3>
+                        <p class="card-desc">{mod.desc}</p>
+                        <div class="card-synergy">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="synergy-icon">
+                                <path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3" />
+                            </svg>
+                            <span>{mod.synergy}</span>
+                        </div>
+                    </div>
+                </div>
+            ))}
+        </div>
+    </div>
+</section>
+
+<style>
+    .modules-section {
+        padding: 4rem 2rem 6rem;
+    }
+
+    .modules-container {
+        max-width: 1300px;
+        margin: 0 auto;
+    }
+
+    .modules-header {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    .modules-badge {
+        display: inline-block;
+        padding: 0.4rem 1.2rem;
+        border-radius: 100px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        border: 1px solid rgba(99, 102, 241, 0.3);
+        background: rgba(99, 102, 241, 0.08);
+        color: #a5b4fc;
+        margin-bottom: 1.2rem;
+    }
+
+    .modules-title {
+        font-size: clamp(1.6rem, 4vw, 2.4rem);
+        font-weight: 700;
+        color: #f1f5f9;
+        margin-bottom: 0.8rem;
+    }
+
+    .modules-title .gradient {
+        background: linear-gradient(135deg, #6366f1, #22d3ee);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .modules-subtitle {
+        font-size: 1rem;
+        color: #94a3b8;
+        max-width: 550px;
+        margin: 0 auto;
+        line-height: 1.6;
+    }
+
+    .modules-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1.2rem;
+    }
+
+    .module-card {
+        background: rgba(15, 23, 42, 0.6);
+        border: 1px solid rgba(99, 102, 241, 0.1);
+        border-radius: 16px;
+        padding: 1.5rem;
+        display: flex;
+        gap: 1rem;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        backdrop-filter: blur(8px);
+    }
+
+    .module-card:hover {
+        border-color: var(--card-color, rgba(99, 102, 241, 0.3));
+        box-shadow: 0 0 30px rgba(99, 102, 241, 0.08);
+        transform: translateY(-2px);
+    }
+
+    .card-icon {
+        flex-shrink: 0;
+        width: 42px;
+        height: 42px;
+        border-radius: 10px;
+        background: rgba(99, 102, 241, 0.08);
+        border: 1px solid rgba(99, 102, 241, 0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s;
+    }
+
+    .module-card:hover .card-icon {
+        background: rgba(99, 102, 241, 0.12);
+        border-color: var(--card-color);
+    }
+
+    .card-icon svg {
+        width: 20px;
+        height: 20px;
+        color: var(--card-color, #a5b4fc);
+    }
+
+    .card-content {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .card-name {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #f1f5f9;
+        margin-bottom: 0.4rem;
+    }
+
+    .card-desc {
+        font-size: 0.82rem;
+        color: #94a3b8;
+        line-height: 1.55;
+        margin-bottom: 0.6rem;
+    }
+
+    .card-synergy {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.4rem;
+        font-size: 0.72rem;
+        color: var(--card-color, #818cf8);
+        line-height: 1.4;
+        padding-top: 0.5rem;
+        border-top: 1px solid rgba(99, 102, 241, 0.08);
+    }
+
+    .synergy-icon {
+        width: 14px;
+        height: 14px;
+        flex-shrink: 0;
+        margin-top: 1px;
+    }
+
+    @media (max-width: 640px) {
+        .modules-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .modules-section {
+            padding: 3rem 1rem 4rem;
+        }
+    }
+</style>

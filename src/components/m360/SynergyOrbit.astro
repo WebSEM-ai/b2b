@@ -1,0 +1,824 @@
+---
+// SynergyOrbit - Interactive visualization showing data flow between MarketingIQ modules
+---
+
+<section class="synergy-section">
+    <div class="synergy-header">
+        <span class="synergy-badge">MarketingIQ — Marketing 360&deg;</span>
+        <h1 class="synergy-title">
+            <span class="line">15 Module. <strong>Un Singur Ecosistem.</strong></span>
+            <span class="line"><span class="gradient">Date sincronizate. Rezultate amplificate.</span></span>
+        </h1>
+        <p class="synergy-subtitle">
+            Fiecare modul colectează date, le procesează și le transmite celorlalte module &mdash; în timp real.
+            Rezultatul: campanii care performează sinergic, nu izolat.
+        </p>
+    </div>
+
+    <div class="orbit-viewport">
+        <div class="orbit-container" id="orbit-container">
+            <canvas id="synergy-canvas"></canvas>
+
+            <!-- Central Hub -->
+            <div class="hub">
+                <div class="hub-ring hub-ring-1"></div>
+                <div class="hub-ring hub-ring-2"></div>
+                <div class="hub-ring hub-ring-3"></div>
+                <div class="hub-core">
+                    <span class="hub-logo">MI</span>
+                    <span class="hub-label">Brandul Tău</span>
+                </div>
+            </div>
+
+            <!-- Module Nodes -->
+            <div class="module-node" data-index="0" data-color="#6366f1">
+                <div class="node-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                </div>
+                <span class="node-label">PromptIQ</span>
+            </div>
+            <div class="module-node" data-index="1" data-color="#22d3ee">
+                <div class="node-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                </div>
+                <span class="node-label">AEO Tracker</span>
+            </div>
+            <div class="module-node" data-index="2" data-color="#f472b6">
+                <div class="node-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </div>
+                <span class="node-label">Competitori</span>
+            </div>
+            <div class="module-node" data-index="3" data-color="#34d399">
+                <div class="node-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                </div>
+                <span class="node-label">Tendințe</span>
+            </div>
+            <div class="module-node" data-index="4" data-color="#a78bfa">
+                <div class="node-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                </div>
+                <span class="node-label">Cuvinte Cheie</span>
+            </div>
+            <div class="module-node" data-index="5" data-color="#fb923c">
+                <div class="node-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </div>
+                <span class="node-label">Conținut</span>
+            </div>
+            <div class="module-node" data-index="6" data-color="#facc15">
+                <div class="node-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                </div>
+                <span class="node-label">Shopping</span>
+            </div>
+            <div class="module-node" data-index="7" data-color="#f87171">
+                <div class="node-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+                </div>
+                <span class="node-label">YouTube</span>
+            </div>
+            <div class="module-node" data-index="8" data-color="#38bdf8">
+                <div class="node-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                </div>
+                <span class="node-label">Rank Tracking</span>
+            </div>
+            <div class="module-node" data-index="9" data-color="#2dd4bf">
+                <div class="node-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+                </div>
+                <span class="node-label">Landing Page</span>
+            </div>
+            <div class="module-node" data-index="10" data-color="#c084fc">
+                <div class="node-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                </div>
+                <span class="node-label">Tracking Audit</span>
+            </div>
+            <div class="module-node" data-index="11" data-color="#4ade80">
+                <div class="node-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <span class="node-label">Compliance</span>
+            </div>
+            <div class="module-node" data-index="12" data-color="#fbbf24">
+                <div class="node-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 20H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v1"/><path d="M21 12h-8"/><path d="M21 8h-5"/><path d="M21 16h-3"/></svg>
+                </div>
+                <span class="node-label">Google News</span>
+            </div>
+            <div class="module-node" data-index="13" data-color="#818cf8">
+                <div class="node-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                </div>
+                <span class="node-label">Meta Ads</span>
+            </div>
+            <div class="module-node" data-index="14" data-color="#fb7185">
+                <div class="node-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                </div>
+                <span class="node-label">Google Ads</span>
+            </div>
+        </div>
+
+        <!-- Active Synergy Scenario -->
+        <div class="scenario-bar" id="scenario-bar">
+            <div class="scenario-indicator"></div>
+            <div class="scenario-content">
+                <div class="scenario-flow" id="scenario-flow"></div>
+                <p class="scenario-desc" id="scenario-desc"></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    // ===== SYNERGY ORBIT ANIMATION =====
+    const container = document.getElementById('orbit-container');
+    const canvas = document.getElementById('synergy-canvas') as HTMLCanvasElement;
+    const nodes = document.querySelectorAll('.module-node');
+
+    if (canvas && container) {
+        const ctx = canvas.getContext('2d')!;
+        let W = 0, H = 0, cx = 0, cy = 0;
+        let radius = 0;
+
+        // Module colors
+        const colors = [
+            '#6366f1', '#22d3ee', '#f472b6', '#34d399', '#a78bfa',
+            '#fb923c', '#facc15', '#f87171', '#38bdf8', '#2dd4bf',
+            '#c084fc', '#4ade80', '#fbbf24', '#818cf8', '#fb7185'
+        ];
+
+        // Module positions (calculated)
+        const modulePositions: Array<{x: number; y: number}> = [];
+
+        // Synergy connections: [fromIndex, toIndex]
+        const connections: [number, number][] = [
+            [3, 4],   // Tendințe → Cuvinte Cheie
+            [4, 5],   // Cuvinte Cheie → Conținut
+            [5, 11],  // Conținut → Compliance
+            [8, 4],   // Rank Tracking → Cuvinte Cheie
+            [1, 5],   // AEO Tracker → Conținut
+            [11, 9],  // Compliance → Landing Page
+            [10, 13], // Tracking Audit → Meta Ads
+            [10, 14], // Tracking Audit → Google Ads
+            [6, 14],  // Shopping → Google Ads
+            [2, 4],   // Competitori → Cuvinte Cheie
+            [9, 14],  // Landing Page → Google Ads
+            [3, 14],  // Tendințe → Google Ads
+            [5, 1],   // Conținut → AEO Tracker
+            [7, 5],   // YouTube → Conținut
+            [0, 5],   // PromptIQ → Conținut
+            [12, 5],  // Google News → Conținut
+            [4, 14],  // Cuvinte Cheie → Google Ads
+            [4, 13],  // Cuvinte Cheie → Meta Ads
+            [8, 14],  // Rank Tracking → Google Ads
+            [0, 1],   // PromptIQ → AEO Tracker
+        ];
+
+        // Synergy scenarios for the cycling description
+        const scenarios = [
+            {
+                active: [3, 4, 14],
+                connections: [[3, 4], [4, 14]],
+                flow: ['Tendințe', 'Cuvinte Cheie', 'Google Ads'],
+                desc: 'Cuvintele în trend sunt identificate automat și transformate în campanii PPC targetate — fără canibalizare SEO.'
+            },
+            {
+                active: [5, 11, 9],
+                connections: [[5, 11], [11, 9]],
+                flow: ['Conținut', 'Compliance', 'Landing Page'],
+                desc: 'Textele sunt verificate automat pentru conformitate, apoi optimizate pe paginile de destinație pentru conversie maximă.'
+            },
+            {
+                active: [8, 4, 5],
+                connections: [[8, 4], [4, 5]],
+                flow: ['Rank Tracking', 'Cuvinte Cheie', 'Conținut'],
+                desc: 'Pozițiile Google alimentează cercetarea de keywords, care generează automat strategia de conținut.'
+            },
+            {
+                active: [10, 13, 14],
+                connections: [[10, 13], [10, 14]],
+                flow: ['Tracking Audit', 'Meta Ads', 'Google Ads'],
+                desc: 'Datele de tracking sunt validate și sincronizate în ambele platforme de advertising pentru atribuire corectă.'
+            },
+            {
+                active: [1, 5, 0],
+                connections: [[1, 5], [0, 5]],
+                flow: ['AEO Tracker', 'Conținut', 'PromptIQ'],
+                desc: 'Vizibilitatea AI dictează strategia de conținut, iar PromptIQ optimizează prompturile pentru prezență maximă în motoarele AI.'
+            },
+            {
+                active: [2, 4, 8],
+                connections: [[2, 4], [8, 4]],
+                flow: ['Competitori', 'Cuvinte Cheie', 'Rank Tracking'],
+                desc: 'Gap-urile competitive sunt identificate, transformate în oportunități de keyword targeting și monitorizate în timp real.'
+            },
+            {
+                active: [6, 14, 9],
+                connections: [[6, 14], [9, 14]],
+                flow: ['Shopping', 'Google Ads', 'Landing Page'],
+                desc: 'Datele de piață din Shopping optimizează biddingul, iar landing page-urile sunt adaptate automat pentru conversie.'
+            },
+        ];
+
+        let currentScenario = 0;
+        let animTime = 0;
+
+        // Particles flowing along connections
+        interface Particle {
+            fromIdx: number;
+            toIdx: number;
+            progress: number;
+            speed: number;
+            color: string;
+            size: number;
+        }
+        let particles: Particle[] = [];
+
+        function resize() {
+            const rect = container!.getBoundingClientRect();
+            W = rect.width;
+            H = rect.height;
+            canvas.width = W * window.devicePixelRatio;
+            canvas.height = H * window.devicePixelRatio;
+            canvas.style.width = W + 'px';
+            canvas.style.height = H + 'px';
+            ctx.setTransform(window.devicePixelRatio, 0, 0, window.devicePixelRatio, 0, 0);
+
+            cx = W / 2;
+            cy = H / 2;
+            radius = Math.min(W, H) * 0.38;
+
+            // Calculate module positions
+            modulePositions.length = 0;
+            const count = 15;
+            for (let i = 0; i < count; i++) {
+                const angle = (i / count) * Math.PI * 2 - Math.PI / 2;
+                modulePositions.push({
+                    x: cx + Math.cos(angle) * radius,
+                    y: cy + Math.sin(angle) * radius
+                });
+            }
+
+            // Position DOM nodes
+            nodes.forEach((node, i) => {
+                const el = node as HTMLElement;
+                const pos = modulePositions[i];
+                if (pos) {
+                    el.style.left = pos.x + 'px';
+                    el.style.top = pos.y + 'px';
+                }
+            });
+        }
+
+        function spawnParticles() {
+            const scenario = scenarios[currentScenario];
+            // Spawn particles for active connections
+            scenario.connections.forEach(([from, to]) => {
+                if (Math.random() > 0.7) {
+                    const fromColor = colors[from];
+                    const toColor = colors[to];
+                    particles.push({
+                        fromIdx: from,
+                        toIdx: to,
+                        progress: 0,
+                        speed: 0.008 + Math.random() * 0.006,
+                        color: Math.random() > 0.5 ? fromColor : toColor,
+                        size: 2 + Math.random() * 2
+                    });
+                }
+            });
+
+            // Also spawn on random other connections (subtle)
+            if (Math.random() > 0.85) {
+                const conn = connections[Math.floor(Math.random() * connections.length)];
+                particles.push({
+                    fromIdx: conn[0],
+                    toIdx: conn[1],
+                    progress: 0,
+                    speed: 0.004 + Math.random() * 0.004,
+                    color: colors[conn[0]],
+                    size: 1.5
+                });
+            }
+        }
+
+        function drawConnection(from: {x:number,y:number}, to: {x:number,y:number}, alpha: number, color: string, lineWidth: number = 1) {
+            // Draw a curved line through center-ish area
+            const midX = (from.x + to.x) / 2 + (cy - (from.y + to.y) / 2) * 0.15;
+            const midY = (from.y + to.y) / 2 + ((from.x + to.x) / 2 - cx) * 0.15;
+
+            ctx.beginPath();
+            ctx.moveTo(from.x, from.y);
+            ctx.quadraticCurveTo(midX, midY, to.x, to.y);
+            ctx.strokeStyle = color.replace(')', `, ${alpha})`).replace('rgb', 'rgba').replace('#', '');
+
+            // Convert hex to rgba
+            const hex = color.replace('#', '');
+            const r = parseInt(hex.substr(0, 2), 16);
+            const g = parseInt(hex.substr(2, 2), 16);
+            const b = parseInt(hex.substr(4, 2), 16);
+            ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${alpha})`;
+            ctx.lineWidth = lineWidth;
+            ctx.stroke();
+        }
+
+        function getPointOnCurve(from: {x:number,y:number}, to: {x:number,y:number}, t: number) {
+            const midX = (from.x + to.x) / 2 + (cy - (from.y + to.y) / 2) * 0.15;
+            const midY = (from.y + to.y) / 2 + ((from.x + to.x) / 2 - cx) * 0.15;
+            const x = (1-t)*(1-t)*from.x + 2*(1-t)*t*midX + t*t*to.x;
+            const y = (1-t)*(1-t)*from.y + 2*(1-t)*t*midY + t*t*to.y;
+            return {x, y};
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, W, H);
+            if (modulePositions.length === 0) {
+                requestAnimationFrame(animate);
+                return;
+            }
+
+            animTime++;
+            const scenario = scenarios[currentScenario];
+            const activeSet = new Set(scenario.active);
+            const activeConns = new Set(scenario.connections.map(c => c.join(',')));
+
+            // Draw ALL connections (very subtle)
+            connections.forEach(([from, to]) => {
+                const fromPos = modulePositions[from];
+                const toPos = modulePositions[to];
+                const isActive = activeConns.has(`${from},${to}`) || activeConns.has(`${to},${from}`);
+                const color = isActive ? colors[from] : '#6366f1';
+                const alpha = isActive ? 0.4 : 0.06;
+                const lineW = isActive ? 2 : 0.5;
+                drawConnection(fromPos, toPos, alpha, color, lineW);
+            });
+
+            // Draw connection to center for active nodes
+            scenario.active.forEach(idx => {
+                const pos = modulePositions[idx];
+                const alpha = 0.15 + Math.sin(animTime * 0.03) * 0.05;
+                ctx.beginPath();
+                ctx.moveTo(pos.x, pos.y);
+                ctx.lineTo(cx, cy);
+                ctx.strokeStyle = `rgba(99, 102, 241, ${alpha})`;
+                ctx.lineWidth = 0.5;
+                ctx.stroke();
+            });
+
+            // Spawn & update particles
+            spawnParticles();
+            particles = particles.filter(p => p.progress <= 1);
+            particles.forEach(p => {
+                p.progress += p.speed;
+                const from = modulePositions[p.fromIdx];
+                const to = modulePositions[p.toIdx];
+                const pt = getPointOnCurve(from, to, p.progress);
+
+                // Glow
+                const hex = p.color.replace('#', '');
+                const r = parseInt(hex.substr(0, 2), 16);
+                const g = parseInt(hex.substr(2, 2), 16);
+                const b = parseInt(hex.substr(4, 2), 16);
+
+                ctx.beginPath();
+                ctx.arc(pt.x, pt.y, p.size * 3, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(${r}, ${g}, ${b}, 0.15)`;
+                ctx.fill();
+
+                ctx.beginPath();
+                ctx.arc(pt.x, pt.y, p.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(${r}, ${g}, ${b}, 0.9)`;
+                ctx.fill();
+            });
+
+            // Highlight active module nodes
+            nodes.forEach((node, i) => {
+                const el = node as HTMLElement;
+                if (activeSet.has(i)) {
+                    el.classList.add('active');
+                } else {
+                    el.classList.remove('active');
+                }
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        // Scenario cycling
+        function updateScenario() {
+            const scenario = scenarios[currentScenario];
+            const flowEl = document.getElementById('scenario-flow');
+            const descEl = document.getElementById('scenario-desc');
+
+            if (flowEl) {
+                flowEl.innerHTML = scenario.flow.map((name, i) => {
+                    const moduleIdx = scenario.active[i];
+                    const color = colors[moduleIdx] || '#6366f1';
+                    return `<span class="flow-step" style="--step-color: ${color}">${name}</span>` +
+                        (i < scenario.flow.length - 1 ? '<span class="flow-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>' : '');
+                }).join('');
+            }
+            if (descEl) {
+                descEl.textContent = scenario.desc;
+            }
+        }
+
+        function nextScenario() {
+            currentScenario = (currentScenario + 1) % scenarios.length;
+            particles = []; // Clear particles for new scenario
+            updateScenario();
+        }
+
+        resize();
+        updateScenario();
+        animate();
+
+        window.addEventListener('resize', resize);
+        setInterval(nextScenario, 5000);
+
+        // Click on scenario bar to advance
+        document.getElementById('scenario-bar')?.addEventListener('click', nextScenario);
+    }
+</script>
+
+<style>
+    .synergy-section {
+        padding: 6rem 2rem 3rem;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .synergy-header {
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto 3rem;
+    }
+
+    .synergy-badge {
+        display: inline-block;
+        padding: 0.4rem 1.2rem;
+        border-radius: 100px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        border: 1px solid rgba(99, 102, 241, 0.3);
+        background: rgba(99, 102, 241, 0.08);
+        color: #a5b4fc;
+        margin-bottom: 1.5rem;
+    }
+
+    .synergy-title {
+        font-size: clamp(2rem, 5vw, 3.2rem);
+        font-weight: 700;
+        line-height: 1.15;
+        color: #f1f5f9;
+        margin-bottom: 1.2rem;
+    }
+
+    .synergy-title .line {
+        display: block;
+    }
+
+    .synergy-title .gradient {
+        background: linear-gradient(135deg, #6366f1, #22d3ee, #34d399);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .synergy-subtitle {
+        font-size: 1.1rem;
+        color: #94a3b8;
+        line-height: 1.7;
+        max-width: 650px;
+        margin: 0 auto;
+    }
+
+    /* ===== ORBIT VIEWPORT ===== */
+    .orbit-viewport {
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    .orbit-container {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        max-height: 700px;
+    }
+
+    #synergy-canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+    }
+
+    /* ===== CENTRAL HUB ===== */
+    .hub {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 5;
+    }
+
+    .hub-core {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #1e1b4b, #312e81);
+        border: 2px solid rgba(99, 102, 241, 0.5);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        z-index: 2;
+        box-shadow: 0 0 40px rgba(99, 102, 241, 0.3), inset 0 0 20px rgba(99, 102, 241, 0.1);
+    }
+
+    .hub-logo {
+        font-size: 1.4rem;
+        font-weight: 800;
+        color: #a5b4fc;
+        letter-spacing: -0.02em;
+    }
+
+    .hub-label {
+        font-size: 0.6rem;
+        color: #818cf8;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-top: 2px;
+    }
+
+    .hub-ring {
+        position: absolute;
+        border-radius: 50%;
+        border: 1px solid rgba(99, 102, 241, 0.15);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .hub-ring-1 {
+        width: 140px;
+        height: 140px;
+        animation: hubPulse 3s ease-in-out infinite;
+    }
+
+    .hub-ring-2 {
+        width: 180px;
+        height: 180px;
+        animation: hubPulse 3s ease-in-out infinite 0.5s;
+    }
+
+    .hub-ring-3 {
+        width: 220px;
+        height: 220px;
+        animation: hubPulse 3s ease-in-out infinite 1s;
+    }
+
+    @keyframes hubPulse {
+        0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+        50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.05); }
+    }
+
+    /* ===== MODULE NODES ===== */
+    .module-node {
+        position: absolute;
+        transform: translate(-50%, -50%);
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        cursor: default;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .node-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        background: rgba(15, 23, 42, 0.9);
+        border: 1px solid rgba(99, 102, 241, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        backdrop-filter: blur(8px);
+    }
+
+    .node-icon svg {
+        width: 20px;
+        height: 20px;
+        color: #94a3b8;
+        transition: color 0.4s;
+    }
+
+    .node-label {
+        font-size: 0.65rem;
+        color: #64748b;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        white-space: nowrap;
+        transition: color 0.4s;
+    }
+
+    /* Active state */
+    .module-node.active .node-icon {
+        border-color: var(--node-color, #6366f1);
+        box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+        transform: scale(1.15);
+        background: rgba(15, 23, 42, 1);
+    }
+
+    .module-node.active .node-icon svg {
+        color: var(--node-color, #a5b4fc);
+    }
+
+    .module-node.active .node-label {
+        color: #e2e8f0;
+    }
+
+    /* Set node colors via data attribute */
+    .module-node[data-color="#6366f1"] { --node-color: #6366f1; }
+    .module-node[data-color="#22d3ee"] { --node-color: #22d3ee; }
+    .module-node[data-color="#f472b6"] { --node-color: #f472b6; }
+    .module-node[data-color="#34d399"] { --node-color: #34d399; }
+    .module-node[data-color="#a78bfa"] { --node-color: #a78bfa; }
+    .module-node[data-color="#fb923c"] { --node-color: #fb923c; }
+    .module-node[data-color="#facc15"] { --node-color: #facc15; }
+    .module-node[data-color="#f87171"] { --node-color: #f87171; }
+    .module-node[data-color="#38bdf8"] { --node-color: #38bdf8; }
+    .module-node[data-color="#2dd4bf"] { --node-color: #2dd4bf; }
+    .module-node[data-color="#c084fc"] { --node-color: #c084fc; }
+    .module-node[data-color="#4ade80"] { --node-color: #4ade80; }
+    .module-node[data-color="#fbbf24"] { --node-color: #fbbf24; }
+    .module-node[data-color="#818cf8"] { --node-color: #818cf8; }
+    .module-node[data-color="#fb7185"] { --node-color: #fb7185; }
+
+    .module-node:hover .node-icon {
+        border-color: var(--node-color, #6366f1);
+        box-shadow: 0 0 15px rgba(99, 102, 241, 0.2);
+        transform: scale(1.1);
+    }
+
+    .module-node:hover .node-icon svg {
+        color: var(--node-color, #a5b4fc);
+    }
+
+    .module-node:hover .node-label {
+        color: #cbd5e1;
+    }
+
+    /* ===== SCENARIO BAR ===== */
+    .scenario-bar {
+        margin-top: 1.5rem;
+        padding: 1.2rem 1.5rem;
+        background: rgba(15, 23, 42, 0.6);
+        border: 1px solid rgba(99, 102, 241, 0.15);
+        border-radius: 16px;
+        backdrop-filter: blur(12px);
+        cursor: pointer;
+        transition: border-color 0.3s;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .scenario-bar:hover {
+        border-color: rgba(99, 102, 241, 0.3);
+    }
+
+    .scenario-indicator {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #6366f1, #22d3ee);
+        animation: scenarioProgress 5s linear infinite;
+    }
+
+    @keyframes scenarioProgress {
+        0% { width: 0%; }
+        100% { width: 100%; }
+    }
+
+    .scenario-content {
+        text-align: center;
+    }
+
+    :global(.scenario-flow) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-bottom: 0.6rem;
+        flex-wrap: wrap;
+    }
+
+    :global(.flow-step) {
+        padding: 0.3rem 0.8rem;
+        border-radius: 8px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--step-color, #a5b4fc);
+        background: rgba(99, 102, 241, 0.1);
+        border: 1px solid var(--step-color, rgba(99, 102, 241, 0.2));
+    }
+
+    :global(.flow-arrow) {
+        color: #475569;
+        display: flex;
+    }
+
+    :global(.flow-arrow svg) {
+        width: 16px;
+        height: 16px;
+    }
+
+    .scenario-desc {
+        font-size: 0.85rem;
+        color: #94a3b8;
+        line-height: 1.5;
+        margin: 0;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+        .synergy-section {
+            padding: 4rem 1rem 2rem;
+        }
+
+        .orbit-container {
+            max-height: 500px;
+        }
+
+        .hub-core {
+            width: 70px;
+            height: 70px;
+        }
+
+        .hub-logo {
+            font-size: 1rem;
+        }
+
+        .hub-ring-1 { width: 100px; height: 100px; }
+        .hub-ring-2 { width: 130px; height: 130px; }
+        .hub-ring-3 { width: 160px; height: 160px; }
+
+        .node-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
+        }
+
+        .node-icon svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .node-label {
+            font-size: 0.5rem;
+        }
+
+        .synergy-subtitle {
+            font-size: 0.95rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .node-label {
+            display: none;
+        }
+
+        .node-icon {
+            width: 30px;
+            height: 30px;
+        }
+
+        .hub-core {
+            width: 56px;
+            height: 56px;
+        }
+
+        .hub-logo {
+            font-size: 0.85rem;
+        }
+
+        .hub-label {
+            font-size: 0.45rem;
+        }
+    }
+</style>

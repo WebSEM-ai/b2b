@@ -1,0 +1,153 @@
+---
+import LandingPage from '../layouts/LandingPage.astro';
+import SynergyOrbit from '../components/m360/SynergyOrbit.astro';
+import ModulesGrid from '../components/m360/ModulesGrid.astro';
+import ClientsCarousel from '../components/ClientsCarousel.astro';
+import BookingModal from '../components/BookingModal.astro';
+
+const pageTitle = "Marketing 360° Sinergic — 15 Module Integrate | MarketingIQ by WebSEM";
+const pageDescription = "Primul ecosistem de marketing digital din România cu 15 module sincronizate. Date în timp real, campanii care nu se canibalizează, compliance automat.";
+---
+
+<LandingPage
+    title={pageTitle}
+    description={pageDescription}
+    footerCtaBadge="Marketing 360°"
+    footerCtaTitle='Transformă-ți marketingul într-un <span class="gradient-text">ecosistem sinergic</span>'
+    footerCtaSubtitle='Solicită o <strong>demonstrație gratuită</strong> și vezi cum 15 module sincronizate pot amplifica performanța fiecărui canal de marketing.'
+    footerCtaStats={[
+        { value: '15', label: 'Module Integrate' },
+        { value: '360°', label: 'Vizibilitate' },
+        { value: 'Real-time', label: 'Sincronizare' }
+    ]}
+    footerCtaButtonText="Solicită Demo Gratuită"
+    footerCtaDisclaimer="* Demo-ul inițial este gratuit și fără obligații. Îți configurăm accesul în platforma MarketingIQ în 24h."
+>
+    <div class="m360-page">
+        <!-- S1: Synergy Orbital Visualization -->
+        <SynergyOrbit />
+
+        <!-- S2: Clients Carousel -->
+        <ClientsCarousel />
+
+        <!-- S3: Key Differentiators -->
+        <section class="diff-section">
+            <div class="diff-container">
+                <div class="diff-grid">
+                    <div class="diff-card">
+                        <div class="diff-number">01</div>
+                        <h3 class="diff-title">Anti-Canibalizare</h3>
+                        <p class="diff-desc">Campaniile PPC și SEO sunt sincronizate automat. Nu mai plătești pe click-uri pentru cuvinte pe care deja le rankezi organic.</p>
+                    </div>
+                    <div class="diff-card">
+                        <div class="diff-number">02</div>
+                        <h3 class="diff-title">Compliance Automat</h3>
+                        <p class="diff-desc">Fiecare text este verificat automat înainte de publicare — riscuri legale, claim-uri neconforme și ingrediente interzise.</p>
+                    </div>
+                    <div class="diff-card">
+                        <div class="diff-number">03</div>
+                        <h3 class="diff-title">Date în Timp Real</h3>
+                        <p class="diff-desc">Modulele se alimentează reciproc cu date live. O schimbare în tendințe actualizează instant strategia de keywords și ads.</p>
+                    </div>
+                    <div class="diff-card">
+                        <div class="diff-number">04</div>
+                        <h3 class="diff-title">Vizibilitate AI</h3>
+                        <p class="diff-desc">Singurul serviciu din România care monitorizează și optimizează prezența brandului în motoarele de răspuns AI.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- S4: Modules Grid -->
+        <ModulesGrid />
+    </div>
+
+    <style is:global>
+        /* Marketing 360 Page Theme */
+        .m360-page {
+            --primary: #6366f1;
+            --primary-light: #a5b4fc;
+            --primary-glow: rgba(99, 102, 241, 0.3);
+        }
+
+        .m360-page .hero-label {
+            border-color: var(--primary-glow);
+            background: rgba(99, 102, 241, 0.08);
+        }
+
+        /* Differentiators Section */
+        .diff-section {
+            padding: 4rem 2rem;
+        }
+
+        .diff-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .diff-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .diff-card {
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid rgba(99, 102, 241, 0.1);
+            border-radius: 16px;
+            padding: 2rem 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .diff-card:hover {
+            border-color: rgba(99, 102, 241, 0.25);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 32px rgba(99, 102, 241, 0.08);
+        }
+
+        .diff-number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #6366f1, #22d3ee);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            line-height: 1;
+        }
+
+        .diff-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #f1f5f9;
+            margin-bottom: 0.6rem;
+        }
+
+        .diff-desc {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 900px) {
+            .diff-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 500px) {
+            .diff-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .diff-section {
+                padding: 3rem 1rem;
+            }
+        }
+    </style>
+
+    <BookingModal
+        title="Solicită Demo Marketing 360°"
+        subtitle="Îți configurăm accesul în platforma MarketingIQ în 24h"
+    />
+</LandingPage>
