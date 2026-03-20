@@ -277,32 +277,32 @@
 
         function spawnParticles() {
             const scenario = scenarios[currentScenario];
-            // Spawn particles for active connections
+            // Spawn particles for active connections — gentle, infrequent
             scenario.connections.forEach(([from, to]) => {
-                if (Math.random() > 0.7) {
+                if (Math.random() > 0.93) {
                     const fromColor = colors[from];
                     const toColor = colors[to];
                     particles.push({
                         fromIdx: from,
                         toIdx: to,
                         progress: 0,
-                        speed: 0.008 + Math.random() * 0.006,
+                        speed: 0.002 + Math.random() * 0.002,
                         color: Math.random() > 0.5 ? fromColor : toColor,
-                        size: 2 + Math.random() * 2
+                        size: 1.2 + Math.random() * 0.8
                     });
                 }
             });
 
-            // Also spawn on random other connections (subtle)
-            if (Math.random() > 0.85) {
+            // Also spawn on random other connections (very subtle)
+            if (Math.random() > 0.96) {
                 const conn = connections[Math.floor(Math.random() * connections.length)];
                 particles.push({
                     fromIdx: conn[0],
                     toIdx: conn[1],
                     progress: 0,
-                    speed: 0.004 + Math.random() * 0.004,
+                    speed: 0.001 + Math.random() * 0.002,
                     color: colors[conn[0]],
-                    size: 1.5
+                    size: 1
                 });
             }
         }
@@ -353,8 +353,8 @@
                 const toPos = modulePositions[to];
                 const isActive = activeConns.has(`${from},${to}`) || activeConns.has(`${to},${from}`);
                 const color = isActive ? colors[from] : '#6366f1';
-                const alpha = isActive ? 0.4 : 0.06;
-                const lineW = isActive ? 2 : 0.5;
+                const alpha = isActive ? 0.2 : 0.04;
+                const lineW = isActive ? 1.5 : 0.5;
                 drawConnection(fromPos, toPos, alpha, color, lineW);
             });
 
@@ -385,14 +385,22 @@
                 const g = parseInt(hex.substr(2, 2), 16);
                 const b = parseInt(hex.substr(4, 2), 16);
 
+                // Soft outer glow
                 ctx.beginPath();
-                ctx.arc(pt.x, pt.y, p.size * 3, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(${r}, ${g}, ${b}, 0.15)`;
+                ctx.arc(pt.x, pt.y, p.size * 4, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(${r}, ${g}, ${b}, 0.06)`;
                 ctx.fill();
 
+                // Inner glow
+                ctx.beginPath();
+                ctx.arc(pt.x, pt.y, p.size * 2, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(${r}, ${g}, ${b}, 0.12)`;
+                ctx.fill();
+
+                // Core dot
                 ctx.beginPath();
                 ctx.arc(pt.x, pt.y, p.size, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(${r}, ${g}, ${b}, 0.9)`;
+                ctx.fillStyle = `rgba(${r}, ${g}, ${b}, 0.6)`;
                 ctx.fill();
             });
 
@@ -820,5 +828,84 @@
         .hub-label {
             font-size: 0.45rem;
         }
+    }
+
+    /* ===== LIGHT MODE ===== */
+    :global([data-theme="light"]) .synergy-title {
+        color: #0f172a;
+    }
+
+    :global([data-theme="light"]) .synergy-subtitle {
+        color: #475569;
+    }
+
+    :global([data-theme="light"]) .synergy-badge {
+        color: #4f46e5;
+        border-color: rgba(99, 102, 241, 0.4);
+        background: rgba(99, 102, 241, 0.06);
+    }
+
+    :global([data-theme="light"]) .hub-core {
+        background: linear-gradient(135deg, #eef2ff, #e0e7ff);
+        border-color: rgba(99, 102, 241, 0.5);
+        box-shadow: 0 0 40px rgba(99, 102, 241, 0.15), inset 0 0 20px rgba(99, 102, 241, 0.05);
+    }
+
+    :global([data-theme="light"]) .hub-logo {
+        color: #4338ca;
+    }
+
+    :global([data-theme="light"]) .hub-label {
+        color: #6366f1;
+    }
+
+    :global([data-theme="light"]) .hub-ring {
+        border-color: rgba(99, 102, 241, 0.2);
+    }
+
+    :global([data-theme="light"]) .node-icon {
+        background: rgba(255, 255, 255, 0.95);
+        border-color: rgba(0, 0, 0, 0.1);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    :global([data-theme="light"]) .node-icon svg {
+        color: #475569;
+    }
+
+    :global([data-theme="light"]) .node-label {
+        color: #475569;
+        font-weight: 600;
+    }
+
+    :global([data-theme="light"]) .module-node.active .node-icon {
+        background: #ffffff;
+        box-shadow: 0 4px 16px rgba(99, 102, 241, 0.2);
+    }
+
+    :global([data-theme="light"]) .module-node.active .node-label {
+        color: #1e293b;
+    }
+
+    :global([data-theme="light"]) .module-node:hover .node-label {
+        color: #1e293b;
+    }
+
+    :global([data-theme="light"]) .scenario-bar {
+        background: rgba(255, 255, 255, 0.8);
+        border-color: rgba(0, 0, 0, 0.08);
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    :global([data-theme="light"]) .scenario-desc {
+        color: #475569;
+    }
+
+    :global([data-theme="light"] .flow-step) {
+        background: rgba(99, 102, 241, 0.06);
+    }
+
+    :global([data-theme="light"] .flow-arrow) {
+        color: #94a3b8;
     }
 </style>
