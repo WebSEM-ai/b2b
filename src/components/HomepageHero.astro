@@ -89,9 +89,9 @@ const nodes = [
                 d={curvePath}
                 fill="none"
                 stroke="url(#hp-curve-grad)"
-                stroke-width="6"
+                stroke-width="4"
                 stroke-linecap="round"
-                opacity="0.18"
+                opacity="0.08"
                 filter="url(#hp-glow)" />
 
             <!-- Crisp foreground curve -->
@@ -100,9 +100,9 @@ const nodes = [
                 d={curvePath}
                 fill="none"
                 stroke="url(#hp-curve-grad)"
-                stroke-width="1.6"
+                stroke-width="1.1"
                 stroke-linecap="round"
-                opacity="0.85" />
+                opacity="0.55" />
 
             <!-- Data nodes -->
             {nodes.map((n, i) => (
@@ -309,31 +309,29 @@ const nodes = [
         position: absolute;
         top: 0;
         left: 0;
-        width: 720px;
-        height: 720px;
+        width: 560px;
+        height: 560px;
         border-radius: 50%;
         pointer-events: none;
         opacity: 0;
         transform: translate3d(-50%, -50%, 0);
         background: radial-gradient(
             circle at center,
-            rgba(196, 181, 253, 0.85) 0%,
-            rgba(192, 132, 252, 0.45) 25%,
-            rgba(167, 139, 250, 0.18) 50%,
-            rgba(167, 139, 250, 0) 72%
+            rgba(196, 181, 253, 0.18) 0%,
+            rgba(192, 132, 252, 0.08) 35%,
+            rgba(167, 139, 250, 0) 75%
         );
         mix-blend-mode: screen;
-        transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1);
         will-change: transform, opacity;
     }
 
     :global([data-theme="light"]) .hp-cursor-glow {
         background: radial-gradient(
             circle at center,
-            rgba(124, 58, 237, 0.45) 0%,
-            rgba(167, 139, 250, 0.25) 32%,
-            rgba(102, 126, 234, 0.10) 55%,
-            rgba(102, 126, 234, 0) 72%
+            rgba(124, 58, 237, 0.10) 0%,
+            rgba(167, 139, 250, 0.05) 40%,
+            rgba(102, 126, 234, 0) 75%
         );
         mix-blend-mode: multiply;
     }
@@ -386,41 +384,42 @@ const nodes = [
         opacity: 0;
         transform-origin: center;
         transform-box: fill-box;
-        animation: hp-halo 3.2s ease-in-out infinite;
+        animation: hp-halo 4s ease-in-out infinite;
         animation-delay: calc(var(--i) * 0.4s);
     }
 
     .hp-node.visible .hp-node-halo {
-        opacity: 0.18;
+        opacity: 0.10;
     }
 
     .hp-node-ring {
         fill: none;
         stroke: #c4b5fd;
-        stroke-width: 1.2;
-        opacity: 0.55;
+        stroke-width: 1;
+        opacity: 0.30;
         transform-origin: center;
         transform-box: fill-box;
-        animation: hp-ring 2.6s ease-out infinite;
+        animation: hp-ring 3.4s ease-out infinite;
         animation-delay: calc(var(--i) * 0.5s);
     }
 
     .hp-node-core {
         fill: #f8fafc;
         stroke: #a78bfa;
-        stroke-width: 1.5;
-        filter: drop-shadow(0 0 8px rgba(167, 139, 250, 0.7));
+        stroke-width: 1.2;
+        opacity: 0.85;
+        filter: drop-shadow(0 0 4px rgba(167, 139, 250, 0.45));
     }
 
     @keyframes hp-halo {
-        0%, 100% { transform: scale(1); opacity: 0.18; }
-        50%      { transform: scale(1.35); opacity: 0.32; }
+        0%, 100% { transform: scale(1); opacity: 0.10; }
+        50%      { transform: scale(1.25); opacity: 0.18; }
     }
 
     @keyframes hp-ring {
-        0%   { transform: scale(1);    opacity: 0.55; }
-        80%  { transform: scale(2.2);  opacity: 0;    }
-        100% { transform: scale(2.2);  opacity: 0;    }
+        0%   { transform: scale(1);    opacity: 0.30; }
+        80%  { transform: scale(2);    opacity: 0;    }
+        100% { transform: scale(2);    opacity: 0;    }
     }
 
     /* Node labels */
