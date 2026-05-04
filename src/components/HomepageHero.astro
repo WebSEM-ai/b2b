@@ -30,6 +30,7 @@ const nodes = [
 <section class="hp-hero" id="hero">
     <div class="hp-hero-bg" aria-hidden="true">
         <div class="hp-grid-lines"></div>
+        <div class="hp-cursor-glow" id="hp-cursor-glow"></div>
 
         <!-- Animated mesh gradient (signature effect 1/2) -->
         <svg class="hp-mesh" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
@@ -45,16 +46,16 @@ const nodes = [
                     <feDisplacementMap in="SourceGraphic" scale="90" />
                 </filter>
                 <radialGradient id="hp-blob-a">
-                    <stop offset="0%" stop-color="#667eea" stop-opacity="0.55" />
-                    <stop offset="100%" stop-color="#667eea" stop-opacity="0" />
+                    <stop offset="0%" stop-color="#4f46e5" stop-opacity="0.42" />
+                    <stop offset="100%" stop-color="#4f46e5" stop-opacity="0" />
                 </radialGradient>
                 <radialGradient id="hp-blob-b">
-                    <stop offset="0%" stop-color="#764ba2" stop-opacity="0.5" />
-                    <stop offset="100%" stop-color="#764ba2" stop-opacity="0" />
+                    <stop offset="0%" stop-color="#5b21b6" stop-opacity="0.38" />
+                    <stop offset="100%" stop-color="#5b21b6" stop-opacity="0" />
                 </radialGradient>
                 <radialGradient id="hp-blob-c">
-                    <stop offset="0%" stop-color="#f093fb" stop-opacity="0.4" />
-                    <stop offset="100%" stop-color="#f093fb" stop-opacity="0" />
+                    <stop offset="0%" stop-color="#a21caf" stop-opacity="0.30" />
+                    <stop offset="100%" stop-color="#a21caf" stop-opacity="0" />
                 </radialGradient>
             </defs>
             <g filter="url(#hp-mesh-distort)">
@@ -88,9 +89,9 @@ const nodes = [
                 d={curvePath}
                 fill="none"
                 stroke="url(#hp-curve-grad)"
-                stroke-width="10"
+                stroke-width="6"
                 stroke-linecap="round"
-                opacity="0.35"
+                opacity="0.18"
                 filter="url(#hp-glow)" />
 
             <!-- Crisp foreground curve -->
@@ -99,8 +100,9 @@ const nodes = [
                 d={curvePath}
                 fill="none"
                 stroke="url(#hp-curve-grad)"
-                stroke-width="2.6"
-                stroke-linecap="round" />
+                stroke-width="1.6"
+                stroke-linecap="round"
+                opacity="0.85" />
 
             <!-- Data nodes -->
             {nodes.map((n, i) => (
@@ -212,31 +214,51 @@ const nodes = [
         }, delay);
     });
 
-    // Mouse parallax (desktop only)
+    // Mouse parallax + cursor-following diffusion (desktop only)
     if (!reducedMotion && hero && window.matchMedia('(hover: hover)').matches) {
         const mesh = hero.querySelector<SVGElement>('.hp-mesh');
         const curve = hero.querySelector<SVGElement>('.hp-curve');
-        let targetX = 0, targetY = 0, currentX = 0, currentY = 0, rafId = 0;
+        const cursorGlow = hero.querySelector<HTMLElement>('#hp-cursor-glow');
+        let targetX = 0, targetY = 0, currentX = 0, currentY = 0;
+        let glowTargetX = 0, glowTargetY = 0, glowX = 0, glowY = 0;
+        let rafId = 0;
+
+        hero.addEventListener('mouseenter', () => {
+            hero.classList.add('hp-active');
+        });
 
         hero.addEventListener('mousemove', (e) => {
             const rect = hero.getBoundingClientRect();
             targetX = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
             targetY = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+            glowTargetX = e.clientX - rect.left;
+            glowTargetY = e.clientY - rect.top;
             if (!rafId) rafId = requestAnimationFrame(loop);
         });
 
         hero.addEventListener('mouseleave', () => {
             targetX = 0;
             targetY = 0;
+            hero.classList.remove('hp-active');
             if (!rafId) rafId = requestAnimationFrame(loop);
         });
 
         const loop = () => {
             currentX += (targetX - currentX) * 0.06;
             currentY += (targetY - currentY) * 0.06;
+            glowX += (glowTargetX - glowX) * 0.18;
+            glowY += (glowTargetY - glowY) * 0.18;
+
             if (mesh) mesh.style.transform = `translate3d(${currentX * 18}px, ${currentY * 12}px, 0)`;
             if (curve) curve.style.transform = `translate3d(${currentX * -10}px, ${currentY * -6}px, 0)`;
-            if (Math.abs(targetX - currentX) > 0.001 || Math.abs(targetY - currentY) > 0.001) {
+            if (cursorGlow) cursorGlow.style.transform = `translate3d(${glowX}px, ${glowY}px, 0) translate(-50%, -50%)`;
+
+            const moving = Math.abs(targetX - currentX) > 0.001
+                || Math.abs(targetY - currentY) > 0.001
+                || Math.abs(glowTargetX - glowX) > 0.5
+                || Math.abs(glowTargetY - glowY) > 0.5;
+
+            if (moving) {
                 rafId = requestAnimationFrame(loop);
             } else {
                 rafId = 0;
@@ -282,19 +304,57 @@ const nodes = [
         -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, #000 30%, transparent 90%);
     }
 
+    /* Cursor-following diffusion spot */
+    .hp-cursor-glow {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 720px;
+        height: 720px;
+        border-radius: 50%;
+        pointer-events: none;
+        opacity: 0;
+        transform: translate3d(-50%, -50%, 0);
+        background: radial-gradient(
+            circle at center,
+            rgba(196, 181, 253, 0.85) 0%,
+            rgba(192, 132, 252, 0.45) 25%,
+            rgba(167, 139, 250, 0.18) 50%,
+            rgba(167, 139, 250, 0) 72%
+        );
+        mix-blend-mode: screen;
+        transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        will-change: transform, opacity;
+    }
+
+    :global([data-theme="light"]) .hp-cursor-glow {
+        background: radial-gradient(
+            circle at center,
+            rgba(124, 58, 237, 0.45) 0%,
+            rgba(167, 139, 250, 0.25) 32%,
+            rgba(102, 126, 234, 0.10) 55%,
+            rgba(102, 126, 234, 0) 72%
+        );
+        mix-blend-mode: multiply;
+    }
+
+    .hp-hero.hp-active .hp-cursor-glow {
+        opacity: 1;
+    }
+
     /* Mesh gradient layer */
     .hp-mesh {
         position: absolute;
         inset: 0;
         width: 100%;
         height: 100%;
-        opacity: 0.95;
+        opacity: 0.85;
         will-change: transform;
         transition: opacity 1.4s ease;
     }
 
     :global([data-theme="light"]) .hp-mesh {
-        opacity: 0.75;
+        opacity: 0.5;
     }
 
     /* Growth curve layer */
