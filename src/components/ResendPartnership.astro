@@ -1,0 +1,992 @@
+---
+// Resend Official Partnership — Transactional Email Infrastructure on AWS SES
+---
+
+<section class="resend-partnership" id="resend-partnership">
+    <div class="rp-container">
+
+        <!-- Header -->
+        <div class="rp-header">
+            <span class="rp-label">
+                <span class="rp-label-pulse"></span>
+                PARTENER OFICIAL · RESEND
+            </span>
+            <h2>Email-uri tranzacționale prin <span class="gradient-text">Amazon AWS</span>, livrate cu Resend.</h2>
+            <p>WebSEM este partener oficial Resend. Toate platformele pe care le construim trimit email-uri tranzacționale printr-o infrastructură enterprise: <strong>Resend orchestrează</strong>, <strong>Amazon SES livrează</strong>, iar deliverability-ul rămâne peste 99%.</p>
+        </div>
+
+        <!-- Hero Card: Logos + Partnership Status -->
+        <div class="rp-hero-card">
+            <!-- Animated grid background -->
+            <div class="rp-hero-grid"></div>
+
+            <div class="rp-hero-inner">
+                <div class="rp-logos">
+                    <!-- WebSEM Mark -->
+                    <div class="rp-logo rp-logo--websem">
+                        <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                            <rect x="2" y="2" width="28" height="28" rx="7" fill="url(#websem-grad)"/>
+                            <path d="M8.5 11.5l3.5 9 4-7 4 7 3.5-9" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <defs>
+                                <linearGradient id="websem-grad" x1="0" y1="0" x2="32" y2="32">
+                                    <stop offset="0%" stop-color="#667eea"/>
+                                    <stop offset="100%" stop-color="#764ba2"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <span>WebSEM</span>
+                    </div>
+
+                    <!-- Animated handshake connector -->
+                    <div class="rp-connector">
+                        <div class="rp-dot rp-dot--1"></div>
+                        <div class="rp-dot rp-dot--2"></div>
+                        <div class="rp-dot rp-dot--3"></div>
+                    </div>
+
+                    <!-- Resend Mark -->
+                    <div class="rp-logo rp-logo--resend">
+                        <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                            <rect x="2" y="2" width="28" height="28" rx="7" fill="#000"/>
+                            <path d="M11 9h6.5c2.485 0 4.5 2.015 4.5 4.5 0 1.95-1.24 3.61-2.97 4.24L23 23h-3.4l-3.7-5H13.5v5H11V9zm2.5 2.4v4.2h4c1.16 0 2.1-.94 2.1-2.1 0-1.16-.94-2.1-2.1-2.1h-4z" fill="#fff"/>
+                        </svg>
+                        <span>Resend</span>
+                    </div>
+                </div>
+
+                <div class="rp-hero-meta">
+                    <div class="rp-meta-row">
+                        <span class="rp-meta-label">Status</span>
+                        <span class="rp-meta-value">
+                            <span class="rp-status-dot"></span>
+                            Partener Oficial Activ
+                        </span>
+                    </div>
+                    <div class="rp-meta-row">
+                        <span class="rp-meta-label">Infrastructură</span>
+                        <span class="rp-meta-value rp-meta-value--mono">Amazon SES (AWS) · Multi-region</span>
+                    </div>
+                    <div class="rp-meta-row">
+                        <span class="rp-meta-label">Volum suportat</span>
+                        <span class="rp-meta-value rp-meta-value--mono">Nelimitat · Auto-scaling</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- What is Transactional Email - Explainer -->
+        <div class="rp-explainer">
+            <div class="rp-explainer-header">
+                <h3>Ce înseamnă <em>email tranzacțional</em>?</h3>
+                <p>Email-uri trimise <strong>1:1</strong>, declanșate de o acțiune a utilizatorului. Diferite total de email-urile de marketing care merg către liste mari.</p>
+            </div>
+
+            <div class="rp-tx-grid">
+                <div class="rp-tx-card">
+                    <div class="rp-tx-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+                    </div>
+                    <h4>Confirmări comandă</h4>
+                    <p>Factură, livrare, status — utilizatorul plătește, primește email instant.</p>
+                </div>
+                <div class="rp-tx-card">
+                    <div class="rp-tx-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    </div>
+                    <h4>Resetare parolă</h4>
+                    <p>Token-uri OTP, magic links, verificare cont — sub 2 secunde latency.</p>
+                </div>
+                <div class="rp-tx-card">
+                    <div class="rp-tx-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 2"/></svg>
+                    </div>
+                    <h4>Notificări sistem</h4>
+                    <p>Alertă login nou, schimbare email, deviere de la normal — critice pentru securitate.</p>
+                </div>
+                <div class="rp-tx-card">
+                    <div class="rp-tx-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                    </div>
+                    <h4>Mesaje contact form</h4>
+                    <p>Formularele site-ului trimit lead-urile direct în inbox — fără SMTP fragil.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Architecture Diagram -->
+        <div class="rp-architecture">
+            <div class="rp-arch-header">
+                <span class="rp-arch-label">ARHITECTURĂ TEHNICĂ</span>
+                <h3>Cum circulă un email prin stack-ul nostru</h3>
+            </div>
+
+            <div class="rp-arch-diagram">
+                <!-- Step 1: App -->
+                <div class="rp-arch-node rp-arch-node--app">
+                    <div class="rp-arch-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                    </div>
+                    <div class="rp-arch-name">Platforma Ta</div>
+                    <div class="rp-arch-tech">Next.js / Astro</div>
+                    <div class="rp-arch-desc">Trigger eveniment</div>
+                </div>
+
+                <!-- Arrow 1 -->
+                <div class="rp-arch-arrow">
+                    <svg viewBox="0 0 60 24" fill="none">
+                        <path d="M0 12h54" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 4"/>
+                        <path d="m48 6 6 6-6 6" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                        <circle r="3" fill="#667eea">
+                            <animateMotion dur="2.5s" repeatCount="indefinite" path="M0 12h54"/>
+                        </circle>
+                    </svg>
+                    <span>API call</span>
+                </div>
+
+                <!-- Step 2: Resend -->
+                <div class="rp-arch-node rp-arch-node--resend">
+                    <div class="rp-arch-icon rp-arch-icon--black">
+                        <svg viewBox="0 0 24 24" fill="none"><path d="M8 7h5.5c2.485 0 4.5 2.015 4.5 4.5 0 1.95-1.24 3.61-2.97 4.24L18 21h-3.4l-3.7-5H10.5v5H8V7zm2.5 2.4v4.2h3c1.16 0 2.1-.94 2.1-2.1 0-1.16-.94-2.1-2.1-2.1h-3z" fill="currentColor"/></svg>
+                    </div>
+                    <div class="rp-arch-name">Resend</div>
+                    <div class="rp-arch-tech">Orchestration</div>
+                    <div class="rp-arch-desc">Template · DKIM · Logs</div>
+                </div>
+
+                <!-- Arrow 2 -->
+                <div class="rp-arch-arrow">
+                    <svg viewBox="0 0 60 24" fill="none">
+                        <path d="M0 12h54" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 4"/>
+                        <path d="m48 6 6 6-6 6" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                        <circle r="3" fill="#22c55e">
+                            <animateMotion dur="2.5s" repeatCount="indefinite" path="M0 12h54" begin="0.5s"/>
+                        </circle>
+                    </svg>
+                    <span>SMTP relay</span>
+                </div>
+
+                <!-- Step 3: AWS -->
+                <div class="rp-arch-node rp-arch-node--aws">
+                    <div class="rp-arch-icon rp-arch-icon--aws">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 0 1 18 0M3 12a9 9 0 0 0 18 0M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
+                    </div>
+                    <div class="rp-arch-name">Amazon SES</div>
+                    <div class="rp-arch-tech">AWS Infrastructure</div>
+                    <div class="rp-arch-desc">Multi-region delivery</div>
+                </div>
+
+                <!-- Arrow 3 -->
+                <div class="rp-arch-arrow">
+                    <svg viewBox="0 0 60 24" fill="none">
+                        <path d="M0 12h54" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 4"/>
+                        <path d="m48 6 6 6-6 6" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                        <circle r="3" fill="#f59e0b">
+                            <animateMotion dur="2.5s" repeatCount="indefinite" path="M0 12h54" begin="1s"/>
+                        </circle>
+                    </svg>
+                    <span>Inbox</span>
+                </div>
+
+                <!-- Step 4: Inbox -->
+                <div class="rp-arch-node rp-arch-node--inbox">
+                    <div class="rp-arch-icon rp-arch-icon--success">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    </div>
+                    <div class="rp-arch-name">Utilizator</div>
+                    <div class="rp-arch-tech">Inbox</div>
+                    <div class="rp-arch-desc">&lt;2s end-to-end</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Specs Grid -->
+        <div class="rp-specs">
+            <h3 class="rp-specs-title">Ce livrează stack-ul Resend + AWS SES</h3>
+            <div class="rp-specs-grid">
+                <div class="rp-spec">
+                    <div class="rp-spec-value">99.9<span>%</span></div>
+                    <div class="rp-spec-label">Deliverability rate</div>
+                    <div class="rp-spec-note">Reputație IP enterprise AWS</div>
+                </div>
+                <div class="rp-spec">
+                    <div class="rp-spec-value">&lt;2<span>s</span></div>
+                    <div class="rp-spec-label">Latency end-to-end</div>
+                    <div class="rp-spec-note">Trigger → inbox utilizator</div>
+                </div>
+                <div class="rp-spec">
+                    <div class="rp-spec-value">100<span>%</span></div>
+                    <div class="rp-spec-label">Configurat DKIM/SPF/DMARC</div>
+                    <div class="rp-spec-note">Auth completă pe domeniu</div>
+                </div>
+                <div class="rp-spec">
+                    <div class="rp-spec-value">∞<span></span></div>
+                    <div class="rp-spec-label">Volum scalabil</div>
+                    <div class="rp-spec-note">Auto-scaling AWS pe trafic</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features List -->
+        <div class="rp-features">
+            <div class="rp-feature">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                <div>
+                    <strong>Domeniu propriu autenticat</strong>
+                    <span>Email-uri trimise de pe <em>noreply@brand-ul-tău.ro</em>, nu de pe servicii third-party.</span>
+                </div>
+            </div>
+            <div class="rp-feature">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                <div>
+                    <strong>Template-uri React</strong>
+                    <span>Email-uri scrise în React Email — mereu responsive, mereu testate, mereu sub Git.</span>
+                </div>
+            </div>
+            <div class="rp-feature">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                <div>
+                    <strong>Logs & analytics</strong>
+                    <span>Vezi fiecare email trimis: deschideri, click-uri, bounces, complaints — în dashboard Resend.</span>
+                </div>
+            </div>
+            <div class="rp-feature">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                <div>
+                    <strong>Webhooks în timp real</strong>
+                    <span>Status delivery integrat în CRM-ul tău — nu mai trimitem la adrese inexistente.</span>
+                </div>
+            </div>
+            <div class="rp-feature">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                <div>
+                    <strong>GDPR & EU compliance</strong>
+                    <span>Date stocate în regiuni EU AWS, DPA semnat, retenție configurabilă.</span>
+                </div>
+            </div>
+            <div class="rp-feature">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                <div>
+                    <strong>Bounce & complaint handling</strong>
+                    <span>Suppression list automată — protejăm reputația domeniului tău.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Why It Matters -->
+        <div class="rp-why">
+            <div class="rp-why-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            </div>
+            <div class="rp-why-text">
+                <strong>De ce contează parteneriatul oficial</strong>
+                <span>Ca partener Resend avem acces direct la suport tehnic prioritar, pre-warm IP-uri pentru lansări mari și consultanță pe deliverability. Pentru tine asta înseamnă <em>email-uri care ajung în Inbox, nu în Spam</em> — chiar și la primul send la 100K+ destinatari.</span>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<style>
+    .resend-partnership {
+        padding: var(--section-padding);
+        background: var(--bg-primary);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .rp-container {
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+
+    /* Header */
+    .rp-header {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    .rp-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        color: var(--accent-light);
+        text-transform: uppercase;
+        margin-bottom: 1.1rem;
+        padding: 0.45rem 1rem;
+        border: 1px solid var(--border-accent);
+        border-radius: 100px;
+        background: var(--alpha-bg);
+    }
+
+    .rp-label-pulse {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #22c55e;
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+        animation: rp-pulse 2s infinite;
+    }
+
+    @keyframes rp-pulse {
+        0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+        70% { box-shadow: 0 0 0 8px rgba(34, 197, 94, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+    }
+
+    .rp-header h2 {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 0.85rem;
+        line-height: 1.2;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .rp-header p {
+        color: var(--text-tertiary);
+        font-size: 1rem;
+        max-width: 720px;
+        margin: 0 auto;
+        line-height: 1.65;
+    }
+
+    .rp-header p strong {
+        color: var(--text-primary);
+        font-weight: 600;
+    }
+
+    .gradient-text {
+        background: var(--gradient-text);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    /* Hero Card */
+    .rp-hero-card {
+        position: relative;
+        background: var(--bg-card);
+        border: 1px solid var(--border-light);
+        border-radius: 24px;
+        padding: 2.5rem 2rem;
+        margin-bottom: 3rem;
+        overflow: hidden;
+    }
+
+    .rp-hero-grid {
+        position: absolute;
+        inset: 0;
+        background-image:
+            linear-gradient(rgba(99, 102, 241, 0.06) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(99, 102, 241, 0.06) 1px, transparent 1px);
+        background-size: 32px 32px;
+        mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+        -webkit-mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+        pointer-events: none;
+    }
+
+    .rp-hero-inner {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2.5rem;
+        flex-wrap: wrap;
+    }
+
+    .rp-logos {
+        display: flex;
+        align-items: center;
+        gap: 1.25rem;
+    }
+
+    .rp-logo {
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+        padding: 0.85rem 1.1rem;
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-medium);
+        border-radius: 12px;
+    }
+
+    .rp-logo svg {
+        width: 32px;
+        height: 32px;
+        flex-shrink: 0;
+    }
+
+    .rp-logo span {
+        font-family: 'Space Grotesk', sans-serif;
+        font-weight: 700;
+        font-size: 0.95rem;
+        color: var(--text-primary);
+        letter-spacing: -0.01em;
+    }
+
+    .rp-connector {
+        display: flex;
+        gap: 6px;
+        align-items: center;
+    }
+
+    .rp-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--accent-light);
+        opacity: 0.4;
+        animation: rp-dot-flow 1.8s infinite ease-in-out;
+    }
+
+    .rp-dot--1 { animation-delay: 0s; }
+    .rp-dot--2 { animation-delay: 0.3s; }
+    .rp-dot--3 { animation-delay: 0.6s; }
+
+    @keyframes rp-dot-flow {
+        0%, 100% { opacity: 0.3; transform: scale(0.85); }
+        50% { opacity: 1; transform: scale(1.15); }
+    }
+
+    .rp-hero-meta {
+        flex: 1;
+        min-width: 280px;
+        display: flex;
+        flex-direction: column;
+        gap: 0.65rem;
+    }
+
+    .rp-meta-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 0.6rem 0;
+        border-bottom: 1px dashed var(--border-light);
+    }
+
+    .rp-meta-row:last-child {
+        border-bottom: none;
+    }
+
+    .rp-meta-label {
+        font-size: 0.78rem;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-family: 'Space Grotesk', sans-serif;
+        font-weight: 600;
+    }
+
+    .rp-meta-value {
+        font-size: 0.85rem;
+        color: var(--text-primary);
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .rp-meta-value--mono {
+        font-family: 'JetBrains Mono', 'Courier New', monospace;
+        font-size: 0.78rem;
+        font-weight: 500;
+        color: var(--text-secondary);
+    }
+
+    .rp-status-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #22c55e;
+        box-shadow: 0 0 8px #22c55e;
+    }
+
+    /* Explainer */
+    .rp-explainer {
+        margin-bottom: 3rem;
+    }
+
+    .rp-explainer-header {
+        text-align: center;
+        margin-bottom: 1.75rem;
+    }
+
+    .rp-explainer-header h3 {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+    }
+
+    .rp-explainer-header h3 em {
+        font-style: italic;
+        background: var(--gradient-text);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .rp-explainer-header p {
+        color: var(--text-tertiary);
+        font-size: 0.95rem;
+        max-width: 560px;
+        margin: 0 auto;
+        line-height: 1.6;
+    }
+
+    .rp-explainer-header p strong {
+        color: var(--text-primary);
+    }
+
+    .rp-tx-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1rem;
+    }
+
+    .rp-tx-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border-light);
+        border-radius: 14px;
+        padding: 1.25rem 1.1rem;
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .rp-tx-card:hover {
+        border-color: var(--border-accent);
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-glow);
+    }
+
+    .rp-tx-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        background: rgba(99, 102, 241, 0.12);
+        color: var(--accent-light);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 0.85rem;
+    }
+
+    .rp-tx-icon svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .rp-tx-card h4 {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 0.35rem;
+    }
+
+    .rp-tx-card p {
+        font-size: 0.8rem;
+        color: var(--text-tertiary);
+        line-height: 1.55;
+        margin: 0;
+    }
+
+    /* Architecture */
+    .rp-architecture {
+        background: var(--bg-card);
+        border: 1px solid var(--border-light);
+        border-radius: 20px;
+        padding: 2rem;
+        margin-bottom: 3rem;
+    }
+
+    .rp-arch-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .rp-arch-label {
+        display: inline-block;
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        color: var(--accent-light);
+        text-transform: uppercase;
+        margin-bottom: 0.65rem;
+    }
+
+    .rp-arch-header h3 {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: var(--text-primary);
+    }
+
+    .rp-arch-diagram {
+        display: flex;
+        align-items: stretch;
+        justify-content: center;
+        gap: 0.5rem;
+        flex-wrap: nowrap;
+    }
+
+    .rp-arch-node {
+        flex: 1;
+        max-width: 180px;
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-light);
+        border-radius: 14px;
+        padding: 1rem 0.85rem;
+        text-align: center;
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .rp-arch-node:hover {
+        border-color: var(--border-accent);
+        transform: translateY(-2px);
+    }
+
+    .rp-arch-icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 11px;
+        background: rgba(99, 102, 241, 0.12);
+        color: var(--accent-light);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 0.65rem;
+    }
+
+    .rp-arch-icon svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .rp-arch-icon--black {
+        background: #000;
+        color: #fff;
+    }
+
+    .rp-arch-icon--aws {
+        background: rgba(255, 153, 0, 0.15);
+        color: #ff9900;
+    }
+
+    .rp-arch-icon--success {
+        background: rgba(34, 197, 94, 0.15);
+        color: #22c55e;
+    }
+
+    .rp-arch-name {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: var(--text-primary);
+    }
+
+    .rp-arch-tech {
+        font-size: 0.72rem;
+        color: var(--text-muted);
+        margin-top: 0.2rem;
+        font-family: 'JetBrains Mono', monospace;
+    }
+
+    .rp-arch-desc {
+        font-size: 0.72rem;
+        color: var(--text-tertiary);
+        margin-top: 0.5rem;
+        line-height: 1.4;
+    }
+
+    .rp-arch-arrow {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.35rem;
+        color: var(--text-muted);
+        flex-shrink: 0;
+        min-width: 60px;
+    }
+
+    .rp-arch-arrow svg {
+        width: 56px;
+        height: 22px;
+    }
+
+    .rp-arch-arrow span {
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--text-muted);
+        font-family: 'Space Grotesk', sans-serif;
+        font-weight: 600;
+    }
+
+    /* Specs */
+    .rp-specs {
+        margin-bottom: 2.5rem;
+    }
+
+    .rp-specs-title {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .rp-specs-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1rem;
+    }
+
+    .rp-spec {
+        background: var(--bg-card);
+        border: 1px solid var(--border-light);
+        border-radius: 16px;
+        padding: 1.5rem 1.25rem;
+        text-align: center;
+        transition: all 0.3s;
+    }
+
+    .rp-spec:hover {
+        border-color: var(--border-accent);
+        background: var(--bg-card-hover);
+    }
+
+    .rp-spec-value {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 2.3rem;
+        font-weight: 800;
+        background: var(--gradient-text);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        line-height: 1;
+        margin-bottom: 0.45rem;
+    }
+
+    .rp-spec-value span {
+        font-size: 1.2rem;
+        margin-left: 1px;
+    }
+
+    .rp-spec-label {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 0.25rem;
+    }
+
+    .rp-spec-note {
+        font-size: 0.72rem;
+        color: var(--text-muted);
+        line-height: 1.4;
+    }
+
+    /* Features */
+    .rp-features {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem 1.5rem;
+        margin-bottom: 2.5rem;
+    }
+
+    .rp-feature {
+        display: flex;
+        gap: 0.75rem;
+        align-items: flex-start;
+    }
+
+    .rp-feature svg {
+        width: 18px;
+        height: 18px;
+        color: #22c55e;
+        flex-shrink: 0;
+        margin-top: 3px;
+    }
+
+    .rp-feature strong {
+        display: block;
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 0.88rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 0.2rem;
+    }
+
+    .rp-feature span {
+        font-size: 0.78rem;
+        color: var(--text-tertiary);
+        line-height: 1.5;
+    }
+
+    .rp-feature em {
+        font-style: italic;
+        color: var(--accent-light);
+    }
+
+    /* Why */
+    .rp-why {
+        display: flex;
+        align-items: center;
+        gap: 1.25rem;
+        padding: 1.5rem 1.75rem;
+        background: var(--alpha-bg);
+        border: 1px solid var(--border-accent);
+        border-radius: 16px;
+    }
+
+    .rp-why-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        background: var(--gradient-primary);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .rp-why-icon svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    .rp-why-text {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .rp-why-text strong {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 0.95rem;
+        color: var(--text-primary);
+    }
+
+    .rp-why-text span {
+        font-size: 0.85rem;
+        color: var(--text-tertiary);
+        line-height: 1.6;
+    }
+
+    .rp-why-text em {
+        font-style: italic;
+        color: var(--accent-light);
+        font-weight: 600;
+    }
+
+    /* Light mode adjustments */
+    [data-theme="light"] .rp-arch-icon--black {
+        background: #0f172a;
+    }
+
+    [data-theme="light"] .rp-logo {
+        background: var(--bg-tertiary);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+        .rp-header h2 {
+            font-size: 1.7rem;
+        }
+
+        .rp-hero-inner {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .rp-logos {
+            justify-content: center;
+        }
+
+        .rp-tx-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .rp-specs-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .rp-features {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .rp-arch-diagram {
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .rp-arch-node {
+            min-width: 140px;
+        }
+
+        .rp-arch-arrow {
+            min-width: auto;
+        }
+
+        .rp-arch-arrow svg {
+            width: 40px;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .resend-partnership {
+            padding: 3rem 1.25rem;
+        }
+
+        .rp-header h2 {
+            font-size: 1.4rem;
+        }
+
+        .rp-tx-grid,
+        .rp-specs-grid,
+        .rp-features {
+            grid-template-columns: 1fr;
+        }
+
+        .rp-arch-diagram {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .rp-arch-node {
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .rp-arch-arrow svg {
+            transform: rotate(90deg);
+            width: 40px;
+        }
+
+        .rp-why {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .rp-hero-card {
+            padding: 1.75rem 1.25rem;
+        }
+
+        .rp-architecture {
+            padding: 1.5rem 1rem;
+        }
+    }
+</style>
