@@ -1,6 +1,5 @@
 ---
 interface Props {
-    badge?: string;
     titleLine1?: string;
     titleLine2?: string;
     subtitle?: string;
@@ -9,10 +8,9 @@ interface Props {
 }
 
 const {
-    badge = 'AlphaGrade — Ecosistem B2B Growth',
     titleLine1 = 'Creștem Revenue-ul B2B',
     titleLine2 = 'prin Tehnologie și Date.',
-    subtitle = 'De la lead generation la analytics — un ecosistem complet de servicii B2B enterprise. Outreach, AI, tracking, raportare și platforme custom.',
+    subtitle = 'Outreach · AI · Analytics · Platforme — pentru B2B enterprise.',
     ctaPrimary = 'Solicită Consultanță',
     ctaSecondary = 'Vezi Serviciile'
 } = Astro.props;
@@ -129,7 +127,6 @@ const nodes = [
     </div>
 
     <div class="hp-hero-content">
-        <div class="hp-hero-label">{badge}</div>
         <h1 class="hp-hero-title">
             <span class="line">{titleLine1}</span>
             <span class="line"><span class="gradient">{titleLine2}</span></span>
@@ -399,29 +396,13 @@ const nodes = [
         max-width: 800px;
     }
 
-    .hp-hero-label {
-        display: inline-block;
-        font-family: 'Space Grotesk', sans-serif;
-        font-size: 0.8rem;
-        font-weight: 600;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        color: var(--accent-light);
-        background: rgba(99, 102, 241, 0.1);
-        border: 1px solid rgba(99, 102, 241, 0.2);
-        padding: 0.5rem 1.25rem;
-        border-radius: 100px;
-        margin-bottom: 2rem;
-        backdrop-filter: blur(8px);
-    }
-
     .hp-hero-title {
         font-family: 'Space Grotesk', sans-serif;
         font-size: clamp(2.2rem, 5vw, 3.8rem);
         font-weight: 700;
         line-height: 1.15;
         color: var(--text-primary);
-        margin-bottom: 1.5rem;
+        margin-bottom: 1.25rem;
     }
 
     .hp-hero-title .line {
@@ -435,11 +416,12 @@ const nodes = [
     }
 
     .hp-hero-sub {
-        font-size: 1.15rem;
-        line-height: 1.7;
-        color: var(--text-secondary);
-        max-width: 620px;
-        margin: 0 auto 2.5rem;
+        font-size: 0.95rem;
+        line-height: 1.5;
+        color: var(--text-tertiary);
+        letter-spacing: 0.01em;
+        max-width: none;
+        margin: 0 auto 2rem;
     }
 
     .hp-hero-actions {
@@ -523,7 +505,7 @@ const nodes = [
         }
 
         .hp-hero-sub {
-            font-size: 1rem;
+            font-size: 0.85rem;
         }
 
         .hp-hero-actions {
