@@ -9,7 +9,7 @@ interface Props {
     ogImage?: string;
     navLinks?: Array<{ text: string; href: string }>;
     navCta?: { text: string; href: string };
-    navPoweredByText?: string;
+    navTagline?: string;
     langSwitch?: { current: 'ro' | 'en'; alternateUrl: string };
     lang?: string;
     footerCtaBadge?: string;
@@ -35,7 +35,7 @@ const {
     ogImage = '/images/og-default.jpg',
     navLinks,
     navCta,
-    navPoweredByText,
+    navTagline,
     langSwitch,
     lang = 'ro',
     footerCtaBadge,
@@ -121,7 +121,7 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
         links={navLinks}
         ctaText={navCta?.text}
         ctaHref={navCta?.href}
-        poweredByText={navPoweredByText}
+        tagline={navTagline}
         langSwitch={langSwitch}
     />
     
