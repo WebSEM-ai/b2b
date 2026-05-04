@@ -16,15 +16,116 @@ const {
     ctaPrimary = 'Solicită Consultanță',
     ctaSecondary = 'Vezi Serviciile'
 } = Astro.props;
+
+// Hockey-stick exponential — flat across the lower band, then steep climb up the right edge.
+// Pulled up from the bottom edge so labels stay visible after slice-cropping.
+const curvePath = 'M 40 705 C 220 700, 380 695, 540 680 C 680 666, 820 644, 900 600 C 970 555, 1020 495, 1060 410 C 1095 325, 1125 215, 1170 75';
+
+const nodes = [
+    { x: 170,  y: 702, target: 47,  decimals: 0, prefix: '+', suffix: '%', key: 'Pipeline',   labelDx:  18, labelDy: -32 },
+    { x: 480,  y: 686, target: 12,  decimals: 0, prefix: '',  suffix: 'K', key: 'Leads/lună', labelDx:  18, labelDy: -32 },
+    { x: 870,  y: 620, target: 3.2, decimals: 1, prefix: '',  suffix: '×', key: 'ROAS',       labelDx:  24, labelDy:   6 },
+    { x: 1110, y: 190, target: 98,  decimals: 0, prefix: '',  suffix: '%', key: 'Acuratețe',  labelDx: -24, labelDy:   6, anchor: 'end' }
+];
 ---
 
 <section class="hp-hero" id="hero">
-    <div class="hp-hero-bg">
+    <div class="hp-hero-bg" aria-hidden="true">
         <div class="hp-grid-lines"></div>
-        <div class="hp-orb hp-orb-1"></div>
-        <div class="hp-orb hp-orb-2"></div>
-        <div class="hp-orb hp-orb-3"></div>
-        <canvas id="hp-network-canvas"></canvas>
+
+        <!-- Animated mesh gradient (signature effect 1/2) -->
+        <svg class="hp-mesh" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+            <defs>
+                <filter id="hp-mesh-distort" x="-20%" y="-20%" width="140%" height="140%">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.006 0.009" numOctaves="2" seed="4">
+                        <animate
+                            attributeName="baseFrequency"
+                            values="0.006 0.009; 0.009 0.006; 0.005 0.011; 0.006 0.009"
+                            dur="34s"
+                            repeatCount="indefinite" />
+                    </feTurbulence>
+                    <feDisplacementMap in="SourceGraphic" scale="90" />
+                </filter>
+                <radialGradient id="hp-blob-a">
+                    <stop offset="0%" stop-color="#667eea" stop-opacity="0.55" />
+                    <stop offset="100%" stop-color="#667eea" stop-opacity="0" />
+                </radialGradient>
+                <radialGradient id="hp-blob-b">
+                    <stop offset="0%" stop-color="#764ba2" stop-opacity="0.5" />
+                    <stop offset="100%" stop-color="#764ba2" stop-opacity="0" />
+                </radialGradient>
+                <radialGradient id="hp-blob-c">
+                    <stop offset="0%" stop-color="#f093fb" stop-opacity="0.4" />
+                    <stop offset="100%" stop-color="#f093fb" stop-opacity="0" />
+                </radialGradient>
+            </defs>
+            <g filter="url(#hp-mesh-distort)">
+                <circle cx="220" cy="180" r="380" fill="url(#hp-blob-a)" />
+                <circle cx="980" cy="160" r="340" fill="url(#hp-blob-b)" />
+                <circle cx="640" cy="660" r="460" fill="url(#hp-blob-c)" />
+                <circle cx="900" cy="600" r="280" fill="url(#hp-blob-a)" />
+            </g>
+        </svg>
+
+        <!-- Growth curve + data nodes (signature effect 2/2) -->
+        <svg class="hp-curve" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+            <defs>
+                <linearGradient id="hp-curve-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#667eea" stop-opacity="0.7" />
+                    <stop offset="55%" stop-color="#a78bfa" stop-opacity="1" />
+                    <stop offset="100%" stop-color="#f093fb" stop-opacity="1" />
+                </linearGradient>
+                <filter id="hp-glow" x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur stdDeviation="6" result="b" />
+                    <feMerge>
+                        <feMergeNode in="b" />
+                        <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                </filter>
+            </defs>
+
+            <!-- Outer glow trail -->
+            <path
+                class="hp-curve-trail"
+                d={curvePath}
+                fill="none"
+                stroke="url(#hp-curve-grad)"
+                stroke-width="10"
+                stroke-linecap="round"
+                opacity="0.35"
+                filter="url(#hp-glow)" />
+
+            <!-- Crisp foreground curve -->
+            <path
+                class="hp-curve-line"
+                d={curvePath}
+                fill="none"
+                stroke="url(#hp-curve-grad)"
+                stroke-width="2.6"
+                stroke-linecap="round" />
+
+            <!-- Data nodes -->
+            {nodes.map((n, i) => (
+                <g class="hp-node" style={`--i:${i}`}>
+                    <circle class="hp-node-halo" cx={n.x} cy={n.y} r="22" />
+                    <circle class="hp-node-ring" cx={n.x} cy={n.y} r="9" />
+                    <circle class="hp-node-core" cx={n.x} cy={n.y} r="4" />
+                    <g class="hp-node-label" transform={`translate(${n.x + n.labelDx}, ${n.y + n.labelDy})`}>
+                        <text
+                            class="hp-label-value"
+                            text-anchor={n.anchor || 'start'}
+                            data-target={n.target}
+                            data-decimals={n.decimals}
+                            data-prefix={n.prefix}
+                            data-suffix={n.suffix}>{n.prefix}0{n.decimals > 0 ? '.0' : ''}{n.suffix}</text>
+                        <text
+                            class="hp-label-key"
+                            y="18"
+                            text-anchor={n.anchor || 'start'}>{n.key.toUpperCase()}</text>
+                    </g>
+                </g>
+            ))}
+        </svg>
     </div>
 
     <div class="hp-hero-content">
@@ -52,64 +153,98 @@ const {
 </section>
 
 <script>
-    // Network Canvas Animation
-    const canvas = document.getElementById('hp-network-canvas') as HTMLCanvasElement;
-    if (canvas) {
-        const ctx = canvas.getContext('2d');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-        function resize() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+    const hero = document.getElementById('hero');
+    const curveLine = document.querySelector<SVGPathElement>('.hp-curve-line');
+    const curveTrail = document.querySelector<SVGPathElement>('.hp-curve-trail');
+    const nodeEls = document.querySelectorAll<SVGGElement>('.hp-node');
+    const valueEls = document.querySelectorAll<SVGTextElement>('.hp-label-value');
+
+    // Curve draw-on-mount
+    if (curveLine && curveTrail) {
+        const len = curveLine.getTotalLength();
+        [curveLine, curveTrail].forEach(p => {
+            p.style.strokeDasharray = String(len);
+            p.style.strokeDashoffset = reducedMotion ? '0' : String(len);
+        });
+
+        if (!reducedMotion) {
+            const easing = 'cubic-bezier(0.22, 1, 0.36, 1)';
+            const duration = 2600;
+            curveTrail.animate(
+                [{ strokeDashoffset: len }, { strokeDashoffset: 0 }],
+                { duration, easing, fill: 'forwards' }
+            );
+            curveLine.animate(
+                [{ strokeDashoffset: len }, { strokeDashoffset: 0 }],
+                { duration, easing, fill: 'forwards', delay: 80 }
+            );
         }
-        resize();
-        window.addEventListener('resize', resize);
+    }
 
-        const particles: Array<{x: number; y: number; vx: number; vy: number}> = [];
-        const particleCount = 40;
-
-        for (let i = 0; i < particleCount; i++) {
-            particles.push({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                vx: (Math.random() - 0.5) * 0.4,
-                vy: (Math.random() - 0.5) * 0.4
-            });
+    // Counter animation per node value
+    function animateCounter(el: SVGTextElement, durMs = 1400) {
+        const target = parseFloat(el.dataset.target || '0');
+        const decimals = parseInt(el.dataset.decimals || '0', 10);
+        const prefix = el.dataset.prefix || '';
+        const suffix = el.dataset.suffix || '';
+        if (reducedMotion) {
+            el.textContent = `${prefix}${target.toFixed(decimals)}${suffix}`;
+            return;
         }
+        const start = performance.now();
+        const tick = (now: number) => {
+            const t = Math.min(1, (now - start) / durMs);
+            const eased = 1 - Math.pow(1 - t, 3);
+            const val = (target * eased).toFixed(decimals);
+            el.textContent = `${prefix}${val}${suffix}`;
+            if (t < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+    }
 
-        function animate() {
-            if (!ctx) return;
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // Reveal nodes synchronized with curve progress
+    const nodeDelays = [600, 1100, 1750, 2350];
+    nodeEls.forEach((node, i) => {
+        const delay = reducedMotion ? 0 : nodeDelays[i] || 600;
+        setTimeout(() => {
+            node.classList.add('visible');
+            const value = node.querySelector<SVGTextElement>('.hp-label-value');
+            if (value) animateCounter(value);
+        }, delay);
+    });
 
-            particles.forEach((p, i) => {
-                p.x += p.vx;
-                p.y += p.vy;
+    // Mouse parallax (desktop only)
+    if (!reducedMotion && hero && window.matchMedia('(hover: hover)').matches) {
+        const mesh = hero.querySelector<SVGElement>('.hp-mesh');
+        const curve = hero.querySelector<SVGElement>('.hp-curve');
+        let targetX = 0, targetY = 0, currentX = 0, currentY = 0, rafId = 0;
 
-                if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
-                if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+        hero.addEventListener('mousemove', (e) => {
+            const rect = hero.getBoundingClientRect();
+            targetX = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+            targetY = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+            if (!rafId) rafId = requestAnimationFrame(loop);
+        });
 
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(99, 102, 241, 0.4)';
-                ctx.fill();
+        hero.addEventListener('mouseleave', () => {
+            targetX = 0;
+            targetY = 0;
+            if (!rafId) rafId = requestAnimationFrame(loop);
+        });
 
-                particles.slice(i + 1).forEach(p2 => {
-                    const dx = p.x - p2.x;
-                    const dy = p.y - p2.y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-
-                    if (dist < 150) {
-                        ctx.beginPath();
-                        ctx.moveTo(p.x, p.y);
-                        ctx.lineTo(p2.x, p2.y);
-                        ctx.strokeStyle = `rgba(99, 102, 241, ${0.15 * (1 - dist / 150)})`;
-                        ctx.stroke();
-                    }
-                });
-            });
-
-            requestAnimationFrame(animate);
-        }
-        animate();
+        const loop = () => {
+            currentX += (targetX - currentX) * 0.06;
+            currentY += (targetY - currentY) * 0.06;
+            if (mesh) mesh.style.transform = `translate3d(${currentX * 18}px, ${currentY * 12}px, 0)`;
+            if (curve) curve.style.transform = `translate3d(${currentX * -10}px, ${currentY * -6}px, 0)`;
+            if (Math.abs(targetX - currentX) > 0.001 || Math.abs(targetY - currentY) > 0.001) {
+                rafId = requestAnimationFrame(loop);
+            } else {
+                rafId = 0;
+            }
+        };
     }
 
     // Open booking modal
@@ -124,7 +259,7 @@ const {
 <style>
     .hp-hero {
         position: relative;
-        min-height: 85vh;
+        min-height: 88vh;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -136,65 +271,127 @@ const {
         position: absolute;
         inset: 0;
         z-index: 0;
+        pointer-events: none;
     }
 
     .hp-grid-lines {
         position: absolute;
         inset: 0;
         background-image:
-            linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px);
-        background-size: 60px 60px;
+            linear-gradient(rgba(99, 102, 241, 0.035) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(99, 102, 241, 0.035) 1px, transparent 1px);
+        background-size: 64px 64px;
+        mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, #000 30%, transparent 90%);
+        -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, #000 30%, transparent 90%);
     }
 
-    #hp-network-canvas {
+    /* Mesh gradient layer */
+    .hp-mesh {
         position: absolute;
         inset: 0;
         width: 100%;
         height: 100%;
-        opacity: 0.6;
+        opacity: 0.95;
+        will-change: transform;
+        transition: opacity 1.4s ease;
     }
 
-    .hp-orb {
+    :global([data-theme="light"]) .hp-mesh {
+        opacity: 0.75;
+    }
+
+    /* Growth curve layer */
+    .hp-curve {
         position: absolute;
-        border-radius: 50%;
-        filter: blur(80px);
-        opacity: 0.15;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        will-change: transform;
     }
 
-    .hp-orb-1 {
-        width: 500px;
-        height: 500px;
-        background: #667eea;
-        top: -10%;
-        right: -5%;
-        animation: hp-float 20s ease-in-out infinite;
+    .hp-curve-line,
+    .hp-curve-trail {
+        will-change: stroke-dashoffset;
     }
 
-    .hp-orb-2 {
-        width: 400px;
-        height: 400px;
-        background: #764ba2;
-        bottom: -5%;
-        left: -5%;
-        animation: hp-float 25s ease-in-out infinite reverse;
+    /* Data nodes */
+    .hp-node {
+        opacity: 0;
+        transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    .hp-orb-3 {
-        width: 300px;
-        height: 300px;
-        background: #f093fb;
-        top: 40%;
-        left: 50%;
-        animation: hp-float 15s ease-in-out infinite;
+    .hp-node.visible {
+        opacity: 1;
     }
 
-    @keyframes hp-float {
-        0%, 100% { transform: translate(0, 0); }
-        33% { transform: translate(30px, -20px); }
-        66% { transform: translate(-20px, 15px); }
+    .hp-node-halo {
+        fill: #a78bfa;
+        opacity: 0;
+        transform-origin: center;
+        transform-box: fill-box;
+        animation: hp-halo 3.2s ease-in-out infinite;
+        animation-delay: calc(var(--i) * 0.4s);
     }
 
+    .hp-node.visible .hp-node-halo {
+        opacity: 0.18;
+    }
+
+    .hp-node-ring {
+        fill: none;
+        stroke: #c4b5fd;
+        stroke-width: 1.2;
+        opacity: 0.55;
+        transform-origin: center;
+        transform-box: fill-box;
+        animation: hp-ring 2.6s ease-out infinite;
+        animation-delay: calc(var(--i) * 0.5s);
+    }
+
+    .hp-node-core {
+        fill: #f8fafc;
+        stroke: #a78bfa;
+        stroke-width: 1.5;
+        filter: drop-shadow(0 0 8px rgba(167, 139, 250, 0.7));
+    }
+
+    @keyframes hp-halo {
+        0%, 100% { transform: scale(1); opacity: 0.18; }
+        50%      { transform: scale(1.35); opacity: 0.32; }
+    }
+
+    @keyframes hp-ring {
+        0%   { transform: scale(1);    opacity: 0.55; }
+        80%  { transform: scale(2.2);  opacity: 0;    }
+        100% { transform: scale(2.2);  opacity: 0;    }
+    }
+
+    /* Node labels */
+    .hp-label-value {
+        font-family: 'Space Grotesk', 'Inter', sans-serif;
+        font-size: 22px;
+        font-weight: 700;
+        fill: var(--text-primary);
+        letter-spacing: -0.01em;
+    }
+
+    .hp-label-key {
+        font-family: 'Inter', sans-serif;
+        font-size: 9.5px;
+        font-weight: 600;
+        letter-spacing: 0.18em;
+        fill: var(--text-tertiary);
+    }
+
+    :global([data-theme="light"]) .hp-label-value {
+        fill: #1a1a2e;
+    }
+
+    :global([data-theme="light"]) .hp-label-key {
+        fill: #64748b;
+    }
+
+    /* Hero content */
     .hp-hero-content {
         position: relative;
         z-index: 1;
@@ -215,6 +412,7 @@ const {
         padding: 0.5rem 1.25rem;
         border-radius: 100px;
         margin-bottom: 2rem;
+        backdrop-filter: blur(8px);
     }
 
     .hp-hero-title {
@@ -287,6 +485,7 @@ const {
         border: 1px solid var(--border-light);
         text-decoration: none;
         transition: all 0.3s ease;
+        backdrop-filter: blur(8px);
     }
 
     .hp-btn-secondary:hover {
@@ -295,9 +494,31 @@ const {
         transform: translateY(-2px);
     }
 
+    /* Reduced motion: freeze everything decisively */
+    @media (prefers-reduced-motion: reduce) {
+        .hp-node-halo,
+        .hp-node-ring {
+            animation: none;
+        }
+        .hp-node {
+            opacity: 1;
+            transition: none;
+        }
+        .hp-mesh {
+            opacity: 0.4;
+        }
+    }
+
+    /* Tablet & below: simplify the curve labels */
+    @media (max-width: 900px) {
+        .hp-label-value { font-size: 18px; }
+        .hp-label-key  { font-size: 8.5px; letter-spacing: 0.14em; }
+    }
+
+    /* Mobile: hide labels (curve still tells the story), shrink hero */
     @media (max-width: 640px) {
         .hp-hero {
-            min-height: 70vh;
+            min-height: 78vh;
             padding: 7rem 1.5rem 3rem;
         }
 
@@ -314,5 +535,8 @@ const {
             width: 100%;
             justify-content: center;
         }
+
+        .hp-curve { display: none; }
+        .hp-mesh { opacity: 0.85; }
     }
 </style>
