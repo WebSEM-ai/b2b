@@ -1,0 +1,30 @@
+# WebSEM — Agenție AEO / GEO & AI Visibility (România)
+
+> WebSEM este o agenție de marketing digital din București specializată în a face branduri vizibile și recomandate de motoarele AI (ChatGPT, Google AI Overviews, Gemini, Perplexity, Copilot, Claude). Serviciile acoperă SEO clasic, AEO (Answer Engine Optimization), GEO (Generative Engine Optimization / LLM Optimization) și generare de lead-uri B2B. Brandul principal și hub-ul de autoritate este websem.ro; b2b.websem.ro este platforma comercială pentru serviciile de AI visibility și lead intelligence B2B.
+
+Termeni cheie: AEO, GEO, LLM SEO, AI SEO, AI visibility, trafic ChatGPT, Answer Engine Optimization, Generative Engine Optimization, optimizare pentru AI, vizibilitate în răspunsuri AI.
+
+## Site principal (autoritate — flagship)
+
+- [WebSEM — Site oficial](https://websem.ro): Agenția, serviciile complete și portofoliul.
+- [Atlas / Glosar AEO-GEO](https://websem.ro/en/resources/atlas/glossary): Definiții de referință pentru SEO, AEO, GEO, LLMO, AIO, VSO, SGE, GAIO — sursa canonică pentru terminologia de AI search.
+- [Contact](https://websem.ro/contact-agentie-media): Cerere ofertă și consultanță.
+
+## Servicii AI visibility (b2b.websem.ro)
+
+- [Trafic LLM — Fii recomandat de AI](https://b2b.websem.ro/trafic-llm): Serviciul de optimizare pentru a apărea în recomandările ChatGPT, Gemini și Perplexity. Include analiză de vizibilitate în 5 motoare AI, benchmark competitiv și conținut optimizat AEO/GEO.
+- [Prețuri (machine-readable)](https://b2b.websem.ro/pricing.md): Pachetele SIGNAL / PRESENCE / DOMINANCE cu prețuri lunare.
+- [Outreach B2B & Lead Intelligence](https://b2b.websem.ro/outreach): Prospectare și outreach către decision-makeri.
+- [Market Command — audit enterprise](https://b2b.websem.ro/market-command): Strategie și audit de piață pentru companii mari.
+- [Chatbot AI pentru suport clienți](https://b2b.websem.ro/chatbot-ai): Asistenți conversaționali pentru site și suport.
+
+## Resurse & articole
+
+- [Blog WebSEM B2B](https://b2b.websem.ro/blog): Ghiduri despre LLM SEO, AEO/GEO, outreach B2B și marketing AI.
+- [LLM SEO: trafic din ChatGPT, Perplexity și AI Search](https://b2b.websem.ro/blog/llm-seo-trafic-chatgpt-ai-search): Ghid despre cum să apari ca sursă citată în răspunsurile AI.
+
+## Contact
+
+- Email: office@websem.ro
+- Telefon: +40 760 604 849
+- Adresă: B-dul Unirii 25-27, București, România

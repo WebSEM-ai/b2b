@@ -1,0 +1,62 @@
+---
+/**
+ * SchemaOrg.astro
+ * JSON-LD reutilizabil: Organization (entitatea flagship pe websem.ro) + WebSite (b2b).
+ * Toate paginile b2b referă același @id de organizație => consolidează autoritatea de
+ * entitate către brandul websem.ro (strategia "websem.ro = flagship"), fără canibalizare.
+ */
+export const ORG_ID = 'https://websem.ro/#organization';
+
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': ORG_ID,
+      name: 'WebSEM',
+      alternateName: 'WebSEM Agenție AEO GEO',
+      url: 'https://websem.ro',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://b2b.websem.ro/websem-logo.png',
+      },
+      description:
+        'Agenție de marketing digital din București specializată în SEO, AEO (Answer Engine Optimization), GEO (Generative Engine Optimization) și AI visibility — vizibilitate și recomandare în ChatGPT, Google AI Overviews, Gemini și Perplexity.',
+      email: 'office@websem.ro',
+      telephone: '+40760604849',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'B-dul Unirii 25-27',
+        addressLocality: 'București',
+        addressCountry: 'RO',
+      },
+      areaServed: {
+        '@type': 'Country',
+        name: 'România',
+      },
+      knowsAbout: [
+        'SEO',
+        'AEO',
+        'Answer Engine Optimization',
+        'GEO',
+        'Generative Engine Optimization',
+        'LLM Optimization',
+        'AI Visibility',
+        'AI Search',
+        'Optimizare ChatGPT',
+        'Lead Generation B2B',
+      ],
+    },
+    {
+      '@type': 'WebSite',
+      '@id': 'https://b2b.websem.ro/#website',
+      url: 'https://b2b.websem.ro',
+      name: 'WebSEM B2B',
+      inLanguage: 'ro-RO',
+      publisher: { '@id': ORG_ID },
+    },
+  ],
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(graph)} />

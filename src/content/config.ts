@@ -20,6 +20,12 @@ const blogCollection = defineCollection({
     ogImage: z.string().optional(),
     canonicalUrl: z.string().url().optional(),
 
+    // FAQ — generează FAQPage schema + secțiune vizibilă (AEO)
+    faq: z.array(z.object({
+      q: z.string(),
+      a: z.string(),
+    })).optional(),
+
     // Categorization
     category: z.enum([
       'seo',

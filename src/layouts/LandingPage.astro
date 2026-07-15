@@ -1,6 +1,7 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import SchemaOrg from '../components/SchemaOrg.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -66,7 +67,9 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{title}</title>
     <meta name="description" content={description}>
-    
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="theme-color" content="#0a0a0a">
+
     <!-- Canonical -->
     <link rel="canonical" href={canonicalUrl}>
     
@@ -115,6 +118,12 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
         o.onload=function(){window.trackingFunctions.onLoad({appId:"6671df7c865584038b0cd259"})},
         document.head.appendChild(o)}initApollo();
     </script>
+
+    <!-- Structured data: Organization + WebSite (entitate flagship websem.ro) -->
+    <SchemaOrg />
+
+    <!-- Schema specifică paginii (Service, FAQPage, BreadcrumbList etc.) -->
+    <slot name="head" />
 </head>
 <body>
     <Header

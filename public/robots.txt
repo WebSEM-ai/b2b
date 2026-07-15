@@ -1,14 +1,48 @@
 # robots.txt for b2b.websem.ro
 
-User-agent: *
+# --- Boți AI de search/citare — permiși explicit (ca să te poată cita) ---
+User-agent: GPTBot
 Allow: /
 
-# Sitemap
-Sitemap: https://b2b.websem.ro/sitemap-index.xml
+User-agent: OAI-SearchBot
+Allow: /
 
-# Disallow admin/draft pages
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# --- Crawler de training pur (fără citare) — blocat ---
+User-agent: CCBot
+Disallow: /
+
+# --- Toți ceilalți ---
+User-agent: *
+Allow: /
 Disallow: /draft/
 Disallow: /admin/
 
-# Crawl-delay (optional, pentru a nu supraîncărca serverul)
-# Crawl-delay: 1
+# Sitemap
+Sitemap: https://b2b.websem.ro/sitemap-index.xml

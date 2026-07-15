@@ -12,6 +12,69 @@ import BookingModal from '../components/BookingModal.astro';
 
 const pageTitle = "Trafic LLM — Fii Recomandat de AI | AlphaGrade by WebSEM";
 const pageDescription = "ChatGPT si Gemini recomanda branduri de milioane de ori pe zi. Optimizam prezenta ta digitala ca sa fii in acele recomandari. Analiza gratuita in 24h.";
+
+const ORG_ID = 'https://websem.ro/#organization';
+const pageUrl = new URL(Astro.url.pathname, Astro.site ?? 'https://b2b.websem.ro').toString();
+
+// FAQ — text identic cu secțiunea vizibilă de mai jos (cerință pentru FAQPage schema)
+const faqs = [
+    {
+        q: 'Ce este AEO (Answer Engine Optimization)?',
+        a: 'AEO este optimizarea conținutului ca să fie extras și citat direct de motoarele AI (ChatGPT, Google AI Overviews, Gemini, Perplexity). Spre deosebire de SEO clasic, unde concurezi pentru poziții în Google, la AEO obiectivul este ca AI-ul să te recomande ca sursă în răspunsul generat.',
+    },
+    {
+        q: 'Care este diferența dintre SEO și GEO / AEO?',
+        a: 'SEO te aduce pe prima pagină în Google. GEO (Generative Engine Optimization) și AEO te fac citat în răspunsurile generate de AI. O pagină bine structurată poate fi recomandată de ChatGPT chiar dacă în Google e pe pagina 2-3, pentru că AI-ul alege sursele după claritate, structură și autoritate, nu doar după poziție.',
+    },
+    {
+        q: 'În cât timp apar în răspunsurile ChatGPT, Gemini sau Perplexity?',
+        a: 'Primele semnale apar de obicei în 4-8 săptămâni de la implementare, după ce motoarele AI re-crawlează și re-indexează conținutul optimizat. Perplexity și Google AI Overviews reacționează mai rapid, ChatGPT mai lent. Rezultatele consistente se consolidează în 3-6 luni de optimizare continuă.',
+    },
+    {
+        q: 'Cum măsurați vizibilitatea în AI?',
+        a: 'Rulăm întrebările relevante pentru business-ul tău în 5 motoare AI și înregistrăm dacă apari, cine mai apare (competiția) și ce pagină e citată. Din asta rezultă un benchmark competitiv și un scor de share-of-AI-voice, monitorizat lunar în raportul de progres.',
+    },
+    {
+        q: 'Cât costă optimizarea pentru vizibilitate în AI?',
+        a: 'Pachetele pornesc de la €800/lună (SIGNAL — benchmark și primele optimizări), €1.800/lună (PRESENCE — strategie completă) și €3.500/lună (DOMINANCE — conținut nelimitat și monitorizare săptămânală). Analiza inițială de vizibilitate AI este gratuită și se livrează în 24h.',
+    },
+];
+
+const serviceSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    '@id': `${pageUrl}#service`,
+    name: 'Trafic LLM — Optimizare AEO / GEO pentru vizibilitate în AI',
+    serviceType: 'Answer Engine Optimization / Generative Engine Optimization',
+    description: pageDescription,
+    url: pageUrl,
+    provider: { '@id': ORG_ID },
+    areaServed: { '@type': 'Country', name: 'România' },
+    offers: [
+        { '@type': 'Offer', name: 'SIGNAL', price: '800', priceCurrency: 'EUR', url: pageUrl, description: 'Benchmark + primele optimizări. 3 pagini optimizate/lună.' },
+        { '@type': 'Offer', name: 'PRESENCE', price: '1800', priceCurrency: 'EUR', url: pageUrl, description: 'Strategie completă AI-first. 8 pagini optimizate/lună.' },
+        { '@type': 'Offer', name: 'DOMINANCE', price: '3500', priceCurrency: 'EUR', url: pageUrl, description: 'Conținut nelimitat + monitorizare săptămânală.' },
+    ],
+};
+
+const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+};
+
+const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Acasă', item: 'https://b2b.websem.ro/' },
+        { '@type': 'ListItem', position: 2, name: 'Trafic LLM (AEO / GEO)', item: pageUrl },
+    ],
+};
 ---
 
 <LandingPage
@@ -28,6 +91,11 @@ const pageDescription = "ChatGPT si Gemini recomanda branduri de milioane de ori
     footerCtaButtonText="Solicită Analiză Gratuită"
     footerCtaDisclaimer="* Analizăm prezența ta în principalele AI-uri și îți livrăm un sumar acționabil gratuit."
 >
+    <Fragment slot="head">
+        <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+        <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+        <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+    </Fragment>
     <div class="llm-page">
         <!-- S1: Hero -->
         <Hero
@@ -154,6 +222,28 @@ const pageDescription = "ChatGPT si Gemini recomanda branduri de milioane de ori
                 }
             ]}
         />
+
+        <!-- S5.5: FAQ — optimizat pentru citare AI (AEO) -->
+        <section class="llm-faq" id="faq" aria-labelledby="faq-title">
+            <div class="llm-faq-inner">
+                <div class="llm-faq-head">
+                    <span class="llm-faq-badge">Întrebări frecvente</span>
+                    <h2 id="faq-title">AEO, GEO și trafic din AI — pe scurt</h2>
+                    <p>Răspunsuri directe la ce ne întreabă cel mai des companiile B2B despre vizibilitatea în ChatGPT, Gemini și Perplexity.</p>
+                </div>
+                <div class="llm-faq-list">
+                    {faqs.map((f) => (
+                        <details class="llm-faq-item">
+                            <summary>{f.q}</summary>
+                            <div class="llm-faq-answer"><p>{f.a}</p></div>
+                        </details>
+                    ))}
+                </div>
+                <p class="llm-faq-more">
+                    Vrei definițiile complete? Vezi <a href="https://websem.ro/en/resources/atlas/glossary">Atlasul WebSEM — glosar AEO / GEO / LLMO</a>.
+                </p>
+            </div>
+        </section>
 
         <!-- S6: CTA Final -->
         <CtaSection
@@ -299,5 +389,102 @@ const pageDescription = "ChatGPT si Gemini recomanda branduri de milioane de ori
     .llm-page .audit-form-field input:focus {
         border-color: rgba(139, 92, 246, 0.5);
         box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+    }
+
+    /* FAQ Section (AEO) */
+    .llm-faq {
+        padding: 5rem 1.5rem;
+    }
+    .llm-faq-inner {
+        max-width: 820px;
+        margin: 0 auto;
+    }
+    .llm-faq-head {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+    .llm-faq-badge {
+        display: inline-block;
+        padding: 0.35rem 0.9rem;
+        border-radius: 50px;
+        font-size: 0.72rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #A78BFA;
+        border: 1px solid rgba(139, 92, 246, 0.3);
+        background: rgba(139, 92, 246, 0.08);
+        margin-bottom: 1.25rem;
+    }
+    .llm-faq-head h2 {
+        font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+        line-height: 1.2;
+        margin-bottom: 0.75rem;
+    }
+    .llm-faq-head p {
+        color: var(--gray-400);
+        max-width: 620px;
+        margin: 0 auto;
+        line-height: 1.6;
+    }
+    .llm-faq-item {
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 14px;
+        padding: 0.35rem 1.5rem;
+        margin-bottom: 1rem;
+        background: rgba(139, 92, 246, 0.03);
+        transition: border-color 0.3s ease;
+    }
+    .llm-faq-item[open] {
+        border-color: rgba(139, 92, 246, 0.4);
+    }
+    .llm-faq-item summary {
+        cursor: pointer;
+        list-style: none;
+        padding: 1.15rem 0;
+        font-size: 1.08rem;
+        font-weight: 600;
+        color: var(--white);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+    }
+    .llm-faq-item summary::-webkit-details-marker {
+        display: none;
+    }
+    .llm-faq-item summary::after {
+        content: '+';
+        font-size: 1.5rem;
+        font-weight: 400;
+        color: #A78BFA;
+        transition: transform 0.3s ease;
+        flex-shrink: 0;
+    }
+    .llm-faq-item[open] summary::after {
+        transform: rotate(45deg);
+    }
+    .llm-faq-answer {
+        padding: 0 0 1.25rem;
+    }
+    .llm-faq-answer p {
+        color: var(--gray-400);
+        line-height: 1.7;
+        margin: 0;
+    }
+    .llm-faq-more {
+        text-align: center;
+        margin-top: 2rem;
+        color: var(--gray-500);
+        font-size: 0.95rem;
+    }
+    .llm-faq-more a {
+        color: #A78BFA;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+    }
+
+    [data-theme="light"] .llm-faq-item summary {
+        color: var(--black, #0a0a0a);
     }
 </style>

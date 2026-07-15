@@ -2,6 +2,7 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import BookingModal from '../components/BookingModal.astro';
+import SchemaOrg, { ORG_ID } from '../components/SchemaOrg.astro';
 import '../styles/global.css';
 
 interface Heading {
@@ -23,6 +24,7 @@ interface Props {
     tags?: string[];
     readingTime?: number;
     headings?: Heading[];
+    faq?: { q: string; a: string }[];
 }
 
 const {
@@ -38,6 +40,7 @@ const {
     tags = [],
     readingTime,
     headings = [],
+    faq = [],
 } = Astro.props;
 
 // Filter headings for TOC (only h2 and h3)
@@ -69,6 +72,57 @@ const shareUrls = {
     linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(currentUrl)}`,
     twitter: `https://twitter.com/intent/tweet?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(title)}`,
     facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`,
+};
+
+const absoluteOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
+
+// BlogPosting schema — legat de entitatea flagship (websem.ro) prin publisher @id
+const articleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: title,
+    description,
+    image: absoluteOgImage,
+    inLanguage: 'ro-RO',
+    author: {
+        '@type': 'Organization',
+        '@id': ORG_ID,
+        name: author,
+    },
+    publisher: { '@id': ORG_ID },
+    datePublished: pubDate.toISOString(),
+    dateModified: (updatedDate || pubDate).toISOString(),
+    ...(category ? { articleSection: formatCategory(category) } : {}),
+    ...(tags.length ? { keywords: tags.join(', ') } : {}),
+    mainEntityOfPage: { '@type': 'WebPage', '@id': canonicalUrl },
+    isPartOf: { '@type': 'Blog', '@id': `${siteUrl}blog`, name: 'WebSEM B2B Blog' },
+};
+
+// FAQPage schema — doar dacă articolul are FAQ (reflectă secțiunea vizibilă de mai jos)
+const faqSchema = faq.length
+    ? {
+          '@context': 'https://schema.org',
+          '@type': 'FAQPage',
+          mainEntity: faq.map((f) => ({
+              '@type': 'Question',
+              name: f.q,
+              acceptedAnswer: { '@type': 'Answer', text: f.a },
+          })),
+      }
+    : null;
+
+// BreadcrumbList — reflectă breadcrumb-ul vizibil
+const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Acasă', item: siteUrl },
+        { '@type': 'ListItem', position: 2, name: 'Blog', item: `${siteUrl}blog` },
+        ...(category
+            ? [{ '@type': 'ListItem', position: 3, name: formatCategory(category), item: `${siteUrl}blog/category/${category}` }]
+            : []),
+        { '@type': 'ListItem', position: category ? 4 : 3, name: title, item: canonicalUrl },
+    ],
 };
 ---
 
@@ -127,31 +181,11 @@ const shareUrls = {
         document.head.appendChild(o)}initApollo();
     </script>
 
-    <script type="application/ld+json" set:html={JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "BlogPosting",
-        "headline": title,
-        "description": description,
-        "image": `${siteUrl}${ogImage}`,
-        "author": {
-            "@type": "Organization",
-            "name": author
-        },
-        "publisher": {
-            "@type": "Organization",
-            "name": "WebSEM",
-            "logo": {
-                "@type": "ImageObject",
-                "url": `${siteUrl}/images/logo.png`
-            }
-        },
-        "datePublished": pubDate.toISOString(),
-        "dateModified": (updatedDate || pubDate).toISOString(),
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": canonicalUrl
-        }
-    })} />
+    <!-- Structured data: Organization + WebSite (entitate flagship websem.ro) -->
+    <SchemaOrg />
+    <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+    {faqSchema && <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />}
 </head>
 <body>
     <!-- Reading Progress Bar -->
@@ -197,6 +231,9 @@ const shareUrls = {
                                 {formatDate(pubDate)}
                                 {readingTime && ` · ${readingTime} min citire`}
                             </span>
+                            {updatedDate && (
+                                <span class="updated">Actualizat: {formatDate(updatedDate)}</span>
+                            )}
                         </div>
                     </div>
 
@@ -260,6 +297,23 @@ const shareUrls = {
                 </div>
             </div>
         </article>
+
+        <!-- FAQ (AEO) -->
+        {faq.length > 0 && (
+            <section class="article-faq" aria-labelledby="faq-title">
+                <div class="container">
+                    <h2 id="faq-title">Întrebări frecvente</h2>
+                    <div class="faq-list">
+                        {faq.map(item => (
+                            <details class="faq-item">
+                                <summary>{item.q}</summary>
+                                <div class="faq-answer"><p>{item.a}</p></div>
+                            </details>
+                        ))}
+                    </div>
+                </div>
+            </section>
+        )}
 
         <!-- Tags -->
         {tags.length > 0 && (
@@ -592,6 +646,13 @@ const shareUrls = {
         color: var(--text-muted);
     }
 
+    .author .updated {
+        display: block;
+        font-size: 0.75rem;
+        color: var(--accent-light);
+        margin-top: 0.15rem;
+    }
+
     .share {
         display: flex;
         gap: 0.5rem;
@@ -911,6 +972,67 @@ const shareUrls = {
     .content-wrapper :global(strong) {
         color: var(--text-primary);
         font-weight: 600;
+    }
+
+    /* FAQ (AEO) */
+    .article-faq {
+        padding: 2.5rem 0;
+        background: var(--bg-primary);
+        border-top: 1px solid var(--border-light);
+    }
+
+    .article-faq h2 {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin-bottom: 1.5rem;
+    }
+
+    .faq-item {
+        border: 1px solid var(--border-light);
+        border-radius: 12px;
+        padding: 0.25rem 1.25rem;
+        margin-bottom: 0.85rem;
+        background: var(--bg-card);
+    }
+
+    .faq-item[open] {
+        border-color: var(--border-accent);
+    }
+
+    .faq-item summary {
+        cursor: pointer;
+        list-style: none;
+        padding: 1rem 0;
+        font-weight: 600;
+        color: var(--text-primary);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .faq-item summary::-webkit-details-marker { display: none; }
+
+    .faq-item summary::after {
+        content: '+';
+        font-size: 1.4rem;
+        color: var(--accent-light);
+        transition: transform 0.3s ease;
+        flex-shrink: 0;
+    }
+
+    .faq-item[open] summary::after { transform: rotate(45deg); }
+
+    .faq-answer {
+        padding: 0 0 1.1rem;
+    }
+
+    .faq-answer p {
+        color: var(--text-secondary);
+        line-height: 1.7;
+        margin: 0;
     }
 
     /* Tags */
