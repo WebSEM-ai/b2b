@@ -2,6 +2,7 @@
 title: "LLM SEO: Cum să atragi trafic din ChatGPT, Perplexity și AI Search"
 description: "Ghid complet despre optimizarea pentru motoarele de căutare AI. Învață cum să apari în răspunsurile ChatGPT și să atragi trafic calificat din surse AI."
 pubDate: 2025-01-29
+updatedDate: 2026-07-15
 author: "WebSEM Team"
 category: "seo"
 tags: ["LLM SEO", "AI Search", "ChatGPT", "Trafic AI", "GEO", "Perplexity"]
@@ -10,6 +11,17 @@ heroImageLight: "/images/blog/LLM_SEO_2_-_mobile_light.avif"
 heroImageAlt: "Diagrama Venn: LLM SEO vs Traditional SEO"
 featured: true
 draft: false
+faq:
+  - q: "Ce este LLM SEO?"
+    a: "LLM SEO (numit și GEO sau AEO) este procesul de optimizare a conținutului pentru a apărea în răspunsurile generate de AI precum ChatGPT, Claude, Gemini și Perplexity. Scopul este ca AI-ul să citeze site-ul tău ca sursă atunci când utilizatorii pun întrebări relevante pentru business-ul tău."
+  - q: "LLM SEO înlocuiește SEO-ul tradițional?"
+    a: "Nu. LLM SEO completează SEO-ul tradițional — ai nevoie de ambele. Un site bine optimizat pentru Google performează mai bine și în AI search, dar sunt necesare ajustări specifice pentru LLM-uri: structură extractabilă, date structurate și autoritate tematică."
+  - q: "Cât durează până văd rezultate din LLM SEO?"
+    a: "Depinde de autoritatea actuală a site-ului. Site-urile cu autoritate ridicată pot vedea rezultate în câteva săptămâni. Site-urile noi au nevoie de 3-6 luni pentru a construi semnalele necesare. Perplexity și Google AI Overviews reacționează mai rapid, ChatGPT mai lent."
+  - q: "Cum știu dacă sunt citat în ChatGPT?"
+    a: "Testează manual întrebări relevante pentru nișa ta în ChatGPT, Gemini și Perplexity și notează dacă apari. Completează cu monitorizarea traficului din surse AI în GA4 și urmărește creșterile neexplicate în trafic direct sau branded search. Tool-uri ca Otterly, Peec AI sau ZipTie automatizează măsurarea."
+  - q: "Merită să investesc în LLM SEO acum?"
+    a: "Da. Traficul din AI crește accelerat, iar în România sub 3% dintre companii au o strategie activă de vizibilitate în AI. Cei care construiesc autoritate acum vor domina când AI search devine mainstream — e ca SEO-ul în 2010: avantajul e al celor care încep devreme."
 ---
 
 <div class="key-takeaway">
@@ -266,27 +278,13 @@ Mult trafic AI apare ca "direct" sau fără referrer. Monitorizează:
 4. Construiește autoritate tematică pe nișa ta
 5. Actualizează conținutul existent cu date recente
 
-## FAQ: Întrebări frecvente despre LLM SEO
+## Articole conexe
 
-### Ce este LLM SEO?
+Aprofundează subiectul cu ghidurile din același cluster:
 
-LLM SEO (Large Language Model SEO) este procesul de optimizare a conținutului pentru a apărea în răspunsurile generate de AI precum ChatGPT, Claude, Gemini și Perplexity. Scopul este ca AI-ul să citeze site-ul tău când utilizatorii pun întrebări relevante pentru business-ul tău.
-
-### LLM SEO înlocuiește SEO-ul tradițional?
-
-Nu. LLM SEO completează SEO-ul tradițional. Ai nevoie de ambele strategii. Un site bine optimizat pentru Google va performa mai bine și în AI search, dar sunt necesare ajustări specifice pentru LLM-uri.
-
-### Cât durează până văd rezultate din LLM SEO?
-
-Depinde de autoritatea actuală a site-ului. Site-uri cu autoritate ridicată pot vedea rezultate în câteva săptămâni. Site-uri noi au nevoie de 3-6 luni pentru a construi semnalele necesare.
-
-### Cum știu dacă sunt citat în ChatGPT?
-
-Momentan nu există un tool dedicat. Poți: (1) testa manual întrebări relevante pentru nișa ta, (2) monitoriza traficul din surse AI în GA4, (3) urmări creșteri neexplicate în trafic direct sau branded search.
-
-### Merită să investesc în LLM SEO acum?
-
-Da. Traficul din AI crește exponențial. Companiile care construiesc autoritate acum vor avea un avantaj major când AI search devine mainstream. E ca SEO-ul în 2010 — cei care au început devreme au dominat.
+- **[AEO vs SEO vs GEO: diferența și când folosești fiecare](/blog/aeo-vs-seo-vs-geo-diferente)** — comparație clară între cele trei straturi de vizibilitate.
+- **[Cum să apari în ChatGPT: ghid practic pentru companii B2B din România](/blog/cum-sa-apari-in-chatgpt-b2b-romania)** — pașii concreți, de la robots.txt la conținut extractabil.
+- **[Atlasul WebSEM — glosarul AEO / GEO / LLMO](https://websem.ro/en/resources/atlas/glossary)** — definițiile de referință pentru terminologia de AI search.
 
 ---
 
@@ -302,8 +300,8 @@ Strategia nu e complicată: **conținut clar, structurat, actualizat, cu date co
 
 **Vrei să afli cum poți atrage trafic din ChatGPT și alte surse AI pentru business-ul tău?**
 
-[Contactează-ne pentru o consultație gratuită →](/contact-agentie-media/)
+WebSEM oferă servicii complete de Trafic AI și LLM SEO, de la audit și strategie până la implementare și monitorizare. Primești o **analiză gratuită** a vizibilității tale în 5 motoare AI, livrată în 24h.
 
-WebSEM oferă servicii complete de Trafic AI și LLM SEO, de la audit și strategie până la implementare și monitorizare.
+[Vezi serviciul Trafic LLM și cere analiza gratuită →](/trafic-llm)
 
-[Află mai multe despre serviciile noastre de Trafic AI →](/trafic-ai-trafic-chatgpt/)
+[Contactează echipa WebSEM →](https://websem.ro/contact-agentie-media)
